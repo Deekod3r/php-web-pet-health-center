@@ -16,4 +16,16 @@ class BaseRepository {
         return $conn;
     }
 
+    protected function findAll(){
+        global $table;
+        $query = "SELECT * FROM " . $this->table;
+        $result = $this->getConnection()->query($query);
+        $data = [];
+        if($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
 }
