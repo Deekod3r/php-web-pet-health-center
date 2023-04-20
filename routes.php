@@ -9,8 +9,12 @@ if(isset($_GET['controller']) && isset($_GET['action'])) {
         include($controllerFileName);
         $controllerClass = $controller.'Controller';
         $controllerObj = new $controllerClass();
-        $controllerObj->$action();
-    }else {
+        if(method_exists($controllerObj,$action)){
+            $controllerObj->$action();
+        } else {
+            include('view/error/error.php');
+        }
+    } else {
         include('view/error/error.php');
     }
 } else {

@@ -38,7 +38,7 @@
                 <a href="" class="navbar-brand d-none d-lg-block">
                     <h1 class="m-0 display-5 text-capitalize">
                         <span class="text-primary">Care</span>PET 
-                        <span style="font-size:20px">Hệ thống chăm sóc thú cưng số 1 HUCE</span>
+                        <span style="font-size:20px">Team 2 - 65PM2</span>
                     </h1>
                 </a>
             </div>
@@ -71,28 +71,28 @@
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
             <a href="" class="navbar-brand d-block d-lg-none">
-                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Care</span>PET</h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
+                    <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
+                    <a href="service.html" class="nav-item nav-link">Dịch vụ</a>
+                    <a href="booking.html" class="nav-item nav-link">Đặt lịch</a>
+                    <a href="price.html" class="nav-item nav-link">Đánh giá</a>
+                    <a href="about.html" class="nav-item nav-link">Thông tin shop</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tin tức</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="blog.html" class="dropdown-item">Blog Grid</a>
                             <a href="single.html" class="dropdown-item">Blog Detail</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
                 </div>
-                <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="background-color:#ED2B2A">Gọi khẩn cấp</a>
+                <a href="?controller=home&action=login" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="background-color:#ED2B2A">Đăng nhập</a>
             </div>
         </nav>
     </div>
@@ -107,11 +107,11 @@
                     <img class="w-100" src="asset/img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h3 class="text-white mb-3 d-none d-sm-block">Best Pet Services</h3>
+                            <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
                             <h1 class="display-3 text-white mb-3">Keep Your Pet Happy</h1>
-                            <h5 class="text-white mb-3 d-none d-sm-block">Duo nonumy et dolor tempor no et. Diam sit diam sit diam erat</h5>
-                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
-                            <a href="" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
+                            <h5 class="text-white mb-3 d-none d-sm-block"> - CarePET - </h5>
+                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Đặt lịch ngay</a>
+                            <a href="" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4" style="color:white">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -119,11 +119,11 @@
                     <img class="w-100" src="asset/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h3 class="text-white mb-3 d-none d-sm-block">Best Pet Services</h3>
+                            <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
                             <h1 class="display-3 text-white mb-3">Pet Spa & Grooming</h1>
-                            <h5 class="text-white mb-3 d-none d-sm-block">Duo nonumy et dolor tempor no et. Diam sit diam sit diam erat</h5>
-                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
-                            <a href="" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
+                            <h5 class="text-white mb-3 d-none d-sm-block"> - CarePET - </h5>
+                            <a href="" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Đặt lịch ngay</a>
+                            <a href="" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4" style="color:white">Xem thêm</a>
                         </div>
                     </div>
                 </div>

@@ -6,4 +6,7 @@ class HomeController extends BaseController{
             'index',[]
         );
     }
+    public function login(){
+        $this->renderView('login');
+    }
 }
