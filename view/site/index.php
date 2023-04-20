@@ -8,11 +8,9 @@
         <div class="row bg-secondary py-2 px-lg-5">
             <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-white pr-3" href="">FAQs</a>
+                    <a class="text-white pr-3" href="">Câu hỏi thường gặp</a>
                     <span class="text-white">|</span>
-                    <a class="text-white px-3" href="">Help</a>
-                    <span class="text-white">|</span>
-                    <a class="text-white pl-3" href="">Support</a>
+                    <a class="text-white px-3" href="">Hỗ trợ</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -39,7 +37,7 @@
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
                     <h1 class="m-0 display-5 text-capitalize">
-                        <span class="text-primary">Care</span>PET | 
+                        <span class="text-primary">Care</span>PET 
                         <span style="font-size:20px">Hệ thống chăm sóc thú cưng số 1 HUCE</span>
                     </h1>
                 </a>
@@ -49,6 +47,10 @@
                     <div class="d-inline-flex flex-column text-center pr-3 border-right">
                         <h6>Giờ mở cửa</h6>
                         <p class="m-0">8.00AM - 9.00PM</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center px-3 border-right">
+                        <h6>Địa chỉ</h6>
+                        <p class="m-0">55 Giải Phóng, Đồng Tâm</p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
                         <h6>Email liên hệ</h6>
@@ -90,7 +92,7 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
+                <a href="#" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="background-color:#ED2B2A">Gọi khẩn cấp</a>
             </div>
         </nav>
     </div>
@@ -187,7 +189,7 @@
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-2">
                                     <h1 class="flaticon-house font-weight-normal text-secondary m-0 mr-3"></h1>
-                                    <h5 class="text-truncate m-0">Pet Boarding</h5>
+                                    <h5 class="text-truncate m-0">Sức khoẻ</h5>
                                 </div>
                                 <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet</p>
                             </div>
@@ -196,7 +198,7 @@
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-2">
                                     <h1 class="flaticon-food font-weight-normal text-secondary m-0 mr-3"></h1>
-                                    <h5 class="text-truncate m-0">Pet Feeding</h5>
+                                    <h5 class="text-truncate m-0">Tư vấn dinh dưỡng</h5>
                                 </div>
                                 <p>Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet</p>
                             </div>
@@ -205,7 +207,7 @@
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-2">
                                     <h1 class="flaticon-grooming font-weight-normal text-secondary m-0 mr-3"></h1>
-                                    <h5 class="text-truncate m-0">Pet Grooming</h5>
+                                    <h5 class="text-truncate m-0">Thẩm mỹ</h5>
                                 </div>
                                 <p class="m-0">Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet</p>
                             </div>
@@ -214,7 +216,7 @@
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center mb-2">
                                     <h1 class="flaticon-toy font-weight-normal text-secondary m-0 mr-3"></h1>
-                                    <h5 class="text-truncate m-0">Pet Tranning</h5>
+                                    <h5 class="text-truncate m-0">Huấn luyện</h5>
                                 </div>
                                 <p class="m-0">Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet</p>
                             </div>

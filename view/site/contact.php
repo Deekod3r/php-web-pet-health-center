@@ -81,19 +81,19 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
-                    <div class="nav-item dropdown">
+                    <a href="index.html" class="nav-item nav-top nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-top nav-link">About</a>
+                    <a href="service.html" class="nav-item  nav-topnav-link">Service</a>
+                    <a href="price.html" class="nav-item  nav-top nav-link">Price</a>
+                    <a href="booking.html" class="nav-item nav-top nav-link">Booking</a>
+                    <div class="nav-item nav-top dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="blog.html" class="dropdown-item">Blog Grid</a>
                             <a href="single.html" class="dropdown-item">Blog Detail</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                    <a href="contact.html" class="nav-item nav-top nav-link active">Contact</a>
                 </div>
                 <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
             </div>
