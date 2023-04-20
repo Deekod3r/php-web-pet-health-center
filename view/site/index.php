@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="asset/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
@@ -18,14 +18,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Flaticon Font -->
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="asset/lib/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="asset/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="asset/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="asset/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -125,7 +125,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="asset/img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Best Pet Services</h3>
@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="asset/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Best Pet Services</h3>
@@ -268,13 +268,13 @@
             <div class="col-lg-5">
                 <div class="row px-3">
                     <div class="col-12 p-0">
-                        <img class="img-fluid w-100" src="img/about-1.jpg" alt="">
+                        <img class="img-fluid w-100" src="asset/img/about-1.jpg" alt="">
                     </div>
                     <div class="col-6 p-0">
-                        <img class="img-fluid w-100" src="img/about-2.jpg" alt="">
+                        <img class="img-fluid w-100" src="asset/img/about-2.jpg" alt="">
                     </div>
                     <div class="col-6 p-0">
-                        <img class="img-fluid w-100" src="img/about-3.jpg" alt="">
+                        <img class="img-fluid w-100" src="asset/img/about-3.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -349,7 +349,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="img/feature.jpg" alt="">
+                <img class="img-fluid w-100" src="asset/img/feature.jpg" alt="">
             </div>
             <div class="col-lg-7 py-5 py-lg-0 px-3 px-lg-5">
                 <h4 class="text-secondary mb-3">Why Choose Us?</h4>
@@ -398,7 +398,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="card border-0">
                         <div class="card-header position-relative border-0 p-0 mb-4">
-                            <img class="card-img-top" src="img/price-1.jpg" alt="">
+                            <img class="card-img-top" src="asset/img/price-1.jpg" alt="">
                             <div class="position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100" style="top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5);">
                                 <h3 class="text-primary mb-3">Basic</h3>
                                 <h1 class="display-4 text-white mb-0">
@@ -422,7 +422,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="card border-0">
                         <div class="card-header position-relative border-0 p-0 mb-4">
-                            <img class="card-img-top" src="img/price-2.jpg" alt="">
+                            <img class="card-img-top" src="asset/img/price-2.jpg" alt="">
                             <div class="position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100" style="top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5);">
                                 <h3 class="text-secondary mb-3">Standard</h3>
                                 <h1 class="display-4 text-white mb-0">
@@ -446,7 +446,7 @@
                 <div class="col-lg-4 mb-4">
                     <div class="card border-0">
                         <div class="card-header position-relative border-0 p-0 mb-4">
-                            <img class="card-img-top" src="img/price-3.jpg" alt="">
+                            <img class="card-img-top" src="asset/img/price-3.jpg" alt="">
                             <div class="position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100" style="top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5);">
                                 <h3 class="text-primary mb-3">Premium</h3>
                                 <h1 class="display-4 text-white mb-0">
@@ -482,7 +482,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="img/team-1.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/team-1.jpg" alt="">
                     <div class="card-body text-center p-0">
                         <div class="team-text d-flex flex-column justify-content-center bg-light">
                             <h5>Mollie Ross</h5>
@@ -499,7 +499,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="img/team-2.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/team-2.jpg" alt="">
                     <div class="card-body text-center p-0">
                         <div class="team-text d-flex flex-column justify-content-center bg-light">
                             <h5>Jennifer Page</h5>
@@ -516,7 +516,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="img/team-3.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/team-3.jpg" alt="">
                     <div class="card-body text-center p-0">
                         <div class="team-text d-flex flex-column justify-content-center bg-light">
                             <h5>Kate Glover</h5>
@@ -533,7 +533,7 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="img/team-4.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/team-4.jpg" alt="">
                     <div class="card-body text-center p-0">
                         <div class="team-text d-flex flex-column justify-content-center bg-light">
                             <h5>Lilly Fry</h5>
@@ -563,7 +563,7 @@
             <div class="owl-carousel testimonial-carousel">
                 <div class="bg-white mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
-                        <img class="img-fluid" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;" alt="">
+                        <img class="img-fluid" src="asset/img/testimonial-1.jpg" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
                             <h5>Client Name</h5>
                             <i>Profession</i>
@@ -573,7 +573,7 @@
                 </div>
                 <div class="bg-white mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
-                        <img class="img-fluid" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;" alt="">
+                        <img class="img-fluid" src="asset/img/testimonial-2.jpg" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
                             <h5>Client Name</h5>
                             <i>Profession</i>
@@ -583,7 +583,7 @@
                 </div>
                 <div class="bg-white mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
-                        <img class="img-fluid" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;" alt="">
+                        <img class="img-fluid" src="asset/img/testimonial-3.jpg" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
                             <h5>Client Name</h5>
                             <i>Profession</i>
@@ -593,7 +593,7 @@
                 </div>
                 <div class="bg-white mx-3 p-4">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4">
-                        <img class="img-fluid" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;" alt="">
+                        <img class="img-fluid" src="asset/img/testimonial-4.jpg" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
                             <h5>Client Name</h5>
                             <i>Profession</i>
@@ -616,7 +616,7 @@
         <div class="row pb-3">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
-                    <img class="card-img-top" src="img/blog-1.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/blog-1.jpg" alt="">
                     <div class="card-body bg-light p-4">
                         <h4 class="card-title text-truncate">Diam amet eos at no eos</h4>
                         <div class="d-flex mb-3">
@@ -631,7 +631,7 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
-                    <img class="card-img-top" src="img/blog-2.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/blog-2.jpg" alt="">
                     <div class="card-body bg-light p-4">
                         <h4 class="card-title text-truncate">Diam amet eos at no eos</h4>
                         <div class="d-flex mb-3">
@@ -646,7 +646,7 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
-                    <img class="card-img-top" src="img/blog-3.jpg" alt="">
+                    <img class="card-img-top" src="asset/img/blog-3.jpg" alt="">
                     <div class="card-body bg-light p-4">
                         <h4 class="card-title text-truncate">Diam amet eos at no eos</h4>
                         <div class="d-flex mb-3">
@@ -749,18 +749,18 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="asset/lib/easing/easing.min.js"></script>
+    <script src="asset/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="asset/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="asset/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="asset/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    <script src="asset/mail/jqBootstrapValidation.min.js"></script>
+    <script src="asset/mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="asset/js/main.js"></script>
 </body>
 
 </html>
