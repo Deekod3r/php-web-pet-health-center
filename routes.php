@@ -13,4 +13,6 @@ if(isset($_GET['controller']) && isset($_GET['action'])) {
     }else {
         include('view/error/error.php');
     }
+} else {
+    header("location:routes.php?controller=home&action=index");
 }
