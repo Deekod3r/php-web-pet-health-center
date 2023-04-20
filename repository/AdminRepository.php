@@ -3,6 +3,7 @@ class AdminRepository extends BaseRepository{
 
     private $connection;
     var $table = 'admin';
+    var $id_table = 'ad_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
@@ -12,6 +13,3 @@ class AdminRepository extends BaseRepository{
         var_dump($json_result);
     }
 };
-
-$a = new AdminRepository();
-$a->getData();

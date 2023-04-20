@@ -1,6 +1,6 @@
 <?php
 include('controller/BaseController.php');
-if(isset($_GET['controller']) && $_GET['action']) {
+if(isset($_GET['controller']) && isset($_GET['action'])) {
     //echo $_GET['controller']. " " . $_GET['action'];
     $controller = $_GET['controller'];
     $action = $_GET['action'];

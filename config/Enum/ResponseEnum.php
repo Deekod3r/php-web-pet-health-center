@@ -1,5 +1,5 @@
 <?php 
-class Constant {
+class ResponseEnum {
     // RESPONSE CODE
     public const RESPONSE_INSERT = "response_insert_";
     public const RESPONSE_UPDATE = "response_update_";
