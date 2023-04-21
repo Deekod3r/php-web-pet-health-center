@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- Topbar Start -->
 <div class="container-fluid">
         <div class="row bg-secondary py-2 px-lg-5">
@@ -33,7 +34,7 @@
                 <a href="" class="navbar-brand d-none d-lg-block">
                     <h1 class="m-0 display-5 text-capitalize">
                         <span class="text-primary">Care</span>PET 
-                        <span style="font-size:20px">Team 2 - 65PM2</span>
+                        <span style="font-size:20px">Hệ thống chăm sóc thú cưng</span>
                     </h1>
                 </a>
             </div>
@@ -73,15 +74,20 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="?controller=home&action=index" class="nav-item nav-link active">Trang chủ</a>
-                    <a href="?controller=service&action=service_page" class="nav-item nav-link">Dịch vụ</a>
-                    <a href="?controller=appointment&action=appointment_page" class="nav-item nav-link">Đặt lịch</a>
-                    <a href="?controller=feedback&action=feedback_page" class="nav-item nav-link">Đánh giá</a>
-                    <a href="?controller=shop&action=about_page" class="nav-item nav-link">Thông tin shop</a>
-                    <a href="?controller=news&action=news_page" class="nav-item nav-link">Tin tức</a>
-                    <a href="?controller=shop&action=contact_page" class="nav-item nav-link">Liên hệ</a>
+                    <a href="?controller=home&action=index" class="nav-item nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
+                    <a href="?controller=service&action=service_page" class="nav-item nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
+                    <a href="?controller=appointment&action=appointment_page" class="nav-item nav-link <?php if ($title == "Đặt lịch") echo "active"; ?>">Đặt lịch</a>
+                    <a href="?controller=feedback&action=feedback_page" class="nav-item nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
+                    <a href="?controller=shop&action=about_page" class="nav-item nav-link <?php if ($title == "Thông tin shop") echo "active"; ?>">Thông tin shop</a>
+                    <a href="?controller=news&action=news_page" class="nav-item nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
+                    <a href="?controller=shop&action=contact_page" class="nav-item nav-link <?php if ($title == "Liên hệ") echo "active"; ?>">Liên hệ</a>
                 </div>
-                <a href="?controller=home&action=login" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="background-color:#ED2B2A">Đăng nhập</a>
+                <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
+                    <a href="?controller=home&action=register" class="btn btn-lg btn-primary px-3 d-none d-lg-block" >Thông tin tài khoản</a>
+                <?php } else { ?>
+                    <a href="?controller=home&action=register" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="margin-right:20px">Đăng ký</a>
+                    <a href="?controller=home&action=login" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Đăng nhập</a>
+                <?php }?>
             </div>
         </nav>
     </div>

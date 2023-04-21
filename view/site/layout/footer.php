@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-5">
-                        <h5 class="text-primary mb-4">Đăng ký để nhận các thông tin khuyến mại sớm nhất</h5>
+                        <h5 class="text-primary mb-4">Đăng ký nhận thông báo <br/> để có các thông tin khuyến mại sớm nhất</h5>
                         <form action="">
                             <div class="form-group">
                                 <input type="text" class="form-control border-0" placeholder="Họ và tên" required="required" />
