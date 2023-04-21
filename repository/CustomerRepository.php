@@ -2,19 +2,19 @@
 class AdminRepository extends BaseRepository{
 
     private $connection;
-    var $table = 'admin';
-    var $id_table = 'ad_id';
+    var $table = 'customer';
+    var $id_table = 'ctm_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
 
     public function getData(){
-        $json_result = $this->findAll();
-        var_dump($json_result);
+        $result = $this->findAll();
+        return $result;
     }
 
     protected function getByAccount($phone,$password){
-        $query = "SELECT * FROM " . $this->table . " WHERE ad_phone ='" . $phone . "' and ad_password = '" . $password ."'";
+        $query = "SELECT * FROM " . $this->table . " WHERE ctm_phone ='" . $phone . "' and ctm_password = '" . $password ."'";
         $result = null;
         $response = null;
         try{

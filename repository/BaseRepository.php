@@ -5,8 +5,8 @@ class BaseRepository {
 
     protected $table;
     protected $id_table;
-
-    private $response_enum = new ResponseEnum();
+    protected $field_table;
+    protected $response_enum = new ResponseEnum();
     protected function getConnection() {
         $hostname = "localhost";
         $username = "root";
@@ -85,7 +85,10 @@ class BaseRepository {
     }
 
     protected function update($data, $id){
-        $query = "Delete from $this->table where $this->id_table = " . $id;
+        $query = "Update $this->table ".
+                "set ".
+                "set "
+                ." where $this->id_table = " . $id;
         $response = null;
         try {
             if($this->getConnection()->query($query)){
@@ -97,5 +100,6 @@ class BaseRepository {
         return $response;
     }
 
+    
     
 }   

@@ -10,10 +10,10 @@ class BaseController {
         include($path.$view_name.'.php');
     }
 
-    public function getModel($service_name) {
-        include('service/'.$service_name.'Service.php');
-        $serviceObj = new $service_name();
-        return $serviceObj;
+    public function getRepo($repo_name) {
+        include('repository/'.$repo_name.'Repository.php');
+        $repoObj = new $repo_name();
+        return $repoObj;
     }
     public function redirect($controller, $action) {
         header("Location: ?controller=" . $controller . "&action=" . $action);
