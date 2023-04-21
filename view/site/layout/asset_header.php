@@ -23,5 +23,5 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="asset/css/style.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="asset/img/icon_web.png"/>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
 </head>

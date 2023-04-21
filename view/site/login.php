@@ -1,3 +1,10 @@
-<?php $title = "Đăng nhập";?>
+<!DOCTYPE html>
+<html lang="es">
+<?php $title = "Đăng nhập"; ?>
 <?php include("layout/asset_header.php")?>
-<h1>login</h1>
+
+<body>
+    
+</body>
+
+</html>
