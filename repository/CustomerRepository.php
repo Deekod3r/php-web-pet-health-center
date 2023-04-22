@@ -1,4 +1,5 @@
 <?php 
+include("BaseRepository.php");
 class AdminRepository extends BaseRepository{
 
     private $connection;
@@ -24,10 +25,10 @@ class AdminRepository extends BaseRepository{
                 while ($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }
-                $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH), $this->response_enum::SEARCH_MESSAGE_SUCCESS, $data, 200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH), ResponseEnum::SEARCH_MESSAGE_SUCCESS, $data, 200);
             } else throw new Exception();
         } catch(Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH),$this->response_enum::SEARCH_MESSAGE_FAIL,$result,501);
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH),ResponseEnum::SEARCH_MESSAGE_FAIL,$result,501);
         }
         return $response;
     }

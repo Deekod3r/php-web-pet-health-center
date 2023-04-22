@@ -5,8 +5,7 @@ let switchCircle = document.querySelectorAll(".switch__circle");
 let switchBtn = document.querySelectorAll(".switch-btn");
 let aContainer = document.querySelector("#a-container");
 let bContainer = document.querySelector("#b-container");
-let allButtons = document.querySelectorAll(".submit");
-
+let allButtons = document.querySelectorAll(".submit")
 let getButtons = (e) => e.preventDefault()
 
 let changeForm = (e) => {
@@ -29,9 +28,21 @@ let changeForm = (e) => {
 
 let mainF = (e) => {
     for (var i = 0; i < allButtons.length; i++)
-        allButtons[i].addEventListener("click", getButtons );
+        allButtons[i].addEventListener("click", getButtons)
     for (var i = 0; i < switchBtn.length; i++)
         switchBtn[i].addEventListener("click", changeForm)
 }
 
 window.addEventListener("load", mainF);
+window.onload = () => {
+    var formLogin = document.getElementById('a-form');
+    formLogin.onsubmit = function(evt){
+        evt.preventDefault();
+        let phone = document.getElementById('name').value;
+        let password = document.getElementById('password').value;
+        if (phone == "" || password == ""){
+            document.getElementById('msg').innerHTML = "Vui lòng điền đủ thông tin đăng nhập";
+            return false;
+        } else return true;
+    }
+}

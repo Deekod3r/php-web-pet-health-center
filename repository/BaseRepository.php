@@ -1,12 +1,11 @@
 <?php 
 
-use ResponseEnum;
+include("config/Enum/ResponseEnum.php");
 class BaseRepository {
 
     protected $table;
     protected $id_table;
     protected $field_table;
-    protected $response_enum = new ResponseEnum();
     protected function getConnection() {
         $hostname = "localhost";
         $username = "root";
@@ -31,10 +30,10 @@ class BaseRepository {
                 while ($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }
-                $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH), $this->response_enum::SEARCH_MESSAGE_SUCCESS, $data, 200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH), ResponseEnum::SEARCH_MESSAGE_SUCCESS, $data, 200);
             } else throw new Exception();
         } catch(Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH),$this->response_enum::SEARCH_MESSAGE_FAIL,$result,501);
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH),ResponseEnum::SEARCH_MESSAGE_FAIL,$result,501);
         }
         return $response;
     }
@@ -50,10 +49,10 @@ class BaseRepository {
                 while ($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }
-                $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH), $this->response_enum::SEARCH_MESSAGE_SUCCESS, $data, 200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH), ResponseEnum::SEARCH_MESSAGE_SUCCESS, $data, 200);
             } else throw new Exception();
         }catch(Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_SEARCH),$this->response_enum::SEARCH_MESSAGE_FAIL,null,501);
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_SEARCH),ResponseEnum::SEARCH_MESSAGE_FAIL,null,501);
         }
         return $response;
     }
@@ -63,10 +62,10 @@ class BaseRepository {
         $response = null;
         try {
             if($this->getConnection()->query($query)){
-                $response = new Response(uniqid($this->response_enum::RESPONSE_INSERT),$this->response_enum::INSERT_MESSAGE_SUCCESS,true,200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_INSERT),ResponseEnum::INSERT_MESSAGE_SUCCESS,true,200);
             } else throw new Exception();
         } catch (Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_INSERT),$this->response_enum::INSERT_MESSAGE_FAIL,true,501);        
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_INSERT),ResponseEnum::INSERT_MESSAGE_FAIL,true,501);        
         }
         return $response;
     }
@@ -76,10 +75,10 @@ class BaseRepository {
         $response = null;
         try {
             if($this->getConnection()->query($query)){
-                $response = new Response(uniqid($this->response_enum::RESPONSE_DELETE),$this->response_enum::DELETE_MESSAGE_SUCCESS,true,200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_DELETE),ResponseEnum::DELETE_MESSAGE_SUCCESS,true,200);
             } else throw new Exception();
         } catch (Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_DELETE),$e->getMessage(),true,501);        
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_DELETE),$e->getMessage(),true,501);        
         }
         return $response;
     }
@@ -92,10 +91,10 @@ class BaseRepository {
         $response = null;
         try {
             if($this->getConnection()->query($query)){
-                $response = new Response(uniqid($this->response_enum::RESPONSE_DELETE),$this->response_enum::DELETE_MESSAGE_FAIL,true,200);
+                $response = new Response(uniqid(ResponseEnum::RESPONSE_DELETE),ResponseEnum::DELETE_MESSAGE_FAIL,true,200);
             } else throw new Exception();
         } catch (Exception $e){
-            $response = new Response(uniqid($this->response_enum::RESPONSE_DELETE),$e->getMessage(),true,501);        
+            $response = new Response(uniqid(ResponseEnum::RESPONSE_DELETE),$e->getMessage(),true,501);        
         }
         return $response;
     }

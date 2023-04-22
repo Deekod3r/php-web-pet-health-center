@@ -1,5 +1,5 @@
 <?php 
-class ResponseEnum {
+enum ResponseEnum {
     // RESPONSE CODE
     public const RESPONSE_INSERT = "response_insert_";
     public const RESPONSE_UPDATE = "response_update_";
@@ -13,6 +13,5 @@ class ResponseEnum {
     public const UPDATE_MESSAGE_FAIL = "Update message failed";
     public const SEARCH_MESSAGE_SUCCESS = "Search message successfully";
     public const SEARCH_MESSAGE_FAIL = "Seach message failed";
-
 
 }
