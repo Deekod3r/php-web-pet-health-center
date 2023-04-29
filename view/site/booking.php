@@ -43,7 +43,7 @@
                                 </div>
                             </form>
                         <?php } else { ?>
-                            <h4 class="mb-3">Vui lòng đăng nhập để đặt lịch</h4>
+                            <h4 style="margin-bottom:0">Vui lòng đăng nhập để đặt lịch</h4>
                         <?php }?>
                     </div>
                 </div>
