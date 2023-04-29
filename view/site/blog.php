@@ -8,8 +8,25 @@
     <div class="container pt-5">
         <div class="d-flex flex-column text-center mb-5 pt-5">
             <h4 class="text-secondary mb-3">Pet Blog</h4>
-            <h1 class="display-4 m-0"><span class="text-primary">Updates</span> From Blog</h1>
+            <h1 class="display-4 m-0">Tin tức<span class="text-primary"> mới nhất</span></h1>
         </div>
+        <form action="" style="margin-bottom: 40px">
+            <div class="form-group">
+                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức"/>
+            </div>
+            <div>
+                <!-- <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục: </p> -->
+                <select name="category_news" id="category_news" class="custom-select" style="width:250px;" required>
+                    <option value="">Chọn danh mục tin tức</option>
+                    <?php foreach ($categoryNews as $cn): ?>
+                        <option value="<?php echo $cn['cn_id']?>"><?php echo $cn['cn_name']?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div style="margin-top:10px">
+                <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
+            </div>
+        </form>
         <div class="row pb-3">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
@@ -134,5 +151,4 @@
 
     <?php include("layout/asset_footer.php") ?>
 </body>
-
 </html>

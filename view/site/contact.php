@@ -7,8 +7,8 @@
     <!-- Contact Start -->
     <div class="container-fluid pt-5">
         <div class="d-flex flex-column text-center mb-5 pt-5">
-            <h4 class="text-secondary mb-3">Contact Us</h4>
-            <h1 class="display-4 m-0">Contact For <span class="text-primary">Any Query</span></h1>
+            <h4 class="text-secondary mb-3">Liên hệ</h4>
+            <h1 class="display-4 m-0">Hòm thư<span class="text-primary"> góp ý</span></h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-sm-8 mb-5">
@@ -16,23 +16,27 @@
                     <div id="success"></div>
                     <form name="sentMessage" id="contactForm" novalidate="novalidate">
                         <div class="control-group">
-                            <input type="text" class="form-control p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                            <p style="margin-bottom:0; font-weight:bold; font-size: 18px">Họ và tên</p>
+                            <input type="text" class="form-control p-4" id="name" placeholder="" required="required" data-validation-required-message="* Họ và tên trống."/>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="email" class="form-control p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                            <p style="margin-bottom:0; font-weight:bold; font-size: 18px">Số điện thoại</p>
+                            <input type="text" class="form-control p-4" id="phone" placeholder="" required="required" data-validation-required-message="* Số điện thoại trống."/>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input type="text" class="form-control p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                            <p style="margin-bottom:0; font-weight:bold; font-size: 18px">Địa chỉ</p>
+                            <input type="text" class="form-control p-4" id="address" placeholder="" required="required" data-validation-required-message="* Địa chỉ trống." />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <textarea class="form-control p-4" rows="6" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                            <p style="margin-bottom:0; font-weight:bold; font-size: 18px">Nội dung</p>
+                            <textarea class="form-control p-4" rows="6" id="message" placeholder="" required="required" data-validation-required-message="* Nội dung trống."></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>
+                            <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Gửi</button>
                         </div>
                     </form>
                 </div>

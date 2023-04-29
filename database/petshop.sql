@@ -12,8 +12,9 @@ create table admin
     ad_password varchar(32) not null, -- mật khẩu
     ad_role tinyint(1) not null, -- chức vụ: 1-quản lý, 2-NV tin tức, 3-NV QL bán hàng
     ad_status boolean default true not null, -- trạng thái: 1-đang làm, 0-nghỉ việc, -- linh hoạt
-    ad_is_delete boolean default false not null, -- xoá mềm -- default
-    constraint check_ad_name check(length(ad_name) > 2)
+    is_delete boolean default false not null, -- xoá mềm -- default
+    constraint check_ad_name check(length(ad_name) > 2),
+    constraint unique_account unique(ad_phone, is_delete)
 );
 
 
@@ -27,10 +28,11 @@ create table customer
     ctm_password varchar(32), -- mật khẩu
     ctm_gender boolean not null, -- giới tính: 1-nam, 0-nữ
     ctm_can_feedback boolean default false not null, -- khả năng đánh giá: 1-có, 0-không --default
+    ctm_active boolean default true not null, -- 1: có, 0: không
+    is_delete boolean not null default false,
     constraint check_ctm_password check (length(ctm_password) >= 8 or length(ctm_password) <= 32),
-    constraint check_ctm_name check(length(ctm_name) > 2)
+    constraint check_ctm_name check(length(ctm_name) >= 2)
 );
-
 create table discount
 (
     dc_code varchar(50) primary key, -- mã giảm giá
@@ -42,11 +44,12 @@ create table discount
     dc_end_time date not null, -- thời gian kết thúc
     dc_quantity int, -- số lượng mã giảm (có thể null nếu không giới hạn số lượng mã)
     dc_active boolean not null default false, -- trạng thái: 1-công khai, 0-bí mật -- linh hoạt
-    dc_is_delete boolean not null default false, -- xoá mềm: 1-xoá, 0-không -- default
+    is_delete boolean not null default false, -- xoá mềm: 1-xoá, 0-không -- default
     constraint check_discount_time check(dc_start_time < dc_end_time),
     constraint check_discount_percent check(dc_value_percent >= 0 and dc_value_percent <= 100),
     constraint check_discount_value check(dc_value >= 0),
-    constraint check_discount_quantity check(dc_quantity > 0)
+    constraint check_discount_quantity check(dc_quantity > 0),
+    constraint unique_discount unique(dc_code, is_delete)
 );
 
 
@@ -59,6 +62,7 @@ create table pet
     pet_gender boolean not null, -- giới tính: 1-đực, 0-cái
     pet_note text, -- mô tả đặc điểm
     ctm_id int, -- mã khách hàng
+    is_delete boolean not null default false,
     constraint fk_pet_customer foreign key (ctm_id) references customer(ctm_id)
 );
 
@@ -66,7 +70,8 @@ create table category_news
 (
     cn_id int primary key auto_increment, -- mã danh mục tin tức --default
     cn_name varchar(100) not null, -- tên
-    cn_is_delete boolean default false not null -- xoá mềm: 1-xoá, 0-không -- default
+    is_delete boolean default false not null -- xoá mềm: 1-xoá, 0-không -- default,
+    -- constraint unique_cn unique(cn_name,is_delete)
 );
 
 create table news
@@ -78,6 +83,7 @@ create table news
    news_img varchar(500) not null, -- ảnh
    news_date_release datetime not null default now(), -- ngày phát hành
    news_active boolean default true not null, -- trạng thái: 1-công khai, 0-ẩn với khách hàng
+   is_delete boolean default false not null,
    ad_id int, -- mã admin
    cn_id int, -- mã danh mục tin tức
    constraint fk_news_admin foreign key (ad_id) references admin(ad_id),
@@ -89,7 +95,7 @@ create table category_service
 (
     cs_id int primary key auto_increment, -- mã danh mục dịch vụ --default
     cs_name varchar(100) not null, -- tên
-    cs_is_delete boolean default false not null -- xoá mềm: 1-xoá, 0-không -- default
+    is_delete boolean default false not null -- xoá mềm: 1-xoá, 0-không -- default
 );
 
 
@@ -100,9 +106,9 @@ create table service
     sv_img varchar(500) not null, -- ảnh
     sv_price double not null, -- giá
     sv_description varchar(100) not null, -- mô tả
-    sv_pet boolean not null, -- loại thú cưng: 1-chó, 0-mèo
+    sv_pet tinyint(1) not null, -- loại thú cưng: 1-chó, 0-mèo, 2-cả 2
     sv_status boolean default true not null, -- trạng thái: 1-hoạt động, 0-dừng kinh doanh
-    sv_is_delete boolean default false not null, -- xoá mềm - default
+    is_delete boolean default false not null, -- xoá mềm - default
     cs_id int, -- mã danh mục dịch vụ
     constraint fk_service_category foreign key (cs_id) references category_service(cs_id),
     constraint check_service_price check(sv_price >= 0)
@@ -113,7 +119,7 @@ create table material
     mtr_id int primary key auto_increment, -- mã vật liệu -- default
     mtr_name varchar(100) not null, -- tên
     mtr_quantity int not null, -- số lượng tồn kho
-    mtr_is_delete boolean default false not null, -- xoá mềm --default
+    is_delete boolean default false not null, -- xoá mềm --default
     constraint check_material_quantity check(mtr_quantity >= 0)
 );
 
@@ -123,7 +129,7 @@ create table detail_service
     sv_id int, -- mã dịch vụ
     mtr_id int, -- mã vật liệu
     quantity int not null, -- số lượng vật liệu
-    detail_is_delete boolean default false not null, -- default
+    is_delete boolean default false not null, -- default
     constraint fk_ds_service foreign key (sv_id) references service(sv_id),
     constraint fk_ds_material foreign key (mtr_id) references material(mtr_id),
     constraint check_detail_service_quantity check(quantity > 0)
@@ -137,6 +143,7 @@ create table appointment
     apm_status tinyint(1) default 0 not null, -- trạng thái:0-chờ xác nhận, 1-đã xác nhận, 2- đã hủy, 3- đã hoàn thành
     ctm_id int, -- mã khách hàng
     cs_id int, -- mã nhóm dịch vụ
+    is_delete boolean default false, 
     constraint fk_appointment_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_appointment_category_service foreign key (cs_id) references category_service(cs_id)
 );
@@ -145,11 +152,12 @@ create table bill
 (
     bill_id int primary key auto_increment, -- mã hóa đơn -- default
     bill_date_release datetime not null default now(), -- ngày thanh toán -- linh hoạt
-    bill_is_delete boolean default false not null, -- -- default
+    is_delete boolean default false not null, -- -- default
     bill_status boolean default true not null, -- 1: bình thường, 0: huỷ
     ctm_id int, -- mã khách hàng
     ad_id int, -- mã admin
     dc_code varchar(50), -- mã giảm giá
+    total_value float not null, --
     constraint fk_bill_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_bill_admin foreign key (ad_id) references admin(ad_id),
     constraint fk_bill_discount foreign key (dc_code) references discount(dc_code)
@@ -163,7 +171,8 @@ create table detail_bill
     quantity int not null, -- số lượng dịch vụ
     sv_price double not null, -- giá dịch vụ
     pet_id int not null, -- mã thú cưng
-    detail_is_delete boolean default false not null, -- default
+    is_delete boolean default false not null, -- default
+    value float not null, --
     constraint fk_do_service foreign key (sv_id) references service (sv_id),
     constraint fk_do_bill  foreign key (bill_id) references bill (bill_id)
 );
@@ -174,7 +183,7 @@ create table feedback
     fb_content text not null, -- nội dung
     fb_rating tinyint(1) not null, -- đánh giá range(1-5)
     fb_time datetime not null default now(), -- thời gian đánh giá -- linh hoạt
-    fb_is_delete boolean default false not null, -- default
+    is_delete boolean default false not null, -- default
     ctm_id int, -- mã khách hàng
     constraint fk_feedback_ctm foreign key (ctm_id) references customer(ctm_id),
     constraint check_feedback_rating check(fb_rating >= 0 and fb_rating <=5)
@@ -183,14 +192,16 @@ create table feedback
 
 create table shop_info
 (
-    shop_name varchar(150) primary key  , -- Tên shop
+    shop_name varchar(150) primary key , -- Tên shop
     shop_address varchar(150) not null, -- địa chỉ
-    shop_phone char(13) not null, -- số điện thoại
+    shop_phone char(20) not null, -- số điện thoại
+    shop_mail varchar(30) not null, -- số điện thoại
     shop_description text, -- mô tả
     shop_facebook varchar(255), -- địa chỉ facebook
     shop_website varchar(255), -- địa chỉ website
     shop_banner varchar(255) not null, -- banner hiển thị trên website
-    shop_logo varchar(255) not null -- logo shop
+    shop_logo varchar(255) not null, -- logo shop
+    is_delete boolean not null default false
 )
 
 

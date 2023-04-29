@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!-- Topbar Start -->
 <div class="container-fluid">
         <div class="row bg-secondary py-2 px-lg-5">
@@ -11,19 +10,19 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" href="<?php echo $shop['shop_facebook']?>" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" href="https://twitter.com/?lang=vi" target="_blank">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" href="https://www.linkedin.com/in/dung-trinh-tien-a76939272/" target="_blank">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a class="text-white px-3" href="">
+                    <a class="text-white px-3" href="https://www.instagram.com/trtieensdungx/" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a class="text-white pl-3" href="">
+                    <a class="text-white pl-3" href="https://www.youtube.com/" target="_blank">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -45,16 +44,16 @@
                         <p class="m-0">8.00AM - 9.00PM</p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
-                        <h6>Địa chỉ</h6>
-                        <p class="m-0">55 Giải Phóng, Đồng Tâm</p>
+                        <h6>Địa chỉ cơ sở chính</h6>
+                        <p class="m-0"><?php echo $shop['shop_address']?></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
                         <h6>Email liên hệ</h6>
-                        <p class="m-0">carepet@huce.com</p>
+                        <p class="m-0"><?php echo $shop['shop_mail']?></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center pl-3">
                         <h6>Số điện thoại</h6>
-                        <p class="m-0">+012 345 6789</p>
+                        <p class="m-0"><?php echo $shop['shop_phone']?></p>
                     </div>
                 </div>
             </div>
@@ -82,8 +81,9 @@
                     <a href="?controller=news&action=news_page" class="nav-item nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
                     <a href="?controller=shop&action=contact_page" class="nav-item nav-link <?php if ($title == "Liên hệ") echo "active"; ?>">Liên hệ</a>
                 </div>
-                <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
-                    <a href="?controller=home&action=customer_info" class="btn btn-lg btn-primary px-3 d-none d-lg-block" >Thông tin tài khoản</a>
+                <?php if (isset($_SESSION['login']) && $_SESSION['login'] == true) { ?>
+                    <a href="?controller=home&action=customer_info" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="margin-right: 5px">Thông tin tài khoản</a>
+                    <a href="?controller=home&action=logout" class="btn btn-lg btn-primary px-3 d-none d-lg-block" >Đăng xuất</a>
                 <?php } else { ?>
                     <a href="?controller=home&action=login_page" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Đăng nhập</a>
                 <?php }?>

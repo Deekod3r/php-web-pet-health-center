@@ -1,10 +1,13 @@
 <?php
 class BaseController {
 
+    public function __construct() {
+        session_start();
+    }
     public function renderView($view_name, $data=[]) {
         extract($data);
         $path = 'view/';
-        if(isset($_SESSION["admin"]) && $_SESSION["admin"]){
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == true){
             $path .= 'admin/';
         } else $path .= 'site/';
         include($path.$view_name.'.php');
@@ -12,6 +15,7 @@ class BaseController {
 
     public function getRepo($repo_name) {
         include('repository/'.$repo_name.'Repository.php');
+        $repo_name .= 'Repository';
         $repoObj = new $repo_name();
         return $repoObj;
     }

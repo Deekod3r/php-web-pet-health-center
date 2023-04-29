@@ -9,14 +9,14 @@
                 <div class="row">
                     <div class="col-md-3 mb-5">
                         <h5 class="text-primary mb-4">Liên hệ</h5>
-                        <p><i class="fa fa-map-marker-alt mr-2"></i>55 Giải Phóng, Đồng Tâm, <br/> Hai Bà Trưng, Hà Nội</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope mr-2"></i>carepet@huce.com</p>
+                        <p style="width: 210px"><i class="fa fa-map-marker-alt mr-2"></i><?php echo $shop['shop_address']?></p>
+                        <p><i class="fa fa-phone-alt mr-2"></i><?php echo $shop['shop_phone']?></p>
+                        <p><i class="fa fa-envelope mr-2"></i><?php echo $shop['shop_mail']?></p>
                         <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://twitter.com/?lang=vi" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="<?php echo $shop['shop_facebook']?>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://www.linkedin.com/in/dung-trinh-tien-a76939272/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://www.instagram.com/trtieensdungx/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="col-md-3 mb-5">
