@@ -9,8 +9,8 @@ class AdminRepository extends BaseRepository{
         //$this->connection = $this->getConnection();
     }
 
-    public function getData(){
-        return $this->findAll();
+    public function getData($key){
+        return $this->findAll($key);
     }
 
     public function getByAccount($phone,$password){

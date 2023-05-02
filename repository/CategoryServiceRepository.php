@@ -9,8 +9,8 @@ class CategoryServiceRepository extends BaseRepository{
         //$this->connection = $this->getConnection();
     }
 
-    public function getData(){
-        $result = $this->findAll();
+    public function getData($key){
+        $result = $this->findAll($key);
         return $result;
     }
 

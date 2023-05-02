@@ -157,7 +157,7 @@ create table bill
     ctm_id int, -- mã khách hàng
     ad_id int, -- mã admin
     dc_code varchar(50), -- mã giảm giá
-    total_value float not null, --
+    total_value float not null default 0, --
     constraint fk_bill_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_bill_admin foreign key (ad_id) references admin(ad_id),
     constraint fk_bill_discount foreign key (dc_code) references discount(dc_code)
@@ -172,7 +172,7 @@ create table detail_bill
     sv_price double not null, -- giá dịch vụ
     pet_id int not null, -- mã thú cưng
     is_delete boolean default false not null, -- default
-    value float not null, --
+    value float not null default (sv_price * quantity), --
     constraint fk_do_service foreign key (sv_id) references service (sv_id),
     constraint fk_do_bill  foreign key (bill_id) references bill (bill_id)
 );

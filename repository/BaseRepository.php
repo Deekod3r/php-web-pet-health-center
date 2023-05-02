@@ -19,8 +19,10 @@ class BaseRepository {
         return $conn;
     }
 
-    protected function findAll(){
-        $query = "SELECT * FROM " . $this->table . " where is_delete = 0";
+    protected function findAll($key){
+        if(empty($key)) {
+            $query = "SELECT * FROM " . $this->table . " where is_delete = 0";
+        } else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 " . $key;
         $result = null;
         $response = null;
         try{

@@ -44,7 +44,7 @@
                         <p class="m-0">8.00AM - 9.00PM</p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
-                        <h6>Địa chỉ cơ sở chính</h6>
+                        <h6>Địa chỉ</h6>
                         <p class="m-0"><?php echo $shop['shop_address']?></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">

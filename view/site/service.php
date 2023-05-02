@@ -62,7 +62,7 @@
             <h4 class="text-secondary mb-3"></h4>
             <h1 class="display-4 m-0">Trải nghiệm với <span class="text-primary">chi phí tốt nhất</span></h1>
         </div>
-        <form action="" style="margin-bottom: 40px">
+        <form action="?controller=service&action=" style="margin-bottom: 40px">
             <div class="form-group">
                 <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" required/>
             </div>
