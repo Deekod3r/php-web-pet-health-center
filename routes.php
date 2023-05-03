@@ -1,6 +1,6 @@
 <?php
 include('controller/BaseController.php');
-include('repository/BaseRepository.php');
+include('model/BaseRepository.php');
 include('config/Enum/Enum.php');
 if(isset($_GET['controller']) && isset($_GET['action'])) {
     //echo $_GET['controller']. " " . $_GET['action'];

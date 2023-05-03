@@ -79,7 +79,7 @@
                 </label>
             </div>
             <div style="margin-top: 10px">
-                <input class="btn btn-lg btn-primary btn-block border-0" type="submit" <?php if (isset($_SESSION['login']) && $_SESSION['login']) {echo "value='Gửi'";} else echo "disabled value='Nếu bạn đã sử dụng dịch vụ tại CarePET, vui lòng đăng nhập để đánh giá'";?>>
+                <input class="btn btn-lg btn-primary btn-block border-0" type="submit" <?php if (isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['can_feedback']) {echo "value='Gửi'";} else echo "disabled value='Hãy sử dụng dịch vụ của CarePET và quay lại đánh giá sau nhé!'";?>>
             </div>
         </form>
     </div>

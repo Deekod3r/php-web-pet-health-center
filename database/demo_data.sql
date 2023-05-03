@@ -87,9 +87,9 @@ insert into detail_service (detail_id, sv_id, mtr_id, quantity, is_delete)
                    (default,'2023/04/18','2:45:00',1,3,2,false); -- kh3 đặt onl -> đã xác nhận
 -- select * from appointment;
 -- bill
-insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_code, total_value)
-            values (default,'2023/03/16',default,default,1,3,'HAPPYPET',200000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-                    (default,'2023/04/16',default,default,3,2,null,300000); -- kh2 ko đc giảm giá
+insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_code, value_temp,value_reduced,total_value)
+            values (default,'2023/03/16',default,default,1,3,'HAPPYPET',200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+                    (default,'2023/04/16',default,default,3,2,null,300000,0,300000); -- kh2 ko đc giảm giá
 -- select * from bill;
 -- detail_bill
 insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete,value)
@@ -107,4 +107,6 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
 insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_website, shop_banner, shop_logo, shop_mail)
             value ('CarePET','55 Giải Phóng, Đồng Tâm, Hai Bà Trưng, Hà Nội','+84 987 654 321','Cửa hàng chăm sóc thú cưng CarePET','https://www.facebook.com/carepet.nhom2','https://carepet.com','#','#','carepet@huce.com');
 -- select * from shop_info;
+
+update shop_info set shop_description = 'Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.' where 1=1
 

@@ -15,31 +15,35 @@
                         <?php if (isset($_SESSION['login']) && $_SESSION['login']) {?>
                             <form class="py-5">
                                 <div class="form-group">
-                                    <input type="text" class="form-control border-0 p-4" placeholder="Your Name" required="required" />
+                                    <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Họ và tên</p>
+                                    <input type="text" class="form-control border-0 p-4" placeholder="" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control border-0 p-4" placeholder="Your Email" required="required" />
+                                    <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Số điện thoại</p>
+                                    <input type="text" class="form-control border-0 p-4" placeholder="" required="required" />
                                 </div>
                                 <div class="form-group">
+                                    <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ngày</p>
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Reservation Date" data-target="#date" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="" data-target="#date" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Giờ</p>
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Reservation Time" data-target="#time" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="" data-target="#time" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select border-0 px-4" style="height: 47px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 1</option>
-                                        <option value="3">Service 1</option>
+                                        <option value="">Chọn dịch vụ</option>
+                                        <?php foreach($categoryService as $cs): ?>
+                                        <option value="<?php echo $cs['cs_id'] ?>"><?php echo $cs['cs_name'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div>
-                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Book Now</button>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Đặt lịch</button>
                                 </div>
                             </form>
                         <?php } else { ?>

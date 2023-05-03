@@ -14,7 +14,7 @@ class BaseController {
     }
 
     public function getRepo($repo_name) {
-        include('repository/'.$repo_name.'Repository.php');
+        include('model/'.$repo_name.'Repository.php');
         $repo_name .= 'Repository';
         $repoObj = new $repo_name();
         return $repoObj;
@@ -23,12 +23,20 @@ class BaseController {
         header("Location: ?controller=" . $controller . "&action=" . $action);
     }
 
-    // public function __construct()
-    // {
-    //     session_start();
-    //     if(!isset($_SESSION['is_login'])) {
-    //         $_SESSION['error_login_message'] = "Vui lòng đăng nhập để sử dụng này.";
-    //         $this->redirect('Home', 'login_page');
-    //     }
-    // }
+    public function checkLogin()
+    {
+        if(!isset($_SESSION['login']) || !$_SESSION['login']) {
+            $_SESSION['error_login_message'] = "Vui lòng đăng nhập để sử dụng chức năng này.";
+            $this->redirect('Home', 'login_page');
+        }
+    }
+
+    public function checkAdmin()
+    {
+        if(!isset($_SESSION['admin']) || !$_SESSION['admin']) {
+            $_SESSION['error_login_message'] = "Bạn không có quyền sử dụng chức năng này.";
+            $this->redirect('Home', 'index');
+        }
+    }
+
 }

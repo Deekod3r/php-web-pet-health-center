@@ -13,13 +13,13 @@
                 <h5 class="text-muted mb-3"><b>Địa chỉ:</b> <?php echo $shop['shop_address']?></h5>
                 <h5 class="text-muted mb-3"><b>Số điện thoại:</b> <?php echo $shop['shop_phone']?></h5>
                 <h5 class="text-muted mb-3"><b>Email:</b> <?php echo $shop['shop_mail']?></h5>
-                <p class="mb-4"><?php echo $shop['shop_description']?></p>
+                <p class="mb-4" style="font-size:18px"><?php echo $shop['shop_description']?></p>
                 <ul class="list-inline">
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Uy tín</h5></li>
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Chất lượng</h5></li>
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Hỗ trợ 24/7</h5></li>
                 </ul>
-                <a href="" class="btn btn-lg btn-primary mt-3 px-4">Đặt lịch ngay</a>
+                <a href="?controller=appointment&action=appointment_page" class="btn btn-lg btn-primary mt-3 px-4">Đặt lịch ngay</a>
             </div>
             <div class="col-lg-5">
                 <div class="row px-3">

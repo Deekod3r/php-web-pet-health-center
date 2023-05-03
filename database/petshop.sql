@@ -153,14 +153,19 @@ create table bill
     bill_id int primary key auto_increment, -- mã hóa đơn -- default
     bill_date_release datetime not null default now(), -- ngày thanh toán -- linh hoạt
     is_delete boolean default false not null, -- -- default
-    bill_status boolean default true not null, -- 1: bình thường, 0: huỷ
+    bill_status tinyint(1) default true not null, -- 2: huỷ, 1: đã thanh toán, 0: chờ thanh toán
     ctm_id int, -- mã khách hàng
     ad_id int, -- mã admin
     dc_code varchar(50), -- mã giảm giá
-    total_value float not null default 0, --
+    value_temp float not null default 0, --
+    value_reduced float default 0 not null, -- giá trị được giảm
+    total_value float not null default (value_temp - value_reduced),
     constraint fk_bill_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_bill_admin foreign key (ad_id) references admin(ad_id),
-    constraint fk_bill_discount foreign key (dc_code) references discount(dc_code)
+    constraint fk_bill_discount foreign key (dc_code) references discount(dc_code),
+    constraint check_value_reduced check(value_reduced >= 0),
+    constraint check_total_value check(total_value >= 0),
+    constraint check_value_temp check(value_temp >= 0)
 );
 
 create table detail_bill
@@ -174,7 +179,8 @@ create table detail_bill
     is_delete boolean default false not null, -- default
     value float not null default (sv_price * quantity), --
     constraint fk_do_service foreign key (sv_id) references service (sv_id),
-    constraint fk_do_bill  foreign key (bill_id) references bill (bill_id)
+    constraint fk_do_bill  foreign key (bill_id) references bill (bill_id),
+    constraint check_value check(value >= 0)
 );
 
 create table feedback

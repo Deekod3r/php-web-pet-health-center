@@ -9,7 +9,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="asset/img/carousel-3.jpg" alt="Image"  height="715px">
+                    <img class="w-100" src="asset/img/carousel-3.jpg" alt="Image" >
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center" >
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="height:80%">
-                    <img class="w-100" src="asset/img/carousel-4.jpg" alt="Image"  height="715px">
+                    <img class="w-100" src="asset/img/carousel-4.jpg" alt="Image" >
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>

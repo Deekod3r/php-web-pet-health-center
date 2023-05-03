@@ -82,7 +82,7 @@
                     <a href="?controller=shop&action=contact_page" class="nav-item nav-link <?php if ($title == "Liên hệ") echo "active"; ?>">Liên hệ</a>
                 </div>
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] == true) { ?>
-                    <a href="?controller=home&action=customer_info" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="margin-right: 5px">Thông tin tài khoản</a>
+                    <a href="?controller=customer&action=customer_info" class="btn btn-lg btn-primary px-3 d-none d-lg-block" style="margin-right: 5px">Thông tin tài khoản</a>
                     <a href="?controller=home&action=logout" class="btn btn-lg btn-primary px-3 d-none d-lg-block" >Đăng xuất</a>
                 <?php } else { ?>
                     <a href="?controller=home&action=login_page" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Đăng nhập</a>

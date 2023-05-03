@@ -27,4 +27,8 @@ class CustomerRepository extends BaseRepository{
         }
         return null;
     }
+
+    public function getById($id){
+        return  $this->findById($id)[0];
+    }
 };

@@ -1,11 +1,9 @@
 <?php 
 class ShopController extends BaseController{
 
-    public function __construct(){
-    }
     public function about_page(){
         $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData();
+        $shop = $shopRepo->getData("");
         $this->renderView(
             'about',[
                 'shop' => $shop
@@ -15,7 +13,7 @@ class ShopController extends BaseController{
 
     public function contact_page(){
         $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData();
+        $shop = $shopRepo->getData("");
         $this->renderView(
             'contact',[
                 'shop' => $shop

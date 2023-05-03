@@ -62,20 +62,34 @@
             <h4 class="text-secondary mb-3"></h4>
             <h1 class="display-4 m-0">Trải nghiệm với <span class="text-primary">chi phí tốt nhất</span></h1>
         </div>
-        <form action="?controller=service&action=" style="margin-bottom: 40px">
-            <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" required/>
+        <form action="" style="margin-bottom: 40px" method="get">
+            <input type="hidden" name="controller" value="service"/>
+            <input type="hidden" name="action" value="service_page"/>
+            <div class="form-group" >
+                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name"/>
             </div>
-            <div>
-                <!-- <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục: </p> -->
-                <select name="category_news" id="category_news" class="custom-select" style="width:250px;" required>
-                    <option value="">Chọn danh mục dịch vụ</option>
-                    <?php foreach ($categoryService as $cs): ?>
-                        <option value="<?php echo $cs['cs_id']?>"><?php echo $cs['cs_name']?></option>
-                    <?php endforeach; ?>
-                </select>
+            <div class="row" style="margin-top: 10px">
+                <div class="col-lg-4">
+                    <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục dịch vụ: </p>
+                    <select name="category_service" id="category_service" class="custom-select" style="width:250px;">
+                        <option value="">Chọn danh mục dịch vụ</option>
+                        <option value="">Tất cả</option>
+                        <?php foreach ($categoryService as $cs): ?>
+                            <option value="<?php echo $cs['cs_id']?>"><?php echo $cs['cs_name']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-lg-8">
+                    <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục thú cưng: </p>
+                    <select name="type_pet" id="type_pet" class="custom-select" style="width:250px;">
+                        <option value="">Chọn loại thú cưng</option>
+                        <option value="">Tất cả</option>
+                        <option value="0">Mèo</option>
+                        <option value="1">Chó</option>
+                    </select>
+                </div>
             </div>
-            <div style="margin-top:10px">
+            <div style="margin-top:10px; width: 250px;">
                 <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
             </div>
         </form>

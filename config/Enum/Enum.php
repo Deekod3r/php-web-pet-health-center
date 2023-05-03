@@ -28,4 +28,8 @@ enum Enum {
     public  const SERVICE_DOG = 1;
     public const SERVICE_BOTH = 2;
 
+    //TYPE PET
+    public  const TYPE_DOG = 1;
+    public  const TYPE_CAT = 0;
+
 }
