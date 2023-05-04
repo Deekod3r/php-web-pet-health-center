@@ -19,12 +19,12 @@
         <form action="?controller=home&action=login_action" method=post>
           <div class="input-field">
             <input type="text" placeholder=" " class="form-input" name="phone">
-            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">Số điện thoại</label>
-            <i class="uil uil-envelope icon"></i>
+            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspSố điện thoại</label>
+            <i class="uil uil-phone icon"></i>
           </div>
           <div class="input-field">
             <input type="password" class="form-input password" placeholder=" " name="password">
-            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">Mật khẩu</label>
+            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspMật khẩu</label>
             <i class="uil uil-lock icon"></i>
             <i class="uil uil-eye-slash showHidePw"></i>
           </div>
@@ -36,7 +36,7 @@
             <a href="#" class="text">Quên mật khẩu?</a>
           </div>
           <div class="input-field button">
-            <input type="submit" value="Login">
+            <input type="submit" value="Đăng nhập">
           </div>
         </form>
         <div class="login-signup">
@@ -44,9 +44,14 @@
             <a href="#" class="text signup-link">Đăng ký ngay</a>
           </span>
         </div>
-        <div class="alert">
-          <span class="text" style="font-size:15px">Alert</span>
+        <?php if (isset($_SESSION['msg_login']) && isset($_SESSION['check_login']) && !$_SESSION['check_login']): ?>
+        <div class="login-signup">
+          <span class="text" style="font-size:15px; color: red; font-weight:600"><?php echo $_SESSION['msg_login']?></span>
         </div>
+        <?php endif;
+          $_SESSION['msg_login'] = null;
+          $_SESSION['check_login'] = null;
+        ?>
       </div>
 
       <div class="form signup">
@@ -54,33 +59,33 @@
         <form action="#">
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input ">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Họ và tên</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspHọ và tên</label>
             <i class="uil uil-user"></i>
           </div>
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input ">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Email</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspEmail</label>
             <i class="uil uil-envelope icon"></i>
           </div>
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input ">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Số điện thoại</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspSố điện thoại</label>
             <i class="uil uil-phone"></i>
           </div>
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input ">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Địa chỉ</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspĐịa chỉ</label>
             <i class="uil uil-location-pin-alt"></i>
           </div>
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input password">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Mật khẩu</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspMật khẩu</label>
             <i class="uil uil-lock icon"></i>
             <i class="uil uil-eye-slash showHidePw"></i>
           </div>
           <div class="input-field">
             <input type="text" placeholder=" " required class="form-input password">
-            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">Xác nhận mật khẩu</label>
+            <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspXác nhận mật khẩu</label>
             <i class="uil uil-lock icon"></i>
             <i class="uil uil-eye-slash showHidePw"></i>
           </div>

@@ -9,7 +9,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="asset/img/carousel-3.jpg" alt="Image" >
+                    <img class="w-100" src="asset/img/carousel-6.jpg" alt="Image" >
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center" >
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
@@ -20,12 +20,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item" style="height:80%">
-                    <img class="w-100" src="asset/img/carousel-4.jpg" alt="Image" >
+                <div class="carousel-item">
+                    <img class="w-100" src="asset/img/carousel-5.jpg" alt="Image" >
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
-                            <h1 class="display-3 text-white mb-3">Pet Spa & Grooming</h1>
+                            <h1 class="display-3 text-white mb-3">Keep Your Pet Happy</h1>
                             <h5 class="text-white mb-3 d-none d-sm-block"> - CarePET - </h5>
                             <a href="?controller=appointment&action=appointment_page" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Đặt lịch ngay</a>
                             <a href="?controller=service&action=service_page" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4" style="color:white">Xem thêm</a>

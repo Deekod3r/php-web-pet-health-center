@@ -25,17 +25,14 @@ class BaseRepository {
         } else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 " . $key;
         $result = null;
         $response = null;
-        try{
-            $result = $this->getConnection()->query($query);
-            $data = [];
-            if($result->num_rows >= 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $response = $data;
-            } else $response = null;
-        } catch(Exception $e) {
-        }
+        $result = $this->getConnection()->query($query);
+        $data = [];
+        if($result->num_rows >= 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $response = $data;
+        } 
         return $response;
     }
 
@@ -43,40 +40,29 @@ class BaseRepository {
         $query = "SELECT * FROM " . $this->table . " WHERE $this->id_table = " . $id . " and is_delete = 0";
         $result = null;
         $response = null;
-        try{
-            $result = $this->getConnection()->query($query);
-            $data = [];
-            if($result->num_rows >= 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $data[] = $row;
-                }
-                $response = $data;
-            } else return null;
-        }catch(Exception $e){
+        $result = $this->getConnection()->query($query);
+        $data = [];
+        if($result->num_rows >= 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            $response = $data;
         }
         return $response;
     }
 
     protected function save($data){
         $query = "Insert into " . $this->table . " values(" . implode(",", $data) . ")";
-        try {
-            if($this->getConnection()->query($query)){
-                return true;            
-            } else return false;
-        } catch (Exception $e){
-        }
-        return false;
+        if($this->getConnection()->query($query)){
+            return true;            
+        } else return false;
     }
 
     protected function delete($id){
         $query = "Delete from $this->table where $this->id_table = " . $id;
-        try {
-            if($this->getConnection()->query($query)){
+        if($this->getConnection()->query($query)){
                 return true;
-            } else return false;
-        } catch (Exception $e){
-        }
-        return false;
+        } else return false;
     }
 
     protected function update($data, $id){
@@ -84,13 +70,9 @@ class BaseRepository {
                 "set ".
                 "set "
                 ." where $this->id_table = " . $id;
-        try {
-            if($this->getConnection()->query($query)){
+        if($this->getConnection()->query($query)){
                 return true;
-            } else return false;
-        } catch (Exception $e){
-        }
-        return false;
+        } else return false;
     }
 
 }   
