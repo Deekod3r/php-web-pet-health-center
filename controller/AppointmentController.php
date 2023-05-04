@@ -10,7 +10,7 @@ class AppointmentController extends BaseController{
             'booking',[
             'shop' => $shop,
             'categoryService' => $categoryService
-        ]
+            ]
         );
     }
 

@@ -32,4 +32,10 @@ enum Enum {
     public  const TYPE_DOG = 1;
     public  const TYPE_CAT = 0;
 
+    //STATUS APPOINTMENT
+    public const STATUS_APPOINTMENT_CONFIRMED_NO = 0;
+    public const STATUS_APPOINTMENT_CONFIRMED_YES = 1;
+    public const STATUS_APPOINTMENT_CANCEL = 2;
+    public const STATUS_APPOINTMENT_COMPLETED = 3;
+
 }

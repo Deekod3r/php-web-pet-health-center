@@ -16,19 +16,15 @@ class CustomerRepository extends BaseRepository{
 
     public function getByAccount($phone,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ctm_phone ='" . $phone . "' and ctm_password = '" . $password ."'";
-        $result = null;
-        try{
-            $result = $this->getConnection()->query($query);
-            if($result->num_rows > 0) {
-                $data = $result->fetch_assoc();
-                return $data;
-            } else return null;
-        } catch(Exception $e){
-        }
+        $result = $this->getConnection()->query($query);
+        if($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
+            return $data;
+        } 
         return null;
     }
 
     public function getById($id){
-        return  $this->findById($id)[0];
+        return  $this->findById($id);
     }
 };

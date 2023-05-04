@@ -19,6 +19,6 @@ class NewsRepository extends BaseRepository{
     }
 
     public function getById($id){
-        return $this->findById($id)[0];
+        return $this->findById($id);
     }
 };

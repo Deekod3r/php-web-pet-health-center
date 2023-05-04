@@ -23,11 +23,10 @@ class BaseRepository {
         if(empty($key)) {
             $query = "SELECT * FROM " . $this->table . " where is_delete = 0";
         } else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 " . $key;
-        $result = null;
         $response = null;
         $result = $this->getConnection()->query($query);
         $data = [];
-        if($result->num_rows >= 0) {
+        if($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
@@ -38,17 +37,14 @@ class BaseRepository {
 
     protected function findById($id){
         $query = "SELECT * FROM " . $this->table . " WHERE $this->id_table = " . $id . " and is_delete = 0";
-        $result = null;
-        $response = null;
+        $response = [];
         $result = $this->getConnection()->query($query);
-        $data = [];
-        if($result->num_rows >= 0) {
+        if($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
+                $response[] = $row;
             }
-            $response = $data;
-        }
-        return $response;
+        } 
+        return $response[0];
     }
 
     protected function save($data){
@@ -73,6 +69,6 @@ class BaseRepository {
         if($this->getConnection()->query($query)){
                 return true;
         } else return false;
-    }
+    } 
 
 }   

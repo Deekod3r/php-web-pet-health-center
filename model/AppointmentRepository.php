@@ -1,10 +1,10 @@
 <?php 
 //include("BaseRepository.php");
-class PetRepository extends BaseRepository{
+class AppointmentRepository extends BaseRepository{
 
     private $connection;
-    var $table = 'pet';
-    var $id_table = 'pet_id';
+    var $table = 'appointment';
+    var $id_table = 'apm_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
@@ -18,8 +18,10 @@ class PetRepository extends BaseRepository{
         return $this->findById($id);
     }
 
-    public function getByCustomer($customer){
-        $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer";
+    public function getByCustomer($customer,$key){
+        if ($key == "") {
+            $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer";
+        }  else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer " . $key;
         $response = null;
         $result = $this->getConnection()->query($query);
         $data = [];
@@ -28,7 +30,7 @@ class PetRepository extends BaseRepository{
                 $data[] = $row;
             }
             $response = $data;
-        }
+        } 
         return $response;
     }
 };

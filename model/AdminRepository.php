@@ -15,14 +15,10 @@ class AdminRepository extends BaseRepository{
 
     public function getByAccount($phone,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_phone ='" . $phone . "' and ad_password = '" . $password ."'";
-        $result = null;
-        try{
-            $result = $this->getConnection()->query($query);
-            if($result->num_rows > 0) {
-                $data = $result->fetch_assoc();
-                return $data;
-            } else return null;
-        } catch(Exception $e){
+        $result = $this->getConnection()->query($query);
+        if($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
+            return $data;
         }
         return null;
     }

@@ -10,12 +10,15 @@ class CustomerController extends BaseController{
         $pet = $petRepo->getByCustomer($_SESSION['id']);
         $billRepo = $this->getRepo('bill');
         $bill = $billRepo->getByCustomer($_SESSION['id']);
+        $appointmentRepo = $this->getRepo('appointment');
+        $appointment = $appointmentRepo->getByCustomer($_SESSION['id']," and apm_status = ".Enum::STATUS_APPOINTMENT_CONFIRMED_YES);
         $this->renderView(
             'customer_info',[
                 'shop' => $shop,
                 'customer' => $customer,
                 'pet' => $pet,
-                'bill' => $bill
+                'bill' => $bill,
+                'appointment' => $appointment
             ]
         );
     }
