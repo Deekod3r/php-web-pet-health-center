@@ -5,7 +5,7 @@
 <body>
     <?php include("layout/header.php")?>
     <!-- Services Start -->
-    <div class="container-fluid bg-light pt-5">
+    <div class="container-fluid bg-light pt-3 main">
         <div class="container py-5">
             <div class="d-flex flex-column text-center mb-5">
                 <h4 class="text-secondary mb-3"></h4>

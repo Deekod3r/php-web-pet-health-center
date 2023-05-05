@@ -13,8 +13,8 @@ class AdminRepository extends BaseRepository{
         return $this->findAll($key);
     }
 
-    public function getByAccount($phone,$password){
-        $query = "SELECT * FROM " . $this->table . " WHERE ad_phone ='" . $phone . "' and ad_password = '" . $password ."'";
+    public function getByAccount($username,$password){
+        $query = "SELECT * FROM " . $this->table . " WHERE ad_username ='" . $username . "' and ad_password = '" . $password ."'";
         $result = $this->getConnection()->query($query);
         if($result->num_rows > 0) {
             $data = $result->fetch_assoc();

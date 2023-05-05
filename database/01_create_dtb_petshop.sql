@@ -1,20 +1,15 @@
--- create database web_shop_pet;
--- use web_shop_pet;
+# create database web_shop_pet;
+# use web_shop_pet;
 
 create table admin
 (
     ad_id int primary key auto_increment, -- mã admin - default
-    ad_name varchar(100) not null, -- họ tên
-    ad_phone char(10) not null unique, -- số điện thoại
-    ad_person_id char(13) not null unique, -- số căn cước công dân
-    ad_gender boolean not null, -- giới tính: 1-nam, 0-nữ
-    ad_birthday date not null, -- ngày sinh
+    ad_username varchar(100) not null, -- họ tên
     ad_password varchar(32) not null, -- mật khẩu
     ad_role tinyint(1) not null, -- chức vụ: 1-quản lý, 2-NV tin tức, 3-NV QL bán hàng
     ad_status boolean default true not null, -- trạng thái: 1-đang làm, 0-nghỉ việc, -- linh hoạt
     is_delete boolean default false not null, -- xoá mềm -- default
-    constraint check_ad_name check(length(ad_name) > 2),
-    constraint unique_account unique(ad_phone, is_delete)
+    constraint unique_account unique(ad_username, is_delete)
 );
 
 

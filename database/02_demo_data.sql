@@ -1,9 +1,9 @@
 -- admin
-insert into admin (ad_id, ad_name, ad_phone, ad_person_id, ad_gender, ad_birthday, ad_password, ad_role, ad_status, is_delete)
-            values (default,'Test','0396432023','026304002516',0,'2002/11/19','13434345678',1,1,false),
-                   (default,'Thuận','0383092429','125904887',1,'2002/04/29','765434343421',3,1,false),
-                   (default,'Hải','0383092123','125904457',1,'2002/04/29','765434343421',3,0,false),
-                   (default,'Dũng','0981794085','987654322',1,'2002/02/02','1',2,1,false);
+insert into admin (ad_id, ad_username, ad_password, ad_role, ad_status, is_delete)
+            values (default,'admin1','13434345678',1,1,false),
+                   (default,'admin2','765434343421',3,1,false),
+                   (default,'admin3','765434343421',3,0,false),
+                   (default,'admin','1',2,1,false);
 -- select * from admin;
 -- customer
 insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_password, ctm_gender, ctm_can_feedback, ctm_active)

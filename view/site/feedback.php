@@ -4,7 +4,7 @@
 <?php include("layout/asset_header.php")?>
 <body>
     <?php include("layout/header.php")?>
-    <div class="container py-5">
+    <div class="container py-5 main">
         <div class="mb-5">
             <h3 class="mb-4"><?php echo count($feedback)?> Đánh giá</h3>
             <?php foreach($feedback as $fb): ?>

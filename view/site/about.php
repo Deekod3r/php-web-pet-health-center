@@ -5,7 +5,7 @@
 <body>
     <?php include("layout/header.php")?>
     <!-- About Start -->
-    <div class="container py-5" style="margin-bottom:0">
+    <div class="container py-5 main" style="margin-bottom:0">
         <div class="row py-5">
             <div class="col-lg-7 pb-5 pb-lg-0 px-3 px-lg-5">
                 <h4 class="text-secondary mb-3">Thông tin</h4>

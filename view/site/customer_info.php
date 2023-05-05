@@ -16,7 +16,7 @@
     }
 
     .tablink:hover {
-        background-color: #777;
+        background-color: #65C178;
     }
 
     /* Style the tab content (and add height:100% for full page content) */
@@ -31,7 +31,7 @@
 <body>
     <?php include("layout/header.php")?>
 
-    <div class="container py-5" style="margin-bottom:0">
+    <div class="container py-5 main" style="margin-bottom:0">
 
         <button class="tablink" onclick="openPage('Account', this)" id="defaultOpen">Thông tin tài khoản</button>
         <button class="tablink" onclick="openPage('Pet', this)">Thông tin thú cưng</button>
@@ -51,6 +51,36 @@
 
         <div id="Pet" class="tabcontent">
             <h3 class="text-primary mb-3">Thông tin thú cưng</h3>
+                <div class="table-responsive">
+                <?php if (count($pet) > 0) { ?>
+                    <table class="table table-striped table-hover table-borderless table-success align-middle">
+                        <thead class="">
+                            <tr class="">
+                                <th scope="col">Mã thú cưng</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Loại</th>
+                                <th scope="col">Giống</th>
+                                <th scope="col">Giới tính</th>
+                                <th scope="col">Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <?php for($i = 0; $i < 10; $i++): ?>
+                            <?php foreach($pet as $p): ?>
+                            <tr class="">
+                                <td scope="row" class=""><?php echo $p['pet_id']?></td>
+                                <td><?php echo $p['pet_name']?></td>
+                                <td><?php if($p['pet_type'] == Enum::TYPE_CAT) echo "Mèo"; else echo "Chó" ?></td>
+                                <td><?php echo $p['pet_species']?></td>
+                                <td><?php if($p['pet_gender'] == Enum::GENDER_MALE) echo "Đực"; else echo "Cái" ?></td>
+                                <td><?php echo $p['pet_note']?></td>
+                            </tr>
+                            <?php endforeach;?>
+                            <?php endfor;?>
+                        </tbody>
+                    </table>
+                <?php } else echo "<p style='color:black; font-size: 20px'>Thông tin trống.</p>";?>
+                </div>
             <div class="col-lg-7 pb-5 pb-lg-0 px-3 px-lg-5">
                 <?php if (count($pet) > 0) { ?>
                     <?php foreach($pet as $p): ?>

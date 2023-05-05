@@ -5,7 +5,7 @@
 <body>
     <?php include("layout/header.php")?>
     <!-- Carousel Start -->
-    <div class="container-fluid p-0">
+    <div class="main container-fluid p-0 main main1">
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -87,7 +87,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="asset/img/feature-2.jpg" alt="" style="height: 650px">
+                <img class="img-fluid w-100" src="asset/img/feature-2.jpg" alt="">
             </div>
             <div class="col-lg-7 py-5 py-lg-0 px-3 px-lg-5">
                 <h4 class="text-secondary mb-3" style="font-size:30px">Vì sao nên sử dụng dịch vụ của <b>CarePET</b>?</h4>

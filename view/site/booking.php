@@ -7,7 +7,7 @@
     </br>
     </br>
     <!-- Booking Start -->
-    <div class="container-fluid">
+    <div class="container-fluid main pt-3">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">

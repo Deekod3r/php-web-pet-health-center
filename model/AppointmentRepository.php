@@ -22,6 +22,7 @@ class AppointmentRepository extends BaseRepository{
         if ($key == "") {
             $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer";
         }  else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer " . $key;
+        //echo $query;
         $response = null;
         $result = $this->getConnection()->query($query);
         $data = [];

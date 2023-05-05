@@ -19,8 +19,8 @@
         <form action="?controller=home&action=login_action" method=post>
           <div class="input-field">
             <input type="text" placeholder=" " class="form-input" name="phone">
-            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspSố điện thoại</label>
-            <i class="uil uil-phone icon"></i>
+            <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspTên tài khoản hoặc số điện thoại</label>
+            <i class="uil uil-user icon"></i>
           </div>
           <div class="input-field">
             <input type="password" class="form-input password" placeholder=" " name="password">

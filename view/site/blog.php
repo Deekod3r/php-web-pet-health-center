@@ -5,7 +5,7 @@
 <body>
     <?php include("layout/header.php")?>
     <!-- Blog Start -->
-    <div class="container pt-5">
+    <div class="container pt-3 main">
         <div class="d-flex flex-column text-center mb-5 pt-5">
             <h4 class="text-secondary mb-3">Pet Blog</h4>
             <h1 class="display-4 m-0">Tin tức<span class="text-primary"> mới nhất</span></h1>
