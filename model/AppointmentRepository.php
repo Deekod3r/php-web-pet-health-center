@@ -5,6 +5,7 @@ class AppointmentRepository extends BaseRepository{
     private $connection;
     var $table = 'appointment';
     var $id_table = 'apm_id';
+    var $insert = ['apm_date', 'apm_time', 'apm_note' , 'ctm_id', 'cs_id'];
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
@@ -33,5 +34,18 @@ class AppointmentRepository extends BaseRepository{
             $response = $data;
         } 
         return $response;
+    }
+
+    public function saveData($data){
+        $value = "'".$data['date']."','".$data['time']."','".$data['note']."',".$data['ctmId'].",".$data['categoryService'];
+        return $this->save($value);
+    }
+
+    public function cancelApm($idApm, $idCtm){
+        $query = "update $this->table set apm_status = ".Enum::STATUS_APPOINTMENT_CANCEL." where $this->id_table = " . $idApm . " and ctm_id = " . $idCtm;
+        //echo $query;
+        if($this->getConnection()->query($query)){
+            return true;
+        } else return false;
     }
 };

@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
                 <p class="m-0 text-white">
-                    &copy; <a class="text-white font-weight-bold" href="#">CarePET</a>. Copyright <?php echo date("Y");?> by Team2 - 65PM2 (Web advenced).
+                    &copy; <a class="text-white font-weight-bold" href="#">CarePET</a>. Copyright <?php echo date("Y");?> by Team2 - 65PM2 (Web advanced project).
                 </p>
             </div>
             <div class="col-md-6 text-center text-md-right">

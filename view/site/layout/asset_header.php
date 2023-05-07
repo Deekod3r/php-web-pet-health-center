@@ -12,8 +12,10 @@
     <link href="asset/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <!-- <link href="asset/css/stylee.css" rel="stylesheet">
     <link href="asset/css/mainn.css" rel="stylesheet"> -->
-    <link href="asset/css/css.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="asset/img/icon_web.png"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
-
+    <link href="asset/css/main.css?v=<?php echo time();?>" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="asset/js/script-jquery.js"></script>
 </head>

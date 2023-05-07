@@ -5,6 +5,7 @@ enum Enum {
     // GENDER
     public const GENDER_MALE = 1;
     public const GENDER_FEMALE = 0;
+    public const GENDER_OTHER = 2;
 
     // ROLE ADMIN
     public const ROLE_MANAGER = 1;

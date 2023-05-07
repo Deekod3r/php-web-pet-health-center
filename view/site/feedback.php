@@ -43,9 +43,9 @@
                   </ul>
                 </nav>
             </div>
-        <form action="" method="post">
+        <form action="<?php if (isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['can_feedback']) echo '?controller=feedback&action=sendFeedback'?>" method="post">
             <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn" required/>
+                <input type="text" class="form-control border-1" placeholder="Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn" name="fbContent"/>
             </div>
             <!-- <img class="img-fluid" src="asset/img/star.png" style="width: 25px; height: 25px; margin-right:5px; margin-left:5px " alt=""> -->
             <div class="form-check" style="display: inline;">
@@ -73,14 +73,26 @@
                 </label>
             </div>
             <div class="form-check" style="display: inline;">
-                <input class="form-check-input" type="radio" name="rating" id="rating-4" value=5>
+                <input class="form-check-input" type="radio" name="rating" id="rating-5" value=5>
                 <label class="form-check-label" for="rating-5">
                     5<img class="img-fluid" src="asset/img/star.png" style="width: 18px; height: 18px; margin-right:5px; margin-left:5px " alt=""> 
                 </label>
             </div>
-            <div style="margin-top: 10px">
+            <?php ?>
+            <input type="hidden" name="ctmId" value="<?php echo $_SESSION['id'];?>">
+            <input type="hidden" name="time" value="<?php echo date('Y/m/d H:i:s');?>">
+            <?php ?>
+            <div style="margin-top: 10px; margin-bottom: 10px">
                 <input class="btn btn-lg btn-primary btn-block border-0" type="submit" <?php if (isset($_SESSION['login']) && $_SESSION['login'] && $_SESSION['can_feedback']) {echo "value='Gửi'";} else echo "disabled value='Hãy sử dụng dịch vụ của CarePET và quay lại đánh giá sau nhé!'";?>>
             </div>
+            <?php if (isset($_SESSION['check_send_feedback'])):?>
+            <div class="alert <?php if (!$_SESSION['check_send_feedback']) echo ' alert-danger '; else echo ' alert-success' ?>" role="alert">
+                <?php echo $_SESSION['msg_send_feedback']?>
+            </div>
+            <?php endif;
+                $_SESSION['msg_send_feedback'] = null;
+                $_SESSION['check_send_feedback'] = null;
+            ?>
         </form>
     </div>
 
