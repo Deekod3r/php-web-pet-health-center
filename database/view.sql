@@ -142,7 +142,7 @@ select * from view_appointment_join_category_service_and_customer;
 create or replace view view_bill
 as
     select
-        bill_id, bill_date_release, bill_status, ctm_id, ad_id, dc_code, value_temp, value_reduced, total_value
+        bill_id, bill_date_release, bill_status, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value
     from bill
     where is_delete = false;
 
@@ -153,7 +153,7 @@ create or replace view view_bill_join_customer_and_admin_and_discount
 as
     select
         bill_id, bill_date_release, bill_status, ctm_name, ad_username, dc_code, value_temp, value_reduced, total_value
-    from (bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id
+    from ((bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id) join discount d on d.dc_id = bill.dc_id
     where bill.is_delete = false;
 
 select * from view_bill_join_customer_and_admin_and_discount;
