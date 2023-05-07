@@ -52,7 +52,7 @@ insert into category_service (cs_id, cs_name, is_delete)
 -- select * from category_service;
 -- service
 insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, is_delete, cs_id)
-            values (default,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',1,1,default,1),
+            values (default,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ,1,default,1),
                    (default,'Tiêm phòng bệnh do Herpervirus cho mèo','#',500000,'Tiêm phòng bệnh Herper cho mèo',1,1,default,1),
                    (default,'Cắt tỉa lông theo yêu cầu','#',200000,'Cắt tỉa lông',2,1,default,3),
                    (default,'Khám tổng quát chó','#',3000000,'Cắt tỉa lông',1,1,default,5),
@@ -89,12 +89,12 @@ insert into detail_service (detail_id, sv_id, mtr_id, quantity, is_delete)
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_code, value_temp,value_reduced,total_value)
             values (default,'2023/03/16',default,default,1,3,'HAPPYPET',200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-                    (default,'2023/04/16',default,default,3,2,null,300000,0,300000); -- kh2 ko đc giảm giá
+                    (default,'2023/04/16',default,default,3,2,null,500000,0,500000); -- kh2 ko đc giảm giá
 -- select * from bill;
 -- detail_bill
 insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete,value)
-            values (default,1,2,1,200000,1,default,200000), -- kh1 cắt tỉa lông cho chó
-                    (default,2,1,1,100000,3,default,100000); -- kh3 tiêm phòng cho mèo lông ngắn
+            values (default,1,3,1,200000,1,default,200000), -- kh1 cắt tỉa lông cho chó
+                    (default,2,2,1,500000,3,default,500000); -- kh3 tiêm phòng cho mèo lông ngắn
 -- select * from detail_bill;
 -- feedback
 insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
