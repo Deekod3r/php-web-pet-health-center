@@ -30,7 +30,8 @@ create table customer
 );
 create table discount
 (
-    dc_code varchar(50) primary key, -- mã giảm giá
+    dc_id int auto_increment primary key,
+    dc_code varchar(50), -- mã giảm giá
     dc_description varchar(255) not null, -- mô tả
     dc_condition double not null default 0, -- điều kiện (VD: điều kiện tối thiểu 500.000 -> value = 500.000)
     dc_value double not null default 0, -- giá trị giảm trực tiếp (VD: giảm 10.000 -> value = 10.000)
