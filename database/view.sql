@@ -102,7 +102,7 @@ select * from view_service_join_category_service;
 create or replace view view_material
 as
     select
-       mtr_id, mtr_name, mtr_quantity
+       mtr_id, mtr_name
     from material
     where is_delete = false;
 
