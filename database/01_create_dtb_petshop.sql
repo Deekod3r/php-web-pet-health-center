@@ -113,9 +113,7 @@ create table material
 (
     mtr_id int primary key auto_increment, -- mã vật liệu -- default
     mtr_name varchar(100) not null, -- tên
-    mtr_quantity int not null, -- số lượng tồn kho
-    is_delete boolean default false not null, -- xoá mềm --default
-    constraint check_material_quantity check(mtr_quantity >= 0)
+    is_delete boolean default false not null -- xoá mềm --default
 );
 
 create table detail_service
@@ -136,6 +134,7 @@ create table appointment
     apm_date date not null, -- ngày hẹn
     apm_time time not null, -- thời gian hẹn
     apm_status tinyint(1) default 0 not null, -- trạng thái:0-chờ xác nhận, 1-đã xác nhận, 2- đã hủy, 3- đã hoàn thành
+    apm_note varchar(500) default ' ',
     ctm_id int, -- mã khách hàng
     cs_id int, -- mã nhóm dịch vụ
     is_delete boolean default false, 

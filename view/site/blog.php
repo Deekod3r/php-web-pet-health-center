@@ -31,6 +31,7 @@
             </div>
         </form>
         <div class="row pb-3">
+            <?php if ($news != null && count($news) > 0) { ?>
             <?php foreach($news as $n): ?>
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
@@ -48,6 +49,7 @@
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php } else echo "<p style='color:black; font-size: 18px; margin:auto; margin-bottom: 10px;'>Thông tin trống.</p>";  ?>
             <div class="col-lg-12">
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center mb-4">

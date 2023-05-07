@@ -4,6 +4,8 @@
 class BaseRepository {
 
     protected $table;
+    protected $view;
+    protected $insert;
     protected $id_table;
     protected $field_table;
     protected function getConnection() {
@@ -48,7 +50,8 @@ class BaseRepository {
     }
 
     protected function save($data){
-        $query = "Insert into " . $this->table . " values(" . implode(",", $data) . ")";
+        $query = "Insert into " . $this->table . " (" . implode(",", $this->insert) .") values (" . $data .")";
+        //echo $query;
         if($this->getConnection()->query($query)){
             return true;            
         } else return false;
@@ -57,7 +60,14 @@ class BaseRepository {
     protected function delete($id){
         $query = "Delete from $this->table where $this->id_table = " . $id;
         if($this->getConnection()->query($query)){
-                return true;
+            return true;
+        } else return false;
+    }
+
+    protected function deleteSoft($id){
+        $query = "update $this->table set is_delte = true where $this->id_table = " . $id;
+        if($this->getConnection()->query($query)){
+            return true;
         } else return false;
     }
 

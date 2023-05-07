@@ -67,10 +67,10 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (default, 'Tắm cho mèo < 3kg','#',100000,'Tắm cho mèo < 3kg,',0,0,default,3);
 -- select * from service;
 -- material
-insert into material (mtr_id, mtr_name, mtr_quantity, is_delete)
-            values (default,'Vaccine',30,default ),
-                    (default,'Sữa tắm ',40,default),
-                    (default,'Dầu thơm',10,default);
+insert into material (mtr_id, mtr_name, is_delete)
+            values (default,'Vaccine',default ),
+                    (default,'Sữa tắm ',default),
+                    (default,'Dầu thơm',default);
 -- select * from material;
 -- detail_service
 insert into detail_service (detail_id, sv_id, mtr_id, quantity, is_delete)
@@ -80,11 +80,11 @@ insert into detail_service (detail_id, sv_id, mtr_id, quantity, is_delete)
                    (default,3,3,1,default);
 -- select * from detail_service;
 -- appointment
- insert into appointment (apm_id, apm_date, apm_time, apm_status, ctm_id, cs_id, is_delete)
-            values (default,'2023/04/16','9:30:00',2,2,1,false), -- kh2 đặt onl-> hủy
-                   (default,'2023/03/16','9:30:00',3,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
-                   (default,'2023/04/16','10:30:00',3,3,1,false), -- kh3 đặt onl -> đã hoàn thành
-                   (default,'2023/04/18','2:45:00',1,3,2,false); -- kh3 đặt onl -> đã xác nhận
+ insert into appointment (apm_id, apm_date, apm_time, apm_note ,apm_status, ctm_id, cs_id, is_delete)
+            values (default,'2023/04/16','9:30:00',default,2,2,1,false), -- kh2 đặt onl-> hủy
+                   (default,'2023/03/16','9:30:00',default,3,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
+                   (default,'2023/04/16','10:30:00',default,3,3,1,false), -- kh3 đặt onl -> đã hoàn thành
+                   (default,'2023/04/18','2:45:00','Có thể sẽ đến muộn 15p',1,3,2,false); -- kh3 đặt onl -> đã xác nhận
 -- select * from appointment;
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_code, value_temp,value_reduced,total_value)

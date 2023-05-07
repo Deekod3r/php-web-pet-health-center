@@ -5,6 +5,7 @@ class FeedbackRepository extends BaseRepository{
     private $connection;
     var $table = 'feedback';
     var $id_table = 'fb_id';
+    var $insert = ['fb_content', 'fb_rating', 'fb_time' , 'ctm_id'];
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
@@ -14,5 +15,9 @@ class FeedbackRepository extends BaseRepository{
         return $result;
     }
 
+    public function saveData($data){
+        $value = "'".$data['content']."',".$data['rating'].",'".$data['time']."',".$data['ctmId'];
+        return $this->save($value);
+    }
    
 };

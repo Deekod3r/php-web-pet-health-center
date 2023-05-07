@@ -32,11 +32,11 @@ class HomeController extends BaseController{
         $request_login = $_POST;
         $adminRepo = $this->getRepo('admin');
         $customerRepo = $this->getRepo('customer');
-        $admin = $adminRepo->getByAccount($request_login['phone'], $request_login['password']);
+        $admin = $adminRepo->getByAccount(htmlspecialchars($request_login['lg-phone']), htmlspecialchars($request_login['lg-password']));
         // var_dump($admin);
         // var_dump($admin==null);
         if ($admin == null) {
-            $customer = $customerRepo->getByAccount($request_login['phone'], $request_login['password']);
+            $customer = $customerRepo->getByAccount(htmlspecialchars($request_login['lg-phone']), htmlspecialchars($request_login['lg-password']));
             // var_dump($customer);
             // var_dump($customer==null);
             if ($customer == null) {
