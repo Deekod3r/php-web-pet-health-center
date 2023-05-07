@@ -87,8 +87,8 @@ insert into detail_service (detail_id, sv_id, mtr_id, quantity, is_delete)
                    (default,'2023/04/18','2:45:00',1,3,2,false); -- kh3 đặt onl -> đã xác nhận
 -- select * from appointment;
 -- bill
-insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_code, value_temp,value_reduced,total_value)
-            values (default,'2023/03/16',default,default,1,3,'HAPPYPET',200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp,value_reduced,total_value)
+            values (default,'2023/03/16',default,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
                     (default,'2023/04/16',default,default,3,2,null,500000,0,500000); -- kh2 ko đc giảm giá
 -- select * from bill;
 -- detail_bill
