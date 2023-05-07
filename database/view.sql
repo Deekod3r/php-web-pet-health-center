@@ -22,7 +22,7 @@ select * from view_customer;
 create or replace view view_discount
 as
     select
-        dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active
+        dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active
     from discount
     where is_delete = false;
 
