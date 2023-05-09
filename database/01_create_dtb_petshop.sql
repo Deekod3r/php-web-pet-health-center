@@ -32,7 +32,7 @@ create table discount
 (
     dc_id int auto_increment primary key,
     dc_code varchar(50), -- mã giảm giá
-    dc_description varchar(255) not null, -- mô tả
+    dc_description varchar(500) not null, -- mô tả
     dc_condition double not null default 0, -- điều kiện (VD: điều kiện tối thiểu 500.000 -> value = 500.000)
     dc_value double not null default 0, -- giá trị giảm trực tiếp (VD: giảm 10.000 -> value = 10.000)
     dc_value_percent double not null default 0, -- giá trị giảm theo phần trăm  (VD: giảm 10% -> value_percent = 10)
@@ -74,7 +74,7 @@ create table news
 (
    news_id int primary key auto_increment, -- mã tin tức --default
    news_title varchar(100) not null, -- tiêu đề
-   news_description varchar(100) not null, -- mô tả
+   news_description varchar(500) not null, -- mô tả
    news_content text not null, -- nội dung
    news_img varchar(500) not null, -- ảnh
    news_date_release datetime not null default now(), -- ngày phát hành
@@ -101,32 +101,13 @@ create table service
     sv_name varchar(255) not null, -- tên
     sv_img varchar(500) not null, -- ảnh
     sv_price double not null, -- giá
-    sv_description varchar(100) not null, -- mô tả
+    sv_description varchar(500) not null, -- mô tả
     sv_pet tinyint(1) not null, -- loại thú cưng: 1-chó, 0-mèo, 2-cả 2
     sv_status boolean default true not null, -- trạng thái: 1-hoạt động, 0-dừng kinh doanh
     is_delete boolean default false not null, -- xoá mềm - default
     cs_id int, -- mã danh mục dịch vụ
     constraint fk_service_category foreign key (cs_id) references category_service(cs_id),
     constraint check_service_price check(sv_price >= 0)
-);
-
-create table material
-(
-    mtr_id int primary key auto_increment, -- mã vật liệu -- default
-    mtr_name varchar(100) not null, -- tên
-    is_delete boolean default false not null -- xoá mềm --default
-);
-
-create table detail_service
-(
-    detail_id int primary key auto_increment, -- mã chi tiết dịch vụ -- default
-    sv_id int, -- mã dịch vụ
-    mtr_id int, -- mã vật liệu
-    quantity int not null, -- số lượng vật liệu
-    is_delete boolean default false not null, -- default
-    constraint fk_ds_service foreign key (sv_id) references service(sv_id),
-    constraint fk_ds_material foreign key (mtr_id) references material(mtr_id),
-    constraint check_detail_service_quantity check(quantity > 0)
 );
 
 create table appointment
@@ -138,7 +119,7 @@ create table appointment
     apm_note varchar(500) default ' ',
     ctm_id int, -- mã khách hàng
     cs_id int, -- mã nhóm dịch vụ
-    is_delete boolean default false, 
+    is_delete boolean default false,
     constraint fk_appointment_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_appointment_category_service foreign key (cs_id) references category_service(cs_id)
 );
@@ -148,7 +129,7 @@ create table bill
     bill_id int primary key auto_increment, -- mã hóa đơn -- default
     bill_date_release datetime not null default now(), -- ngày thanh toán -- linh hoạt
     is_delete boolean default false not null, -- -- default
-    bill_status tinyint(1) default true not null, -- 2: huỷ, 1: đã thanh toán, 0: chờ thanh toán
+    bill_status tinyint(1) default 0 not null, -- 2: huỷ, 1: đã thanh toán, 0: chờ thanh toán
     ctm_id int, -- mã khách hàng
     ad_id int, -- mã admin
     dc_id int, -- mã giảm giá
