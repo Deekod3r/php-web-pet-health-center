@@ -146,28 +146,28 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
 -- select * from appointment;
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp,value_reduced,total_value)
-#             values (1,'2023/03/16',1,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-#                    (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
-#                    (3,'2023/04/01',1,default,1,2,null,250000,0,250000),
-#                    (4,'2023/04/06',1,default,2,3,null,130000,0,130000),
-#                    (5,'2023/04/08',1,default,4,2,null,330000,0,330000),
-#                    (6,'2023/04/10',1,default,5,3,null,2500000,0,2500000),
-#                    (7,'2023/05/01',1,default,5,6,4,200000,0,150000),
-#                    (8,'2023/05/08',1,default,7,2,8,3000000,0,1500000),
-#                    (9,'2023/05/08',1,default,7,6,null,0,0,0),
-#                    (10,'2023/04/18',0,default,3,2,6,500000,0,450000),
-#                    (11,'2023/05/09',0,default,6,6,null,0,0,0);
-            values (1,'2023/03/16',1,default,1,3,1,0,0,0), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-                   (2,'2023/04/10',1,default,3,2,null,0,0,0), -- kh3 ko đc giảm giá
-                   (3,'2023/04/01',1,default,1,2,null,0,0,0),
-                   (4,'2023/04/06',1,default,2,3,null,0,0,0),
-                   (5,'2023/04/08',1,default,4,2,null,0,0,0),
-                   (6,'2023/04/10',1,default,5,3,null,0,0,0),
-                   (7,'2023/05/01',1,default,5,6,4,0,0,0),
-                   (8,'2023/05/08',1,default,7,2,8,0,0,0),
+            values (1,'2023/03/16',1,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+                   (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
+                   (3,'2023/04/01',1,default,1,2,null,250000,0,250000),
+                   (4,'2023/04/06',1,default,2,3,null,130000,0,130000),
+                   (5,'2023/04/08',1,default,4,2,null,330000,0,330000),
+                   (6,'2023/04/10',1,default,5,3,null,2500000,0,2500000),
+                   (7,'2023/05/01',1,default,5,6,4,200000,50000,150000),
+                   (8,'2023/05/08',1,default,7,2,8,3000000,1500000,1500000),
                    (9,'2023/05/08',1,default,7,6,null,0,0,0),
-                   (10,'2023/04/18',0,default,3,2,6,0,0,0),
+                   (10,'2023/04/18',0,default,3,2,6,500000,50000,450000),
                    (11,'2023/05/09',0,default,6,6,null,0,0,0);
+#             values (1,'2023/03/16',1,default,1,3,1,0,0,0), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+#                    (2,'2023/04/10',1,default,3,2,null,0,0,0), -- kh3 ko đc giảm giá
+#                    (3,'2023/04/01',1,default,1,2,null,0,0,0),
+#                    (4,'2023/04/06',1,default,2,3,null,0,0,0),
+#                    (5,'2023/04/08',1,default,4,2,null,0,0,0),
+#                    (6,'2023/04/10',1,default,5,3,null,0,0,0),
+#                    (7,'2023/05/01',1,default,5,6,4,0,0,0),
+#                    (8,'2023/05/08',1,default,7,2,8,0,0,0),
+#                    (9,'2023/05/08',1,default,7,6,null,0,0,0),
+#                    (10,'2023/04/18',0,default,3,2,6,0,0,0),
+#                    (11,'2023/05/09',0,default,6,6,null,0,0,0);
 -- select * from bill;
 -- detail_bill
 insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete,value)
