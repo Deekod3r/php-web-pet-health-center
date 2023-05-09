@@ -98,26 +98,6 @@ as
 
 select * from view_service_join_category_service;
 
-# material
-create or replace view view_material
-as
-    select
-       mtr_id, mtr_name
-    from material
-    where is_delete = false;
-
-select * from view_material;
-
-# detail_service
-create or replace view view_detail_service
-as
-    select
-        detail_id, sv_id, mtr_id, quantity
-    from detail_service
-    where is_delete = false;
-
-select * from view_detail_service;
-
 # appointment
 create or replace view view_appointment
 as
