@@ -32,6 +32,7 @@ enum Enum {
     //TYPE PET
     public  const TYPE_DOG = 1;
     public  const TYPE_CAT = 0;
+    public  const TYPE_BOTH = 2;
 
     //STATUS APPOINTMENT
     public const STATUS_APPOINTMENT_CONFIRMED_NO = 0;

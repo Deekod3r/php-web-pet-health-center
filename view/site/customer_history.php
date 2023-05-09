@@ -27,7 +27,7 @@
                             <tr class="">
                                 <td scope="row" class=""><?php echo $b['bill_id'] ?></td>
                                 <td><?php echo $b['bill_date_release'] ?></td>
-                                <td><?php if ($b['dc_code'] != null) echo $b['dc_code'];
+                                <td><?php if ($b['dc_id'] != null) echo $b['dc_code'];
                                     else echo "Không" ?></td>
                                 <td><?php echo number_format($b['value_temp'], 0, ',', '.') ?> VND</td>
                                 <td><?php echo number_format($b['value_reduced'], 0, ',', '.') ?> VND</td>

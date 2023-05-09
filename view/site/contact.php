@@ -5,7 +5,7 @@
 <body>
     <?php include("layout/header.php")?>
     <!-- Contact Start -->
-    <div class="container-fluid pt-3 main">
+    <div class="container-fluid pt-3 main" style="margin-bottom:0">
         <div class="d-flex flex-column text-center mb-5 pt-5">
             <h4 class="text-secondary mb-3">Liên hệ</h4>
             <h1 class="display-4 m-0">Hòm thư<span class="text-primary"> góp ý</span></h1>

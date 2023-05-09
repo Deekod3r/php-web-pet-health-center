@@ -1,5 +1,7 @@
-<title>ERROR</title>
-<link rel="shortcut icon" type="image/png" href="asset/img/icon_web.png"/>
+<html>
+    
+<title>Không tìm thấy trang | CarePET</title>
+<link rel="shortcut icon" type="image/png" href="asset/img/icon_web.png" />
 <style>
     @import url(https://fonts.googleapis.com/css?family=Gilda+Display);
 
@@ -18,7 +20,6 @@
     .error {
         text-align: center;
         font-family: 'Gilda Display', serif;
-
         text-align: center;
         width: 100%;
         height: 120px;
@@ -34,7 +35,7 @@
     }
 
     body:after {
-        content: 'error';
+        content: 'error 404';
         font-family: OCR-A;
         font-size: 100px;
 
@@ -53,7 +54,7 @@
     }
 
     body:before {
-        content: 'error';
+        content: 'error 404';
         font-family: OCR-A;
         font-size: 100px;
 
@@ -395,6 +396,7 @@
     }
 </style>
 <div class="error">
+<a href="?controller=home&action=index" style="font-size:20px; color: white; font-weight: bold; text-decoration: none">CLICK: BACK TO HOME</a>
 
     <div class="wrap">
         <div class="404">
@@ -411,8 +413,6 @@
                 <span class="comment">&lt;!--.--&gt;
         </span>
  <span class="orange"></span> 
-              
-
 
 </div>
 <br />
@@ -428,4 +428,4 @@
     </div>
 
 
-    </span>
+    </span
