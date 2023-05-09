@@ -1,5 +1,5 @@
-<?php 
+<?php
 
-class Admin extends BaseController {
-    
+class Admin extends BaseController
+{
 }

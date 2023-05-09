@@ -1,7 +1,9 @@
-<?php 
-class NewsController extends BaseController{
+<?php
+class NewsController extends BaseController
+{
 
-    public function news_page(){
+    public function news_page()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $key = "";
             if (isset($_GET['key']) and $_GET['key'] != '') {
@@ -9,7 +11,7 @@ class NewsController extends BaseController{
             }
             if (isset($_GET['category_news']) and $_GET['category_news'] != '') {
                 $key .= "and cn_id = " . $_GET['category_news'];
-            } 
+            }
             $shopRepo = $this->getRepo('shop');
             $shop = $shopRepo->getData("");
             $newsRepo = $this->getRepo('news');
@@ -27,25 +29,26 @@ class NewsController extends BaseController{
         }
     }
 
-    public function detail_news(){
+    public function detail_news()
+    {
         if (isset($_GET['id']) and $_GET['id'] != '') {
             $id = $_GET['id'];
             $newsRepo = $this->getRepo('news');
             $news = $newsRepo->getById($id);
-            $recentNews =  $newsRepo->getData("",3);
+            $recentNews =  $newsRepo->getData("", 3);
             $shopRepo = $this->getRepo('shop');
             $shop = $shopRepo->getData("");
             $categoryNewsRepo = $this->getRepo('categorynews');
             $categoryNews = $categoryNewsRepo->getData("");
             $this->renderView(
-                'single',[
+                'single',
+                [
                     'shop' => $shop,
                     'categoryNews' => $categoryNews,
                     'news' => $news,
                     'recentNews' => $recentNews
                 ]
             );
-        } else $this->redirect('news','news_page');
+        } else $this->redirect('news', 'news_page');
     }
-
 }

@@ -43,7 +43,13 @@
                                     else if ($a['apm_status'] == Enum::STATUS_APPOINTMENT_CANCEL) echo "Đã huỷ";
                                     else echo "Hoàn thành"; ?></td>
                                 <?php if ($a['apm_status'] != Enum::STATUS_APPOINTMENT_CONFIRMED_YES) { ?>
-                                    <td><a style="font-weight:600;" href="?controller=appointment&action=cancel_appointment&id_apm=<?php echo $a['apm_id'] ?>&id_ctm=<?php echo $_SESSION['id'] ?>" onclick="return confirmAction('huỷ','lịch hẹn')">Huỷ</a></td>
+                                    <td>
+                                        <form method="post" action="?controller=appointment&action=cancel_appointment" onsubmit="return confirmAction('huỷ','lịch hẹn')">
+                                            <input type="hidden" name="id_apm" value="<?php echo $a['apm_id'] ?>">
+                                            <input type="hidden" name="id_ctm" value="<?php echo $_SESSION['id'] ?>">
+                                            <button class="btn btn-danger">Huỷ</button>
+                                        </form>
+                                    </td>
                                 <?php } else echo "<td></td>" ?>
                             </tr>
                         <?php endforeach; ?>

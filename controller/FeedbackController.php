@@ -1,26 +1,29 @@
-<?php 
-class FeedbackController extends BaseController{
+<?php
+class FeedbackController extends BaseController
+{
 
-    public function feedback_page(){
+    public function feedback_page()
+    {
         $feedbackRepo = $this->getRepo('feedback');
         $feedback = $feedbackRepo->getData("");
         $shopRepo = $this->getRepo('shop');
         $shop = $shopRepo->getData("");
         $this->renderView(
-            'feedback',[
-            'shop' => $shop,
-            'feedback' => $feedback
-        ]
+            'feedback', [
+                'shop' => $shop,
+                'feedback' => $feedback,
+            ]
         );
     }
 
-    public function sendFeedback(){
+    public function sendFeedback()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = [
                 'content' => $_POST['fbContent'],
                 'rating' => $_POST['rating'],
                 'time' => $_POST['time'],
-                'ctmId' => $_POST['ctmId']
+                'ctmId' => $_POST['ctmId'],
             ];
             $feedbackRepo = $this->getRepo('feedback');
             if ($feedbackRepo->saveData($data)) {
@@ -30,7 +33,7 @@ class FeedbackController extends BaseController{
                 $_SESSION['msg_send_feedback'] = "Đánh giá không thành công.";
                 $_SESSION['check_send_feedback'] = false;
             }
-            $this->redirect('feedback','feedback_page');
+            $this->redirect('feedback', 'feedback_page');
         }
     }
 

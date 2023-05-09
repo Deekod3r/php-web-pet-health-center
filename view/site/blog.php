@@ -14,7 +14,7 @@
             <input type="hidden" name="controller" value="news"/>
             <input type="hidden" name="action" value="news_page"/>
             <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức" name="key"/>
+                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức" name="key" <?php if (isset($_GET['key']) && $_GET['key'] != "") echo "value='".$_GET['key']."'" ?>>
             </div>
             <div>
                 <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục tin tức: </p>
@@ -22,7 +22,7 @@
                     <option value="">Chọn danh mục tin tức</option>
                     <option value="">Tất cả</option>
                     <?php foreach ($categoryNews as $cn): ?>
-                        <option value="<?php echo $cn['cn_id']?>"><?php echo $cn['cn_name']?></option>
+                        <option value="<?php echo $cn['cn_id']?>" <?php if (isset($_GET['category_news']) && $_GET['category_news'] != "" && $_GET['category_news'] == $cn['cn_id']) echo "selected" ?>><?php echo $cn['cn_name']?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

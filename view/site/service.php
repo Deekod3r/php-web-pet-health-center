@@ -66,7 +66,7 @@
             <input type="hidden" name="controller" value="service"/>
             <input type="hidden" name="action" value="service_page"/>
             <div class="form-group" >
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name"/>
+                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name" <?php if (isset($_GET['sv_name']) && $_GET['sv_name'] != "") echo "value='".$_GET['sv_name']."'" ?> />
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-4">
@@ -75,7 +75,7 @@
                         <option value="">Chọn danh mục dịch vụ</option>
                         <option value="">Tất cả</option>
                         <?php foreach ($categoryService as $cs): ?>
-                            <option value="<?php echo $cs['cs_id']?>"><?php echo $cs['cs_name']?></option>
+                            <option value="<?php echo $cs['cs_id']?>" <?php if (isset($_GET['category_service']) && $_GET['category_service'] != "" && $_GET['category_service'] == $cs['cs_id']) echo "selected" ?>><?php echo $cs['cs_name']?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -84,8 +84,8 @@
                     <select name="type_pet" id="type_pet" class="custom-select" style="width:250px;">
                         <option value="">Chọn loại thú cưng</option>
                         <option value="">Tất cả</option>
-                        <option value="0">Mèo</option>
-                        <option value="1">Chó</option>
+                        <option value="<?php echo Enum::TYPE_CAT ?>" <?php if (isset($_GET['type_pet']) && $_GET['type_pet'] != "" && $_GET['type_pet'] == Enum::TYPE_CAT) echo "selected" ?>>Mèo</option>
+                        <option value="<?php echo Enum::TYPE_DOG ?>" <?php if (isset($_GET['type_pet']) && $_GET['type_pet'] != "" && $_GET['type_pet'] == Enum::TYPE_DOG) echo "selected" ?>>Chó</option>
                     </select>
                 </div>
             </div>
@@ -94,6 +94,7 @@
             </div>
         </form>
         <div class="row">
+            <?php if ($service != null && count($service) > 0) {?>
             <?php foreach ($service as $sv):?>
             <div class="col-lg-4 mb-4">
                 <div class="card border-1">
@@ -109,7 +110,11 @@
                     <div class="card-body text-center p-0">
                         <ul class="list-group list-group-flush mb-4">
                             <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:70px"><i class="fa fa-check text-secondary mr-2"></i><?php echo $sv['sv_name']?></li>
-                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:20px"><i class="fa fa-check text-secondary mr-2"></i>Giá: <?php if ($sv['sv_price'] > 0) { echo number_format($sv['sv_price']); } else echo "Liên hệ"?></li>
+                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:20px"><i class="fa fa-check text-secondary mr-2"></i>Giá: <?php if ($sv['sv_price'] > 0) {
+                                echo number_format($sv['sv_price']);
+                            } else {
+                                echo "Liên hệ";
+                            }?></li>
                         </ul>
                     </div>
                     <div class="card-footer border-0 p-0">
@@ -118,6 +123,7 @@
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php } else echo "<p style='color:black; font-size: 18px; margin:auto; margin-bottom: 10px; margin-top:0'>Thông tin trống.</p>";?>
             <div class="col-lg-12">
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center mb-4">
