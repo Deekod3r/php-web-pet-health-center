@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Lịch sử dịch vụ"; ?>
-<?php include("layout/asset_header.php") ?>
+<?php include("layout/asset_header.php"); ?>
 
 <body>
-    <?php include("layout/header.php") ?>
+    <?php include("layout/header.php"); ?>
 
     <div class="container py-5 main" style="margin-bottom:0">
         <h3 class="text-primary mb-3">Lịch sử sử dụng dịch vụ</h3>
@@ -27,7 +27,7 @@
                             <tr class="">
                                 <td scope="row" class=""><?php echo $b['bill_id'] ?></td>
                                 <td><?php echo $b['bill_date_release'] ?></td>
-                                <td><?php if ($b['dc_id'] != null) echo $b['dc_code'];
+                                <td><?php if ($b['dc_id'] != null) echo $b['dc_id'];
                                     else echo "Không" ?></td>
                                 <td><?php echo number_format($b['value_temp'], 0, ',', '.') ?> VND</td>
                                 <td><?php echo number_format($b['value_reduced'], 0, ',', '.') ?> VND</td>

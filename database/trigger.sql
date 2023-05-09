@@ -121,7 +121,7 @@ create trigger trigger_insert_feedback
             end;
         else
             begin
-                delete from NEW where fb_id = NEW.fb_id;
+                delete from feedback where fb_id = NEW.fb_id;
             end;
         end if;
     end;

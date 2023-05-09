@@ -9,18 +9,18 @@ insert into admin (ad_id, ad_username, ad_password, ad_role, ad_status, is_delet
 -- select * from admin;
 -- customer
 insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_password, ctm_gender, ctm_active)
-            values (1,'Hằng','0383094429',null,null,null,1, true),
-                   (2,'Sơn','0383092427','son262965@huce.edu.vn','Trại Cá','262965',1, true),
-                   (3,'Đạt','0987654321','dat262965@gmail.com','Thanh Xuân','123456',1, true),
-                   (4,'An','0423423784','haha@gmail.com','Hà Nam','12345678',0, true),
-                   (5,'Dương','0356575674','duong@gmail.com','Thanh Xuân ','123456',1, true),
-                   (6,'Lê','0987654978',null,null,null,0, true),
+            values (1,'Nguyễn Thị Hằng','0383094429',null,null,null,1, true),
+                   (2,'Trần Lê Hoàng Sơn','0383092427','son262965@huce.edu.vn','Trại Cá, Trương Định, Hoàng Mai, Hà Nội','262965',1, true),
+                   (3,'Nguyễn Quang Đạt','0987654321','dat262965@gmail.com','Lê Trọng Tấn, Thanh Xuân, Hà Nội','123456',1, true),
+                   (4,'Đoàn Mạnh An','0423423784','haha@gmail.com','Đọi Tam, Duy Tiên, Hà Nam','12345678',0, true),
+                   (5,'Nguyễn Hải Dương','0356575674','duong@gmail.com','36 Trường Chinh, Thanh Xuân, Hà Nội ','123456',1, true),
+                   (6,'Lê Kiên Cường','0987654978',null,null,null,0, true),
                    (7,'Trần Minh','0987123478',null,null,null,1, true),
-                   (8,'Minh Thảo','0987122345','minhthao.19@gmail.com','Lê Thanh Nghị','minhthao123',0, true),
-                   (9,'Tú Linh','0973456428','tulinh02@gmail.com','Trần Đại Nghĩa','tulinh1234',0, true),
-                   (10,'Hằng Nga','0787121568','hangngakt@gmail.com','Kim Đồng','1234.nga',0, true),
-                   (11,'Bùi Hoa','0987123569','hoahoa@gmail.com','Bạch Mai','BuiHoa.02',0, true),
-                   (12,'Hoàng Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền','viet.2000',1, true);
+                   (8,'Minh Thảo','0987122345','minhthao.19@gmail.com','100 Lê Thanh Nghị, Đồng Tâm, Hai Bà Trưng, Hà Nội','minhthao123',0, true),
+                   (9,'Tú Linh','0973456428','tulinh02@gmail.com','Trần Đại Nghĩa, Bách Khoa, Hà Nội','tulinh1234',0, true),
+                   (10,'Hằng Nga','0787121568','hangngakt@gmail.com','24 Kim Đồng, Hoàng Mai, Hà Nội','1234.nga',0, true),
+                   (11,'Bùi Hoa','0987123569','hoahoa@gmail.com','109 Bạch Mai, Hai Bà Trưng','BuiHoa.02',0, true),
+                   (12,'Hoàng Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true);
 
 -- select * from customer;
 -- discount
@@ -28,24 +28,24 @@ insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc
             values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
                    (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,1,default),
                    (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,10,'2023/12/01','2024/2/01',null,0,default),
-                   (4, 'HAPPYPET66','Mã giảm giá HAPPYPET66',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
-                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
-                   (6, 'HAPPY99','Mã giảm giá HAPPY99',default,default,10,'2023/04/15','2023/04/22',null,1,default),
-                   (7, 'FUN88','Mã giảm giá FUN88',200000,default,10,'2023/9/01','2024/10/01',null,0,default),
-                   (8, 'FUN99','Mã giảm giá FUN99',default,default,50,'2023/5/01','2024/6/01',5,0,default);
+                   (4, 'HAPPYPET66','Mã giảm giá HAPPYPET66 nhân giày 6/6',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
+                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88 nhân giày 8/8',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
+                   (6, 'HAPPY99','Mã giảm giá HAPPY99 nhân giày 9/9',default,default,10,'2023/04/15','2023/04/22',null,1,default),
+                   (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/9/01','2024/10/01',null,0,default),
+                   (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,0,default);
 -- select * from discount;
 -- pet
 insert into pet (pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, ctm_id)
-            values (1,'Bun',1,'Ngáo',1,'chân ngắn, màu lông trắng, 10kg',1),
+            values (1,'Bun',1,'Ngáo',1,'Chân ngắn, màu lông trắng, 10kg',1),
                    (2,'Tun',1,'Corgy',1,'chân ngắn, lông vàng, 3kg',2),
                    (3,'Mun',0,'Anh lông ngắn',0,'Lông vàng, tai cụp, 2kg',3),
                    (4,'Tí',0,'Tam thể',0,'2kg, 6 tháng',4),
                    (5,'Mập',0,'Anh lông dài',1,'3kg, 6 tháng',4),
                    (6,'Mập',0,'Anh lông dài',1,'3kg, 6 tháng',5),
-                   (7,'Bun',1,'Corgy',1,'chân ngắn, lông vàng, 3kg',6),
-                   (8,'Đen',1,'Corgy',0,'chân ngắn, lông vàng, 3kg',7),
+                   (7,'Bun',1,'Corgy',1,'Chân ngắn, lông vàng, 3kg',6),
+                   (8,'Đen',1,'Corgy',0,'Chân ngắn, lông vàng, 3kg',7),
                    (9,'Mỹ Diệu',0,'Tam thể',0,'2kg, 12 tháng',7),
-                   (10,'Tun',1,'Ngáo',1,'chân ngắn, màu lông trắng, 10kg',8);
+                   (10,'Tun',1,'Ngáo',1,'Chân ngắn, màu lông trắng, 10kg',8);
 -- select * from pet;
 -- category_news
 insert into category_news (cn_id, cn_name, is_delete)
@@ -190,7 +190,7 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
                    (default,'Cắt tỉa lông đẹp lắm.',4,'2023/04/08 20:00:00',default,4),
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3),
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5),
-                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/10 20:00:00',default,5);
+                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
