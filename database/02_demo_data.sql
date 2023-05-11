@@ -8,19 +8,19 @@ insert into admin (ad_id, ad_username, ad_password, ad_role, ad_status, is_delet
                    (default,'adminBH03','12345678',3,1,false);
 -- select * from admin;
 -- customer
-insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_password, ctm_gender, ctm_active)
-            values (1,'Nguyễn Thị Hằng','0383094429',null,null,null,1, true),
-                   (2,'Trần Lê Hoàng Sơn','0383092427','son262965@huce.edu.vn','Trại Cá, Trương Định, Hoàng Mai, Hà Nội','262965',1, true),
-                   (3,'Nguyễn Quang Đạt','0987654321','dat262965@gmail.com','Lê Trọng Tấn, Thanh Xuân, Hà Nội','123456',1, true),
-                   (4,'Đoàn Mạnh An','0423423784','haha@gmail.com','Đọi Tam, Duy Tiên, Hà Nam','12345678',0, true),
-                   (5,'Nguyễn Hải Dương','0356575674','duong@gmail.com','36 Trường Chinh, Thanh Xuân, Hà Nội ','123456',1, true),
-                   (6,'Lê Kiên Cường','0987654978',null,null,null,0, true),
-                   (7,'Trần Minh','0987123478',null,null,null,1, true),
-                   (8,'Minh Thảo','0987122345','minhthao.19@gmail.com','100 Lê Thanh Nghị, Đồng Tâm, Hai Bà Trưng, Hà Nội','minhthao123',0, true),
-                   (9,'Tú Linh','0973456428','tulinh02@gmail.com','Trần Đại Nghĩa, Bách Khoa, Hà Nội','tulinh1234',0, true),
-                   (10,'Hằng Nga','0787121568','hangngakt@gmail.com','24 Kim Đồng, Hoàng Mai, Hà Nội','1234.nga',0, true),
-                   (11,'Bùi Hoa','0987123569','hoahoa@gmail.com','109 Bạch Mai, Hai Bà Trưng','BuiHoa.02',0, true),
-                   (12,'Hoàng Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true);
+insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_password, ctm_gender, ctm_active,ctm_can_feedback)
+            values (1,'Nguyễn Thị Hằng','0383094429',null,null,null,1, true, false),
+                   (2,'Trần Lê Hoàng Sơn','0383092427','son262965@huce.edu.vn','Trại Cá, Trương Định, Hoàng Mai, Hà Nội','262965',1, true, true),
+                   (3,'Nguyễn Quang Đạt','0987654321','dat262965@gmail.com','Lê Trọng Tấn, Thanh Xuân, Hà Nội','123456',1, true, true),
+                   (4,'Đoàn Mạnh An','0423423784','haha@gmail.com','Đọi Tam, Duy Tiên, Hà Nam','12345678',0, true, true),
+                   (5,'Nguyễn Hải Dương','0356575674','duong@gmail.com','36 Trường Chinh, Thanh Xuân, Hà Nội ','123456',1, true, true),
+                   (6,'Lê Kiên Cường','0987654978',null,null,null,0, true, false),
+                   (7,'Trần Lê Minh','0987123478',null,null,null,1, true, false),
+                   (8,'Lê Minh Thảo','0987122345','minhthao.19@gmail.com','100 Lê Thanh Nghị, Đồng Tâm, Hai Bà Trưng, Hà Nội','minhthao123',0, true, false),
+                   (9,'Tạ Thị Tú Linh','0973456428','tulinh02@gmail.com','Trần Đại Nghĩa, Bách Khoa, Hà Nội','tulinh1234',0, true, false),
+                   (10,'Nguyễn Hằng Nga','0787121568','hangngakt@gmail.com','24 Kim Đồng, Hoàng Mai, Hà Nội','1234.nga',0, true, false),
+                   (11,'Bùi Lê Hoa','0987123569','hoahoa@gmail.com','109 Bạch Mai, Hai Bà Trưng','BuiHoa.02',0, true, false),
+                   (12,'Hoàng Quốc Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true, false);
 
 -- select * from customer;
 -- discount
@@ -145,7 +145,7 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (16,'2023/05/18','15:45:00',0,3,3,false);
 -- select * from appointment;
 -- bill
-insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp,value_reduced,total_value)
+insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value)
             values (1,'2023/03/16',1,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
                    (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
                    (3,'2023/04/01',1,default,1,2,null,250000,0,250000),
@@ -157,40 +157,40 @@ insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad
                    (9,'2023/05/08',1,default,7,6,null,0,0,0),
                    (10,'2023/04/18',0,default,3,2,6,500000,50000,450000),
                    (11,'2023/05/09',0,default,6,6,null,0,0,0);
-#             values (1,'2023/03/16',1,default,1,3,1,0,0,0), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-#                    (2,'2023/04/10',1,default,3,2,null,0,0,0), -- kh3 ko đc giảm giá
-#                    (3,'2023/04/01',1,default,1,2,null,0,0,0),
-#                    (4,'2023/04/06',1,default,2,3,null,0,0,0),
-#                    (5,'2023/04/08',1,default,4,2,null,0,0,0),
-#                    (6,'2023/04/10',1,default,5,3,null,0,0,0),
-#                    (7,'2023/05/01',1,default,5,6,4,0,0,0),
-#                    (8,'2023/05/08',1,default,7,2,8,0,0,0),
-#                    (9,'2023/05/08',1,default,7,6,null,0,0,0),
-#                    (10,'2023/04/18',0,default,3,2,6,0,0,0),
-#                    (11,'2023/05/09',0,default,6,6,null,0,0,0);
+#             values (1,'2023/03/16',1,default,1,3,1), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+#                    (2,'2023/04/10',1,default,3,2,null), -- kh3 ko đc giảm giá
+#                    (3,'2023/04/01',1,default,1,2,null),
+#                    (4,'2023/04/06',1,default,2,3,null),
+#                    (5,'2023/04/08',1,default,4,2,null),
+#                    (6,'2023/04/10',1,default,5,3,null),
+#                    (7,'2023/05/01',1,default,5,6,4),
+#                    (8,'2023/05/08',1,default,7,2,8),
+#                    (9,'2023/05/08',1,default,7,6,null),
+#                    (10,'2023/04/18',0,default,3,2,6),
+#                    (11,'2023/05/09',0,default,6,6,null);
 -- select * from bill;
 -- detail_bill
-insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete,value)
-            values (default,1,3,1,200000,1,default,200000), -- kh1 cắt tỉa lông cho chó
-                   (default,2,2,1,500000,3,default,500000), -- kh3 tiêm phòng cho mèo lông ngắn
-                   (default,3,22,1,250000,1,default,250000),
-                   (default,4,15,1,130000,2,default,130000),
-                   (default,5,15,1,130000,4,default,130000),
-                   (default,5,3,1,200000,5,default,200000),
-                   (default,6,5,1,2500000,6,default,2500000),
-                   (default,7,3,1,200000,6,default,200000),
-                   (default,8,4,1,3000000,9,default,3000000),
-                   (default,9,12,1,0,8,default,0),
-                   (default,10,2,1,500000,3,default,500000),
-                   (default,11,6,1,0,7,default,0);
+insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete)
+            values (default,1,3,1,200000,1,default), -- kh1 cắt tỉa lông cho chó
+                   (default,2,2,1,500000,3,default), -- kh3 tiêm phòng cho mèo lông ngắn
+                   (default,3,22,1,250000,1,default),
+                   (default,4,15,1,130000,2,default),
+                   (default,5,15,1,130000,4,default),
+                   (default,5,3,1,200000,5,default),
+                   (default,6,5,1,2500000,6,default),
+                   (default,7,3,1,200000,6,default),
+                   (default,8,4,1,3000000,9,default),
+                   (default,9,12,1,0,8,default),
+                   (default,10,2,1,500000,3,default),
+                   (default,11,6,1,0,7,default);
 -- select * from detail_bill;
 -- feedback
 insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
             values (default,'Nhân viên nhiệt tình, thân thiện. Dịch vụ rất tốt.',5,'2023/04/06 12:00:00',default,2),
                    (default,'Cắt tỉa lông đẹp lắm.',4,'2023/04/08 20:00:00',default,4),
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3),
-                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5),
-                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
+                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5);
+--                 (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
