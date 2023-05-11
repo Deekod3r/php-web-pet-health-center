@@ -15,7 +15,7 @@ class AdminRepository extends BaseRepository{
 
     public function getByAccount($username,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username = '" . $username . "' and ad_password = '" . $password ."'";
-        echo $query;
+        //echo $query;
         $result = $this->getConnection()->query($query);
         if($result->num_rows > 0) {
             $data = $result->fetch_assoc();
