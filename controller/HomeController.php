@@ -4,23 +4,26 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $feedbackRepo = $this->getRepo('feedback');
-        $feedback = $feedbackRepo->getData("");
-        $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData("");
         $this->renderView(
-            'index',
-            [
-                'feedback' => $feedback,
-                'shop' => $shop
-            ]
+            'index'
         );
     }
+
+    public function index_admin()
+    {
+        $this->renderViewRole(
+            'index',
+            'admin'
+        );
+    }
+
     public function login_page()
     {
         if (isset($_SESSION['login']) && $_SESSION['login']) {
-            $this->redirect('home', 'index');
-        } else  $this->renderView('login');
+           $this->redirect('home', 'index');
+        } else  {
+            $this->renderView('login');
+        }
     }
     public function logout()
     {
@@ -33,6 +36,7 @@ class HomeController extends BaseController
         $this->redirect('home', 'index');
     }
 
+
     public function login_action()
     {
         $request_login = $_POST;
@@ -40,42 +44,93 @@ class HomeController extends BaseController
         //var_dump($data);
         $adminRepo = $this->getRepo('admin');
         $customerRepo = $this->getRepo('customer');
-        $admin = $adminRepo->getByAccount(htmlspecialchars($request_login['lg-phone']), htmlspecialchars($request_login['lg-password']));
+        $admin = $adminRepo->getByUsername(htmlspecialchars($request_login['lg-username']));
+        // , htmlspecialchars($request_login['lg-password'])
         // var_dump($admin);
-        // var_dump($admin==null);
         if ($admin == null) {
-            $customer = $customerRepo->getByAccount(htmlspecialchars($request_login['lg-phone']), htmlspecialchars($request_login['lg-password']));
+            $customer = $customerRepo->getByPhone(htmlspecialchars($request_login['lg-username']));
+            // , htmlspecialchars($request_login['lg-password'])
             // var_dump($customer);
-            // var_dump($customer==null);
             if ($customer == null) {
-                $_SESSION['check_login'] = false;
-                $_SESSION['msg_login'] = "Thông tin không hợp lệ.";
+                // $_SESSION['check_login'] = false;
+                // $_SESSION['msg_login'] = "Thông tin không hợp lệ.";
                 //$this->redirect('home', 'login_page');
                 //return false;
-                $result = ["checkLogin" => false];
+                $result = [
+                    "statusCode" => "0",
+                    "message" => "Tài khoản không tồn tại.",
+                    "data" => []
+                ];
                 echo json_encode($result);
-                //echo "false";
             } else {
-                $_SESSION['login'] = true;
-                $_SESSION['admin'] = false;
-                $_SESSION['can_feedback'] = $customer['ctm_can_feedback'];
-                $_SESSION['id'] = $customer['ctm_id'];
-                //$this->redirect('home', 'index');
-                //return true;
-                $result = ["checkLogin" => true];
-                echo json_encode($result);
-                //echo "true";
+                if ($customer['ctm_password'] == $request_login['lg-password']) {
+                    $_SESSION['login'] = true;
+                    // $_SESSION['admin'] = false;
+                    // $_SESSION['can_feedback'] = $customer['ctm_can_feedback'];
+                    // $_SESSION['id'] = $customer['ctm_id'];
+                    //$this->redirect('home', 'index');
+                    //return true;
+                    $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
+                    $result = [
+                        "statusCode" => "1",
+                        "message" => "Đăng nhập thành công.",
+                        "data" => [
+                            "token" => $token,
+                            "typeAccount" => "customer",
+                        ]
+                    ];
+                    echo json_encode($result);
+                } else {
+                    // $_SESSION['admin'] = false;
+                    // $_SESSION['can_feedback'] = $customer['ctm_can_feedback'];
+                    // $_SESSION['id'] = $customer['ctm_id'];
+                    //$this->redirect('home', 'index');
+                    //return true;
+                    $result = [
+                        "statusCode" => "0",
+                        "message" => "Sai mật khẩu.",
+                        "data" => [
+                            "token" => "",
+                            "typeAccount" => "customer",
+                        ]
+                    ];
+                    echo json_encode($result);
+                }
             }
         } else {
-            $_SESSION['login'] = true;
-            $_SESSION['admin'] = true;
-            $_SESSION['role'] = $admin['ad_role'];
-            $_SESSION['id'] = $admin['ad_id'];
-            //$this->redirect('home', 'index');
-            //return true;
-            $result = ["checkLogin" => true];
-            echo json_encode($result);
-            //echo "true";
+            if ($request_login['lg-password'] == $admin['ad_password']) {
+                $_SESSION['login'] = true;
+                // $_SESSION['admin'] = true;
+                // $_SESSION['role'] = $admin['ad_role'];
+                // $_SESSION['id'] = $admin['ad_id'];
+                //$this->redirect('home', 'index');
+                //return true;
+                $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
+                $result = [
+                    "statusCode" => "1",
+                    "message" => "Đăng nhập thành công.",
+                    "data" => [
+                        "token" => $token,
+                        "typeAccount" => "admin",
+                    ]
+                ];
+                echo json_encode($result);
+            } else {
+                // $_SESSION['admin'] = true;
+                // $_SESSION['role'] = $admin['ad_role'];
+                // $_SESSION['id'] = $admin['ad_id'];
+                //$this->redirect('home', 'index');
+                //return true;
+                $result = [
+                    "statusCode" => "0",
+                    "message" => "Sai mật khẩu.",
+                    "data" => [
+                        "token" => "",
+                        "typeAccount" => "admin",
+                    ]
+                ];
+                echo json_encode($result);
+            }
         }
     }
 }

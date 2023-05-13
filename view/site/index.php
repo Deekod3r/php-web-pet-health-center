@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = "Trang chủ";?>
-<?php include("layout/asset_header.php")?>
+<?php $title = "Trang chủ"; ?>
+<?php include("layout/asset_header.php") ?>
+<!-- <script src="asset/js/index.js?v=<?php echo time() ?>" async></script> -->
 <body>
-    <?php include("layout/header.php")?>
-    <!-- Carousel Start -->
+    <?php include("layout/header.php") ?>
+
     <div class="main container-fluid p-0 main main1">
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="asset/img/carousel-6.jpg" alt="Image" >
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center" >
+                    <img class="w-100" src="asset/img/carousel-6.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
                             <h1 class="display-3 text-white mb-3">Keep Your Pet Happy</h1>
@@ -21,7 +22,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="asset/img/carousel-5.jpg" alt="Image" >
+                    <img class="w-100" src="asset/img/carousel-5.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h3 class="text-white mb-3 d-none d-sm-block">Cung cấp các dịch vụ tốt nhất cho thú cưng của bạn</h3>
@@ -45,9 +46,7 @@
             </a>
         </div>
     </div>
-    <!-- Carousel End -->
 
-    <!-- Services Start -->
     <div class="container-fluid bg-light pt-5">
         <div class="container py-5">
             <div class="d-flex flex-column text-center mb-5">
@@ -80,10 +79,7 @@
             <p style="text-align:center; font-size:25px"><a class="text-uppercase font-weight-bold" href="?controller=service&action=service_page">Xem thêm</a></p>
         </div>
     </div>
-    <!-- Services End -->
 
-
-    <!-- Features Start -->
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
@@ -121,9 +117,7 @@
             </div>
         </div>
     </div>
-    <!-- Features End -->
 
-    <!-- Team Start -->
     <div class="container mt-5 pt-5 pb-3">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-secondary mb-3" style="font-size:30px">Đối tác</h4>
@@ -200,47 +194,36 @@
             </div>
         </div>
     </div>
-    <!-- Team End -->
 
 
-    <!-- Testimonial Start -->
     <div class="container-fluid bg-light p-0 py-5">
-        <div class="container p-0 py-5">
+        <div class="container p-0 py-5" id="feedback">
             <div class="d-flex flex-column text-center mb-5">
                 <h4 class="text-secondary mb-3">Feedback</h4>
                 <h1 class="display-4 m-0">Đánh giá của <span class="text-primary">khách hàng</span></h1>
             </div>
-            <div class="owl-carousel testimonial-carousel">
-                <?php foreach($feedback as $fb) : ?>
+            <div class='owl-carousel testimonial-carousel' id="feedback1"> 
                 <div class="bg-white mx-3 p-4" style="height: 180px">
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4" style="height:100px">
                         <img class="img-fluid" src="asset/img/customer.png" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
                             <h5>Ẩn danh</h5>
-                            <?php for ($i = 0; $i < $fb['fb_rating']; $i++):?>
                             <span style="font-size: 20px; vertical-align:bottom"><img class="img-fluid" src="asset/img/star.png" style="width: 20px; height: 20px; display: inline" alt=""></span>
-                            <?php endfor;?>
-                            <?php for ($i = $fb['fb_rating']; $i < 5; $i++):?>
                             <span style="font-size: 20px; vertical-align:bottom"><img class="img-fluid" src="asset/img/non-star.png" style="width: 18px; height: 18px; display: inline" alt=""></span>
-                            <?php endfor;?>
-                            <is style="display: block"><?php echo $fb['fb_time'] ?></is>
+                            <is style="display: block"></is>
                         </div>
                     </div>
-                    <p class="m-0"><?php echo $fb['fb_content'] ?></p>
+                    <p class="m-0"></p>
                 </div>
-                <?php endforeach; ?>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    
+    <?php include("layout/footer.php") ?>
 
-
-    <?php include("layout/footer.php")?>
-
-
-    <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+    <script src="asset/js/index.js?v=<?php echo time() ?>" async></script>
 
     <?php include("layout/asset_footer.php") ?>
 </body>

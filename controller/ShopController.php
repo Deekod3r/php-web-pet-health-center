@@ -7,10 +7,7 @@ class ShopController extends BaseController
         $shopRepo = $this->getRepo('shop');
         $shop = $shopRepo->getData("");
         $this->renderView(
-            'about',
-            [
-                'shop' => $shop
-            ]
+            'about'
         );
     }
 
@@ -19,10 +16,23 @@ class ShopController extends BaseController
         $shopRepo = $this->getRepo('shop');
         $shop = $shopRepo->getData("");
         $this->renderView(
-            'contact',
-            [
-                'shop' => $shop
-            ]
+            'contact'
         );
+    }
+
+    public function data_shop()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $shopRepo = $this->getRepo('shop');
+            $shop = $shopRepo->getData("");
+            $result = [
+                "statusCode" => "1",
+                "message" => "OK",
+                "data" => [
+                    'shop' => $shop
+                ]
+            ];
+            echo json_encode($result);
+        } else $this->redirect('home', 'index');
     }
 }

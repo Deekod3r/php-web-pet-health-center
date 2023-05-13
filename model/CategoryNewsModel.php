@@ -1,10 +1,10 @@
 <?php 
-//include("BaseRepository.php");
-class ServiceRepository extends BaseRepository{
+//include("BaseModel.php");
+class CategoryNewsModel extends BaseModel{
 
     private $connection;
-    var $table = 'service';
-    var $id_table = 'sv_id';
+    var $table = 'category_news';
+    var $id_table = 'cn_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }

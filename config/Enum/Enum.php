@@ -1,6 +1,8 @@
 <?php 
 enum Enum {
 
+    // SECURITY KEY 
+    public const SECURITY_KEY = "nhom2.65pm2.!@#$%";
 
     // GENDER
     public const GENDER_MALE = 1;

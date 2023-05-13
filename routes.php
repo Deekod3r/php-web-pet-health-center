@@ -1,7 +1,8 @@
 <?php
 include('controller/BaseController.php');
-include('model/BaseRepository.php');
+include('model/BaseModel.php');
 include('config/Enum/Enum.php');
+
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     //echo $_GET['controller']. " " . $_GET['action'];
     $controller = $_GET['controller'];

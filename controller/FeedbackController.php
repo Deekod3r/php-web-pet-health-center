@@ -4,16 +4,27 @@ class FeedbackController extends BaseController
 
     public function feedback_page()
     {
-        $feedbackRepo = $this->getRepo('feedback');
-        $feedback = $feedbackRepo->getData("");
-        $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData("");
-        $this->renderView(
-            'feedback', [
-                'shop' => $shop,
-                'feedback' => $feedback,
-            ]
-        );
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->renderView(
+                'feedback'
+            );
+        } else include('view/error/error-400.php');
+    }
+
+    public function data_feedback()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $feedbackRepo = $this->getRepo('feedback');
+            $feedback = $feedbackRepo->getData("");
+            $result = [
+                "statusCode" => "1",
+                "message" => "OK",
+                "data" => [
+                    'feedback' => $feedback
+                ]
+            ];
+            echo json_encode($result);
+        } else $this->redirect('home', 'index');
     }
 
     public function sendFeedback()
@@ -36,5 +47,4 @@ class FeedbackController extends BaseController
             $this->redirect('feedback', 'feedback_page');
         }
     }
-
 }

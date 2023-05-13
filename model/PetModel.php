@@ -1,10 +1,10 @@
 <?php 
-//include("BaseRepository.php");
-class BillRepository extends BaseRepository{
+//include("BaseModel.php");
+class PetModel extends BaseModel{
 
     private $connection;
-    var $table = 'bill';
-    var $id_table = 'bill_id';
+    var $table = 'pet';
+    var $id_table = 'pet_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }

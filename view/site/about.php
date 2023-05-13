@@ -9,11 +9,11 @@
         <div class="row py-5">
             <div class="col-lg-7 pb-5 pb-lg-0 px-3 px-lg-5">
                 <h4 class="text-secondary mb-3">Thông tin</h4>
-                <h1 class="display-4 mb-4"><span class="text-primary"><?php echo $shop['shop_name'] ?></span> & <span class="text-secondary">Your pet</span></h1>
-                <h5 class="text-muted mb-3"><b>Địa chỉ:</b> <?php echo $shop['shop_address']?></h5>
-                <h5 class="text-muted mb-3"><b>Số điện thoại:</b> <?php echo $shop['shop_phone']?></h5>
-                <h5 class="text-muted mb-3"><b>Email:</b> <?php echo $shop['shop_mail']?></h5>
-                <p class="mb-4" style="font-size:18px"><?php echo $shop['shop_description']?></p>
+                <h1 class="display-4 mb-4"><span class="text-primary shop-name"></span> & <span class="text-secondary">Your pet</span></h1>
+                <h5 class="text-muted mb-3 shop-address"><b>Địa chỉ: </b></h5>
+                <h5 class="text-muted mb-3 shop-phone"><b>Số điện thoại: </b></h5>
+                <h5 class="text-muted mb-3 shop-mail"><b>Email: </b></h5>
+                <p class="mb-4 shop-desc" style="font-size:18px"></p>
                 <ul class="list-inline">
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Uy tín</h5></li>
                     <li><h5><i class="fa fa-check-double text-secondary mr-3"></i>Chất lượng</h5></li>
@@ -109,6 +109,8 @@
 
 
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/about-contact.js?v=<?php echo time() ?>" async></script>
+
 </body>
 
 </html>

@@ -18,39 +18,32 @@
             </div>
             <div>
                 <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục tin tức: </p>
-                <select name="category_news" id="category_news" class="custom-select" style="width:250px;">
+                <select name="category_news" id="categoryNews" class="custom-select" style="width:250px;">
                     <option value="">Chọn danh mục tin tức</option>
-                    <option value="">Tất cả</option>
-                    <?php foreach ($categoryNews as $cn): ?>
-                        <option value="<?php echo $cn['cn_id']?>" <?php if (isset($_GET['category_news']) && $_GET['category_news'] != "" && $_GET['category_news'] == $cn['cn_id']) echo "selected" ?>><?php echo $cn['cn_name']?></option>
-                    <?php endforeach; ?>
+                    <option value="">Tất cả</option>                   
                 </select>
             </div>
             <div style="margin-top:10px">
                 <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
             </div>
         </form>
-        <div class="row pb-3">
-            <?php if ($news != null && count($news) > 0) { ?>
-            <?php foreach($news as $n): ?>
-            <div class="col-lg-4 mb-4">
+        <div class="row pb-3" id="dataNews">
+            <!-- <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
                     <img class="card-img-top" src="asset/img/blog-1.jpg" alt="">
                     <div class="card-body bg-light p-4">
-                        <h4 class="card-title text-truncate text-wrap"><?php echo $n['news_title']?></h4>
+                        <h4 class="card-title text-truncate text-wrap"><?php //echo $n['news_title']?></h4>
                         <div class="d-flex mb-3">
                             <small class="mr-2"><i class="fa fa-user text-muted"></i> Admin</small>
                             <small class="mr-2"><i class="fa fa-folder text-muted"></i> Danh mục</small>
-                            <small class="mr-2"><i class="fa fa-calendar text-muted"></i> <?php echo $n['news_date_release']?></small>
+                            <small class="mr-2"><i class="fa fa-calendar text-muted"></i> <?php //echo $n['news_date_release']?></small>
                         </div>
-                        <p style="height:80px" class="text-nowrap"><?php echo $n['news_description']?></p>
-                        <a class="font-weight-bold" href="?controller=news&action=detail_news&id=<?php echo $n['news_id']?>">Xem chi tiết</a>
+                        <p style="height:80px" class="text-nowrap"><?php //echo $n['news_description']?></p>
+                        <a class="font-weight-bold" href="?controller=news&action=detail_news&id=<?php //echo $n['news_id']?>">Xem chi tiết</a>
                     </div>
                 </div>
-            </div>
-            <?php endforeach; ?>
-            <?php } else echo "<p style='color:black; font-size: 18px; margin:auto; margin-bottom: 10px;'>Thông tin trống.</p>";  ?>
-            <div class="col-lg-12">
+            </div> -->
+            <!-- <div class="col-lg-12">
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center mb-4">
                     <li class="page-item disabled">
@@ -68,7 +61,7 @@
                     </li>
                   </ul>
                 </nav>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- Blog End -->
@@ -80,7 +73,8 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/news.js?v=<?php echo time() ?>" async></script>
+
 </body>
 </html>

@@ -4,6 +4,15 @@ class ServiceController extends BaseController
 
     public function service_page()
     {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {            
+            $this->renderView(
+                'service'
+            );
+        }
+    }
+
+    public function data_service()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $key = "";
             if (isset($_GET['sv_name']) and $_GET['sv_name'] != '') {
@@ -16,19 +25,16 @@ class ServiceController extends BaseController
                 $key .= " and sv_pet in (" . $_GET['type_pet'] . "," . Enum::TYPE_BOTH . ")";
             }
             $serviceRepo = $this->getRepo('service');
-            $service = $serviceRepo->getData($key);
-            $shopRepo = $this->getRepo('shop');
-            $shop = $shopRepo->getData("");
-            $categoryServiceRepo = $this->getRepo('categoryservice');
-            $categoryService = $categoryServiceRepo->getData("");
-            $this->renderView(
-                'service',
-                [
-                    'shop' => $shop,
-                    'service' => $service,
-                    'categoryService' => $categoryService
+            $service = $serviceRepo->getData($key);         
+            $result = [
+                "statusCode" => "1",
+                "message" => "OK",
+                "data" => [
+                    'service' => $service
                 ]
-            );
+            ];
+            echo json_encode($result);
         }
     }
+
 }

@@ -7,12 +7,10 @@
   <title>Đăng nhập | CarePET</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link rel="stylesheet" href="asset/css/signin-signup.css?v=<?php echo time();?>">
-  <script src="https://kit.fontawesome.com/ddac631aed.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="asset/js/signin-up-jquery.js?v=<?php echo time()?>"></script>
 </head>
 
 <body>
@@ -23,7 +21,7 @@
         <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=home&action=login_action" method="post" name="login" id="login">
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input" name="lg-phone" id="lg-phone">
+            <input type="text" placeholder=" " class="form-input" name="lg-username" id="lg-username">
             <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspTên tài khoản hoặc số điện thoại</label>
             <i class="uil uil-user icon"></i>
           </div>
@@ -49,14 +47,9 @@
             <a href="#" class="text signup-link">Đăng ký ngay</a>
           </span>
         </div>
-        <?php //if (isset($_SESSION['msg_login']) && isset($_SESSION['check_login']) && !$_SESSION['check_login']): ?>
-        <div class="login-signup">
-          <span class="text" id="msg-login" style="font-size:15px; color: red; font-weight:600"><?php //echo $_SESSION['msg_login']?></span>
+        <div class="login-signup" id="alert-login">
+          <span class="text" id="msg-login" style="font-size:15px; color: red; font-weight:600"></span>
         </div>
-        <?php //endif;
-          $_SESSION['msg_login'] = null;
-          $_SESSION['check_login'] = null;
-        ?>
       </div>
 
       <div class="form signup">
@@ -130,9 +123,10 @@
       </div>
     </div>
   </div>
+  <script src="https://kit.fontawesome.com/ddac631aed.js" crossorigin="anonymous"></script>
+  <script src="asset/js/script.js?v=<?php echo time()?>"></script>
+  <script src="asset/js/signin-signup.js?v=<?php echo time()?>"></script>
 
-  <script src="asset/js/signin-up.js?v=<?php echo time()?>"></script>
-  <script src="asset/js/script.js"></script>
 
 </body>
 

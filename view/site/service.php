@@ -62,21 +62,16 @@
             <h4 class="text-secondary mb-3"></h4>
             <h1 class="display-4 m-0">Trải nghiệm với <span class="text-primary">chi phí tốt nhất</span></h1>
         </div>
-        <form action="" style="margin-bottom: 40px" method="get">
-            <input type="hidden" name="controller" value="service"/>
-            <input type="hidden" name="action" value="service_page"/>
+        <form action="?controller=service&action=data_service" style="margin-bottom: 40px" id="form-search-service" method="get">
             <div class="form-group" >
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name" <?php if (isset($_GET['sv_name']) && $_GET['sv_name'] != "") echo "value='".$_GET['sv_name']."'" ?> />
+                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name" />
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-4">
                     <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục dịch vụ: </p>
-                    <select name="category_service" id="category_service" class="custom-select" style="width:250px;">
+                    <select name="category_service" id="category-service" class="custom-select" style="width:250px;">
                         <option value="">Chọn danh mục dịch vụ</option>
                         <option value="">Tất cả</option>
-                        <?php foreach ($categoryService as $cs): ?>
-                            <option value="<?php echo $cs['cs_id']?>" <?php if (isset($_GET['category_service']) && $_GET['category_service'] != "" && $_GET['category_service'] == $cs['cs_id']) echo "selected" ?>><?php echo $cs['cs_name']?></option>
-                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-lg-8">
@@ -84,47 +79,39 @@
                     <select name="type_pet" id="type_pet" class="custom-select" style="width:250px;">
                         <option value="">Chọn loại thú cưng</option>
                         <option value="">Tất cả</option>
-                        <option value="<?php echo Enum::TYPE_CAT ?>" <?php if (isset($_GET['type_pet']) && $_GET['type_pet'] != "" && $_GET['type_pet'] == Enum::TYPE_CAT) echo "selected" ?>>Mèo</option>
-                        <option value="<?php echo Enum::TYPE_DOG ?>" <?php if (isset($_GET['type_pet']) && $_GET['type_pet'] != "" && $_GET['type_pet'] == Enum::TYPE_DOG) echo "selected" ?>>Chó</option>
+                        <option value="0">Mèo</option>
+                        <option value="1">Chó</option>
                     </select>
                 </div>
             </div>
             <div style="margin-top:10px; width: 250px;">
-                <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
+                <button class="btn btn-lg btn-primary btn-block border-0" type="submit" >Tìm kiếm</button>
             </div>
         </form>
-        <div class="row">
-            <?php if ($service != null && count($service) > 0) {?>
-            <?php foreach ($service as $sv):?>
-            <div class="col-lg-4 mb-4">
+        <div class="row" id="data-service">
+            <!-- <div class="col-lg-4 mb-4">
                 <div class="card border-1">
                     <div class="card-header position-relative border-0 p-0 mb-4">
                         <img class="card-img-top" src="asset/img/orange.jpg" alt="" height=100px>
                         <div class="position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100" style="top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5);">
                             <h3 class="text-primary mb-3"></h3>
                             <h1 class="display-5 text-white mb-0">
-                                <small class="align-top" style="font-size: 22px; line-height: 45px;"></small><?php echo$shop['shop_name']?><small class="align-bottom" style="font-size: 16px; line-height: 40px;"></small>
+                                <small class="align-top" style="font-size: 22px; line-height: 45px;"></small>CarePET<small class="align-bottom" style="font-size: 16px; line-height: 40px;"></small>
                             </h1>
                         </div>
                     </div>
                     <div class="card-body text-center p-0">
                         <ul class="list-group list-group-flush mb-4">
-                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:70px"><i class="fa fa-check text-secondary mr-2"></i><?php echo $sv['sv_name']?></li>
-                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:20px"><i class="fa fa-check text-secondary mr-2"></i>Giá: <?php if ($sv['sv_price'] > 0) {
-                                echo number_format($sv['sv_price']);
-                            } else {
-                                echo "Liên hệ";
-                            }?></li>
+                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:70px"><i class="fa fa-check text-secondary mr-2"></i></li>
+                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:20px"><i class="fa fa-check text-secondary mr-2"></i>Giá:</li>
                         </ul>
                     </div>
                     <div class="card-footer border-0 p-0">
                         <a href="?controller=appointment&action=appointment_page" class="btn btn-primary btn-block p-3" style="border-radius: 0; background-color: #65C178; border-color: #65C178">Đặt lịch</a>
                     </div>
                 </div>
-            </div>
-            <?php endforeach; ?>
-            <?php } else echo "<p style='color:black; font-size: 18px; margin:auto; margin-bottom: 10px; margin-top:0'>Thông tin trống.</p>";?>
-            <div class="col-lg-12">
+            </div> -->
+            <!-- <div class="col-lg-12">
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-center mb-4">
                     <li class="page-item disabled">
@@ -142,7 +129,7 @@
                     </li>
                   </ul>
                 </nav>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- Pricing Plan End -->
@@ -155,6 +142,7 @@
 
 
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/service.js?v=<?php echo time() ?>" async></script>
 </body>
 
 </html>
