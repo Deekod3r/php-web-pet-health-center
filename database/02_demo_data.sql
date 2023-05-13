@@ -97,7 +97,7 @@ insert into category_service (cs_id, cs_name, is_delete)
 -- select * from category_service;
 -- service
 insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, is_delete, cs_id)
-            values (1,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',0,1,default,1),
+            values (1,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',1,1,default,1),
                    (2,'Tiêm phòng bệnh do Herpervirus cho mèo','#',500000,'Tiêm phòng bệnh Herper cho mèo',1,1,default,1),
                    (3,'Cắt tỉa lông theo yêu cầu','#',200000,'Cắt tỉa lông',2,1,default,3),
                    (4,'Khám tổng quát chó','#',3000000,'Khám tổng quát chó',1,1,default,5),
@@ -189,8 +189,8 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
             values (default,'Nhân viên nhiệt tình, thân thiện. Dịch vụ rất tốt.',5,'2023/04/06 12:00:00',default,2),
                    (default,'Cắt tỉa lông đẹp lắm.',4,'2023/04/08 20:00:00',default,4),
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3),
-                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5);
---                 (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
+                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5),
+                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
