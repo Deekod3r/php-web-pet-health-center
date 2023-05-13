@@ -10,13 +10,33 @@ $(document).ready(function () {
     }
 
     $('#login').submit(function (e) {
-        e.preventDefault();
+        $('#msg-login').html("");
         if ($('#lg-password').val() != "" && $('#lg-phone').val() != "") {
-            this.submit();
+            $.ajax({
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    response = JSON.stringify(response);
+                    response = JSON.parse(response);
+                    console.log(response);
+                    console.log(response.checkLogin);
+                    if(response.checkLogin == true){
+                        window.location.replace("https://carepet65.com/routes.php?controller=home&action=index");
+                    } else  $('#msg-login').html("Lỗi đăng nhập.");
+                },
+                error: function(response) {
+                    if(response){
+                        //window.location.replace("https://carepet65.com/routes.php?controller=home&action=index");
+                    } else  $('#msg-login').html("Thông tin đăng nhập không chính xác.");
+                }
+            })
         } else {
-            $('#msg-login').html("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+            $('#msg-login').html("Vui lòng nhập đầy đủ thông tin đăng nhập 1.");
         }
-    })
+        e.preventDefault();
+    });
 
     $('#register').submit(function (e) {
         e.preventDefault();

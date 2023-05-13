@@ -12,8 +12,7 @@
   <script src="https://kit.fontawesome.com/ddac631aed.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="asset/js/signin-up-jquery.js">
-  </script>
+  <script src="asset/js/signin-up-jquery.js?v=<?php echo time()?>"></script>
 </head>
 
 <body>
@@ -42,7 +41,7 @@
             <a href="#" class="text">Quên mật khẩu?</a>
           </div>
           <div class="input-field button">
-            <input type="submit" value="Đăng nhập">
+            <input id="btn-login" type="submit" value="Đăng nhập">
           </div>
         </form>
         <div class="login-signup">
@@ -50,11 +49,11 @@
             <a href="#" class="text signup-link">Đăng ký ngay</a>
           </span>
         </div>
-        <?php if (isset($_SESSION['msg_login']) && isset($_SESSION['check_login']) && !$_SESSION['check_login']): ?>
+        <?php //if (isset($_SESSION['msg_login']) && isset($_SESSION['check_login']) && !$_SESSION['check_login']): ?>
         <div class="login-signup">
-          <span class="text" id="msg-login" style="font-size:15px; color: red; font-weight:600"><?php echo $_SESSION['msg_login']?></span>
+          <span class="text" id="msg-login" style="font-size:15px; color: red; font-weight:600"><?php //echo $_SESSION['msg_login']?></span>
         </div>
-        <?php endif;
+        <?php //endif;
           $_SESSION['msg_login'] = null;
           $_SESSION['check_login'] = null;
         ?>
@@ -132,7 +131,7 @@
     </div>
   </div>
 
-  <script src="asset/js/signin-up.js"></script>
+  <script src="asset/js/signin-up.js?v=<?php echo time()?>"></script>
   <script src="asset/js/script.js"></script>
 
 </body>
