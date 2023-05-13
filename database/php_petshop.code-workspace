@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "php_petshop",
+			"path": ".."
+		},
+		{
+			"path": "../../DellMVC"
+		},
+		{
+			"path": "../../../../Users/VTTDung/OneDrive - HUCE/Hoc tap/WebNC/BTH2"
+		},
+		{
+			"name": "csharp_test",
+			"path": "../../../../Users/VTTDung/OneDrive - HUCE/Hoc tap/C#/csharp_test"
+		},
+		{
+			"path": "../../../../Users/VTTDung/OneDrive - HUCE/Hoc tap/C#/LabHlx"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "php_petshop"
+	}
+}
