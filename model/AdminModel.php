@@ -1,6 +1,6 @@
 <?php 
-//include("BaseRepository.php");
-class AdminRepository extends BaseRepository{
+//include("BaseModel.php");
+class AdminModel extends BaseModel{
 
     private $connection;
     var $table = 'admin';
@@ -12,7 +12,15 @@ class AdminRepository extends BaseRepository{
     public function getData($key){
         return $this->findAll($key);
     }
-
+    public function getByUsername($username){
+        $query = "SELECT * FROM " . $this->table . " WHERE ad_username ='" . $username ."'";
+        //echo $query;
+        $result = $this->getConnection()->query($query);
+        if($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } 
+        return null;
+    }
     public function getByAccount($username,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username = '" . $username . "' and ad_password = '" . $password ."'";
         //echo $query;

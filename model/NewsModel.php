@@ -1,6 +1,6 @@
 <?php 
-//include("BaseRepository.php");
-class NewsRepository extends BaseRepository{
+//include("BaseModel.php");
+class NewsModel extends BaseModel{
 
     private $connection;
     var $table = 'news';

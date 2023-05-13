@@ -1,18 +1,17 @@
 <?php 
-//include("BaseRepository.php");
-class ShopRepository extends BaseRepository{
+//include("BaseModel.php");
+class CategoryServiceModel extends BaseModel{
 
     private $connection;
-    var $table = 'shop_info';
-    var $id_table = 'shop_name';
+    var $table = 'category_service';
+    var $id_table = 'cs_id';
     public function __construct(){
         //$this->connection = $this->getConnection();
     }
 
     public function getData($key){
         $result = $this->findAll($key);
-        return $result[0];
+        return $result;
     }
 
-    
 };

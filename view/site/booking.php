@@ -14,41 +14,32 @@
                 <div class="col-lg-5">
                     <div class="bg-primary py-1 px-4 px-sm-5">
                         <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
-                            <form class="py-5" action="?controller=appointment&action=booking" method="post">
-                                <input type="hidden" name="ctmId" value="<?php echo $_SESSION['id'];?>">
+                            <form class="py-5" method="post" id="form-booking" action="?controller=appointment&action=booking">
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ngày</p>
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmDate" placeholder="" data-target="#date" data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmDate" id="apm-date" placeholder="" data-target="#date" data-toggle="datetimepicker" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Giờ</p>
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmTime" placeholder="" data-target="#time" data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmTime" id="apm-time" placeholder="" data-target="#time" data-toggle="datetimepicker" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select border-0 px-4" style="height: 47px;" name="categoryService">
-                                        <option value="">Chọn dịch vụ</option>
-                                        <?php foreach ($categoryService as $cs) : ?>
-                                            <option value="<?php echo $cs['cs_id'] ?>"><?php echo $cs['cs_name'] ?></option>
-                                        <?php endforeach; ?>
+                                    <select class="custom-select border-0 px-4" style="height: 47px;" name="categoryService" id="category-service">
+                                        <option value="">Chọn dịch vụ</option>                                       
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ghi chú</p>
-                                    <input type="text" class="form-control border-0 p-4" placeholder="" name="apmNote" />
+                                    <input type="text" class="form-control border-0 p-4" placeholder="" name="apmNote" id="apm-note"/>
                                 </div>
                                 <div>
                                     <button class="btn btn-dark btn-block border-0 py-3" type="submit">Đặt lịch</button>
                                 </div>
-                                <?php if (isset($_SESSION['check_booking'])): ?>
-                                <p style="margin-top:15px; margin-bottom:0; text-align:center; font-size: 20px; <?php if (!$_SESSION['check_booking']) echo ' color: #F6F1E9; '; else echo ' color: #F6F1E9; ' ?>"><?php echo $_SESSION['msg_booking']?></p>
-                                <?php endif; 
-                                    $_SESSION['msg_booking'] = null;
-                                    $_SESSION['check_booking'] = null;
-                                ?>
+                                <p style="margin-top:15px; margin-bottom:0; text-align:center; font-size: 20px; color: #F6F1E9;" id="msg-booking"></p>
                             </form>
                         <?php } else { ?>
                             <h4 style="margin-bottom:0">Vui lòng đăng nhập để đặt lịch</h4>
@@ -111,6 +102,7 @@
 
 
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/appointment.js?v=<?php echo time() ?>" async></script>
 </body>
 
 </html>

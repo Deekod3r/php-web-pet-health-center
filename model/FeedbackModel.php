@@ -1,6 +1,6 @@
 <?php 
 //include("BaseRepository.php");
-class FeedbackRepository extends BaseRepository{
+class FeedbackModel extends BaseModel{
 
     private $connection;
     var $table = 'feedback';

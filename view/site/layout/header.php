@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-white px-3" href="<?php echo $shop['shop_facebook'] ?>" target="_blank">
+                    <a class="text-white px-3 shop-fb" id="nav-shop-fb" target="_blank">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a class="text-white px-3" href="https://twitter.com/?lang=vi" target="_blank">
@@ -46,15 +46,15 @@
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
                         <h6>Địa chỉ</h6>
-                        <p class="m-0"><?php echo $shop['shop_address'] ?></p>
+                        <p class="m-0 shop-address"  id="nav-shop-address" ></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
                         <h6>Email liên hệ</h6>
-                        <p class="m-0"><?php echo $shop['shop_mail'] ?></p>
+                        <p class="m-0 shop-mail"  id="nav-shop-mail" ></p>
                     </div>
                     <div class="d-inline-flex flex-column text-center pl-3">
                         <h6>Số điện thoại</h6>
-                        <p class="m-0"><?php echo $shop['shop_phone'] ?></p>
+                        <p class="m-0 shop-phone"  id="nav-shop-phone" ></p>
                     </div>
                 </div>
             </div>

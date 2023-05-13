@@ -1,7 +1,7 @@
 <?php 
 
 //include("config/Enum/Enum.php");
-class BaseRepository {
+class BaseModel {
 
     protected $table;
     protected $view;
@@ -80,5 +80,14 @@ class BaseRepository {
                 return true;
         } else return false;
     } 
+
+    protected function response($status, $message, $data) {
+        $result = [
+            'statusCode' => $status,
+            'message' => $message,
+            'data' => $data
+        ];
+        echo json_encode($result);
+    }
 
 }   

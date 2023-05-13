@@ -3,18 +3,18 @@
         <div class="row pt-5">
             <div class="col-lg-4 col-md-12 mb-5">
                 <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Care</span>PET</h1>
-                <p class="m-0"><?php echo $shop['shop_description']?></p>
+                <p class="m-0 shop-desc"></p>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-3 mb-5">
                         <h5 class="text-primary mb-4">Liên hệ</h5>
-                        <p style="width: 210px"><i class="fa fa-map-marker-alt mr-2"></i><?php echo $shop['shop_address']?></p>
-                        <p><i class="fa fa-phone-alt mr-2"></i><?php echo $shop['shop_phone']?></p>
-                        <p><i class="fa fa-envelope mr-2"></i><?php echo $shop['shop_mail']?></p>
+                        <p style="width: 210px" class=" shop-address"><i class="fa fa-map-marker-alt mr-2"></i></p>
+                        <p class="shop-phone"><i class="fa fa-phone-alt mr-2"></i></p>
+                        <p class="shop-mail"><i class="fa fa-envelope mr-2"></i></p>
                         <div class="d-flex justify-content-start mt-4">
                             <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://twitter.com/?lang=vi" target="_blank"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="<?php echo $shop['shop_facebook']?>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0 shop-fb" style="width: 36px; height: 36px;" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://www.linkedin.com/in/dung-trinh-tien-a76939272/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="https://www.instagram.com/trtieensdungx/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>

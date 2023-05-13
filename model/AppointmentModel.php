@@ -1,6 +1,6 @@
 <?php 
-//include("BaseRepository.php");
-class AppointmentRepository extends BaseRepository{
+//include("BaseModel.php");
+class AppointmentModel extends BaseModel{
 
     private $connection;
     var $table = 'appointment';

@@ -1,6 +1,6 @@
 <?php 
-//include("BaseRepository.php");
-class CustomerRepository extends BaseRepository{
+//include("BaseModel.php");
+class CustomerModel extends BaseModel{
 
     private $connection;
     var $table = 'customer';
@@ -13,6 +13,16 @@ class CustomerRepository extends BaseRepository{
     public function getData($key){
         $result = $this->findAll($key);
         return $result;
+    }
+
+    public function getByPhone($phone){
+        $query = "SELECT * FROM " . $this->table . " WHERE ctm_phone ='" . $phone ."'";
+        //echo $query;
+        $result = $this->getConnection()->query($query);
+        if($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } 
+        return null;
     }
 
     public function getByAccount($phone,$password){

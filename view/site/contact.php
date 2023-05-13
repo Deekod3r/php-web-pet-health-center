@@ -57,6 +57,8 @@
 
 
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/about-contact.js?v=<?php echo time() ?>" async></script>
+
 </body>
 
 </html>
