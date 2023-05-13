@@ -98,7 +98,7 @@ insert into category_service (cs_id, cs_name, is_delete)
 -- service
 insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, is_delete, cs_id)
             values (1,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',1,1,default,1),
-                   (2,'Tiêm phòng bệnh do Herpervirus cho mèo','#',500000,'Tiêm phòng bệnh Herper cho mèo',1,1,default,1),
+                   (2,'Tiêm phòng bệnh do Herpervirus cho mèo','#',500000,'Tiêm phòng bệnh Herper cho mèo',0,1,default,1),
                    (3,'Cắt tỉa lông theo yêu cầu','#',200000,'Cắt tỉa lông',2,1,default,3),
                    (4,'Khám tổng quát chó','#',3000000,'Khám tổng quát chó',1,1,default,5),
                    (5,'Khám tổng quát mèo','#',2500000,'Khám tổng quát mèo',0,0,default,5),
