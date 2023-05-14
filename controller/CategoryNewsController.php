@@ -5,7 +5,7 @@ class CategoryNewsController extends BaseController
     public function category_news_page()
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {            
-            $this->renderView(
+            $this->render_view(
                 ''
             );
         }
@@ -14,8 +14,8 @@ class CategoryNewsController extends BaseController
     public function data_category_news()
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            $categoryNewsRepo = $this->getRepo('categoryNews');
-            $categoryNews = $categoryNewsRepo->getData("");              
+            $categoryNewsRepo = $this->get_model('categoryNews');
+            $categoryNews = $categoryNewsRepo->get_data("");              
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",

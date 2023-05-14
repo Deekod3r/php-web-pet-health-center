@@ -3,7 +3,7 @@
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
-        url: 'https://carepet65.com/routes.php?controller=customer&action=data_customer_info',
+        url: '?controller=customer&action=data_customer_info',
         data: {
             token: sessionStorage.getItem('token')
         },

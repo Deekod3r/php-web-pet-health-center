@@ -6,11 +6,11 @@ class CategoryServiceModel extends BaseModel{
     var $table = 'category_service';
     var $id_table = 'cs_id';
     public function __construct(){
-        //$this->connection = $this->getConnection();
+        //$this->connection = $this->get_connection();
     }
 
-    public function getData($key){
-        $result = $this->findAll($key);
+    public function get_data($key){
+        $result = $this->find_all($key);
         return $result;
     }
 

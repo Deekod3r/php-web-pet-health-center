@@ -38,7 +38,7 @@ function loadDataFeedback(data){
 $(document).ready(function() {
     $.ajax({
         type: 'GET',
-        url: 'https://carepet65.com/routes.php?controller=feedback&action=data_feedback',
+        url: '?controller=feedback&action=data_feedback',
         // data: {
         //     token: sessionStorage.getItem('token')
         // },

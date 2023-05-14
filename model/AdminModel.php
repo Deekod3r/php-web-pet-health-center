@@ -6,25 +6,25 @@ class AdminModel extends BaseModel{
     var $table = 'admin';
     var $id_table = 'ad_id';
     public function __construct(){
-        //$this->connection = $this->getConnection();
+        //$this->connection = $this->get_connection();
     }
 
-    public function getData($key){
-        return $this->findAll($key);
+    public function get_data($key){
+        return $this->find_all($key);
     }
-    public function getByUsername($username){
+    public function get_by_username($username){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username ='" . $username ."'";
         //echo $query;
-        $result = $this->getConnection()->query($query);
+        $result = $this->get_connection()->query($query);
         if($result->num_rows > 0) {
             return $result->fetch_assoc();
         } 
         return null;
     }
-    public function getByAccount($username,$password){
+    public function get_by_account($username,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username = '" . $username . "' and ad_password = '" . $password ."'";
         //echo $query;
-        $result = $this->getConnection()->query($query);
+        $result = $this->get_connection()->query($query);
         if($result->num_rows > 0) {
             $data = $result->fetch_assoc();
             return $data;

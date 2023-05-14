@@ -36,10 +36,11 @@
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ghi chú</p>
                                     <input type="text" class="form-control border-0 p-4" placeholder="" name="apmNote" id="apm-note"/>
                                 </div>
-                                <div>
+                                <div class="mb-3">
                                     <button class="btn btn-dark btn-block border-0 py-3" type="submit">Đặt lịch</button>
                                 </div>
-                                <p style="margin-top:15px; margin-bottom:0; text-align:center; font-size: 20px; color: #F6F1E9;" id="msg-booking"></p>
+                                <div class="alert mb-0" id="msg-booking" role="alertdialog" style="display:none">
+                                </div>
                             </form>
                         <?php } else { ?>
                             <h4 style="margin-bottom:0">Vui lòng đăng nhập để đặt lịch</h4>

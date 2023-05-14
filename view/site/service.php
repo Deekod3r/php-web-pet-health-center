@@ -64,19 +64,19 @@
         </div>
         <form action="?controller=service&action=data_service" style="margin-bottom: 40px" id="form-search-service" method="get">
             <div class="form-group" >
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="sv_name" />
+                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="svName" id="service-name"/>
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-4">
                     <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục dịch vụ: </p>
-                    <select name="category_service" id="category-service" class="custom-select" style="width:250px;">
+                    <select name="categoryService" id="category-service" class="custom-select" style="width:250px;">
                         <option value="">Chọn danh mục dịch vụ</option>
                         <option value="">Tất cả</option>
                     </select>
                 </div>
                 <div class="col-lg-8">
                     <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục thú cưng: </p>
-                    <select name="type_pet" id="type_pet" class="custom-select" style="width:250px;">
+                    <select name="typePet" id="type_pet" class="custom-select" style="width:250px;">
                         <option value="">Chọn loại thú cưng</option>
                         <option value="0">Mèo</option>
                         <option value="1">Chó</option>
@@ -129,6 +129,8 @@
                   </ul>
                 </nav>
             </div> -->
+        </div>
+        <div class="row" id="page">
         </div>
     </div>
     <!-- Pricing Plan End -->

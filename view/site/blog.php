@@ -10,15 +10,13 @@
             <h4 class="text-secondary mb-3">Pet Blog</h4>
             <h1 class="display-4 m-0">Tin tức<span class="text-primary"> mới nhất</span></h1>
         </div>
-        <form action="" style="margin-bottom: 40px">
-            <input type="hidden" name="controller" value="news"/>
-            <input type="hidden" name="action" value="news_page"/>
+        <form action="" style="margin-bottom: 40px" id="form-search-news">
             <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức" name="key" <?php if (isset($_GET['key']) && $_GET['key'] != "") echo "value='".$_GET['key']."'" ?>>
+                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức" name="newsKey" id="news-key">
             </div>
             <div>
                 <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục tin tức: </p>
-                <select name="category_news" id="categoryNews" class="custom-select" style="width:250px;">
+                <select name="categoryNews" id="category-news" class="custom-select" style="width:250px;">
                     <option value="">Chọn danh mục tin tức</option>
                     <option value="">Tất cả</option>                   
                 </select>
@@ -63,6 +61,8 @@
                 </nav>
             </div> -->
         </div>
+        <div class="row" id="page">
+        </div>
     </div>
     <!-- Blog End -->
 
@@ -74,7 +74,7 @@
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
     <?php include("layout/asset_footer.php") ?>
-    <script src="asset/js/news.js?v=<?php echo time() ?>" async></script>
+    <script src="asset/js/news/news.js?v=<?php echo time() ?>" async></script>
 
 </body>
 </html>

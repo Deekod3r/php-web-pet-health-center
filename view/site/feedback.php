@@ -5,8 +5,8 @@
 <body>
     <?php include("layout/header.php")?>
     <div class="container py-5 main">
+        <h3 class="mb-4" id="countFeedback"></h3>
         <div class="mb-5" id="dataFeedback">
-            <h3 class="mb-4" id="countFeedback"></h3>
         </div>
         <div class="col-lg-12" id="page">
             <!-- <nav aria-label="Page navigation">
@@ -27,13 +27,14 @@
                 </ul>
             </nav> -->
         </div>
-        <form action="?controller=feedback&action=sendFeedback" method="post">
+        <form action="?controller=feedback&action=send_feedback" method="post" id="form-feedback">
+            <div class="alert " role="alert" id="msg-send-feedback" style="display:none"></div>
             <div class="form-group">
                 <input type="text" class="form-control border-1" placeholder="Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn" name="fbContent"/>
             </div>
             <!-- <img class="img-fluid" src="asset/img/star.png" style="width: 25px; height: 25px; margin-right:5px; margin-left:5px " alt=""> -->
             <div class="form-check" style="display: inline;">
-                <input class="form-check-input" type="radio" name="rating" id="rating-1" value=1 required>
+                <input class="form-check-input" type="radio" name="rating" id="rating-1" value=1>
                 <label class="form-check-label" for="rating-1">
                     1<img class="img-fluid" src="asset/img/star.png" style="width: 18px; height: 18px; margin-right:5px; margin-left:5px;" alt=""> |
                 </label>
@@ -64,8 +65,6 @@
             </div>
             <div style="margin-top: 10px; margin-bottom: 10px">
                 <input class="btn btn-lg btn-primary btn-block border-0" type="submit">
-            </div>
-            <div class="alert" role="alert" id="mgsSendFeedback">
             </div>
         </form>
     </div>

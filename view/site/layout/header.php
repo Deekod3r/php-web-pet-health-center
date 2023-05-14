@@ -93,7 +93,7 @@
                             <li><a href="?controller=appointment&action=customer_current_apm" class="dropdown-item">Lịch đang hẹn</a></li>
                         </ul>
                     </div>
-                    <a href="?controller=home&action=logout" class="nav-link">Đăng xuất</a>
+                    <a onclick="logout()" class="nav-link" style="cursor:pointer">Đăng xuất</a>
                 <?php } else { ?>
                     <a href="?controller=home&action=login_page" class="nav-link">Đăng nhập</a>
                 <?php } ?>

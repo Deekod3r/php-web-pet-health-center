@@ -4,14 +4,14 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $this->renderView(
+        $this->render_view(
             'index'
         );
     }
 
     public function index_admin()
     {
-        $this->renderViewRole(
+        $this->render_view_role(
             'index',
             'admin'
         );
@@ -22,18 +22,19 @@ class HomeController extends BaseController
         if (isset($_SESSION['login']) && $_SESSION['login']) {
            $this->redirect('home', 'index');
         } else  {
-            $this->renderView('login');
+            $this->render_view('login');
         }
     }
     public function logout()
     {
         $_SESSION['login'] = null;
-        $_SESSION['admin'] = null;
-        $_SESSION['can_feedback'] = null;
-        $_SESSION['role'] = null;
-        $_SESSION['id'] = null;
         //echo "haha";
-        $this->redirect('home', 'index');
+        $result = [
+            "statusCode" => "1",
+            "message" => "OK",
+            "data" => []
+        ];
+        echo json_encode($result);
     }
 
 
@@ -42,13 +43,13 @@ class HomeController extends BaseController
         $request_login = $_POST;
         //var_dump($request_login);
         //var_dump($data);
-        $adminRepo = $this->getRepo('admin');
-        $customerRepo = $this->getRepo('customer');
-        $admin = $adminRepo->getByUsername(htmlspecialchars($request_login['lg-username']));
+        $adminRepo = $this->get_model('admin');
+        $customerRepo = $this->get_model('customer');
+        $admin = $adminRepo->get_by_username(htmlspecialchars($request_login['lg-username']));
         // , htmlspecialchars($request_login['lg-password'])
         // var_dump($admin);
         if ($admin == null) {
-            $customer = $customerRepo->getByPhone(htmlspecialchars($request_login['lg-username']));
+            $customer = $customerRepo->get_by_phone(htmlspecialchars($request_login['lg-username']));
             // , htmlspecialchars($request_login['lg-password'])
             // var_dump($customer);
             if ($customer == null) {

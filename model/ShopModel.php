@@ -6,11 +6,11 @@ class ShopModel extends BaseModel{
     var $table = 'shop_info';
     var $id_table = 'shop_name';
     public function __construct(){
-        //$this->connection = $this->getConnection();
+        //$this->connection = $this->get_connection();
     }
 
-    public function getData($key){
-        $result = $this->findAll($key);
+    public function get_data($key){
+        $result = $this->find_all($key);
         return $result[0];
     }
 

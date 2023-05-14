@@ -7,15 +7,17 @@ class FeedbackModel extends BaseModel{
     var $id_table = 'fb_id';
     var $insert = ['fb_content', 'fb_rating', 'fb_time' , 'ctm_id'];
     public function __construct(){
-        //$this->connection = $this->getConnection();
+        //$this->connection = $this->get_connection();
     }
 
-    public function getData($key){
-        $result = $this->findAll($key);
+    public function get_data($key){
+        $result = $this->find_all($key);
         return $result;
     }
-
-    public function saveData($data){
+    public function count_data($key){
+        return count($this->get_data($key));
+    }    
+    public function save_data($data){
         $value = "'".$data['content']."',".$data['rating'].",'".$data['time']."',".$data['ctmId'];
         return $this->save($value);
     }

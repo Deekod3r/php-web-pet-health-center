@@ -25,6 +25,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-lg-12" id="page">
+        </div>
     </div>
 
 

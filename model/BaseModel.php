@@ -1,6 +1,4 @@
 <?php 
-
-//include("config/Enum/Enum.php");
 class BaseModel {
 
     protected $table;
@@ -8,7 +6,7 @@ class BaseModel {
     protected $insert;
     protected $id_table;
     protected $field_table;
-    protected function getConnection() {
+    protected function get_connection() {
         $hostname = "localhost";
         $username = "root";
         $password = "123456";
@@ -21,12 +19,12 @@ class BaseModel {
         return $conn;
     }
 
-    protected function findAll($key){
+    protected function find_all($key){
         if(empty($key)) {
             $query = "SELECT * FROM " . $this->table . " where is_delete = 0";
         } else $query = "SELECT * FROM " . $this->table . " where is_delete = 0 " . $key;
         $response = null;
-        $result = $this->getConnection()->query($query);
+        $result = $this->get_connection()->query($query);
         $data = [];
         if($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -37,10 +35,10 @@ class BaseModel {
         return $response;
     }
 
-    protected function findById($id){
+    protected function find_by_id($id){
         $query = "SELECT * FROM " . $this->table . " WHERE $this->id_table = " . $id . " and is_delete = 0";
         $response = [];
-        $result = $this->getConnection()->query($query);
+        $result = $this->get_connection()->query($query);
         if($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
@@ -52,21 +50,21 @@ class BaseModel {
     protected function save($data){
         $query = "Insert into " . $this->table . " (" . implode(",", $this->insert) .") values (" . $data .")";
         //echo $query;
-        if($this->getConnection()->query($query)){
+        if($this->get_connection()->query($query)){
             return true;            
         } else return false;
     }
 
     protected function delete($id){
         $query = "Delete from $this->table where $this->id_table = " . $id;
-        if($this->getConnection()->query($query)){
+        if($this->get_connection()->query($query)){
             return true;
         } else return false;
     }
 
-    protected function deleteSoft($id){
+    protected function delete_soft($id){
         $query = "update $this->table set is_delte = true where $this->id_table = " . $id;
-        if($this->getConnection()->query($query)){
+        if($this->get_connection()->query($query)){
             return true;
         } else return false;
     }
@@ -76,7 +74,7 @@ class BaseModel {
                 "set ".
                 "set "
                 ." where $this->id_table = " . $id;
-        if($this->getConnection()->query($query)){
+        if($this->get_connection()->query($query)){
                 return true;
         } else return false;
     } 

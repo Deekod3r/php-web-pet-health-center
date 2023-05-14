@@ -4,18 +4,18 @@ class ShopController extends BaseController
 
     public function about_page()
     {
-        $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData("");
-        $this->renderView(
+        $shopRepo = $this->get_model('shop');
+        $shop = $shopRepo->get_data("");
+        $this->render_view(
             'about'
         );
     }
 
     public function contact_page()
     {
-        $shopRepo = $this->getRepo('shop');
-        $shop = $shopRepo->getData("");
-        $this->renderView(
+        $shopRepo = $this->get_model('shop');
+        $shop = $shopRepo->get_data("");
+        $this->render_view(
             'contact'
         );
     }
@@ -23,8 +23,8 @@ class ShopController extends BaseController
     public function data_shop()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $shopRepo = $this->getRepo('shop');
-            $shop = $shopRepo->getData("");
+            $shopRepo = $this->get_model('shop');
+            $shop = $shopRepo->get_data("");
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",

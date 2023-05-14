@@ -6,19 +6,19 @@ class NewsModel extends BaseModel{
     var $table = 'news';
     var $id_table = 'news_id';
     public function __construct(){
-        //$this->connection = $this->getConnection();
+        //$this->connection = $this->get_connection();
     }
 
-    public function getData($key,$limit){
-        $order = " order by news_date_release DESC";
-        if ($limit > 0) {
-            $order .= " limit " . $limit;
-        }
-        $result = $this->findAll($key . $order);
+    public function get_data($key){
+        $result = $this->find_all($key);
         return $result;
     }
+    
+    public function count_data($key){
+        return count($this->get_data($key));
+    }
 
-    public function getById($id){
-        return $this->findById($id);
+    public function get_by_id($id){
+        return $this->find_by_id($id);
     }
 };

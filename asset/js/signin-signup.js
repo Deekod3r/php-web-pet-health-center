@@ -69,7 +69,7 @@ $(document).ready(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                    $('#msg-login').html("Lỗi đăng nhập, vui lòng thử lại sau ít phút.");
+                    $('#msg-login').html("Lỗi đăng nhập, vui lòng thử lại sau ít phút." + error);
                 }
             })
         } else {
