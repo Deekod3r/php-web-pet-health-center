@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-lg-8">
                     <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục thú cưng: </p>
-                    <select name="typePet" id="type_pet" class="custom-select" style="width:250px;">
+                    <select name="typePet" id="type-pet" class="custom-select" style="width:250px;">
                         <option value="">Chọn loại thú cưng</option>
                         <option value="0">Mèo</option>
                         <option value="1">Chó</option>

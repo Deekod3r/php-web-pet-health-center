@@ -16,10 +16,10 @@ $(document).ready(function() {
             // response = JSON.parse(response);
             //console.log(response);
             if(response.statusCode == "1"){
-                $('#ctm_name').append(response.data.customer.ctm_name);
-                $('#ctm_phone').append(response.data.customer.ctm_phone);
-                $('#ctm_address').append(response.data.customer.ctm_address);
-                $('#ctm_email').append(response.data.customer.ctm_email);
+                $('#ctm-name').append(response.data.customer.ctm_name);
+                $('#ctm-phone').append(response.data.customer.ctm_phone);
+                $('#ctm-address').append(response.data.customer.ctm_address);
+                $('#ctm-email').append(response.data.customer.ctm_email);
 
                 loadDataShop();
             } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");

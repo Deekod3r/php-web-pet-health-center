@@ -6,7 +6,7 @@
     <?php include("layout/header.php")?>
     <div class="container py-5 main">
         <h3 class="mb-4" id="countFeedback"></h3>
-        <div class="mb-5" id="dataFeedback">
+        <div class="mb-5" id="data-feedback">
         </div>
         <div class="col-lg-12" id="page">
             <!-- <nav aria-label="Page navigation">

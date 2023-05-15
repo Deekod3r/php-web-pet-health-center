@@ -21,7 +21,7 @@
         <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=home&action=login_action" method="post" name="login" id="login">
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input" name="lg-username" id="lgUsername">
+            <input type="text" placeholder=" " class="form-input" name="lgUsername" id="lg-username">
             <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspTên tài khoản hoặc số điện thoại</label>
             <i class="uil uil-user icon"></i>
           </div>
@@ -47,7 +47,7 @@
             <a href="#" class="text signup-link">Đăng ký ngay</a>
           </span>
         </div>
-        <div class="login-signup" id="alert-login">
+        <div class="login-signup">
           <span class="text" id="msg-login" style="font-size:15px; color: red; font-weight:600"></span>
         </div>
       </div>
@@ -113,7 +113,7 @@
           </span>
         </div>
         <div class="login-signup">
-          <span class="text" id="msg-register" style="font-size:15px;"></span>
+          <span class="text" id="msg-register" style="font-size:15px; color: red; font-weight:600"></span>
         </div>
       </div>
     </div>

@@ -79,7 +79,7 @@ function loadDataFeedback(data) {
         feedbackData += "  </div>"
         feedbackData += "</div>"
     });
-    $('#dataFeedback').html(feedbackData);
+    $('#data-feedback').html(feedbackData);
     //loadDataFeedback(response.data.feedback);
 }
 

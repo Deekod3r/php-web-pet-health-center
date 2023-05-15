@@ -47,7 +47,7 @@ function cancelAppointment(id) {
             url: "?controller=appointment&action=cancel_appointment",
             data: {
                 token: sessionStorage.getItem("token"),
-                id_apm: id
+                idApm: id
             },
             //cache: false,
             //contentType: "application/json; charset=utf-8",

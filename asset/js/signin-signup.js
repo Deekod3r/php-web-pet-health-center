@@ -54,7 +54,7 @@ $(document).ready(function () {
                 success: function (response) {
                     // response = JSON.stringify(response);
                     // response = JSON.parse(response);
-                    //console.log(response);
+                    console.log(response);
                     if (response.statusCode == "1") {
                         sessionStorage.setItem("token", response.data.token);
                         if (response.data.typeAccount == "admin") {
@@ -83,22 +83,23 @@ $(document).ready(function () {
     });
 
     $('#register').submit(function (e) {
-        e.preventDefault();
         let password = $('#register').find('input[name="rgPassword"]').val();
         let confirmPassword = $('#rg-confirm-password').val();
         let name = $('#register').find('input[name="rgPassword"]').val();
         let phone = $('#register').find('input[name="rgPhone"]').val();
         let email = $('#register').find('input[name="rgEmail"]').val();
         let address = $('#register').find('input[name="rgAddress"]').val();
-        if (password != "" && email != "" && confirmPassword != "" && email != "" && name != "" && address != "" && phone != "") {
+        let gender = $('#register').find('input[name="rgGender"]:checked').val();
+        if (password != "" && email != "" && confirmPassword != "" && email != "" && name != "" && address != "" && phone != "" && gender != "") {
             if (password == confirmPassword) {
                 if (checkSpecialCharacter(password)) {
                     this.submit();
-                } else $('#msg-login').html("Mật khẩu phải bao gồm chữ cái hoa, chữ cái thường, số, ít nhất 1 ký tự đặc biệt và có độ dài tối thiểu 8 ký tự.");
+                } else $('#msg-register').html("Mật khẩu phải bao gồm chữ cái hoa, chữ cái thường, số, ít nhất 1 ký tự đặc biệt và có độ dài tối thiểu 8 ký tự.");
             } else {
-                $('#msg-login').html("Mật khẩu chưa trùng khớp.");
+                $('#msg-register').html("Mật khẩu chưa trùng khớp.");
             }
-        } else $('#msg-login').html("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+        } else $('#msg-register').html("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+        e.preventDefault();
     })
 
 })

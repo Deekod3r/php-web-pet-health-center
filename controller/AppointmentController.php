@@ -108,13 +108,13 @@ class AppointmentController extends BaseController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->check_login()) {
-                if (isset($_POST['id_apm']) && $_POST['id_apm'] != '' && isset($_POST['token']) && $_POST['token'] != '') {
+                if (isset($_POST['idApm']) && $_POST['idApm'] != '' && isset($_POST['token']) && $_POST['token'] != '') {
                     $token = $_POST['token'] != null ? $_POST['token'] : '';
                     $data = $this->verify_and_decode_token($token);
                     if (!$data) {
                         $this->redirect('home', 'index');
                     } else {
-                        $idApm = $_POST['id_apm'];
+                        $idApm = $_POST['idApm'];
                         $idCtm = json_decode($data)->{'id'};
                         $appointmentModel = $this->get_model('appointment');
                         if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
