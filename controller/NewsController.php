@@ -15,7 +15,7 @@ class NewsController extends BaseController
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $key = "";
-            $newsRepo = $this->get_model('news');
+            $newsModel = $this->get_model('news');
             $limit = 0;
             $offset = 0;
             if (isset($_GET['newsKey']) and $_GET['newsKey'] != '') {
@@ -27,7 +27,7 @@ class NewsController extends BaseController
             if (isset($_GET['idNews']) and $_GET['idNews'] != '') {
                 $key .= "and news_id = " . $_GET['idNews'];
             }
-            $count = $newsRepo->count_data($key);
+            $count = $newsModel->count_data($key);
             $key .= " order by news_date_release DESC ";
             if ($count > 0) {
                 if (isset($_GET['limit']) and $_GET['limit'] != '') {
@@ -47,7 +47,7 @@ class NewsController extends BaseController
                 }
             }
             //echo $key . " order by news_date_release DESC";
-            $news = $newsRepo->get_data($key);
+            $news = $newsModel->get_data($key);
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",

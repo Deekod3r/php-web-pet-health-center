@@ -12,6 +12,7 @@ class AdminModel extends BaseModel{
     public function get_data($key){
         return $this->find_all($key);
     }
+    
     public function get_by_username($username){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username ='" . $username ."'";
         //echo $query;
@@ -21,6 +22,7 @@ class AdminModel extends BaseModel{
         } 
         return null;
     }
+
     public function get_by_account($username,$password){
         $query = "SELECT * FROM " . $this->table . " WHERE ad_username = '" . $username . "' and ad_password = '" . $password ."'";
         //echo $query;

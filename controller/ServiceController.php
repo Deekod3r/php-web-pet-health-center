@@ -17,7 +17,7 @@ class ServiceController extends BaseController
             $key = "";
             $limit = 0;
             $offset = 0;
-            $serviceRepo = $this->get_model('service');
+            $serviceModel = $this->get_model('service');
             if (isset($_GET['svName']) and $_GET['svName'] != '') {
                 $key .= "and concat(sv_name,sv_description) like '%" . $_GET['svName'] . "%'";
             }
@@ -27,7 +27,7 @@ class ServiceController extends BaseController
             if (isset($_GET['typePet']) and $_GET['typePet'] != '') {
                 $key .= " and sv_pet in (" . $_GET['typePet'] . "," . Enum::TYPE_BOTH . ")";
             }
-            $count = $serviceRepo->count_data($key);
+            $count = $serviceModel->count_data($key);
             if ($count > 0) {
                 if (isset($_GET['limit']) and $_GET['limit'] != '') {
                     $limit = $_GET['limit'];
@@ -46,7 +46,7 @@ class ServiceController extends BaseController
                 }
             }
             //echo $key;
-            $service = $serviceRepo->get_data($key);
+            $service = $serviceModel->get_data($key);
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",

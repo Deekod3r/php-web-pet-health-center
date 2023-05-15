@@ -16,8 +16,8 @@ class FeedbackController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $limit = 0;
             $offset = 0;
-            $feedbackRepo = $this->get_model('feedback');
-            $count = $feedbackRepo->count_data("");
+            $feedbackModel = $this->get_model('feedback');
+            $count = $feedbackModel->count_data("");
             $key = " order by fb_time DESC ";
             if ($count > 0) {
                 if (isset($_GET['limit']) and $_GET['limit'] != '') {
@@ -36,7 +36,7 @@ class FeedbackController extends BaseController
                     }
                 }
             }
-            $feedback = $feedbackRepo->get_data($key);
+            $feedback = $feedbackModel->get_data($key);
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",
@@ -67,8 +67,8 @@ class FeedbackController extends BaseController
                             'time' => date('Y-m-d H:i:s'),
                             'ctmId' => $id,
                         ];
-                        $feedbackRepo = $this->get_model('feedback');
-                        if ($feedbackRepo->save_data($data)) {
+                        $feedbackModel = $this->get_model('feedback');
+                        if ($feedbackModel->save_data($data)) {
                             $result = [
                                 "statusCode" => "1",
                                 "message" => "Phản hồi thành công.",

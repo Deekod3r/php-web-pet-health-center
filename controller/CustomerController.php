@@ -23,8 +23,8 @@ class CustomerController extends BaseController
                     $this->redirect( 'home','index' );
                 } else {
                     $id = json_decode($data)->{'id'};                   
-                    $customerRepo = $this->get_model('customer');
-                    $customer = $customerRepo->get_by_id($id);
+                    $customerModel = $this->get_model('customer');
+                    $customer = $customerModel->get_by_id($id);
                     $result = [
                         "statusCode" => "1",
                         "message" => "OK",
@@ -49,8 +49,8 @@ class CustomerController extends BaseController
                 'password' => $_POST['rg-password'],
                 'gender' => $_POST['rg-gender']
             ];
-            $customerRepo = $this->get_model('customer');
-            if ($customerRepo->save_data($data)) {
+            $customerModel = $this->get_model('customer');
+            if ($customerModel->save_data($data)) {
                 $_SESSION['msg_register'] = "Đăng ký thành công.";
                 $_SESSION['check_register'] = true;
             } else {

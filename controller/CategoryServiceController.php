@@ -14,8 +14,8 @@ class CategoryServiceController extends BaseController
     public function data_category_service()
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            $categoryServiceRepo = $this->get_model('categoryService');
-            $categoryService = $categoryServiceRepo->get_data("");              
+            $categoryServiceModel = $this->get_model('categoryService');
+            $categoryService = $categoryServiceModel->get_data("");              
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",

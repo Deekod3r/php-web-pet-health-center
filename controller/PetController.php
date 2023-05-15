@@ -23,8 +23,8 @@ class PetController extends BaseController
                     $this->redirect('home', 'index');
                 } else {
                     $id = json_decode($data)->{'id'};
-                    $petRepo = $this->get_model('pet');
-                    $pet = $petRepo->get_by_customer($id);
+                    $petModel = $this->get_model('pet');
+                    $pet = $petModel->get_by_customer($id);
                     $result = [
                         "statusCode" => "1",
                         "message" => "OK",

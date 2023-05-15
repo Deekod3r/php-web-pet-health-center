@@ -17,11 +17,18 @@ class HomeController extends BaseController
         );
     }
 
+    public function error_page()
+    {
+        if (isset($_GET['error']) && $_GET['error'] != null && $_GET['error'] != '') {
+            $this->render_error($_GET['error']);
+        } else $this->render_error('404');
+    }
+
     public function login_page()
     {
         if (isset($_SESSION['login']) && $_SESSION['login']) {
-           $this->redirect('home', 'index');
-        } else  {
+            $this->redirect('home', 'index');
+        } else {
             $this->render_view('login');
         }
     }
@@ -37,26 +44,18 @@ class HomeController extends BaseController
         echo json_encode($result);
     }
 
-
     public function login_action()
     {
         $request_login = $_POST;
         //var_dump($request_login);
-        //var_dump($data);
-        $adminRepo = $this->get_model('admin');
-        $customerRepo = $this->get_model('customer');
-        $admin = $adminRepo->get_by_username(htmlspecialchars($request_login['lg-username']));
+        $adminModel = $this->get_model('admin');
+        $customerModel = $this->get_model('customer');
+        $admin = $adminModel->get_by_username(htmlspecialchars($request_login['lg-username']));
         // , htmlspecialchars($request_login['lg-password'])
-        // var_dump($admin);
         if ($admin == null) {
-            $customer = $customerRepo->get_by_phone(htmlspecialchars($request_login['lg-username']));
+            $customer = $customerModel->get_by_phone(htmlspecialchars($request_login['lg-username']));
             // , htmlspecialchars($request_login['lg-password'])
-            // var_dump($customer);
             if ($customer == null) {
-                // $_SESSION['check_login'] = false;
-                // $_SESSION['msg_login'] = "Thông tin không hợp lệ.";
-                //$this->redirect('home', 'login_page');
-                //return false;
                 $result = [
                     "statusCode" => "0",
                     "message" => "Tài khoản không tồn tại.",
@@ -66,11 +65,6 @@ class HomeController extends BaseController
             } else {
                 if ($customer['ctm_password'] == $request_login['lg-password']) {
                     $_SESSION['login'] = true;
-                    // $_SESSION['admin'] = false;
-                    // $_SESSION['can_feedback'] = $customer['ctm_can_feedback'];
-                    // $_SESSION['id'] = $customer['ctm_id'];
-                    //$this->redirect('home', 'index');
-                    //return true;
                     $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
                     $result = [
                         "statusCode" => "1",
@@ -82,11 +76,6 @@ class HomeController extends BaseController
                     ];
                     echo json_encode($result);
                 } else {
-                    // $_SESSION['admin'] = false;
-                    // $_SESSION['can_feedback'] = $customer['ctm_can_feedback'];
-                    // $_SESSION['id'] = $customer['ctm_id'];
-                    //$this->redirect('home', 'index');
-                    //return true;
                     $result = [
                         "statusCode" => "0",
                         "message" => "Sai mật khẩu.",
@@ -101,11 +90,6 @@ class HomeController extends BaseController
         } else {
             if ($request_login['lg-password'] == $admin['ad_password']) {
                 $_SESSION['login'] = true;
-                // $_SESSION['admin'] = true;
-                // $_SESSION['role'] = $admin['ad_role'];
-                // $_SESSION['id'] = $admin['ad_id'];
-                //$this->redirect('home', 'index');
-                //return true;
                 $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
                 $result = [
                     "statusCode" => "1",
@@ -117,11 +101,6 @@ class HomeController extends BaseController
                 ];
                 echo json_encode($result);
             } else {
-                // $_SESSION['admin'] = true;
-                // $_SESSION['role'] = $admin['ad_role'];
-                // $_SESSION['id'] = $admin['ad_id'];
-                //$this->redirect('home', 'index');
-                //return true;
                 $result = [
                     "statusCode" => "0",
                     "message" => "Sai mật khẩu.",

@@ -25,8 +25,8 @@ class BillController extends BaseController
                     $limit = 0;
                     $offset = 0;
                     $id = json_decode($data)->{'id'};
-                    $billRepo = $this->get_model('bill');
-                    $count = $billRepo->count_data_by_customer($id);
+                    $billModel = $this->get_model('bill');
+                    $count = $billModel->count_data_by_customer($id);
                     $key = " order by bill_date_release DESC ";
                     if ($count > 0) {
                         if (isset($_GET['limit']) and $_GET['limit'] != '') {
@@ -45,7 +45,7 @@ class BillController extends BaseController
                             }
                         }
                     }
-                    $bill = $billRepo->get_data(" and ctm_id = $id " . $key);
+                    $bill = $billModel->get_data(" and ctm_id = $id " . $key);
                     $result = [
                         "statusCode" => "1",
                         "message" => "OK",

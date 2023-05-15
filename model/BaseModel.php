@@ -79,13 +79,5 @@ class BaseModel {
         } else return false;
     } 
 
-    protected function response($status, $message, $data) {
-        $result = [
-            'statusCode' => $status,
-            'message' => $message,
-            'data' => $data
-        ];
-        echo json_encode($result);
-    }
 
 }   

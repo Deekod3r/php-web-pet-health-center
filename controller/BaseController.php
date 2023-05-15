@@ -2,10 +2,10 @@
 class BaseController
 {
 
-    private $securityKey = "nhom2@65pm2!@#$";
+    private $secureKey = "nhom2@65pm2!@#$";
 
     public function get_secure_key(){
-        return $this->securityKey;
+        return $this->secureKey;
     }
     public function __construct()
     {
@@ -19,6 +19,12 @@ class BaseController
             $path .= 'admin/';
         } else $path .= 'site/';
         include($path . $viewName . '.php');
+    }
+
+    public function render_error($errorCode)
+    {
+        $path = 'error/error-';
+        include($path . $errorCode . '.php');
     }
 
     public function render_view_role($viewName, $role)
@@ -95,4 +101,12 @@ class BaseController
         return false;
     }
 
+    public function response($status, $message, $data) {
+        $result = [
+            'statusCode' => $status,
+            'message' => $message,
+            'data' => $data
+        ];
+        echo json_encode($result);
+    }
 }

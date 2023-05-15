@@ -4,8 +4,6 @@ class ShopController extends BaseController
 
     public function about_page()
     {
-        $shopRepo = $this->get_model('shop');
-        $shop = $shopRepo->get_data("");
         $this->render_view(
             'about'
         );
@@ -13,8 +11,6 @@ class ShopController extends BaseController
 
     public function contact_page()
     {
-        $shopRepo = $this->get_model('shop');
-        $shop = $shopRepo->get_data("");
         $this->render_view(
             'contact'
         );
@@ -23,8 +19,8 @@ class ShopController extends BaseController
     public function data_shop()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $shopRepo = $this->get_model('shop');
-            $shop = $shopRepo->get_data("");
+            $shopModel = $this->get_model('shop');
+            $shop = $shopModel->get_data("");
             $result = [
                 "statusCode" => "1",
                 "message" => "OK",
