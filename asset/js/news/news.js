@@ -45,7 +45,7 @@ function loadDataPage(page) {
         //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             //console.log(page);
             // response = JSON.stringify(response);
             // response = JSON.parse(response);
@@ -79,7 +79,7 @@ function loadDataNews(data) {
         newsData += "   </div>"
         newsData += "</div>"
     });
-    $('#dataNews').html(newsData);
+    $('#data-news').html(newsData);
 }
 
 $(document).ready(function () {
@@ -98,7 +98,7 @@ $(document).ready(function () {
         //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             // response = JSON.stringify(response);
             // response = JSON.parse(response);
             if (response.statusCode == "1") {

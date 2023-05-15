@@ -25,7 +25,7 @@
                 <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
             </div>
         </form>
-        <div class="row pb-3" id="dataNews">
+        <div class="row pb-3" id="data-news">
             <!-- <div class="col-lg-4 mb-4">
                 <div class="card border-0 mb-2">
                     <img class="card-img-top" src="asset/img/blog-1.jpg" alt="">

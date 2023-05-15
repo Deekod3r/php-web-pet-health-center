@@ -13,10 +13,10 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Khách hàng</h5>
-                <p class="card-text" id="ctm_name"><b>Họ và tên: </b></p>
-                <p class="card-text" id="ctm_phone"><b>Số điện thoại: </b></p>
-                <p class="card-text" id="ctm_email"><b>Email: </b></p>
-                <p class="card-text" id="ctm_address"><b>Địa chỉ: </b></p>
+                <p class="card-text" id="ctm-name"><b>Họ và tên: </b></p>
+                <p class="card-text" id="ctm-phone"><b>Số điện thoại: </b></p>
+                <p class="card-text" id="ctm-email"><b>Email: </b></p>
+                <p class="card-text" id="ctm-address"><b>Địa chỉ: </b></p>
                 <a href="#" class="btn btn-primary">Cập nhật thông tin</a>
             </div>
             <div class="card-footer text-muted">

@@ -1,4 +1,7 @@
 const limitServicePage = 6;
+var svName = '';
+var categoryService = '';
+var typePet = '';
 
 function loadPaging(index, endPage) {
     page = "";
@@ -10,11 +13,11 @@ function loadPaging(index, endPage) {
     page += "       <span aria-hidden='true'>&laquo; Previous</span>"
     page += "       </a>"
     page += "   </li>"
-    if(index > 2){
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index-2) + ")'>" + (index-2) + "</a></li>"
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index-1) + ")'>" + (index-1) + "</a></li>"
-    }else if (index > 1) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index-1) + ")'>" + (index-1) + "</a></li>"
+    if (index > 2) {
+        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+    } else if (index > 1) {
+        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     }
     page += "   <li class='page-item active'><a class='page-link'  onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
     for (let i = index + 1; i <= endPage; i++) {
@@ -39,7 +42,10 @@ function loadDataPage(page) {
         url: '?controller=service&action=data_service',
         data: {
             limit: limitServicePage,
-            index: page
+            index: page,
+            svName: svName,
+            categoryService: categoryService,
+            typePet: typePet
         },
         //cache: false,
         //contentType: "application/json; charset=utf-8",
@@ -51,7 +57,7 @@ function loadDataPage(page) {
             // response = JSON.parse(response);
             if (response.statusCode == "1") {
                 loadDataService(response.data.service);
-                loadPaging(page, Math.ceil(response.data.count/limitServicePage));
+                loadPaging(page, Math.ceil(response.data.count / limitServicePage));
             } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
         },
         error: function (xhr, status, error) {
@@ -126,15 +132,18 @@ $(document).ready(function () {
     })
 
     $('#form-search-service').submit(function (e) {
+        svName = $('#service-name').val()
+        categoryService = $('#category-service').val()
+        typePet = $('#type-pet').val()
         $.ajax({
             type: 'GET',
             url: '?controller=service&action=data_service',
             data: {
                 limit: limitServicePage,
                 index: 1,
-                svName: $('#service-name').val(),
-                categoryService: $('#category-service').val(),
-                typePet: $('type-pet').val()
+                svName: svName,
+                categoryService: categoryService,
+                typePet: typePet
             },
             //cache: false,
             //contentType: "application/json; charset=utf-8",
@@ -146,7 +155,7 @@ $(document).ready(function () {
                 if (response.statusCode == "1") {
                     if (response.data.service != null) {
                         loadDataService(response.data.service)
-                        loadPaging(1, Math.ceil(response.data.count/limitServicePage));
+                        loadPaging(1, Math.ceil(response.data.count / limitServicePage));
                     } else $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px'>Thông tin trống.</p>");
                 } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
             },
