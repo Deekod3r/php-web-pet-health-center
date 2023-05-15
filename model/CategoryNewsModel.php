@@ -4,7 +4,7 @@ class CategoryNewsModel extends BaseModel{
 
     private $connection;
     var $table = 'category_news';
-    var $id_table = 'cn_id';
+    var $idTable = 'cn_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

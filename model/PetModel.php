@@ -4,7 +4,7 @@ class PetModel extends BaseModel{
 
     private $connection;
     var $table = 'pet';
-    var $id_table = 'pet_id';
+    var $idTable = 'pet_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

@@ -4,7 +4,7 @@ class NewsModel extends BaseModel{
 
     private $connection;
     var $table = 'news';
-    var $id_table = 'news_id';
+    var $idTable = 'news_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

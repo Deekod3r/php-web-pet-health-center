@@ -46,15 +46,15 @@ class HomeController extends BaseController
 
     public function login_action()
     {
-        $request_login = $_POST;
-        //var_dump($request_login);
+        $requestLogin = $_POST;
+        //var_dump($requestLogin);
         $adminModel = $this->get_model('admin');
         $customerModel = $this->get_model('customer');
-        $admin = $adminModel->get_by_username(htmlspecialchars($request_login['lg-username']));
-        // , htmlspecialchars($request_login['lg-password'])
+        $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']));
+        // , htmlspecialchars($requestLogin['lgPassword'])
         if ($admin == null) {
-            $customer = $customerModel->get_by_phone(htmlspecialchars($request_login['lg-username']));
-            // , htmlspecialchars($request_login['lg-password'])
+            $customer = $customerModel->get_by_phone(htmlspecialchars($requestLogin['lgUsername']));
+            // , htmlspecialchars($requestLogin['lgPassword'])
             if ($customer == null) {
                 $result = [
                     "statusCode" => "0",
@@ -63,7 +63,7 @@ class HomeController extends BaseController
                 ];
                 echo json_encode($result);
             } else {
-                if ($customer['ctm_password'] == $request_login['lg-password']) {
+                if ($customer['ctm_password'] == $requestLogin['lgPassword']) {
                     $_SESSION['login'] = true;
                     $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
                     $result = [
@@ -88,7 +88,7 @@ class HomeController extends BaseController
                 }
             }
         } else {
-            if ($request_login['lg-password'] == $admin['ad_password']) {
+            if ($requestLogin['lgPassword'] == $admin['ad_password']) {
                 $_SESSION['login'] = true;
                 $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
                 $result = [

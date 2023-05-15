@@ -4,7 +4,7 @@ class CustomerModel extends BaseModel{
 
     private $connection;
     var $table = 'customer';
-    var $id_table = 'ctm_id';
+    var $idTable = 'ctm_id';
     var $insert = ['ctm_name', 'ctm_phone', 'ctm_email', 'ctm_address', 'ctm_password', 'ctm_gender'];
     public function __construct(){
         //$this->connection = $this->get_connection();

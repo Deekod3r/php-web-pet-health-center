@@ -4,7 +4,7 @@ class FeedbackModel extends BaseModel{
 
     private $connection;
     var $table = 'feedback';
-    var $id_table = 'fb_id';
+    var $idTable = 'fb_id';
     var $insert = ['fb_content', 'fb_rating', 'fb_time' , 'ctm_id'];
     public function __construct(){
         //$this->connection = $this->get_connection();

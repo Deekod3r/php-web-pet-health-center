@@ -4,7 +4,7 @@ class ShopModel extends BaseModel{
 
     private $connection;
     var $table = 'shop_info';
-    var $id_table = 'shop_name';
+    var $idTable = 'shop_name';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

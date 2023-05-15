@@ -4,7 +4,7 @@ class ServiceModel extends BaseModel{
 
     private $connection;
     var $table = 'service';
-    var $id_table = 'sv_id';
+    var $idTable = 'sv_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

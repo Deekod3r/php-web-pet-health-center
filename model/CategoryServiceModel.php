@@ -4,7 +4,7 @@ class CategoryServiceModel extends BaseModel{
 
     private $connection;
     var $table = 'category_service';
-    var $id_table = 'cs_id';
+    var $idTable = 'cs_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

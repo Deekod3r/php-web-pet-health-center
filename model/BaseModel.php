@@ -4,8 +4,8 @@ class BaseModel {
     protected $table;
     protected $view;
     protected $insert;
-    protected $id_table;
-    protected $field_table;
+    protected $idTable;
+    protected $fieldTable;
     protected function get_connection() {
         $hostname = "localhost";
         $username = "root";
@@ -36,7 +36,7 @@ class BaseModel {
     }
 
     protected function find_by_id($id){
-        $query = "SELECT * FROM " . $this->table . " WHERE $this->id_table = " . $id . " and is_delete = 0";
+        $query = "SELECT * FROM " . $this->table . " WHERE $this->idTable = " . $id . " and is_delete = 0";
         $response = [];
         $result = $this->get_connection()->query($query);
         if($result->num_rows > 0) {
@@ -56,14 +56,14 @@ class BaseModel {
     }
 
     protected function delete($id){
-        $query = "Delete from $this->table where $this->id_table = " . $id;
+        $query = "Delete from $this->table where $this->idTable = " . $id;
         if($this->get_connection()->query($query)){
             return true;
         } else return false;
     }
 
     protected function delete_soft($id){
-        $query = "update $this->table set is_delte = true where $this->id_table = " . $id;
+        $query = "update $this->table set is_delte = true where $this->idTable = " . $id;
         if($this->get_connection()->query($query)){
             return true;
         } else return false;
@@ -73,7 +73,7 @@ class BaseModel {
         $query = "Update $this->table ".
                 "set ".
                 "set "
-                ." where $this->id_table = " . $id;
+                ." where $this->idTable = " . $id;
         if($this->get_connection()->query($query)){
                 return true;
         } else return false;

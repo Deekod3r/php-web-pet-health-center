@@ -4,7 +4,7 @@ class AdminModel extends BaseModel{
 
     private $connection;
     var $table = 'admin';
-    var $id_table = 'ad_id';
+    var $idTable = 'ad_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

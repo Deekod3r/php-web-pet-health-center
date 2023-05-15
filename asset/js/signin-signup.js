@@ -32,16 +32,16 @@ login.addEventListener("click", () => {
     container.classList.remove("active");
 });
 
-$(document).ready(function () {
+function checkSpecialCharacter(character) {
+    var minLength = 8;
+    var number = /[0-9]/;
+    var lowCharacter = /[a-z]/;
+    var upCharacter = /[A-Z]/;
+    var specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return number.test(character) && specialChar.test(character) && lowCharacter.test(character) && upCharacter.test(character) && character.length >= minLength;
+}
 
-    function checkSpecialCharacter(character) {
-        var minLength = 8;
-        var number = /[0-9]/;
-        var lowCharacter = /[a-z]/;
-        var upCharacter = /[A-Z]/;
-        var specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-        return number.test(character) && specialChar.test(character) && lowCharacter.test(character) && upCharacter.test(character) && character.length >= minLength;
-    }
+$(document).ready(function () {
 
     $('#login').submit(function (e) {
         $('#msg-login').html("");
@@ -84,12 +84,12 @@ $(document).ready(function () {
 
     $('#register').submit(function (e) {
         e.preventDefault();
-        let password = $('#register').find('input[name="rg-password"]').val();
+        let password = $('#register').find('input[name="rgPassword"]').val();
         let confirmPassword = $('#rg-confirm-password').val();
-        let name = $('#register').find('input[name="rg-password"]').val();
-        let phone = $('#register').find('input[name="rg-phone"]').val();
-        let email = $('#register').find('input[name="rg-email"]').val();
-        let address = $('#register').find('input[name="rg-address"]').val();
+        let name = $('#register').find('input[name="rgPassword"]').val();
+        let phone = $('#register').find('input[name="rgPhone"]').val();
+        let email = $('#register').find('input[name="rgEmail"]').val();
+        let address = $('#register').find('input[name="rgAddress"]').val();
         if (password != "" && email != "" && confirmPassword != "" && email != "" && name != "" && address != "" && phone != "") {
             if (password == confirmPassword) {
                 if (checkSpecialCharacter(password)) {

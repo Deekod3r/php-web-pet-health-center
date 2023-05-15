@@ -21,12 +21,12 @@
         <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=home&action=login_action" method="post" name="login" id="login">
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input" name="lg-username" id="lg-username">
+            <input type="text" placeholder=" " class="form-input" name="lg-username" id="lgUsername">
             <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspTên tài khoản hoặc số điện thoại</label>
             <i class="uil uil-user icon"></i>
           </div>
           <div class="input-field">
-            <input type="password" class="form-input password" placeholder=" " name="lg-password" id="lg-password">
+            <input type="password" class="form-input password" placeholder=" " name="lgPassword" id="lg-password">
             <label for="" class="form-active" style="font-size:15px; color: #ED6436;">&nbspMật khẩu</label>
             <i class="uil uil-lock icon"></i>
             <i class="uil uil-eye-slash showHidePw"></i>
@@ -57,27 +57,27 @@
         <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=customer&action=register" name="register" id="register" method="POST">
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input" name="rg-name" id="rg-name">
+            <input type="text" placeholder=" " class="form-input" name="rgName" id="rg-name">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspHọ và tên</label>
             <i class="uil uil-user"></i>
           </div>
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input " name="rg-email" id="rg-email">
+            <input type="text" placeholder=" " class="form-input " name="rgEmail" id="rg-email">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspEmail</label>
             <i class="uil uil-envelope icon"></i>
           </div>
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input " name="rg-phone" id="rg-phone">
+            <input type="text" placeholder=" " class="form-input " name="rgPhone" id="rg-phone">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspSố điện thoại</label>
             <i class="uil uil-phone"></i>
           </div>
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input " name="rg-address" id="rg-address">
+            <input type="text" placeholder=" " class="form-input " name="rgAddress" id="rg-address">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspĐịa chỉ</label>
             <i class="uil uil-location-pin-alt"></i>
           </div>
           <div class="input-field">
-            <input type="text" placeholder=" " class="form-input password" name="rg-password" id="rg-password">
+            <input type="text" placeholder=" " class="form-input password" name="rgPassword" id="rg-password">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspMật khẩu</label>
             <i class="uil uil-lock icon"></i>
             <i class="uil uil-eye-slash showHidePw"></i>
@@ -91,15 +91,15 @@
           <div class="Gender">
             <h4 class="mb-2 pb-1">Giới tính: </h4>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="rg-gender" id="rg-gender-male" value="1" />
+              <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-male" value="1" />
               <label class="form-check-label" for="maleGender">Nam</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="rg-gender" id="rg-gender-female" value="0" />
+              <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-female" value="0" />
               <label class="form-check-label" for="femaleGender">Nữ</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="rg-gender" id="rg-gender-other" value="2" />
+              <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-other" value="2" />
               <label class="form-check-label" for="otherGender">Khác</label>
             </div>
           </div>
@@ -112,14 +112,9 @@
             <a href="#" class="text login-link">Đăng nhập ngay</a>
           </span>
         </div>
-        <?php if (isset($_SESSION['msg_register']) && isset($_SESSION['check_register'])): ?>
         <div class="login-signup">
-          <span class="text" id="msg-register" style="font-size:15px; <?php if (!$_SESSION['check_register']) echo ' color: red; '; else echo ' color: green; ' ?> font-weight:600"><?php echo $_SESSION['msg_register']?></span>
+          <span class="text" id="msg-register" style="font-size:15px;"></span>
         </div>
-        <?php endif;
-          $_SESSION['msg_register'] = null;
-          $_SESSION['check_register'] = null;
-        ?>
       </div>
     </div>
   </div>

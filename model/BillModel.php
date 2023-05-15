@@ -4,7 +4,7 @@ class BillModel extends BaseModel{
 
     private $connection;
     var $table = 'bill';
-    var $id_table = 'bill_id';
+    var $idTable = 'bill_id';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

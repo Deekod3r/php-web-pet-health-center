@@ -4,7 +4,7 @@ class AppointmentModel extends BaseModel{
 
     private $connection;
     var $table = 'appointment';
-    var $id_table = 'apm_id';
+    var $idTable = 'apm_id';
     var $insert = ['apm_date', 'apm_time', 'apm_note' , 'ctm_id', 'cs_id'];
     public function __construct(){
         //$this->connection = $this->get_connection();
@@ -42,7 +42,7 @@ class AppointmentModel extends BaseModel{
     }
 
     public function cancel_appointmnet($idApm, $idCtm){
-        $query = "update $this->table set apm_status = ".Enum::STATUS_APPOINTMENT_CANCEL." where $this->id_table = " . $idApm . " and ctm_id = " . $idCtm;
+        $query = "update $this->table set apm_status = ".Enum::STATUS_APPOINTMENT_CANCEL." where $this->idTable = " . $idApm . " and ctm_id = " . $idCtm;
         //echo $query;
         if($this->get_connection()->query($query)){
             return true;
