@@ -115,6 +115,8 @@ create table appointment
     apm_id int primary key auto_increment, -- mã lịch hẹn -- default
     apm_date date not null, -- ngày hẹn
     apm_time time not null, -- thời gian hẹn
+    apm_booking_at datetime not null default now(), -- thời gian đặt
+    apm_cancel_at datetime, -- thời gian hủy (nếu có)
     apm_status tinyint(1) default 0 not null, -- trạng thái:0-chờ xác nhận, 1-đã xác nhận, 2- đã hủy, 3- đã hoàn thành
     apm_note varchar(500) default ' ',
     ctm_id int, -- mã khách hàng

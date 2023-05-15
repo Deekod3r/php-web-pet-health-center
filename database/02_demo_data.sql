@@ -9,13 +9,13 @@ insert into admin (ad_id, ad_username, ad_password, ad_role, ad_status, is_delet
 -- select * from admin;
 -- customer
 insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_password, ctm_gender, ctm_active,ctm_can_feedback)
-            values (1,'Nguyễn Thị Hằng','0383094429',null,null,null,1, true, false),
+            values (1,'Nguyễn Thị Hằng','0383094429',null,null,null,1, false, false),
                    (2,'Trần Lê Hoàng Sơn','0383092427','son262965@huce.edu.vn','Trại Cá, Trương Định, Hoàng Mai, Hà Nội','262965',1, true, true),
                    (3,'Nguyễn Quang Đạt','0987654321','dat262965@gmail.com','Lê Trọng Tấn, Thanh Xuân, Hà Nội','123456',1, true, true),
                    (4,'Đoàn Mạnh An','0423423784','haha@gmail.com','Đọi Tam, Duy Tiên, Hà Nam','12345678',0, true, true),
                    (5,'Nguyễn Hải Dương','0356575674','duong@gmail.com','36 Trường Chinh, Thanh Xuân, Hà Nội ','123456',1, true, true),
-                   (6,'Lê Kiên Cường','0987654978',null,null,null,0, true, false),
-                   (7,'Trần Lê Minh','0987123478',null,null,null,1, true, false),
+                   (6,'Lê Kiên Cường','0987654978',null,null,null,0, false, false),
+                   (7,'Trần Lê Minh','0987123478',null,null,null,1, false, false),
                    (8,'Lê Minh Thảo','0987122345','minhthao.19@gmail.com','100 Lê Thanh Nghị, Đồng Tâm, Hai Bà Trưng, Hà Nội','minhthao123',0, true, false),
                    (9,'Tạ Thị Tú Linh','0973456428','tulinh02@gmail.com','Trần Đại Nghĩa, Bách Khoa, Hà Nội','tulinh1234',0, true, false),
                    (10,'Nguyễn Hằng Nga','0787121568','hangngakt@gmail.com','24 Kim Đồng, Hoàng Mai, Hà Nội','1234.nga',0, true, false),
@@ -119,30 +119,26 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (20, 'Tắm cho chó mèo từ 7 kg đến < 10 kg, lông ngắn','#',190000,'Tắm cho chó mèo từ 7 kg đến < 10 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
                    (21, 'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông dài','#',290000,'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
                    (22, 'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông ngắn','#',250000,'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (23, 'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài','#',360000,'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (24, 'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông ngắn','#',310000,'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (25, 'Tắm cho chó mèo từ 20 kg đến < 30 kg, lông dài','#',430000,'Tắm cho chó mèo từ 20 kg đến < 30 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (26, 'Tắm cho chó mèo từ 20 kg đến < 30 kg, lông ngắn','#',370000,'Tắm cho chó mèo từ 20 kg đến < 30 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (27, 'Tắm cho chó mèo trên 30 kg','#',0,'Tắm cho chó mèo trên 30 kg. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3);
+                   (23, 'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài','#',360000,'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3);
 -- select * from service;
 -- appointment
- insert into appointment (apm_id, apm_date, apm_time, apm_status, ctm_id, cs_id, is_delete)
-            values (1,'2023/04/16','9:30:00',2,2,1,false), -- kh2 đặt onl-> hủy
-                   (2,'2023/03/10','9:30:00',3,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
-                   (3,'2023/04/16','10:30:00',3,3,2,false), -- kh3 đặt onl -> đã hoàn thành
-                   (4,'2023/04/18','14:45:00',1,3,2,false), -- kh3 đặt onl -> đã xác nhận
-                   (5,'2023/04/01','14:30:00',3,1,3,false),
-                   (6,'2023/04/06','9:45:00',3,2,3,false),
-                   (7,'2023/04/08','9:45:00',2,4,3,false),
-                   (8,'2023/04/08','15:45:00',3,4,3,false),
-                   (9,'2023/04/10','15:00:00',3,5,5,false),
-                   (10,'2023/05/01','10:15:00',2,5,3,false),
-                   (11,'2023/05/01','14:15:00',3,5,3,false),
-                   (12,'2023/05/09','16:00:00',1,6,5,false),
-                   (13,'2023/05/08','15:45:00',3,7,5,false),
-                   (14,'2023/05/08','16:45:00',3,7,5,false),
-                   (15,'2023/05/15','13:35:00',0,8,2,false),
-                   (16,'2023/05/18','15:45:00',0,3,3,false);
+ insert into appointment (apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, ctm_id, cs_id, is_delete)
+            values (1,'2023/04/16','9:30:00','2023/04/16 7:30:00','2023/04/16 8:30:00',2,2,1,false), -- kh2 đặt onl-> hủy
+                   (2,'2023/03/10','9:30:00','2023/03/10 9:28:00',null,3,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
+                   (3,'2023/04/16','10:30:00','2023/04/16 7:30:00',null,3,3,2,false), -- kh3 đặt onl -> đã hoàn thành
+                   (4,'2023/04/18','14:45:00','2023/04/18 14:40:00',null,1,3,2,false), -- kh3 đặt onl -> đã xác nhận
+                   (5,'2023/04/01','14:30:00','2023/04/1 8:30:10',null,3,1,3,false),
+                   (6,'2023/04/06','9:45:00','2023/04/6 7:30:30',null,3,2,3,false),
+                   (7,'2023/04/08','9:45:00','2023/04/7 7:30:00','2023/04/8 7:30:28',2,4,3,false),
+                   (8,'2023/04/08','15:45:00','2023/04/8 9:56:00',null,3,4,3,false),
+                   (9,'2023/04/10','15:00:00','2023/04/10 10:35:30',null,3,5,5,false),
+                   (10,'2023/05/01','10:15:00','2023/04/28 7:30:00','2023/04/30 7:46:30',2,5,3,false),
+                   (11,'2023/05/01','14:15:00','2023/05/1 9:30:12',null,3,5,3,false),
+                   (12,'2023/05/09','16:00:00','2023/05/2 7:12:20',null,1,6,5,false),
+                   (13,'2023/05/08','15:45:00','2023/05/6 9:30:59',null,3,7,5,false),
+                   (14,'2023/05/08','16:45:00','2023/05/7 7:33:00',null,3,7,5,false),
+                   (15,'2023/05/15','13:35:00','2023/05/15 9:29:24',null,0,8,2,false),
+                   (16,'2023/05/18','15:45:00','2023/05/16 8:39:00',null,0,3,3,false);
 -- select * from appointment;
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value)
