@@ -32,9 +32,9 @@ select * from view_discount;
 create or replace view view_pet_detail
 as
     select
-       pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, ctm_name, ctm_phone
+       pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, pet.ctm_id as ctm_id, ctm_name, ctm_phone
     from pet join customer c on c.ctm_id = pet.ctm_id
-    where pet.is_delete = false;
+    where pet.is_delete = false and c.is_delete = false;
 
 select * from view_pet_detail;
 
@@ -72,9 +72,9 @@ select * from view_news;
 create or replace view view_news_detail
 as
     select
-        news_id, news_title, news_description, news_content, news_img, news_date_release, ad_username, cn_name
+        news_id, news_title, news_description, news_content, news_img, news_date_release, news.ad_id as ad_id, ad_username,news.cn_id as cn_id, cn_name
     from (news inner join admin a on news.ad_id = a.ad_id) inner join category_news cn on news.cn_id = cn.cn_id
-    where news.is_delete = false;
+    where news.is_delete = false and cn.is_delete = false;
 
 select * from view_news_detail;
 
@@ -92,9 +92,9 @@ select * from view_category_service;
 create or replace view view_service_detail
 as
     select
-       sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, cs_name
+       sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status,service.cs_id as cs_id, cs_name
     from service join category_service cs on cs.cs_id = service.cs_id
-    where service.is_delete = false;
+    where service.is_delete = false and cs.is_delete = false;
 
 select * from view_service_detail;
 
@@ -107,11 +107,11 @@ as
 
 select * from view_appointment;
 
-# appointment_join_category_service
+# appointment_join_category_service_and_customer
 create or replace view view_appointment_detail
 as
     select
-        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, ctm_name, cs_name
+        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, appointment.ctm_id as ctm_id, ctm_name, appointment.cs_id as cs_id, cs_name
     from (appointment join category_service cs on cs.cs_id = appointment.cs_id) join customer c on c.ctm_id = appointment.ctm_id
     where appointment.is_delete = false;
 
@@ -131,7 +131,7 @@ select * from view_bill;
 create or replace view view_bill_detail
 as
     select
-        bill_id, bill_date_release, bill_status, ctm_name, ad_username, dc_code, value_temp, value_reduced, total_value
+        bill_id, bill_date_release, bill_status, bill.ctm_id as ctm_id, ctm_name, bill.ad_id as ad_id, ad_username, bill.dc_id as dc_id, dc_code, value_temp, value_reduced, total_value
     from ((bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id) join discount d on d.dc_id = bill.dc_id
     where bill.is_delete = false;
 
@@ -151,7 +151,7 @@ select * from view_detail_bill;
 create or replace view view_detail_bill_detail
 as
     select
-        detail_id, bill_id, sv_name, quantity, detail_bill.sv_price, pet_name, value
+        detail_id, bill_id, detail_bill.sv_id as sv_id, sv_name, quantity, detail_bill.sv_price, detail_bill.pet_id as pet_id, pet_name, value
     from (detail_bill join service s on s.sv_id = detail_bill.sv_id) join pet p on p.pet_id = detail_bill.pet_id
     where detail_bill.is_delete = false;
 
@@ -171,9 +171,9 @@ select * from view_feedback;
 create or replace view view_feedback_detail
 as
     select
-        fb_id, fb_content, fb_rating, fb_time, ctm_name
+        fb_id, fb_content, fb_rating, fb_time, feedback.ctm_id as ctm_id, ctm_name
     from feedback join customer c on c.ctm_id = feedback.ctm_id
-    where feedback.is_delete = false;
+    where feedback.is_delete = false and c.is_delete = false;
 
 select * from view_feedback_detail;
 
