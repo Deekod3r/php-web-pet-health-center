@@ -1,9 +1,17 @@
 const limitServicePage = 6;
-var svName = '';
-var categoryService = '';
-var typePet = '';
+
+var svName = new URLSearchParams(document.location.href).get('sv-name');
+var categoryService = new URLSearchParams(document.location.href).get('category-service');
+var typePet = new URLSearchParams(document.location.href).get('type-pet');
+
+svName = svName != undefined && svName != null ? svName : '';
+categoryService = categoryService != undefined && categoryService != null ? categoryService : '';
+typePet = typePet != undefined && typePet != null ? typePet : '';
+
+url = "?controller=service&action=service_page";
 
 function loadPaging(index, endPage) {
+    index = parseInt(index);
     page = "";
     page += "   <div class='col-lg-12'>"
     page += "     <nav aria-label='Page navigation'>"
@@ -24,7 +32,7 @@ function loadPaging(index, endPage) {
         page += "    <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
     }
     page += "    <li class='page-item' id='next'>"
-    page += "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" + (index + 1) + ")'>"
+    page += "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" + (index - 2 + 3) + ")'>"
     page += "         <span aria-hidden='true'>Next &raquo;</span>"
     page += "        </a>"
     page += "     </li>"
@@ -47,21 +55,28 @@ function loadDataPage(page) {
             categoryService: categoryService,
             typePet: typePet
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
+
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            //console.log(page);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            if (response.responseCode == responseCode.success) {
+                param = ''
+                if (svName != null && svName != '') param += '&sv-name=' + svName;
+                if (categoryService != null && categoryService != '') param += '&category-service=' + categoryService;
+                if (typePet != null && typePet != '') param += '&type-pet=' + typePet;
+                if (page > 1) {
+                    window.history.pushState(null, "", url + param + "&page=" + page);
+                } else window.history.pushState(null, "", url);
                 loadDataService(response.data.service);
                 loadPaging(page, Math.ceil(response.data.count / limitServicePage));
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode == responseCode.dataEmpty) {
+                window.history.pushState(null, "", url);
+                $('#page').html("");
+                $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>");
+            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     });
 }
@@ -101,33 +116,30 @@ function loadDataService(data) {
 
 $(document).ready(function () {
 
-    loadDataPage(1);
+    indexPage = new URLSearchParams(document.location.href).get('page');
+
+    indexPage = indexPage != null && indexPage != 1 ? indexPage : 1;
+
+    loadDataPage(indexPage);
 
     loadDataShop();
 
     $.ajax({
         type: 'GET',
         url: '?controller=CategoryService&action=data_category_service',
-        // data: {
-        //     token: sessionStorage.getItem('token')
-        // },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            if (response.responseCode == responseCode.success) {
                 var categoryServiceData = "";
                 response.data.categoryService.forEach(element => {
                     categoryServiceData += "<option value='" + element.cs_id + "'>" + element.cs_name + "</option>"
                 });
                 $('#category-service').append(categoryServiceData);
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode != responseCode.dataEmpty) alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 
@@ -145,23 +157,25 @@ $(document).ready(function () {
                 categoryService: categoryService,
                 typePet: typePet
             },
-            //cache: false,
-            //contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (response) {
-                //console.log(response);
-                // response = JSON.stringify(response);
-                // response = JSON.parse(response);
-                if (response.statusCode == "1") {
-                    if (response.data.service != null) {
-                        loadDataService(response.data.service)
-                        loadPaging(1, Math.ceil(response.data.count / limitServicePage));
-                    } else $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px'>Thông tin trống.</p>");
-                } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+                console.log(response);
+                if (response.responseCode == responseCode.success) {
+                    param = ''
+                    if (svName != null && svName != '') param += '&sv-name=' + svName;
+                    if (categoryService != null && categoryService != '') param += '&category-service=' + categoryService;
+                    if (typePet != null && typePet != '') param += '&type-pet=' + typePet;
+                    window.history.pushState(null, "", url + param);
+                    loadDataService(response.data.service)
+                    loadPaging(1, Math.ceil(response.data.count / limitServicePage));
+                } else if (response.responseCode == responseCode.dataEmpty) {
+                    window.history.pushState(null, "", url);
+                    $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có dịch vụ phù hợp.</p>");
+                    $('#page').html("");
+                } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
             },
-            error: function (xhr, status, error) {
-                alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút." + " Chi tiết lỗi: " + error);
-                console.log("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút." + " Chi tiết lỗi: " + error);
+            error: function (xhr) {
+                alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
             }
         })
         e.preventDefault();

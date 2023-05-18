@@ -41,7 +41,7 @@ class AppointmentModel extends BaseModel{
         return $this->save($value);
     }
 
-    public function cancel_appointmnet($idApm, $idCtm){
+    public function cancel_appointment($idApm, $idCtm){
         $query = "update $this->table set apm_status = ".Enum::STATUS_APPOINTMENT_CANCEL." where $this->idTable = " . $idApm . " and ctm_id = " . $idCtm;
         //echo $query;
         if($this->get_connection()->query($query)){

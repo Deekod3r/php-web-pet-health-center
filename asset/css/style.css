@@ -1,0 +1,17 @@
+.block-ellipsis-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    height: 70px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.block-ellipsis-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    height: 90px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

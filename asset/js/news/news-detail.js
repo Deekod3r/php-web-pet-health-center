@@ -36,47 +36,52 @@ function loadDataRecentNews(data) {
 }
 
 $(document).ready(function () {
+    
     $.ajax({
         type: 'GET',
         url: '?controller=news&action=data_news',
         data: {
             idNews: new URLSearchParams(document.location.href).get('id')
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            if (response.responseCode == responseCode.success) {
                 loadDataNews(response.data.news[0]);
                 loadDataShop();
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert(
+                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
         }
     })
 
     $.ajax({
         type: 'GET',
         url: '?controller=categorynews&action=data_category_news',
-        // data: {
-        // },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            if (response.responseCode == responseCode.success) {
                 loadDataCategoryNews(response.data.categoryNews);
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode != responseCode.dataEmpty) alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert(
+                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
         }
     })
 
@@ -86,19 +91,22 @@ $(document).ready(function () {
         data: {
             limit: 3
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
-            console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            //console.log(response);
+            if (response.responseCode == responseCode.success) {
                 loadDataRecentNews(response.data.news);
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert(
+                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
         }
     })
 

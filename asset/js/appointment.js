@@ -1,32 +1,27 @@
 $(document).ready(function () {
+
     loadDataShop();
-    $.ajax({
-        type: 'GET',
-        url: '?controller=categoryservice&action=data_category_service',
-        // data: {
-        //     token: sessionStorage.getItem('token')
-        // },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-        success: function (response) {
-            console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
-                if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+        $.ajax({
+            type: 'GET',
+            url: '?controller=categoryservice&action=data_category_service',
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+                if (response.responseCode == responseCode.success) {
                     var categoryServiceData = "";
                     response.data.categoryService.forEach(element => {
                         categoryServiceData += "<option value='" + element.cs_id + "'>" + element.cs_name + "</option>"
                     });
                     $('#category-service').append(categoryServiceData);
-                }
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
-        },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
-        }
-    });
+                } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            },
+            error: function(xhr) {
+                alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            }
+        });
+    }
 
     $('#form-booking').submit(function (e) {
         if ($('#apm-date').val() != '' && $('#apm-time').val() != '' && $('#apm-note').val() != '' && $('#category-service').val() != '') {
@@ -40,14 +35,10 @@ $(document).ready(function () {
                     apmNote: $('#apm-note').val(),
                     categoryService: $('#category-service').val()
                 },
-                //cache: false,
-                //contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
-                    // response = JSON.stringify(response);
-                    // response = JSON.parse(response);
-                    if (response.statusCode == "1") {
+                    if (response.responseCode == responseCode.success) {
                         $('#apm-date').val(''),
                             $('#apm-time').val(''),
                             $('#apm-note').val(''),
@@ -58,18 +49,17 @@ $(document).ready(function () {
                         window.setTimeout(function () {
                             $('#msg-booking').hide()
                         }, 3000);
-                    } else if (response.statusCode == "0") {
+                    } else if (response.responseCode == responseCode.fail) {
                         $('#msg-booking').html(response.message);
                         $('#msg-booking').addClass(' alert-danger');
                         $('#msg-booking').show();
                         window.setTimeout(function () {
                             $('#msg-booking').hide()
                         }, 3000);
-                    } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+                    } else alert(response.responseCode + ": " + response.message + " Vui lòng thử lại sau ít phút.");
                 },
-                error: function (xhr, status, error) {
-                    alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút." + " Chi tiết lỗi: " + error);
-                    console.log("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút." + " Chi tiết lỗi: " + error);
+                error: function(xhr) {
+                    alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
                 }
             })
         } else {

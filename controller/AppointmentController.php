@@ -8,64 +8,79 @@ class AppointmentController extends BaseController
             $this->render_view(
                 'booking',
             );
-        } else include('view/error/error-400.php');
-    }
+        } else {
+            include 'view/error/error-400.php';
+        }
 
+    }
 
     public function booking()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->check_login()) {
                 $token = $_POST['token'] != null ? $_POST['token'] : '';
                 $data = $this->verify_and_decode_token($token);
                 if (!$data) {
-                    $this->redirect('home', 'index');
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
-                    $id = json_decode($data)->{'id'};
-                    $appointmentModel = $this->get_model('appointment');
-                    $countCurrentApm = count($appointmentModel->get_by_customer($id," and apm_status in (".Enum::STATUS_APPOINTMENT_CONFIRMED_YES.",".Enum::STATUS_APPOINTMENT_CONFIRMED_NO.")"));
-                    if ($countCurrentApm <= 3) {
-                        $pos = strripos($_POST['apmTime'], " ");
-                        $data = [
-                            'ctmId' => $id,
-                            'date' => date("Y/m/d", strtotime($_POST['apmDate'])),
-                            'time' => substr($_POST['apmTime'], 0, $pos),
-                            'categoryService' => $_POST['categoryService'],
-                            'note' => $_POST['apmNote']
-                        ];
-                        if ($appointmentModel->save_data($data)) {
-                            $result = [
-                                "statusCode" => "1",
-                                "message" => "Đặt lịch thành công.",
-                                "data" => []
-                            ];
-                            echo json_encode($result);
+                    if ($_POST['apmDate'] != null && $_POST['apmDate'] != '' && $_POST['categoryService'] != null && $_POST['categoryService'] != '' && $_POST['apmTime'] != null && $_POST['apmTime'] != '') {
+                        $id = json_decode($data)->{'id'};
+                        $role = json_decode($data)->{'role'};
+                        $customerModel = $this->get_model('customer');
+                        if ($customerModel->get_by_id($id) != null) {
+                            $appointmentModel = $this->get_model('appointment');
+                            $countCurrentApm = count($appointmentModel->get_by_customer($id, " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")"));
+                            if ($countCurrentApm <= 2) {
+                                $pos = strripos($_POST['apmTime'], " ");
+                                $date = date("Y/m/d", strtotime($_POST['apmDate']));
+                                $time = substr($_POST['apmTime'], 0, $pos);
+                                $dateTimeToday = date("Y/m/d H:i:s");
+                                $dateTimeBooking = $date." ".$time;
+                                if (strtotime($dateTimeBooking) > strtotime($dateTimeToday)) {
+                                    $data = [
+                                        'ctmId' => $id,
+                                        'date' => $date,
+                                        'time' => $time,
+                                        'categoryService' => $_POST['categoryService'],
+                                        'note' => $_POST['apmNote'],
+                                    ];
+                                    if ($appointmentModel->save_data($data)) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thành công");
+                                    } else {
+                                        $responseCode = ResponseCode::FAIL;
+                                        $message = sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thất bại");
+                                    }
+                                } else {
+                                    $responseCode = ResponseCode::INPUT_INVALID_TYPE;
+                                    $message = sprintf(ResponseMessage::INPUT_INVALID_TYPE_MESSAGE,"thời gian");
+                                }
+                            } else {
+                                $responseCode = ResponseCode::FAIL;
+                                $message = "Bạn đang có quá nhiều lịch hẹn, vui lòng đặt lịch sau.";
+                            }
                         } else {
-                            $result = [
-                                "statusCode" => "0",
-                                "message" => "Đặt lịch thất bại.",
-                                "data" => []
-                            ];
-                            echo json_encode($result);
+                            $responseCode = ResponseCode::TOKEN_INVALID;
+                            $message = ResponseMessage::REQUEST_INVALID_MESSAGE;
                         }
                     } else {
-                        $result = [
-                            "statusCode" => "0",
-                            "message" => "Không để đặt lịch, bạn đang có quá nhiều lịch hẹn.",
-                            "data" => []
-                        ];
-                        echo json_encode($result);
+                        $responseCode = ResponseCode::INPUT_EMPTY;
+                        $message = sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "lịch hẹn");
                     }
                 }
             } else {
-                $result = [
-                    "statusCode" => "0",
-                    "message" => "Vui lòng đăng nhập để đặt lịch.",
-                    "data" => []
-                ];
-                echo json_encode($result);
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
             }
-        } else include('view/error/error-400.php');
+        } else {
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = ResponseMessage::REQUEST_INVALID_MESSAGE;
+        }
+        $this->response($responseCode, $message, $data);
     }
 
     public function customer_current_apm()
@@ -75,8 +90,14 @@ class AppointmentController extends BaseController
                 $this->render_view(
                     'customer_current_apm'
                 );
-            } else $this->redirect('home', 'index');
-        } else include('view/error/error-400.php');
+            } else {
+                $this->redirect('home', 'index');
+            }
+
+        } else {
+            include 'view/error/error-400.php';
+        }
+
     }
 
     public function data_customer_current_apm()
@@ -95,13 +116,19 @@ class AppointmentController extends BaseController
                         "statusCode" => "1",
                         "message" => "OK",
                         "data" => [
-                            'appointment' => $appointment
-                        ]
+                            'appointment' => $appointment,
+                        ],
                     ];
                     echo json_encode($result);
                 }
-            } else $this->redirect('home', 'index');
-        } else include('view/error/error-400.php');
+            } else {
+                $this->redirect('home', 'index');
+            }
+
+        } else {
+            include 'view/error/error-400.php';
+        }
+
     }
 
     public function cancel_appointment()
@@ -119,21 +146,27 @@ class AppointmentController extends BaseController
                         $appointmentModel = $this->get_model('appointment');
                         if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
                             $result = [
-                                "statusCode" => "1",
+                                "responseCode" => "01",
                                 "message" => "Huỷ lịch hẹn thành công. ",
-                                "data" => []
+                                "data" => [],
                             ];
                         } else {
                             $result = [
-                                "statusCode" => "0",
+                                "responseCode" => "00",
                                 "message" => "Huỷ lịch hẹn thất bại. ",
-                                "data" => []
+                                "data" => [],
                             ];
                         }
                         echo json_encode($result);
                     }
                 }
-            } else $this->redirect('home', 'index');
-        } else include('view/error/error-400.php');
+            } else {
+                $this->redirect('home', 'index');
+            }
+
+        } else {
+            include 'view/error/error-400.php';
+        }
+
     }
 }

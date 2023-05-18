@@ -49,14 +49,10 @@ function cancelAppointment(id) {
                 token: sessionStorage.getItem("token"),
                 idApm: id
             },
-            //cache: false,
-            //contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
                 //console.log(response);
-                // response = JSON.stringify(response);
-                // response = JSON.parse(response);
-                if (response.statusCode == "1") {
+                if (response.responseCode == "01") {
                     $('#msg-cancel-appointment').html(response.message);
                     $('#msg-cancel-appointment').addClass(" alert-success");
                     $('#msg-cancel-appointment').show();
@@ -64,7 +60,7 @@ function cancelAppointment(id) {
                             $('#msg-cancel-appointment').hide()
                     }, 3000);
                     loadDataCurrentApm();
-                } else if (response.statusCode == "0") {
+                } else if (response.statusCode == "00") {
                     $('#msg-cancel-appointment').html(response.message);
                     $('#msg-cancel-appointment').addClass(" alert-danger");
                     $('#msg-cancel-appointment').show();
@@ -75,7 +71,7 @@ function cancelAppointment(id) {
                 } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
             },
             error: function (xhr, status, error) {
-                alert("Vui lòng thử lại sau ít phút.");
+                alert("Vui lòng thử lại sau ít phút. " + error.message);
             },
         });
     }

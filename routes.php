@@ -2,6 +2,8 @@
 include('controller/BaseController.php');
 include('model/BaseModel.php');
 include('config/Enum/Enum.php');
+include('config/Enum/ResponseCode.php');
+include('config/Enum/ResponseMessage.php');
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     //echo $_GET['controller']. " " . $_GET['action'];
@@ -21,5 +23,5 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
         include('view/error/error-404.php');
     }
 } else {
-    header("location:routes.php?controller=home&action=index");
+    header("location:?controller=home&action=index");
 }

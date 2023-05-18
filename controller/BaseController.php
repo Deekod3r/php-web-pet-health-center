@@ -101,12 +101,42 @@ class BaseController
         return false;
     }
 
-    public function response($status, $message, $data) {
+    public function response($responseCode, $message, $data) {
         $result = [
-            'statusCode' => $status,
+            'responseCode' => $responseCode,
             'message' => $message,
             'data' => $data
         ];
         echo json_encode($result);
     }
+
+    function checkSpecialChars($input,$num,$lowChars,$upChars,$speChars,$length,$size) {
+        $check = true;
+        $number = '/[0-9]/';
+        $lowerChars = '/[a-z]/';
+        $upperChars = '/[A-Z]/';
+        $specialChars = '/[\.\'^£$%&*()}{@#~?><,|=_+¬-]/';
+        if ($num) {
+           $check = $check && preg_match($number, $input);
+           if (!$check) return false;
+        }
+        if ($lowChars) {
+           $check = $check && preg_match($lowerChars, $input);
+           if (!$check) return false;
+        }
+        if ($upChars) {
+           $check = $check && preg_match($upperChars, $input);
+           if (!$check) return false;
+        }
+        if ($speChars) {
+           $check = $check && preg_match($specialChars, $input);
+           if (!$check) return false;
+        }
+        if ($length && is_numeric($size)) {
+           $check = $check && strlen($input) > $size;
+           if (!$check) return false;
+        }
+        return $check;
+     }
 }
+

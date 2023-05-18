@@ -13,6 +13,5 @@ class ShopModel extends BaseModel{
         $result = $this->find_all($key);
         return $result[0];
     }
-
     
 };

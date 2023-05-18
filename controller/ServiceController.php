@@ -13,6 +13,9 @@ class ServiceController extends BaseController
 
     public function data_service()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $data[] = null;
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $key = "";
             $limit = 0;
@@ -44,18 +47,21 @@ class ServiceController extends BaseController
                         }
                     }
                 }
-            }
-            //echo $key;
-            $service = $serviceModel->get_data($key);
-            $result = [
-                "statusCode" => "1",
-                "message" => "OK",
-                "data" => [
+                $service = $serviceModel->get_data($key);
+                $responseCode = "01";
+                $message = sprintf(ResponseMessage::SELECT_MESSAGE,"dịch vụ","thành công.");
+                $data = [
                     'service' => $service,
-                    'count' => $count                
-                ]
-            ];
-            echo json_encode($result);
+                    'count' => $count
+                ];
+            } else {
+                $responseCode = "04";
+                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"dịch vụ");
+            }
+        } else {
+            $responseCode = "98";
+            $message = sprintf(ResponseMessage::REQUEST_INVALID);
         }
+        $this->response($responseCode,$message,$data);
     }
 }

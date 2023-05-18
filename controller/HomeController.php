@@ -35,82 +35,66 @@ class HomeController extends BaseController
     public function logout()
     {
         $_SESSION['login'] = null;
-        //echo "haha";
-        $result = [
-            "statusCode" => "1",
-            "message" => "OK",
-            "data" => []
-        ];
-        echo json_encode($result);
+        $this->response('01', 'Success', null);
     }
 
     public function login_action()
     {
-        $requestLogin = $_POST;
-        //var_dump($requestLogin);
-        $adminModel = $this->get_model('admin');
-        $customerModel = $this->get_model('customer');
-        $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']));
-        // , htmlspecialchars($requestLogin['lgPassword'])
-        if ($admin == null) {
-            $customer = $customerModel->get_by_phone(htmlspecialchars($requestLogin['lgUsername']));
-            // , htmlspecialchars($requestLogin['lgPassword'])
-            if ($customer == null) {
-                $result = [
-                    "statusCode" => "0",
-                    "message" => "Tài khoản không tồn tại.",
-                    "data" => []
-                ];
-                echo json_encode($result);
-            } else {
-                if ($customer['ctm_password'] == $requestLogin['lgPassword']) {
-                    $_SESSION['login'] = true;
-                    $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
-                    $result = [
-                        "statusCode" => "1",
-                        "message" => "Đăng nhập thành công.",
-                        "data" => [
-                            "token" => $token,
-                            "typeAccount" => "customer",
-                        ]
-                    ];
-                    echo json_encode($result);
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestLogin = $_POST;
+            //var_dump($requestLogin);
+            if ($requestLogin['lgUsername'] != '' && $requestLogin['lgPassword'] != '') {
+                $adminModel = $this->get_model('admin');
+                $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']));
+                // , htmlspecialchars($requestLogin['lgPassword'])
+                if ($admin == null) {
+                    $customerModel = $this->get_model('customer');
+                    $customer = $customerModel->get_by_phone(htmlspecialchars($requestLogin['lgUsername']));
+                    // , htmlspecialchars($requestLogin['lgPassword'])
+                    if ($customer == null) {
+                        $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
+                        $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Người dùng");
+                    } else {
+                        if ($customer['ctm_password'] == $requestLogin['lgPassword']) {
+                            $_SESSION['login'] = true;
+                            $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
+                            $responseCode = ResponseCode::SUCCESS;
+                            $message = ResponseMessage::SUCCESS_MESSAGE;
+                            $data = [
+                                "token" => $token,
+                                "typeAccount" => "customer",
+                            ];
+                        } else {
+                            $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
+                            $message = sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
+                        }
+                    }
                 } else {
-                    $result = [
-                        "statusCode" => "0",
-                        "message" => "Sai mật khẩu.",
-                        "data" => [
-                            "token" => "",
-                            "typeAccount" => "customer",
-                        ]
-                    ];
-                    echo json_encode($result);
+                    if ($requestLogin['lgPassword'] == $admin['ad_password']) {
+                        $_SESSION['login'] = true;
+                        $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = ResponseMessage::SUCCESS_MESSAGE;
+                        $data = [
+                            "token" => $token,
+                            "typeAccount" => "admin",
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
+                        $message = sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
+                    }
                 }
+            } else {
+                $responseCode = ResponseCode::INPUT_EMPTY;
+                $message = sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "người dùng");
             }
         } else {
-            if ($requestLogin['lgPassword'] == $admin['ad_password']) {
-                $_SESSION['login'] = true;
-                $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
-                $result = [
-                    "statusCode" => "1",
-                    "message" => "Đăng nhập thành công.",
-                    "data" => [
-                        "token" => $token,
-                        "typeAccount" => "admin",
-                    ]
-                ];
-                echo json_encode($result);
-            } else {
-                $result = [
-                    "statusCode" => "0",
-                    "message" => "Sai mật khẩu.",
-                    "data" => [
-                        "token" => "",
-                        "typeAccount" => "admin",
-                    ]
-                ];
-                echo json_encode($result);
-            }
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
+        $this->response($responseCode, $message, $data);
     }
 }

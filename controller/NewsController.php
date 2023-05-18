@@ -13,6 +13,9 @@ class NewsController extends BaseController
 
     public function data_news()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $key = "";
             $newsModel = $this->get_model('news');
@@ -28,8 +31,8 @@ class NewsController extends BaseController
                 $key .= "and news_id = " . $_GET['idNews'];
             }
             $count = $newsModel->count_data($key);
-            $key .= " order by news_date_release DESC ";
             if ($count > 0) {
+                $key .= " order by news_date_release DESC ";
                 if (isset($_GET['limit']) and $_GET['limit'] != '') {
                     $limit = $_GET['limit'];
                     if ($limit > 0) {
@@ -37,7 +40,7 @@ class NewsController extends BaseController
                         if (isset($_GET['index']) and $_GET['index'] != '') {
                             $index = $_GET['index'];
                             if ($index > 1) {
-                                $offset = ($index-1) * $limit; 
+                                $offset = ($index - 1) * $limit;
                             }
                             if ($offset > 0) {
                                 $key .= " offset " . $offset;
@@ -45,19 +48,22 @@ class NewsController extends BaseController
                         }
                     }
                 }
-            }
-            //echo $key . " order by news_date_release DESC";
-            $news = $newsModel->get_data($key);
-            $result = [
-                "statusCode" => "1",
-                "message" => "OK",
-                "data" => [
+                $news = $newsModel->get_data($key);
+                $responseCode = "01";
+                $message = sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                $data = [
                     'news' => $news,
                     'count' => $count
-                ]
-            ];
-            echo json_encode($result);
+                ];
+            } else {
+                $responseCode = "04";
+                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+            }
+        } else {
+            $responseCode = "98";
+            $message = sprintf(ResponseMessage::REQUEST_INVALID);
         }
+        $this->response($responseCode, $message, $data);
     }
 
 
@@ -69,5 +75,4 @@ class NewsController extends BaseController
             );
         } else  $this->redirect('home', 'index');
     }
-
 }

@@ -1,6 +1,9 @@
 const limitFeedbackPage = 5;
 
+url = "?controller=feedback&action=feedback_page"
+
 function loadPaging(index, endPage) {
+    index = parseInt(index);
     page = "";
     page += "   <div class='col-lg-12'>"
     page += "     <nav aria-label='Page navigation'>"
@@ -41,22 +44,20 @@ function loadDataPage(page) {
             limit: limitFeedbackPage,
             index: page
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
-            console.log(response);
-            //console.log(page);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            //console.log(response);
+            if (response.responseCode == "01") {
                 $('#countFeedback').html(response.data.count + " đánh giá")
+                if (page > 1) {
+                    window.history.pushState(null, "", url + "&page=" + page);
+                } else window.history.pushState(null, "", url);
                 loadDataFeedback(response.data.feedback);
                 loadPaging(page, Math.ceil(response.data.count / limitFeedbackPage));
             } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     });
 }
@@ -85,11 +86,56 @@ function loadDataFeedback(data) {
 
 $(document).ready(function () {
 
-    if (sessionStorage.getItem('token') == null || sessionStorage.getItem('token') == '') $('#form-feedback').hide();
-
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+        let form = "";
+        form += "<form action='?controller=feedback&action=send_feedback' method='post' id='form-feedback'>"
+        form += "    <div class='alert ' role='alert' id='msg-send-feedback' style='display:none'></div>"
+        form += "    <div class='form-group'>"
+        form += "        <input type='text' class='form-control border-1' placeholder='Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn' name='fbContent'/>"
+        form += "   </div>"
+        form += "   <div class='form-check' style='display: inline;'>"
+        form += "       <input class='form-check-input' type='radio' name='rating' id='rating-1' value=1>"
+        form += "       <label class='form-check-label' for='rating-1'>"
+        form += "            1<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px;' alt=''> |"
+        form += "        </label>"
+        form += "    </div>"
+        form += "    <div class='form-check' style='display: inline;'>"
+        form += "        <input class='form-check-input' type='radio' name='rating' id='rating-2' value=2>"
+        form += "        <label class='form-check-label' for='rating-2'>"
+        form += "            2<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
+        form += "        </label>"
+        form += "    </div>"
+        form += "  <div class='form-check' style='display: inline;'>"
+        form += "     <input class='form-check-input' type='radio' name='rating' id='rating-3' value=3>"
+        form += "     <label class='form-check-label' for='rating-3'>"
+        form += "         3<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
+        form += "     </label>"
+        form += "  </div>"
+        form += "  <div class='form-check' style='display: inline;'>"
+        form += "      <input class='form-check-input' type='radio' name='rating' id='rating-4' value=4>"
+        form += "      <label class='form-check-label' for='rating-4'>"
+        form += "           4<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
+        form += "       </label>"
+        form += "   </div>"
+        form += "   <div class='form-check' style='display: inline;'>"
+        form += "       <input class='form-check-input' type='radio' name='rating' id='rating-5' value=5>"
+        form += "      <label class='form-check-label' for='rating-5'>"
+        form += "           5<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> "
+        form += "       </label>"
+        form += "   </div>"
+        form += "    <div style='margin-top: 10px; margin-bottom: 10px'>"
+        form += "        <input class='btn btn-lg btn-primary btn-block border-0' type='submit'>"
+        form += "    </div>"
+        form += "</form>";
+        $('#form').html(form);
+    }
     loadDataShop();
 
-    loadDataPage(1);
+    indexPage = new URLSearchParams(document.location.href).get('page');
+
+    indexPage = indexPage != null && indexPage != 1 ? indexPage : 1;
+
+    loadDataPage(indexPage);
 
     $('#form-feedback').submit(function (e) {
         if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {

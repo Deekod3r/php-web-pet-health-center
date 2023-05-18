@@ -15,7 +15,7 @@ class FeedbackModel extends BaseModel{
         return $result;
     }
     public function count_data($key){
-        return count($this->get_data($key));
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
     }    
     public function save_data($data){
         $value = "'".$data['content']."',".$data['rating'].",'".$data['time']."',".$data['ctmId'];

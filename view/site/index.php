@@ -197,28 +197,15 @@
     </div>
 
 
-    <!-- <div class="container-fluid bg-light p-0 py-5">
+    <div class="container-fluid bg-light p-0 py-5">
         <div class="container p-0 py-5" id="feedback">
             <div class="d-flex flex-column text-center mb-5">
                 <h4 class="text-secondary mb-3">Feedback</h4>
                 <h1 class="display-4 m-0">Đánh giá của <span class="text-primary">khách hàng</span></h1>
             </div>
-            <div class='owl-carousel testimonial-carousel' id="feedback1"> 
-                <div class="bg-white mx-3 p-4" style="height: 180px">
-                    <div class="d-flex align-items-end mb-3 mt-n4 ml-n4" style="height:100px">
-                        <img class="img-fluid" src="asset/img/customer.png" style="width: 80px; height: 80px;" alt="">
-                        <div class="ml-3">
-                            <h5 class="ctm-name">Ẩn danh</h5>
-                            <span style="font-size: 20px; vertical-align:bottom" class="rating"><img class="img-fluid" src="asset/img/star.png" style="width: 20px; height: 20px; display: inline" alt=""></span>
-                            <span style="font-size: 20px; vertical-align:bottom" class="un-rating"><img class="img-fluid" src="asset/img/non-star.png" style="width: 18px; height: 18px; display: inline" alt=""></span>
-                            <is style="display: block" class="fb-time">Time</is>
-                        </div>
-                    </div>
-                    <p class="m-0 fb-content"></p>
-                </div>
-            </div>
+            <div class='owl-carousel testimonial-carousel' id="feedback1"></div>
         </div>
-    </div> -->
+    </div>
     
     <?php include("layout/footer.php") ?>
 

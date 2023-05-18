@@ -16,25 +16,28 @@ class CustomerModel extends BaseModel{
     }
 
     public function get_by_phone($phone){
-        $query = "SELECT * FROM " . $this->table . " WHERE ctm_phone ='" . $phone ."'";
+        $response = null;
+        $conn = $this->get_connection();
         //echo $query;
-        $result = $this->get_connection()->query($query);
-        if($result->num_rows > 0) {
-            return $result->fetch_assoc();
-        } 
-        return null;
+        try {
+            $stm = $conn->prepare("SELECT * FROM  {$this->table} WHERE ctm_phone = ?");
+            $stm->bind_param('s', $phone);
+            if ($stm->execute() && !$stm->errno) {
+                $result = $stm->get_result();
+                if ($result->num_rows > 0) {
+                    $response = $result->fetch_assoc();
+                }
+            } else {
+                throw new mysqli_sql_exception("Statement error: " . $stm->error);
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo ("Error: " . $e->getMessage());
+        }
+        $stm->close();
+        $conn->close();
+        return $response;
     }
 
-    public function get_by_account($phone,$password){
-        $query = "SELECT * FROM " . $this->table . " WHERE ctm_phone ='" . $phone . "' and ctm_password = '" . $password ."'";
-        //echo $query;
-        $result = $this->get_connection()->query($query);
-        if($result->num_rows > 0) {
-            $data = $result->fetch_assoc();
-            return $data;
-        } 
-        return null;
-    }
 
     public function get_by_id($id){
         return  $this->find_by_id($id);

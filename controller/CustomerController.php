@@ -15,9 +15,12 @@ class CustomerController extends BaseController
 
     public function data_customer_info()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
-                $token = $_GET['token'];
+                $token = $_GET['token'] != null ? $_GET['token'] : '';;
                 $data = $this->verify_and_decode_token($token);
                 if (!$data) {
                     $this->redirect( 'home','index' );
@@ -35,7 +38,11 @@ class CustomerController extends BaseController
                     echo json_encode($result);
                 }
             } else $this->redirect( 'home','index' );
-        } else include('view/error/error-400.php');
+        }  else {
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
+        }
+        $this->response($responseCode,$message,$data);
     }
 
     public function register()

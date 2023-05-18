@@ -52,10 +52,8 @@ $(document).ready(function () {
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (response) {
-                    // response = JSON.stringify(response);
-                    // response = JSON.parse(response);
                     console.log(response);
-                    if (response.statusCode == "1") {
+                    if (response.responseCode == responseCode.success) {
                         sessionStorage.setItem("token", response.data.token);
                         if (response.data.typeAccount == "admin") {
                             window.location.href = '?controller=home&action=index_admin'
@@ -68,7 +66,7 @@ $(document).ready(function () {
                         }, 3000);
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function (error) {
                     $('#msg-login').html("Lỗi đăng nhập, vui lòng thử lại sau ít phút." + error);
                 }
             })

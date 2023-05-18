@@ -13,13 +13,16 @@ class FeedbackController extends BaseController
 
     public function data_feedback()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $limit = 0;
             $offset = 0;
             $feedbackModel = $this->get_model('feedback');
             $count = $feedbackModel->count_data("");
-            $key = " order by fb_time DESC ";
             if ($count > 0) {
+                $key = " order by fb_time DESC ";
                 if (isset($_GET['limit']) and $_GET['limit'] != '') {
                     $limit = $_GET['limit'];
                     if ($limit > 0) {
@@ -35,18 +38,22 @@ class FeedbackController extends BaseController
                         }
                     }
                 }
-            }
-            $feedback = $feedbackModel->get_data($key);
-            $result = [
-                "statusCode" => "1",
-                "message" => "OK",
-                "data" => [
-                    'feedback' => $feedback,
+                $feedbackData = $feedbackModel->get_data($key);
+                $responseCode = ResponseCode::SUCCESS;
+                $message = sprintf(ResponseMessage::SELECT_MESSAGE,"feedback","thành công.");
+                $data = [
+                    'feedback' => $feedbackData,
                     'count' => $count
-                ]
-            ];
-            echo json_encode($result);
-        } else $this->redirect('home', 'index');
+                ];
+            } else {
+                $responseCode = ResponseCode::DATA_EMPTY;
+                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"feedback");
+            }
+        } else {
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
+        }
+        $this->response($responseCode,$message,$data);
     }
 
     public function send_feedback()
