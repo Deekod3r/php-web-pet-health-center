@@ -3,6 +3,7 @@
 <?php $title = "Trang chủ"; ?>
 <?php include("layout/asset_header.php") ?>
 <!-- <script src="asset/js/index.js?v=<?php echo time() ?>" async></script> -->
+
 <body>
     <?php include("layout/header.php") ?>
 
@@ -196,7 +197,7 @@
     </div>
 
 
-    <div class="container-fluid bg-light p-0 py-5">
+    <!-- <div class="container-fluid bg-light p-0 py-5">
         <div class="container p-0 py-5" id="feedback">
             <div class="d-flex flex-column text-center mb-5">
                 <h4 class="text-secondary mb-3">Feedback</h4>
@@ -207,25 +208,25 @@
                     <div class="d-flex align-items-end mb-3 mt-n4 ml-n4" style="height:100px">
                         <img class="img-fluid" src="asset/img/customer.png" style="width: 80px; height: 80px;" alt="">
                         <div class="ml-3">
-                            <h5>Ẩn danh</h5>
-                            <span style="font-size: 20px; vertical-align:bottom"><img class="img-fluid" src="asset/img/star.png" style="width: 20px; height: 20px; display: inline" alt=""></span>
-                            <span style="font-size: 20px; vertical-align:bottom"><img class="img-fluid" src="asset/img/non-star.png" style="width: 18px; height: 18px; display: inline" alt=""></span>
-                            <is style="display: block"></is>
+                            <h5 class="ctm-name">Ẩn danh</h5>
+                            <span style="font-size: 20px; vertical-align:bottom" class="rating"><img class="img-fluid" src="asset/img/star.png" style="width: 20px; height: 20px; display: inline" alt=""></span>
+                            <span style="font-size: 20px; vertical-align:bottom" class="un-rating"><img class="img-fluid" src="asset/img/non-star.png" style="width: 18px; height: 18px; display: inline" alt=""></span>
+                            <is style="display: block" class="fb-time">Time</is>
                         </div>
                     </div>
-                    <p class="m-0"></p>
+                    <p class="m-0 fb-content"></p>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <?php include("layout/footer.php") ?>
 
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <script src="asset/js/index.js?v=<?php echo time() ?>" async></script>
-
     <?php include("layout/asset_footer.php") ?>
+    <script src="asset/js/index.js?v=<?php echo time() ?>"></script>
+
 </body>
 
 </html>

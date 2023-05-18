@@ -9,22 +9,22 @@ function loadPaging(index, endPage) {
     page += "     <nav aria-label='Page navigation'>"
     page += "   <ul class='pagination justify-content-center mb-4'>"
     page += "   <li class='page-item ' id='previous'>"
-    page += "       <a class='page-link'  aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>"
+    page += "       <a class='page-link'  style='cursor:pointer' aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>"
     page += "       <span aria-hidden='true'>&laquo; Previous</span>"
     page += "       </a>"
     page += "   </li>"
     if (index > 2) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     } else if (index > 1) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     }
-    page += "   <li class='page-item active'><a class='page-link'  onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
+    page += "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
     for (let i = index + 1; i <= endPage; i++) {
-        page += "    <li class='page-item'><a class='page-link'   onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
+        page += "    <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
     }
     page += "    <li class='page-item' id='next'>"
-    page += "        <a class='page-link'  aria-label='Next' onclick='loadDataPage(" + (index + 1) + ")'>"
+    page += "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" + (index + 1) + ")'>"
     page += "         <span aria-hidden='true'>Next &raquo;</span>"
     page += "        </a>"
     page += "     </li>"
