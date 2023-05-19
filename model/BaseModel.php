@@ -143,7 +143,15 @@ class BaseModel
     {
         $conn = $this->get_connection();
         try {
-            $stm = $conn->prepare("update $this->table set is_delete = true where $this->idTable = ?");
+            $strSet = 'set ';
+            foreach ($data as $key => $value) {
+                if (is_string($value)) {
+                    $strSet .= $key . "='" . $value . "',";
+                } else $strSet .= $key . "=" . $value .",";
+            }
+            //echo "update $this->table {$strSet} where $this->idTable = ?";
+            $strSet = rtrim($strSet,",");
+            $stm = $conn->prepare("update $this->table {$strSet} where $this->idTable = ?");
             $stm->bind_param('i', $id);
             if (!$stm->execute() || $stm->errno) {
                 throw new mysqli_sql_exception("Statement error: " . $stm->error);
@@ -153,10 +161,10 @@ class BaseModel
                 return true;
             }
         } catch (mysqli_sql_exception $e) {
-            echo ("Error: " . $e->getMessage());
-            $stm->close();
-            $conn->close();
-            return false;
+           echo ("Error: " . $e->getMessage());
+           $stm->close();
+           $conn->close();
+           return false;
         }
     }
 }

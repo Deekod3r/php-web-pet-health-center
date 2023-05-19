@@ -27,8 +27,10 @@
         </div>
         <div class="col-lg-12" id="page">
         </div>
-    </div>
 
+        <div id="pop-up-history">
+        </div>
+    </div>
 
     <?php include("layout/footer.php") ?>
 

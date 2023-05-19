@@ -110,7 +110,7 @@ class BaseController
         echo json_encode($result);
     }
 
-    function checkSpecialChars($input,$num,$lowChars,$upChars,$speChars,$length,$size) {
+    function checkChars($input,$num,$lowChars,$upChars,$speChars,$length,$size) {
         $check = true;
         $number = '/[0-9]/';
         $lowerChars = '/[a-z]/';

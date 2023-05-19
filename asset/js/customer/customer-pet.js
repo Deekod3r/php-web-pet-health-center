@@ -1,6 +1,8 @@
 //console.log("token="+sessionStorage.getItem('token')); 
 
 $(document).ready(function() {
+    loadDataShop();
+
     $.ajax({
         type: 'GET',
         url: '?controller=pet&action=data_customer_pet',
@@ -9,7 +11,7 @@ $(document).ready(function() {
         },
         dataType: 'json',
         success: function(response) {
-            //console.log(response);
+            console.log(response);
             if(response.responseCode == responseCode.success) {
                 var petData = "";
                 response.data.pet.forEach(element => {
@@ -23,9 +25,8 @@ $(document).ready(function() {
                     petData += "</tr>"
                 });
                 $('#body-table').html(petData);
-                loadDataShop();
             } else if (response.responseCode == responseCode.dataEmpty) {
-
+                $('.pet').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>");           
             } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {

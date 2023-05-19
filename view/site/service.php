@@ -56,7 +56,7 @@
         </div>
     </div>
     <!-- Services End -->
-    <!-- Pricing Plan Start -->
+    
     <div class="container py-5">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-secondary mb-3"></h4>
@@ -87,53 +87,16 @@
                 <button class="btn btn-lg btn-primary btn-block border-0" type="submit" >Tìm kiếm</button>
             </div>
         </form>
+
         <div class="row" id="data-service">
-            <!-- <div class="col-lg-4 mb-4">
-                <div class="card border-1">
-                    <div class="card-header position-relative border-0 p-0 mb-4">
-                        <img class="card-img-top" src="asset/img/orange.jpg" alt="" height=100px>
-                        <div class="position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100" style="top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5);">
-                            <h3 class="text-primary mb-3"></h3>
-                            <h1 class="display-5 text-white mb-0">
-                                <small class="align-top" style="font-size: 22px; line-height: 45px;"></small>CarePET<small class="align-bottom" style="font-size: 16px; line-height: 40px;"></small>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="card-body text-center p-0">
-                        <ul class="list-group list-group-flush mb-4">
-                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:70px"><i class="fa fa-check text-secondary mr-2"></i></li>
-                            <li class="list-group-item p-2" style="font-size: 20px; font-weight:bold; height:20px"><i class="fa fa-check text-secondary mr-2"></i>Giá:</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer border-0 p-0">
-                        <a href="?controller=appointment&action=appointment_page" class="btn btn-primary btn-block p-3" style="border-radius: 0; background-color: #65C178; border-color: #65C178">Đặt lịch</a>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div class="col-lg-12">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination justify-content-center mb-4">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo; Previous</span>
-                      </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">Next &raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-            </div> -->
         </div>
+
         <div class="row" id="page">
         </div>
     </div>
-    <!-- Pricing Plan End -->
+
+    <div id="pop-up-service">
+    </div>
 
     <?php include("layout/footer.php")?>
 

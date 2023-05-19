@@ -92,7 +92,15 @@ $(document).ready(function () {
 
     loadDataShop();
 
-    loadDataPage(1);
+    indexPage = new URLSearchParams(document.location.href).get('page');
 
-    console.log(sessionStorage.getItem('token'));
+    indexPage = indexPage != null && indexPage != 1 ? indexPage : 1;
+
+    loadDataPage(indexPage);
+
+    //console.log(sessionStorage.getItem('token'));
+
+    function popUp(){
+        
+    }
 })

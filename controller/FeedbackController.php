@@ -64,24 +64,24 @@ class FeedbackController extends BaseController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($this->check_login()) {
                 $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
-                $data = $this->verify_and_decode_token($token);
-                if (!$data) {
+                $dataToken = $this->verify_and_decode_token($token);
+                if (!$dataToken) {
                     $responseCode = ResponseCode::TOKEN_INVALID;
                     $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     if (isset($_POST['fbContent']) && $_POST['fbContent'] != '' && isset($_POST['rating']) && $_POST['rating'] != '') {
-                        $id = json_decode($data)->{'id'};
+                        $id = json_decode($dataToken)->{'id'};
                         $customer = $this->get_model('customer')->get_by_id($id);
                         if ($customer != null) {
                             if ($customer['ctm_can_feedback']) {
-                                $data = [
+                                $dataFeedback = [
                                     'content' => $_POST['fbContent'],
                                     'rating' => $_POST['rating'],
                                     'time' => date('Y-m-d H:i:s'),
                                     'ctmId' => $id,
                                 ];
                                 $feedbackModel = $this->get_model('feedback');
-                                if ($feedbackModel->save_data($data)) {
+                                if ($feedbackModel->save_data($dataFeedback)) {
                                     $responseCode = ResponseCode::SUCCESS;
                                     $message = sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thành công");
                                 } else {

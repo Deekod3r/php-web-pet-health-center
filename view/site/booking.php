@@ -39,7 +39,7 @@
                                 <div class="mb-3">
                                     <button class="btn btn-dark btn-block border-0 py-3" type="submit">Đặt lịch</button>
                                 </div>
-                                <div class="alert mb-0" id="msg-booking" role="alertdialog" style="display:none">
+                                <div class="alert mb-0 " id="msg-booking" role="alertdialog" style="display:none">
                                 </div>
                             </form>
                         <?php } else { ?>

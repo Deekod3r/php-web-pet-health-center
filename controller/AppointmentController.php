@@ -37,14 +37,14 @@ class AppointmentController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->check_login()) {
                 $token = $_POST['token'] != null ? $_POST['token'] : '';
-                $data = $this->verify_and_decode_token($token);
-                if (!$data) {
+                $dataToken = $this->verify_and_decode_token($token);
+                if (!$dataToken) {
                     $responseCode = ResponseCode::ACCESS_DENIED;
                     $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     if ($_POST['apmDate'] != null && $_POST['apmDate'] != '' && $_POST['categoryService'] != null && $_POST['categoryService'] != '' && $_POST['apmTime'] != null && $_POST['apmTime'] != '') {
-                        $id = json_decode($data)->{'id'};
-                        $role = json_decode($data)->{'role'};
+                        $id = json_decode($dataToken)->{'id'};
+                        $role = json_decode($dataToken)->{'role'};
                         $customerModel = $this->get_model('customer');
                         if ($customerModel->get_by_id($id) != null && $role == -1) {
                             $appointmentModel = $this->get_model('appointment');
@@ -52,18 +52,18 @@ class AppointmentController extends BaseController
                             if ($countCurrentApm <= 2) {
                                 $pos = strripos($_POST['apmTime'], " ");
                                 $date = date("Y/m/d", strtotime($_POST['apmDate']));
-                                $time = substr($_POST['apmTime'], 0, $pos);
+                                $time = substr($_POST['apmTime'], 0, $pos) . ":00";
                                 $dateTimeToday = date("Y/m/d H:i:s");
                                 $dateTimeBooking = $date." ".$time;
                                 if (strtotime($dateTimeBooking) > strtotime($dateTimeToday)) {
-                                    $data = [
+                                    $dataBooking = [
                                         'ctmId' => $id,
                                         'date' => $date,
                                         'time' => $time,
                                         'categoryService' => $_POST['categoryService'],
                                         'note' => $_POST['apmNote'],
                                     ];
-                                    if ($appointmentModel->save_data($data)) {
+                                    if ($appointmentModel->save_data($dataBooking)) {
                                         $responseCode = ResponseCode::SUCCESS;
                                         $message = sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thành công");
                                     } else {

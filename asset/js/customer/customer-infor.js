@@ -15,7 +15,7 @@ $(document).ready(function() {
                 $('#ctm-name').append(response.data.customer.ctm_name);
                 $('#ctm-phone').append(response.data.customer.ctm_phone);
                 $('#ctm-address').append(response.data.customer.ctm_address);
-                $('#ctm-email').append(response.data.customer.ctm_email);
+                //$('#ctm-email').append(response.data.customer.ctm_email);
                 loadDataShop();
             } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },

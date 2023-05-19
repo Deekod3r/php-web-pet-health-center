@@ -15,17 +15,20 @@ class BillController extends BaseController
 
     public function data_customer_history()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $token = $_GET['token'];
-                $data = $this->verify_and_decode_token($token);
-                if (!$data) {
+                $dataToken = $this->verify_and_decode_token($token);
+                if (!$dataToken) {
                     $responseCode = ResponseCode::TOKEN_INVALID;
                     $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     $limit = 0;
                     $offset = 0;
-                    $id = json_decode($data)->{'id'};
+                    $id = json_decode($dataToken)->{'id'};
                     $billModel = $this->get_model('bill');
                     $count = $billModel->count_data_by_customer($id);
                     if ($count > 0) {

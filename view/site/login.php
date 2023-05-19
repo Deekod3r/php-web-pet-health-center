@@ -62,11 +62,11 @@
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspHọ và tên</label>
             <i class="uil uil-user"></i>
           </div>
-          <div class="input-field">
-            <input type="text" placeholder=" " class="form-input " name="rgEmail" id="rg-email">
+          <!-- <div class="input-field">
+            <input type="email" placeholder=" " class="form-input " name="rgEmail" id="rg-email">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspEmail</label>
             <i class="uil uil-envelope icon"></i>
-          </div>
+          </div> -->
           <div class="input-field">
             <input type="text" placeholder=" " class="form-input " name="rgPhone" id="rg-phone">
             <label class="form-active" for="" style="font-size:15px; color: #ED6436;">&nbspSố điện thoại</label>

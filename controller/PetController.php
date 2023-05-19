@@ -20,14 +20,14 @@ class PetController extends BaseController
         $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
-                $token = $_GET['token'];
-                $data = $this->verify_and_decode_token($token);
-                if (!$data) {
+                $token = isset($_GET['token']) && $_GET['token'] != null ? $_GET['token'] : '';
+                $dataToken = $this->verify_and_decode_token($token);
+                if (!$dataToken) {
                     $responseCode = ResponseCode::TOKEN_INVALID;
                     $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
-                    $id = json_decode($data)->{'id'};
-                    $role = json_decode($data)->{'role'}; 
+                    $id = json_decode($dataToken)->{'id'};
+                    $role = json_decode($dataToken)->{'role'}; 
                     $petModel = $this->get_model('pet');
                     $pet = null;
                     if ($role == -1) {

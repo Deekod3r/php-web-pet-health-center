@@ -24,7 +24,7 @@ $(document).ready(function () {
     }
 
     $('#form-booking').submit(function (e) {
-        if ($('#apm-date').val() != '' && $('#apm-time').val() != '' && $('#apm-note').val() != '' && $('#category-service').val() != '') {
+        if ($('#apm-date').val() != '' && $('#apm-time').val() != ''  && $('#category-service').val() != '') {
             $.ajax({
                 type: 'POST',
                 url: '?controller=appointment&action=booking',
@@ -44,16 +44,18 @@ $(document).ready(function () {
                             $('#apm-note').val(''),
                             $('#category-service').val('')
                         $('#msg-booking').html(response.message);
-                        $('#msg-booking').addClass(' alert-success');
+                        $('#msg-booking').addClass('alert-success');
                         $('#msg-booking').show();
                         window.setTimeout(function () {
+                            $('#msg-booking').removeClass('alert-success');
                             $('#msg-booking').hide()
                         }, 3000);
-                    } else if (response.responseCode == responseCode.fail) {
+                    } else if (response.responseCode == responseCode.fail || response.responseCode == responseCode.inputInvalidType) {
                         $('#msg-booking').html(response.message);
-                        $('#msg-booking').addClass(' alert-danger');
+                        $('#msg-booking').addClass('alert-danger');
                         $('#msg-booking').show();
                         window.setTimeout(function () {
+                            $('#msg-booking').removeClass('alert-danger');
                             $('#msg-booking').hide()
                         }, 3000);
                     } else alert(response.responseCode + ": " + response.message + " Vui lòng thử lại sau ít phút.");
@@ -64,9 +66,10 @@ $(document).ready(function () {
             })
         } else {
             $('#msg-booking').html('Vui lòng nhập đầy đủ thông tin.');
-            $('#msg-booking').addClass(' alert-danger');
+            $('#msg-booking').addClass('alert-danger');
             $('#msg-booking').show();
             window.setTimeout(function () {
+                $('#msg-booking').removeClass('alert-danger');
                 $('#msg-booking').hide()
             }, 3000);
         }
