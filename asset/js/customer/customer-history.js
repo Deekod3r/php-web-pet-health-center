@@ -1,5 +1,7 @@
 const limitBillPage = 1;
 
+url = "?controller=bill&action=customer_history";
+
 function loadPaging(index, endPage) {
     page = "";
     page += "   <div class='col-lg-12'>"
@@ -42,21 +44,29 @@ function loadDataPage(page) {
             limit: limitBillPage,
             index: page
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            //console.log(page);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if (response.statusCode == "1") {
+            if (response.responseCode == responseCode.success) {
+                if (page > 1) {
+                    window.history.pushState(null, "", url + "&page=" + page);
+                } else window.history.pushState(null, "", url);
                 loadDataHistory(response.data.bill);
                 loadPaging(page, Math.ceil(response.data.count / limitBillPage));
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode == responseCode.dataEmpty) {
+                $('#page').html("");
+                $('.history').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>");           
+            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function (xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert(
+                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
         }
     });
 }
@@ -85,39 +95,4 @@ $(document).ready(function () {
     loadDataPage(1);
 
     console.log(sessionStorage.getItem('token'));
-
-    // $.ajax({
-    //     type: 'GET',
-    //     url: '?controller=bill&action=data_customer_history',
-    //     data: {
-    //         token: sessionStorage.getItem('token')
-    //     },
-    //     //cache: false,
-    //     //contentType: "application/json; charset=utf-8",
-    //     dataType: 'json',
-    //     success: function (response) {
-    //         console.log(response);
-    //         // response = JSON.stringify(response);
-    //         // response = JSON.parse(response);
-    //         if (response.statusCode == "1") {
-    //             var billData = "";
-    //             response.data.bill.forEach(element => {
-    //                 discount = element.dc_id == null ? 'Không' : element.dc_id;
-    //                 billData += "<tr class=''>"
-    //                 billData += "<td scope='row' class=''>" + element.bill_id + "</td>"
-    //                 billData += "<td>" + element.bill_date_release + "</td>"
-    //                 billData += "<td>" + discount + "</td>"
-    //                 billData += "<td>" + element.value_temp + " VND</td>"
-    //                 billData += "<td>" + element.value_reduced + " VND</td>"
-    //                 billData += "<td>" + element.total_value + " VND</td>"
-    //                 billData += "<td><a style='font-weight:600' href='" + element.bill_id + "'>Xem chi tiết</a></td>"
-    //                 billData += "</tr>"
-    //             });
-    //             $('#body-table').html(billData);
-    //         } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
-    //     },
-    //     error: function (xhr, status, error) {
-    //         alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
-    //     }
-    // })
 })

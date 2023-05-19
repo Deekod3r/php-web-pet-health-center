@@ -11,9 +11,24 @@ class AppointmentController extends BaseController
         } else {
             include 'view/error/error-400.php';
         }
-
     }
 
+    public function customer_current_apm()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_login()) {
+                $this->render_view(
+                    'customer_current_apm'
+                );
+            } else {
+                $this->redirect('home', 'index');
+            }
+        } else {
+            include 'view/error/error-400.php';
+        }
+
+    }
+    
     public function booking()
     {
         $responseCode = ResponseCode::FAIL;
@@ -31,7 +46,7 @@ class AppointmentController extends BaseController
                         $id = json_decode($data)->{'id'};
                         $role = json_decode($data)->{'role'};
                         $customerModel = $this->get_model('customer');
-                        if ($customerModel->get_by_id($id) != null) {
+                        if ($customerModel->get_by_id($id) != null && $role == -1) {
                             $appointmentModel = $this->get_model('appointment');
                             $countCurrentApm = count($appointmentModel->get_by_customer($id, " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")"));
                             if ($countCurrentApm <= 2) {
@@ -83,90 +98,78 @@ class AppointmentController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function customer_current_apm()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if ($this->check_login()) {
-                $this->render_view(
-                    'customer_current_apm'
-                );
-            } else {
-                $this->redirect('home', 'index');
-            }
-
-        } else {
-            include 'view/error/error-400.php';
-        }
-
-    }
 
     public function data_customer_current_apm()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $token = $_GET['token'] != null ? $_GET['token'] : '';
                 $data = $this->verify_and_decode_token($token);
                 if (!$data) {
-                    $this->redirect('home', 'index');
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     $id = json_decode($data)->{'id'};
                     $appointmentModel = $this->get_model('appointment');
                     $appointment = $appointmentModel->get_by_customer($id, " and ( apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . " ," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")) ORDER BY apm_date,apm_time");
-                    $result = [
-                        "statusCode" => "1",
-                        "message" => "OK",
-                        "data" => [
-                            'appointment' => $appointment,
-                        ],
-                    ];
-                    echo json_encode($result);
+                    if ($appointment != null) {
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = sprintf(ResponseMessage::SELECT_MESSAGE,'lịch đang hẹn','thành công');
+                        $data = [
+                            'appointment' => $appointment
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::DATA_EMPTY;
+                        $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,'lịch đang hẹn');
+                    }
                 }
             } else {
-                $this->redirect('home', 'index');
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
             }
-
         } else {
-            include 'view/error/error-400.php';
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = ResponseMessage::REQUEST_INVALID_MESSAGE;
         }
-
+        $this->response($responseCode, $message, $data);
     }
 
     public function cancel_appointment()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->check_login()) {
                 if (isset($_POST['idApm']) && $_POST['idApm'] != '' && isset($_POST['token']) && $_POST['token'] != '') {
                     $token = $_POST['token'] != null ? $_POST['token'] : '';
                     $data = $this->verify_and_decode_token($token);
                     if (!$data) {
-                        $this->redirect('home', 'index');
+                        $responseCode = ResponseCode::ACCESS_DENIED;
+                        $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                     } else {
                         $idApm = $_POST['idApm'];
                         $idCtm = json_decode($data)->{'id'};
                         $appointmentModel = $this->get_model('appointment');
                         if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
-                            $result = [
-                                "responseCode" => "01",
-                                "message" => "Huỷ lịch hẹn thành công. ",
-                                "data" => [],
-                            ];
+                            $responseCode = ResponseCode::SUCCESS;
+                            $message = sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thành công');
                         } else {
-                            $result = [
-                                "responseCode" => "00",
-                                "message" => "Huỷ lịch hẹn thất bại. ",
-                                "data" => [],
-                            ];
+                            $message = sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thất bại');
                         }
-                        echo json_encode($result);
                     }
                 }
             } else {
-                $this->redirect('home', 'index');
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
             }
-
         } else {
-            include 'view/error/error-400.php';
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = ResponseMessage::REQUEST_INVALID_MESSAGE;
         }
-
+        $this->response($responseCode, $message, $data);
     }
 }

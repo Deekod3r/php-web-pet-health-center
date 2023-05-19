@@ -7,14 +7,10 @@ $(document).ready(function() {
         data: {
             token: sessionStorage.getItem('token')
         },
-        //cache: false,
-        //contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function(response) {
-            console.log(response);
-            // response = JSON.stringify(response);
-            // response = JSON.parse(response);
-            if(response.statusCode == "1"){
+            //console.log(response);
+            if(response.responseCode == responseCode.success) {
                 var petData = "";
                 response.data.pet.forEach(element => {
                     petData += "<tr class='color-text'>"
@@ -28,10 +24,19 @@ $(document).ready(function() {
                 });
                 $('#body-table').html(petData);
                 loadDataShop();
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode == responseCode.dataEmpty) {
+
+            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function(xhr, status, error) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút.");
+        error: function (xhr) {
+            alert(
+                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
         }
     })
 })

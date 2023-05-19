@@ -11,6 +11,15 @@ class NewsController extends BaseController
         }
     }
 
+    public function detail_news()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $this->render_view(
+                'single'
+            );
+        } else  $this->redirect('home', 'index');
+    }
+    
     public function data_news()
     {
         $responseCode = ResponseCode::FAIL;
@@ -61,18 +70,10 @@ class NewsController extends BaseController
             }
         } else {
             $responseCode = "98";
-            $message = sprintf(ResponseMessage::REQUEST_INVALID);
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode, $message, $data);
     }
 
 
-    public function detail_news()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            $this->render_view(
-                'single'
-            );
-        } else  $this->redirect('home', 'index');
-    }
 }

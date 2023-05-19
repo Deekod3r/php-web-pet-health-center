@@ -7,6 +7,7 @@ enum Enum {
     public const GENDER_OTHER = 2;
 
     // ROLE ADMIN
+    public const ROLE_CUSTOMER = -1;
     public const ROLE_MANAGER = 1;
     public const ROLE_NEWS = 2;
     public const ROLE_SALE = 3;

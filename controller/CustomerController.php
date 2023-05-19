@@ -20,25 +20,38 @@ class CustomerController extends BaseController
         $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
-                $token = $_GET['token'] != null ? $_GET['token'] : '';;
+                $token = $_GET['token'] != null ? $_GET['token'] : '';
                 $data = $this->verify_and_decode_token($token);
                 if (!$data) {
-                    $this->redirect( 'home','index' );
+                    $responseCode = ResponseCode::TOKEN_INVALID;
+                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
-                    $id = json_decode($data)->{'id'};                   
+                    $id = json_decode($data)->{'id'}; 
+                    $role = json_decode($data)->{'role'};                  
                     $customerModel = $this->get_model('customer');
-                    $customer = $customerModel->get_by_id($id);
-                    $result = [
-                        "statusCode" => "1",
-                        "message" => "OK",
-                        "data" => [
-                            'customer' => $customer
-                        ]
-                    ];
-                    echo json_encode($result);
+                    $customer = null;
+                    if ($role == -1) {
+                        $customer = $customerModel->get_by_id($id);
+                        if ($customer != null) {
+                            $responseCode = ResponseCode::SUCCESS;
+                            $message = sprintf(ResponseMessage::SELECT_MESSAGE,'người dùng','thành công');
+                            $data = [
+                                'customer' => $customer
+                            ];
+                        } else {
+                            $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                            $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE,'người dùng');
+                        }
+                    } else {
+                        $responseCode = ResponseCode::ACCESS_DENIED;
+                        $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                    }
                 }
-            } else $this->redirect( 'home','index' );
-        }  else {
+            } else {
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+            }
+        } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
             $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
         }

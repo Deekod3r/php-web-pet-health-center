@@ -10,7 +10,7 @@
         <h3 class="text-primary mb-3">Lịch đang hẹn</h3>
         <div class="alert" role="alert" style="display: none" id="msg-cancel-appointment">
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive current">
             <table class="table table-striped table-hover table-borderless table-success align-middle">
                 <thead class="">
                     <tr class="color-text">

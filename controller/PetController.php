@@ -15,26 +15,46 @@ class PetController extends BaseController
 
     public function data_customer_pet()
     {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $token = $_GET['token'];
                 $data = $this->verify_and_decode_token($token);
                 if (!$data) {
-                    $this->redirect('home', 'index');
+                    $responseCode = ResponseCode::TOKEN_INVALID;
+                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     $id = json_decode($data)->{'id'};
+                    $role = json_decode($data)->{'role'}; 
                     $petModel = $this->get_model('pet');
-                    $pet = $petModel->get_by_customer($id);
-                    $result = [
-                        "statusCode" => "1",
-                        "message" => "OK",
-                        "data" => [
-                            'pet' => $pet
-                        ]
-                    ];
-                    echo json_encode($result);
+                    $pet = null;
+                    if ($role == -1) {
+                        $pet = $petModel->get_by_customer($id);
+                        if ($pet != null) {
+                            $responseCode = ResponseCode::SUCCESS;
+                            $message = sprintf(ResponseMessage::SELECT_MESSAGE,'thú cưng','thành công');
+                            $data = [
+                                'pet' => $pet
+                            ];
+                        } else {
+                            $responseCode = ResponseCode::DATA_EMPTY;
+                            $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,'thú cưng');
+                        }
+                    } else {
+                        $responseCode = ResponseCode::ACCESS_DENIED;
+                        $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                    }
                 }
-            } else $this->redirect( 'home','index' );
-        } else include('view/error/error-400.php');
+            } else {
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+            }
+        } else {
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
+        }
+        $this->response($responseCode,$message,$data);
     }
 }

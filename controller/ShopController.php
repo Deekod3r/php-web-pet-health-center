@@ -36,7 +36,7 @@ class ShopController extends BaseController
             }
         } else {
             $responseCode = "98";
-            $message = sprintf(ResponseMessage::REQUEST_INVALID);
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode,$message,$data);
     }

@@ -8,7 +8,7 @@
 
     <div class="container py-5 main" style="margin-bottom:0">
         <h3 class="text-primary mb-3">Lịch sử sử dụng dịch vụ</h3>
-        <div class="table-responsive">
+        <div class="table-responsive history">
             <table class="table table-striped table-hover table-borderless table-success align-middle">
                 <thead class="">
                     <tr class="color-text">
