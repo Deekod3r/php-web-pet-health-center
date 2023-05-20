@@ -68,7 +68,7 @@ class CustomerController extends BaseController
             if (isset($_POST['rgName']) && $_POST['rgName'] != '' && isset($_POST['rgPhone']) && $_POST['rgPhone'] != '' && isset($_POST['rgAddress']) && $_POST['rgAddress'] != '' && isset($_POST['rgPassword']) && $_POST['rgPassword'] != '' && isset($_POST['rgGender']) && $_POST['rgGender'] != '') {
                 $customerInfo = $_POST;
                 if (strlen($customerInfo['rgName']) >= 2) {
-                    if (strlen($customerInfo['rgPhone']) >= 10 && strlen($customerInfo['rgPhone']) <= 13 && $this->checkChars($customerInfo['rgPhone'], true, false, false, false, false, false, 0)) {
+                    if (strlen($customerInfo['rgPhone']) >= 10 && strlen($customerInfo['rgPhone']) <= 13 && $this->checkChars($customerInfo['rgPhone'], true, false, false, false, false, 0)) {
                         if ($this->checkChars($customerInfo['rgPassword'], true, true, true, true, true, 8)) {
                             $cus0 = $customerModel->get_by_phone($customerInfo['rgPhone'], 0);
                             $cus1 = $customerModel->get_by_phone($customerInfo['rgPhone'], 1);
