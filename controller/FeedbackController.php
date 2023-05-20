@@ -88,7 +88,7 @@ class FeedbackController extends BaseController
                                     $message = sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thất bại");
                                 }
                             } else {
-                                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                $message = "Hãy sử dụng dịch vụ của CarePET và quay lại đánh giá sau";
                             }
                         } else {
                             $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;

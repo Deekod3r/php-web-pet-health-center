@@ -62,7 +62,7 @@ class BaseModel
         $response[] = null;
         $conn = $this->get_connection();
         try {
-            $stm = $conn->prepare("SELECT * FROM  {$this->table} WHERE {$this->idTable} = ? and is_delete = 0");
+            $stm = $conn->prepare("SELECT * FROM  {$this->viewJoin} WHERE {$this->idTable} = ?");
             $stm->bind_param('i', $id);
             if ($stm->execute() && !$stm->errno) {
                 $result = $stm->get_result();

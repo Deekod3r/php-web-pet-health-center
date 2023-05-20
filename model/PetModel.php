@@ -30,7 +30,7 @@ class PetModel extends BaseModel
         $response = null;
         $conn = $this->get_connection();
         try {
-            $stm = $conn->prepare("SELECT * FROM {$this->table} where is_delete = 0 and ctm_id = ?");
+            $stm = $conn->prepare("SELECT * FROM {$this->viewJoin} where ctm_id = ?");
             $stm->bind_param('i', $customer);
             if ($stm->execute() && !$stm->errno) {
                 $result = $stm->get_result();

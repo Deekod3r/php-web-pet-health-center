@@ -12,7 +12,7 @@ function loadDataCategoryNews(data) {
 
 function loadDataNews(data) {
     $('.news-title').append(data.news_title);
-    $('.category-news').append(data.cn_id);
+    $('.category-news').append(data.cn_name);
     $('.news-content').append(data.news_content);
     $('.news-date-release').append(data.news_date_release);
 }
