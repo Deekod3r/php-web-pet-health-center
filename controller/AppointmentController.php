@@ -53,9 +53,10 @@ class AppointmentController extends BaseController
                                 $pos = strripos($_POST['apmTime'], " ");
                                 $date = date("Y/m/d", strtotime($_POST['apmDate']));
                                 $time = substr($_POST['apmTime'], 0, $pos) . ":00";
-                                $dateTimeToday = date("Y/m/d H:i:s");
+                                $dt = new DateTime("now", new DateTimeZone('Asia/Saigon'));
+                                $dateTimeToday = $dt->setTimestamp(time())->format('Y/m/d H:i:s');
                                 $dateTimeBooking = $date." ".$time;
-                                if (strtotime($dateTimeBooking) > strtotime($dateTimeToday)) {
+                                if (strtotime($dateTimeBooking) - 7200 > strtotime($dateTimeToday)) {
                                     $dataBooking = [
                                         'ctmId' => $id,
                                         'date' => $date,
@@ -72,7 +73,7 @@ class AppointmentController extends BaseController
                                     }
                                 } else {
                                     $responseCode = ResponseCode::INPUT_INVALID_TYPE;
-                                    $message = sprintf(ResponseMessage::INPUT_INVALID_TYPE_MESSAGE,"thời gian");
+                                    $message = "Lịch hẹn cần đặt tối thiểu trước 2 tiếng.";
                                 }
                             } else {
                                 $responseCode = ResponseCode::FAIL;
