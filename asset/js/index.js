@@ -47,10 +47,11 @@ function loadDataPage() {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 loadDataFeedback(response.data.feedback);
-            } else if (response.responseCode != responseCode.dataEmpty) alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode != responseCode.dataEmpty) alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+
         },
-        error: function(xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 }

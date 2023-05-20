@@ -51,7 +51,7 @@ class HomeController extends BaseController
     public function login_action()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $requestLogin = $_POST;
@@ -66,20 +66,20 @@ class HomeController extends BaseController
                     // , htmlspecialchars($requestLogin['lgPassword'])
                     if ($customer == null) {
                         $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
-                        $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Người dùng");
+                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Người dùng");
                     } else {
                         if ($customer['ctm_password'] == md5($requestLogin['lgPassword'])) {
                             $_SESSION['login'] = true;
                             $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
                             $responseCode = ResponseCode::SUCCESS;
-                            $message = ResponseMessage::SUCCESS_MESSAGE;
+                            $message = "SERV: " . ResponseMessage::SUCCESS_MESSAGE;
                             $data = [
                                 "token" => $token,
                                 "typeAccount" => "customer",
                             ];
                         } else {
                             $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
-                            $message = sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
+                            $message = "SERV: " . sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
                         }
                     }
                 } else {
@@ -87,23 +87,23 @@ class HomeController extends BaseController
                         $_SESSION['login'] = true;
                         $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
                         $responseCode = ResponseCode::SUCCESS;
-                        $message = ResponseMessage::SUCCESS_MESSAGE;
+                        $message = "SERV: " . ResponseMessage::SUCCESS_MESSAGE;
                         $data = [
                             "token" => $token,
                             "typeAccount" => "admin",
                         ];
                     } else {
                         $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
-                        $message = sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
+                        $message = "SERV: " . sprintf(ResponseMessage::DATA_DOES_NOT_MATCH_MESSAGE, "mật khẩu");
                     }
                 }
             } else {
                 $responseCode = ResponseCode::INPUT_EMPTY;
-                $message = sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "người dùng");
+                $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "người dùng");
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode, $message, $data);
     }
@@ -146,4 +146,5 @@ class HomeController extends BaseController
     //         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
     //     }
     // }
+    
 }

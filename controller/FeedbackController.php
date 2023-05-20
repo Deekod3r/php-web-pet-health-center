@@ -14,7 +14,7 @@ class FeedbackController extends BaseController
     public function data_feedback()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $limit = 0;
@@ -40,18 +40,18 @@ class FeedbackController extends BaseController
                 }
                 $feedbackData = $feedbackModel->get_data($key);
                 $responseCode = ResponseCode::SUCCESS;
-                $message = sprintf(ResponseMessage::SELECT_MESSAGE, "feedback", "thành công.");
+                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "feedback", "thành công.");
                 $data = [
                     'feedback' => $feedbackData,
                     'count' => $count
                 ];
             } else {
                 $responseCode = ResponseCode::DATA_EMPTY;
-                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "feedback");
+                $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "feedback");
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode, $message, $data);
     }
@@ -59,7 +59,7 @@ class FeedbackController extends BaseController
     public function send_feedback()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($this->check_login()) {
@@ -67,7 +67,7 @@ class FeedbackController extends BaseController
                 $dataToken = $this->verify_and_decode_token($token);
                 if (!$dataToken) {
                     $responseCode = ResponseCode::TOKEN_INVALID;
-                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     if (isset($_POST['fbContent']) && $_POST['fbContent'] != '' && isset($_POST['rating']) && $_POST['rating'] != '') {
                         $id = json_decode($dataToken)->{'id'};
@@ -83,29 +83,29 @@ class FeedbackController extends BaseController
                                 $feedbackModel = $this->get_model('feedback');
                                 if ($feedbackModel->save_data($dataFeedback)) {
                                     $responseCode = ResponseCode::SUCCESS;
-                                    $message = sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thành công");
+                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thành công");
                                 } else {
-                                    $message = sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thất bại");
+                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "đánh giá", "thất bại");
                                 }
                             } else {
-                                $message = "Hãy sử dụng dịch vụ của CarePET và quay lại đánh giá sau";
+                                $message = "SERV: " . "Hãy sử dụng dịch vụ của CarePET và quay lại đánh giá sau";
                             }
                         } else {
                             $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
-                            $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'người dùng');
+                            $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'người dùng');
                         }
                     } else {
                         $responseCode = ResponseCode::INPUT_EMPTY;
-                        $message = sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "đánh giá");
+                        $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "đánh giá");
                     }
                 }
             } else {
                 $responseCode = ResponseCode::ACCESS_DENIED;
-                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode, $message, $data);
     }

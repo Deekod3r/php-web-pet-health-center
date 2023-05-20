@@ -15,10 +15,10 @@ $(document).ready(function () {
                         categoryServiceData += "<option value='" + element.cs_id + "'>" + element.cs_name + "</option>"
                     });
                     $('#category-service').append(categoryServiceData);
-                } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+                } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
             },
-            error: function(xhr) {
-                alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            error: function (xhr) {
+                alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
             }
         });
     }
@@ -39,18 +39,15 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
                     if (response.responseCode == responseCode.success) {
-                        $('#apm-date').val(''),
-                            $('#apm-time').val(''),
-                            $('#apm-note').val(''),
-                            $('#category-service').val('')
-                        $('#msg-booking').html(response.message);
+                        $('#form-booking')[0].reset();
+                        $('#msg-booking').html("Đặt lịch thành công.");
                         $('#msg-booking').addClass('alert-success');
                         $('#msg-booking').show();
                         window.setTimeout(function () {
                             $('#msg-booking').removeClass('alert-success');
                             $('#msg-booking').hide()
                         }, 3000);
-                    } else if (response.responseCode == responseCode.fail || response.responseCode == responseCode.inputInvalidType) {
+                    } else if (response.responseCode == responseCode.dataEmpty || response.responseCode == responseCode.inputInvalidType) {
                         $('#msg-booking').html(response.message);
                         $('#msg-booking').addClass('alert-danger');
                         $('#msg-booking').show();
@@ -58,14 +55,14 @@ $(document).ready(function () {
                             $('#msg-booking').removeClass('alert-danger');
                             $('#msg-booking').hide()
                         }, 3000);
-                    } else alert(response.responseCode + ": " + response.message + " Vui lòng thử lại sau ít phút.");
+                    } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
                 },
-                error: function(xhr) {
-                    alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+                error: function (xhr) {
+                    alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
                 }
             })
         } else {
-            $('#msg-booking').html('Vui lòng nhập đầy đủ thông tin.');
+            $('#msg-booking').html('CLI: Vui lòng nhập đầy đủ thông tin.');
             $('#msg-booking').addClass('alert-danger');
             $('#msg-booking').show();
             window.setTimeout(function () {

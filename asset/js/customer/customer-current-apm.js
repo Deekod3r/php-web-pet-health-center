@@ -58,15 +58,8 @@ function loadDataCurrentApm() {
                 );
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
-        },
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        }
     });
 }
 
@@ -84,14 +77,14 @@ function cancelAppointment(id) {
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-cancel-appointment").html(response.message);
+                    $("#msg-cancel-appointment").html("Huỷ lịch hẹn thành công.");
                     $("#msg-cancel-appointment").addClass(" alert-success");
                     $("#msg-cancel-appointment").show();
                     window.setTimeout(function () {
                         $("#msg-cancel-appointment").hide();
                     }, 3000);
                     loadDataCurrentApm();
-                } else if (response.statusCode == "00") {
+                } else if (response.responseCode == responseCode.fail) {
                     $("#msg-cancel-appointment").html(response.message);
                     $("#msg-cancel-appointment").addClass(" alert-danger");
                     $("#msg-cancel-appointment").show();
@@ -99,24 +92,11 @@ function cancelAppointment(id) {
                         $("#msg-cancel-appointment").hide();
                     }, 3000);
                     loadDataCurrentApm();
-                } else
-                    alert(
-                        response.responseCode +
-                        ": " +
-                        response.message +
-                        "Vui lòng thử lại sau ít phút."
-                    );
+                } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
             },
             error: function (xhr) {
-                alert(
-                    "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                    xhr.responseText +
-                    ", " +
-                    xhr.status +
-                    ", " +
-                    xhr.error
-                );
-            },
+                alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            }
         });
     }
 }

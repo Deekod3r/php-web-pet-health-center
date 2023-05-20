@@ -72,10 +72,10 @@ function loadDataPage(page) {
                 window.history.pushState(null, "", url);
                 $('#page').html("");
                 $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>");
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     });
 }
@@ -113,6 +113,7 @@ function loadDataService(data) {
     $('#data-service').html(serviceData);
 };
 
+
 $(document).ready(function () {
 
     indexPage = new URLSearchParams(document.location.href).get('page');
@@ -135,10 +136,11 @@ $(document).ready(function () {
                     categoryServiceData += "<option value='" + element.cs_id + "'>" + element.cs_name + "</option>"
                 });
                 $('#category-service').append(categoryServiceData);
-            } else if (response.responseCode != responseCode.dataEmpty) alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else if (response.responseCode != responseCode.dataEmpty) alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+
         },
         error: function (xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 
@@ -171,10 +173,10 @@ $(document).ready(function () {
                     window.history.pushState(null, "", url);
                     $('#data-service').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có dịch vụ phù hợp.</p>");
                     $('#page').html("");
-                } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+                } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
             },
             error: function (xhr) {
-                alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+                alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
             }
         })
         e.preventDefault();

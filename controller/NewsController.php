@@ -23,7 +23,7 @@ class NewsController extends BaseController
     public function data_news()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -63,22 +63,22 @@ class NewsController extends BaseController
                     }
                     $news = $newsModel->get_data($key);
                     $responseCode = ResponseCode::SUCCESS;
-                    $message = sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
                     $data = [
                         'news' => $news,
                         'count' => $count
                     ];
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
-                    $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
-                $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
             } 
         }  catch (Exception $e) {
             $responseCode = ResponseCode::UNKNOWN_ERROR;
-            $message = $e->getMessage();
+            $message = "SERV: " . $e->getMessage();
         }
         $this->response($responseCode, $message, $data);
     }

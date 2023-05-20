@@ -16,7 +16,7 @@ class PetController extends BaseController
     public function data_customer_pet()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
         $data[] = null;
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
@@ -24,7 +24,7 @@ class PetController extends BaseController
                 $dataToken = $this->verify_and_decode_token($token);
                 if (!$dataToken) {
                     $responseCode = ResponseCode::TOKEN_INVALID;
-                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 } else {
                     $id = json_decode($dataToken)->{'id'};
                     $role = json_decode($dataToken)->{'role'}; 
@@ -34,26 +34,26 @@ class PetController extends BaseController
                         $pet = $petModel->get_by_customer($id);
                         if ($pet != null) {
                             $responseCode = ResponseCode::SUCCESS;
-                            $message = sprintf(ResponseMessage::SELECT_MESSAGE,'thú cưng','thành công');
+                            $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,'thú cưng','thành công');
                             $data = [
                                 'pet' => $pet
                             ];
                         } else {
                             $responseCode = ResponseCode::DATA_EMPTY;
-                            $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,'thú cưng');
+                            $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,'thú cưng');
                         }
                     } else {
                         $responseCode = ResponseCode::ACCESS_DENIED;
-                        $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                     }
                 }
             } else {
                 $responseCode = ResponseCode::ACCESS_DENIED;
-                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . "Vui lòng đăng nhập.";
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE); 
         }
         $this->response($responseCode,$message,$data);
     }

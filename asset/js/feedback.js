@@ -9,19 +9,19 @@ function loadPaging(index, endPage) {
     page += "     <nav aria-label='Page navigation'>"
     page += "   <ul class='pagination justify-content-center mb-4'>"
     page += "   <li class='page-item ' id='previous'>"
-    page += "       <a class='page-link'  aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>"
+    page += "       <a class='page-link' aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>"
     page += "       <span aria-hidden='true'>&laquo; Previous</span>"
     page += "       </a>"
     page += "   </li>"
     if (index > 2) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     } else if (index > 1) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     }
-    page += "   <li class='page-item active'><a class='page-link'  onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
+    page += "   <li class='page-item active'><a class='page-link' onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
     for (let i = index + 1; i <= endPage; i++) {
-        page += "    <li class='page-item'><a class='page-link'   onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
+        page += "    <li class='page-item'><a class='page-link' onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
     }
     page += "    <li class='page-item' id='next'>"
     page += "        <a class='page-link'  aria-label='Next' onclick='loadDataPage(" + (index + 1) + ")'>"
@@ -54,10 +54,10 @@ function loadDataPage(page) {
                 } else window.history.pushState(null, "", url);
                 loadDataFeedback(response.data.feedback);
                 loadPaging(page, Math.ceil(response.data.count / limitFeedbackPage));
-            } else alert("Lỗi tải dữ liệu, vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     });
 }
@@ -136,7 +136,7 @@ function checkCanFeedback(){
         },
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.responseCode == responseCode.success && response.data.canFeedback) {
                 $('#btn-send-feedback').val('Gửi');
             } else {
@@ -145,7 +145,7 @@ function checkCanFeedback(){
             }
         },
         error: function (xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     });
 }
@@ -178,7 +178,7 @@ $(document).ready(function () {
                         //console.log(response);
                         if (response.responseCode == responseCode.success) {
                             loadDataPage(1);
-                            $('#msg-send-feedback').html(response.message);
+                            $('#msg-send-feedback').html("Gửi phần hồi thành công, CarePET cảm ơn quý khách.");
                             $('#msg-send-feedback').addClass(' alert-success');
                             $('#msg-send-feedback').show();
                             window.setTimeout(function () {
@@ -198,18 +198,11 @@ $(document).ready(function () {
                         } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
                     },
                     error: function (xhr) {
-                        alert(
-                            "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                            xhr.responseText +
-                            ", " +
-                            xhr.status +
-                            ", " +
-                            xhr.error
-                        );
+                        alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
                     }
                 })
             } else {
-                $('#msg-send-feedback').html('Vui lòng nhập đầy đủ thông tin.');
+                $('#msg-send-feedback').html('CLI: Vui lòng nhập đầy đủ thông tin.');
                 $('#msg-send-feedback').addClass(' alert-danger');
                 $('#msg-send-feedback').show();
                 window.setTimeout(function () {
@@ -218,7 +211,7 @@ $(document).ready(function () {
                 }, 3000);
             }
         } else {
-            $('#msg-send-feedback').html('Vui lòng đăng nhập để có thể đánh giá.');
+            $('#msg-send-feedback').html('CLI: Vui lòng đăng nhập để có thể đánh giá.');
             $('#msg-send-feedback').addClass(' alert-danger');
             $('#msg-send-feedback').show();
             window.setTimeout(function () {

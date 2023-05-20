@@ -16,17 +16,10 @@ $(document).ready(function() {
                 $('#ctm-address').append(response.data.customer.ctm_address);
                 //$('#ctm-email').append(response.data.customer.ctm_email);
                 loadDataShop();
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 })
