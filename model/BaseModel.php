@@ -5,7 +5,7 @@ class BaseModel
     protected $table;
     protected $view;
     protected $insert;
-    protected $selectView;
+    protected $viewJoin;
     protected $update;
     protected $idTable;
     protected $fieldTable;
@@ -33,7 +33,7 @@ class BaseModel
         $response = null;
         $conn = $this->get_connection();
         try {
-            $stm = $conn->prepare("SELECT * FROM  {$this->table} where is_delete = 0 {$key}");
+            $stm = $conn->prepare("SELECT * FROM  {$this->viewJoin} {$key}");
             if ($stm->execute() && !$stm->errno) {
                 $result = $stm->get_result();
                 $data = [];
@@ -42,6 +42,9 @@ class BaseModel
                         $data[] = $row;
                     }
                     $response = $data;
+                    $stm->close();
+                    $conn->close();
+                    return $response;
                 }
             } else {
                 throw new mysqli_sql_exception("Statement error: " . $stm->error);

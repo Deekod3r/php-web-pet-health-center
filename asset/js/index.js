@@ -7,7 +7,7 @@ function loadDataFeedback(data) {
         feedbackData += "<div class='d-flex align-items-end mb-3 mt-n4 ml-n4' style='height:100px'>";
         feedbackData += "<img class='img-fluid' src='asset/img/customer.png' style='width: 80px; height: 80px;'>";
         feedbackData += "<div class='ml-3'>";
-        feedbackData += "<h5>Ẩn danh</h5>";
+        feedbackData += "<h5>" + element.ctm_name + "</h5>";
         for (i = 0; i < element.fb_rating; i++) {
             feedbackData += "<span style='font-size: 20px; vertical-align:bottom'><img class='img-fluid' src='asset/img/star.png' style='width: 20px; height: 20px; display: inline; margin-right:2px'></span>";
         }

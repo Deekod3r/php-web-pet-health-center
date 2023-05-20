@@ -68,7 +68,7 @@ class HomeController extends BaseController
                         $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;
                         $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Người dùng");
                     } else {
-                        if ($customer['ctm_password'] == $requestLogin['lgPassword']) {
+                        if ($customer['ctm_password'] == md5($requestLogin['lgPassword'])) {
                             $_SESSION['login'] = true;
                             $token = $this->generate_token($customer['ctm_id'], 'customer', -1);
                             $responseCode = ResponseCode::SUCCESS;
@@ -83,7 +83,7 @@ class HomeController extends BaseController
                         }
                     }
                 } else {
-                    if ($requestLogin['lgPassword'] == $admin['ad_password']) {
+                    if (md5($requestLogin['lgPassword']) == $admin['ad_password']) {
                         $_SESSION['login'] = true;
                         $token = $this->generate_token($admin['ad_id'], 'admin', $admin['ad_role']);
                         $responseCode = ResponseCode::SUCCESS;

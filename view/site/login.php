@@ -15,7 +15,7 @@
 
 <body>
   
-  <div class="container <?php if (isset($_SESSION['msg_register']) && isset($_SESSION['check_register'])) echo 'active'?>">
+  <div class="container">
     <div class="forms">
       <div class="form login">
         <span class="title">Đăng nhập</span>

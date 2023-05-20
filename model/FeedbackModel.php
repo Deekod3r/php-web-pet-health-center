@@ -5,7 +5,9 @@ class FeedbackModel extends BaseModel{
     private $connection;
     var $table = 'feedback';
     var $idTable = 'fb_id';
-    var $insert = ['fb_content', 'fb_rating', 'fb_time' , 'ctm_id'];
+    var $insert = ['fb_content', 'fb_rating', 'ctm_id'];
+    var $view = 'view_feedback';
+    var $viewJoin = 'view_feedback_join';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }
@@ -18,7 +20,7 @@ class FeedbackModel extends BaseModel{
         return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
     }    
     public function save_data($data){
-        $value = "'".$data['content']."',".$data['rating'].",'".$data['time']."',".$data['ctmId'];
+        $value = "'".$data['content']."',".$data['rating'].",".$data['ctmId'];
         return $this->save($value);
     }
    

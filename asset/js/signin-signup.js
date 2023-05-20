@@ -125,6 +125,7 @@ $(document).ready(function () {
                                     if (response.responseCode == responseCode.success) {
                                         $('#msg-register').html("Tạo tài khoản thành công.");
                                         $('#msg-register').show();
+                                        $('#register')[0].reset();
                                     } else {
                                         $('#msg-register').html(response.message);
                                         $('#msg-register').show();

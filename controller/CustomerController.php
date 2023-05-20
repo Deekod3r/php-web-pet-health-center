@@ -7,7 +7,7 @@ class CustomerController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $this->render_view(
-                    'customer_info'
+                    'customer-info'
                 );
             }
         } else include('view/error/error-400.php');
@@ -78,7 +78,7 @@ class CustomerController extends BaseController
                                     //'email' => $_POST['rgEmail'],
                                     'phone' => $customerInfo['rgPhone'],
                                     'address' => $customerInfo['rgAddress'],
-                                    'password' => $customerInfo['rgPassword'],
+                                    'password' => md5($customerInfo['rgPassword']),
                                     'gender' => $customerInfo['rgGender'],
                                     'active' => 1
                                 ];
@@ -101,7 +101,7 @@ class CustomerController extends BaseController
                                     //'ctm_email' => $_POST['rgEmail'],
                                     'ctm_phone' => $customerInfo['rgPhone'],
                                     'ctm_address' => $customerInfo['rgAddress'],
-                                    'ctm_password' => $customerInfo['rgPassword'],
+                                    'ctm_password' => md5($customerInfo['rgPassword']),
                                     //'ctm_gender' => $_POST['rgGender'],
                                     'ctm_active' => 1
                                 ];
@@ -128,6 +128,52 @@ class CustomerController extends BaseController
             } else {
                 $responseCode = ResponseCode::INPUT_EMPTY;
                 $message = sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE,'đăng ký');          
+            }
+        } else {
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function check_can_feedback()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_login()) {
+                $token = $_GET['token'] != null ? $_GET['token'] : '';
+                $data = $this->verify_and_decode_token($token);
+                if (!$data) {
+                    $responseCode = ResponseCode::TOKEN_INVALID;
+                    $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                } else {
+                    $id = json_decode($data)->{'id'};
+                    $role = json_decode($data)->{'role'};
+                    $customerModel = $this->get_model('customer');
+                    $customer = null;
+                    if ($role == -1) {
+                        $customer = $customerModel->get_by_id($id);
+                        if ($customer != null) {
+                            $responseCode = ResponseCode::SUCCESS;
+                            $message = sprintf(ResponseMessage::SELECT_MESSAGE, 'người dùng', 'thành công');
+                            $data = [
+                                'ctmId' => $customer['ctm_id'],
+                                'canFeedback' => $customer['ctm_can_feedback']
+                            ];
+                        } else {
+                            $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                            $message = sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'người dùng');
+                        }
+                    } else {
+                        $responseCode = ResponseCode::ACCESS_DENIED;
+                        $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
+                    }
+                }
+            } else {
+                $responseCode = ResponseCode::ACCESS_DENIED;
+                $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;

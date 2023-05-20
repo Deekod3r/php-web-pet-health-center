@@ -23,6 +23,11 @@ insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_p
                    (12,'Hoàng Quốc Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true, false);
 
 -- select * from customer;
+
+update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_active = 1; # pass: 1
+
+update admin set ad_password = 'c4ca4238a0b923820dcc509a6f75849b' where 1=1; # pass: 1
+
 -- discount
 insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active, is_delete)
             values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
@@ -141,7 +146,7 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (16,'2023/05/18','15:45:00','2023/05/16 8:39:00',null,0,3,3,false);
 -- select * from appointment;
 -- bill
-insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value)
+insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, sub_total, value_reduced, total_value)
             values (1,'2023/03/16',1,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
                    (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
                    (3,'2023/04/01',1,default,1,2,null,250000,0,250000),

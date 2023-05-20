@@ -106,31 +106,18 @@ function loadDataNews(data) {
     data.forEach((element) => {
         newsData += "<div class='col-lg-4 mb-4'>";
         newsData += "   <div class='card border-0 mb-2'>";
-        newsData +=
-            "       <img class='card-img-top' src='asset/img/blog-1.jpg' alt=''>";
+        newsData +="       <img class='card-img-top' src='asset/img/blog-1.jpg' alt=''>";
         newsData += "       <div class='card-body bg-light p-4'>";
-        newsData +=
-            "           <h4 class='card-title text-truncate text-wrap block-ellipsis-title'>" +
-            element.news_title +
-            "</h4>";
-        newsData += "           <div class='d-flex mb-3'>";
-        newsData +=
-            "               <small class='mr-2'><i class='fa fa-user text-muted'></i> Admin</small>";
-        newsData +=
-            "               <small class='mr-2'><i class='fa fa-folder text-muted'></i> Danh mục</small>";
-        newsData +=
-            "               <small class='mr-2'><i class='fa fa-calendar text-muted'></i> " +
-            element.news_date_release +
-            "</small>";
+        newsData +="           <h4 class='card-title text-truncate text-wrap block-ellipsis-title'>" + element.news_title +"</h4>";
+        newsData += "           <div class='mb-3'>";
+        newsData += "              <div class='row'>";
+        newsData +="               <small class='mr-2 col-lg-3 col-md-3 col-sm-3'><i class='fa fa-user text-muted'></i> Admin</small>";
+        newsData +="               <small class='mr-2 col-lg-8 col-md-8 col-sm-8'><i class='fa fa-calendar text-muted'></i> " +element.news_date_release + "</small>";
+        newsData += "              </div>";
+        newsData +="               <small class='mr-2'><i class='fa fa-folder text-muted'></i> " + element.cn_name + "</small>";
         newsData += "           </div>";
-        newsData +=
-            "           <p class='text-wrap block-ellipsis-desc'>" +
-            element.news_description +
-            "</p>";
-        newsData +=
-            "           <a class='font-weight-bold' href='?controller=news&action=detail_news&id=" +
-            element.news_id +
-            "'>Xem chi tiết</a>";
+        newsData +="           <p class='text-wrap block-ellipsis-desc'>" + element.news_description +"</p>";
+        newsData +="           <a class='font-weight-bold' href='?controller=news&action=detail_news&id=" +element.news_id + "'>Xem chi tiết</a>";
         newsData += "       </div>";
         newsData += "   </div>";
         newsData += "</div>";

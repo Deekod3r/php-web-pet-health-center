@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = "Trang chủ"; ?>
-<?php include("layout/asset_header.php") ?>
+<?php include("layout/asset-header.php") ?>
 <!-- <script src="asset/js/index.js?v=<?php echo time() ?>" async></script> -->
 
 <body>
@@ -211,7 +211,7 @@
 
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-    <?php include("layout/asset_footer.php") ?>
+    <?php include("layout/asset-footer.php") ?>
     <script src="asset/js/index.js?v=<?php echo time() ?>"></script>
 
 </body>

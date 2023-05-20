@@ -47,7 +47,7 @@ function loadDataPage(page) {
         dataType: 'json',
         success: function (response) {
             //console.log(response);
-            if (response.responseCode == "01") {
+            if (response.responseCode == responseCode.success) {
                 $('#countFeedback').html(response.data.count + " đánh giá")
                 if (page > 1) {
                     window.history.pushState(null, "", url + "&page=" + page);
@@ -68,7 +68,7 @@ function loadDataFeedback(data) {
         feedbackData += "<div class='media mb-4'> "
         feedbackData += "   <img src='asset/img/customer.png' alt='Image' class='img-fluid mr-3 mt-1' style='width: 45px;'>"
         feedbackData += "   <div class='media-body'>"
-        feedbackData += "       <h6 style='margin-bottom:0'>Ẩn danh | <small>" + element.fb_time + "</small></h6>"
+        feedbackData += "       <h6 style='margin-bottom:0'>" + element.ctm_name + " | <small>" + element.fb_time + "</small></h6>"
         for (i = 0; i < element.fb_rating; i++) {
             feedbackData += "   <span style='font-size: 20px;'><img class='img-fluid' src='asset/img/star.png' style='width: 15px; height: 15px; display: inline' alt=''></span>"
         }
@@ -87,7 +87,6 @@ function loadDataFeedback(data) {
 if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
     let form = "";
     form += "<form action='?controller=feedback&action=send_feedback' method='post' id='form-feedback'>"
-    form += "    <div class='alert ' role='alert' id='msg-send-feedback' style='display:none'></div>"
     form += "    <div class='form-group'>"
     form += "        <input type='text' class='form-control border-1' placeholder='Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn' name='fbContent'/>"
     form += "   </div>"
@@ -122,10 +121,33 @@ if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') !
     form += "       </label>"
     form += "   </div>"
     form += "    <div style='margin-top: 10px; margin-bottom: 10px'>"
-    form += "        <input class='btn btn-lg btn-primary btn-block border-0' type='submit'>"
+    form += "        <input class='btn btn-lg btn-primary btn-block border-0' id='btn-send-feedback' type='submit' value='Hãy trải nghiệm dịch vụ của CarePET và để lại phản hồi'>"
     form += "    </div>"
     form += "</form>";
     $('#form').html(form);
+}
+
+function checkCanFeedback(){
+    $.ajax({
+        type: 'GET',
+        url: '?controller=customer&action=check_can_feedback',
+        data: {
+            token: sessionStorage.getItem('token')
+        },
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.responseCode == responseCode.success && response.data.canFeedback) {
+                $('#btn-send-feedback').val('Gửi');
+            } else {
+                $('#btn-send-feedback').prop('disabled',true);
+                $('#btn-send-feedback').val('Hãy trải nghiệm dịch vụ của CarePET và để lại phản hồi');
+            }
+        },
+        error: function (xhr) {
+            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        }
+    });
 }
 
 $(document).ready(function () {
@@ -137,6 +159,8 @@ $(document).ready(function () {
     indexPage = indexPage != null && indexPage != 1 ? indexPage : 1;
 
     loadDataPage(indexPage);
+
+    checkCanFeedback();
 
     $('#form-feedback').submit(function (e) {
         if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
@@ -161,6 +185,8 @@ $(document).ready(function () {
                                 $('#msg-send-feedback').hide()
                                 $('#msg-send-feedback').removeClass(' alert-success');
                             }, 3000);
+                            checkCanFeedback();
+                            $('#form-feedback')[0].reset();
                         } else if (response.responseCode == responseCode.fail) {
                             $('#msg-send-feedback').html(response.message);
                             $('#msg-send-feedback').addClass(' alert-danger');

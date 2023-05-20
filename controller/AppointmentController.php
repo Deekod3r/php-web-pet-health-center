@@ -18,7 +18,7 @@ class AppointmentController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $this->render_view(
-                    'customer_current_apm'
+                    'customer-current-apm'
                 );
             } else {
                 $this->redirect('home', 'index');
@@ -146,13 +146,13 @@ class AppointmentController extends BaseController
             if ($this->check_login()) {
                 if (isset($_POST['idApm']) && $_POST['idApm'] != '' && isset($_POST['token']) && $_POST['token'] != '') {
                     $token = $_POST['token'] != null ? $_POST['token'] : '';
-                    $data = $this->verify_and_decode_token($token);
-                    if (!$data) {
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
                         $responseCode = ResponseCode::ACCESS_DENIED;
                         $message = ResponseMessage::ACCESS_DENIED_MESSAGE;
                     } else {
                         $idApm = $_POST['idApm'];
-                        $idCtm = json_decode($data)->{'id'};
+                        $idCtm = json_decode($dataToken)->{'id'};
                         $appointmentModel = $this->get_model('appointment');
                         if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
                             $responseCode = ResponseCode::SUCCESS;

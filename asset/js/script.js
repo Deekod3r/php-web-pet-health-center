@@ -60,3 +60,21 @@ const responseCode = {
     requestInvalid: "98",
     unknownError: "99"
 }
+
+const typePet = {
+    cat : 0,
+    dog : 1,
+    both : 2
+}
+
+const gender = {
+    male : 1,
+    female : 0
+}
+
+const statusAppointment = {
+    confirmNo : 0,
+    confirmYes : 1,
+    cancel : 2,
+    done : 3
+}

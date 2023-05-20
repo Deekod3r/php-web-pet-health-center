@@ -5,6 +5,8 @@ class BillModel extends BaseModel{
     private $connection;
     var $table = 'bill';
     var $idTable = 'bill_id';
+    var $view = 'view_bill';
+    var $viewJoin = 'view_bill_join';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }
@@ -27,16 +29,31 @@ class BillModel extends BaseModel{
     }
 
     public function get_by_customer($customer){
-        $query = "SELECT * FROM " . $this->table . " where is_delete = 0 and ctm_id = $customer";
         $response = null;
-        $result = $this->get_connection()->query($query);
-        $data = [];
-        if($result->num_rows >= 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
+        $conn = $this->get_connection();
+        try {
+            $stm = $conn->prepare("SELECT * FROM {$this->viewJoin} where ctm_id = ?");
+            $stm->bind_param('i', $customer);
+            if ($stm->execute() && !$stm->errno) {
+                $result = $stm->get_result();
+                $data = [];
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $data[] = $row;
+                    }
+                    $response = $data;
+                    $stm->close();
+                    $conn->close();
+                    return $response;
+                }
+            } else {
+                throw new mysqli_sql_exception("Statement error: " . $stm->error);
             }
-            $response = $data;
+        } catch (mysqli_sql_exception $e) {
+            $stm->close();
+            $conn->close();
+            echo ("Error: " . $e->getMessage());
+            return false;
         }
-        return $response;
     }
 };

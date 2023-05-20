@@ -5,6 +5,8 @@ class NewsModel extends BaseModel{
     private $connection;
     var $table = 'news';
     var $idTable = 'news_id';
+    var $view = 'view_news';
+    var $viewJoin = 'view_news_join';
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

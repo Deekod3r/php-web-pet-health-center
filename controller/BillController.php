@@ -7,7 +7,7 @@ class BillController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $this->render_view(
-                    'customer_history',
+                    'customer-history',
                 );
             } else $this->redirect('home', 'index');
         } else include('view/error/error-400.php');
@@ -48,9 +48,10 @@ class BillController extends BaseController
                                 }
                             }
                         }
-                        $bill = $billModel->get_data(" and ctm_id = $id " . $key);
+                        $bill = $billModel->get_data(" where ctm_id = $id " . $key);
                         $responseCode = ResponseCode::SUCCESS;
-                        $message = sprintf(ResponseMessage::SELECT_MESSAGE,'hoá đơn','thành công');
+                        //$message = sprintf(ResponseMessage::SELECT_MESSAGE,'hoá đơn','thành công');
+                        $message = " where ctm_id = $id " . $key;
                         $data = [
                             'bill' => $bill,
                             'count' => $count

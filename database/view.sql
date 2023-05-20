@@ -111,7 +111,7 @@ select * from view_appointment;
 create or replace view view_appointment_join
 as
     select
-        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, appointment.ctm_id as ctm_id, ctm_name, appointment.cs_id as cs_id, cs_name
+        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, apm_note, appointment.ctm_id as ctm_id, ctm_name, appointment.cs_id as cs_id, cs_name
     from (appointment join category_service cs on cs.cs_id = appointment.cs_id) join customer c on c.ctm_id = appointment.ctm_id
     where appointment.is_delete = false;
 
@@ -121,7 +121,7 @@ select * from view_appointment_join;
 create or replace view view_bill
 as
     select
-        bill_id, bill_date_release, bill_status, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value
+        bill_id, bill_date_release, bill_status, ctm_id, ad_id, dc_id, sub_total, value_reduced, total_value
     from bill
     where is_delete = false;
 
@@ -131,8 +131,8 @@ select * from view_bill;
 create or replace view view_bill_join
 as
     select
-        bill_id, bill_date_release, bill_status, bill.ctm_id as ctm_id, ctm_name, bill.ad_id as ad_id, ad_username, bill.dc_id as dc_id, dc_code, value_temp, value_reduced, total_value
-    from ((bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id) join discount d on d.dc_id = bill.dc_id
+        bill_id, bill_date_release, bill_status, bill.ctm_id as ctm_id, ctm_name, bill.ad_id as ad_id, ad_username, bill.dc_id as dc_id, dc_code, sub_total, value_reduced, total_value
+    from ((bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id) left join discount d on d.dc_id = bill.dc_id
     where bill.is_delete = false;
 
 select * from view_bill_join;

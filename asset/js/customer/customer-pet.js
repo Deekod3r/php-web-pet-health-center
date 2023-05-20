@@ -15,12 +15,14 @@ $(document).ready(function() {
             if(response.responseCode == responseCode.success) {
                 var petData = "";
                 response.data.pet.forEach(element => {
+                    petType = element.pet_type == typePet.cat ? "Mèo" : "Chó";
+                    petGender = element.pet_gender == gender.female ? "Cái" : "Đực";
                     petData += "<tr class='color-text'>"
                     petData += "<td scope='row' class=''>" + element.pet_id +"</td>"
                     petData += "<td>" + element.pet_name +"</td>"
-                    petData += "<td>" + element.pet_type +"</td>"
+                    petData += "<td>" + petType +"</td>"
                     petData += "<td>" + element.pet_species + "</td>"
-                    petData += "<td>" + element.pet_gender +"</td>"
+                    petData += "<td>" + petGender +"</td>"
                     petData += "<td>" + element.pet_note +"</td>"
                     petData += "</tr>"
                 });

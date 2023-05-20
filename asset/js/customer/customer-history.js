@@ -46,7 +46,7 @@ function loadDataPage(page) {
         },
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 if (page > 1) {
                     window.history.pushState(null, "", url + "&page=" + page);
@@ -74,12 +74,12 @@ function loadDataPage(page) {
 function loadDataHistory(data) {
     var billData = "";
     data.forEach(element => {
-        discount = element.dc_id == null ? 'Không' : element.dc_id;
+        discount = element.dc_id == null ? 'Không' : element.dc_code;
         billData += "<tr class=''>"
         billData += "<td scope='row' class=''>" + element.bill_id + "</td>"
         billData += "<td>" + element.bill_date_release + "</td>"
         billData += "<td>" + discount + "</td>"
-        billData += "<td>" + element.value_temp + " VND</td>"
+        billData += "<td>" + element.sub_total + " VND</td>"
         billData += "<td>" + element.value_reduced + " VND</td>"
         billData += "<td>" + element.total_value + " VND</td>"
         billData += "<td><a style='font-weight:600' href='" + element.bill_id + "'>Xem chi tiết</a></td>"

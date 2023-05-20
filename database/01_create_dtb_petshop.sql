@@ -135,15 +135,15 @@ create table bill
     ctm_id int, -- mã khách hàng
     ad_id int, -- mã admin
     dc_id int, -- mã giảm giá
-    value_temp float not null default 0, --
+    sub_total float not null default 0, --
     value_reduced float default 0 not null, -- giá trị được giảm
-    total_value float not null default (value_temp - value_reduced),
+    total_value float not null default (sub_total - value_reduced),
     constraint fk_bill_customer foreign key (ctm_id) references customer(ctm_id),
     constraint fk_bill_admin foreign key (ad_id) references admin(ad_id),
     constraint fk_bill_discount foreign key (dc_id) references discount(dc_id),
     constraint check_value_reduced check(value_reduced >= 0),
     constraint check_total_value check(total_value >= 0),
-    constraint check_value_temp check(value_temp >= 0)
+    constraint check_value_temp check(sub_total >= 0)
 );
 
 create table detail_bill

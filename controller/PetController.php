@@ -7,7 +7,7 @@ class PetController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_login()) {
                 $this->render_view(
-                    'customer_pet',
+                    'customer-pet',
                 );
             } else $this->redirect('home', 'index');
         } else include('view/error/error-400.php');
