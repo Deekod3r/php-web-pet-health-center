@@ -68,6 +68,9 @@ class BaseModel
                 $result = $stm->get_result();
                 if ($result->num_rows > 0) {
                     $response = $result->fetch_assoc();
+                    $stm->close();
+                    $conn->close();
+                    return $response;
                 };
             } else {
                 throw new mysqli_sql_exception("Statement error: " . $stm->error);
@@ -150,10 +153,10 @@ class BaseModel
             foreach ($data as $key => $value) {
                 if (is_string($value)) {
                     $strSet .= $key . "='" . $value . "',";
-                } else $strSet .= $key . "=" . $value .",";
+                } else $strSet .= $key . "=" . $value . ",";
             }
             //echo "update $this->table {$strSet} where $this->idTable = ?";
-            $strSet = rtrim($strSet,",");
+            $strSet = rtrim($strSet, ",");
             $stm = $conn->prepare("update $this->table {$strSet} where $this->idTable = ?");
             $stm->bind_param('i', $id);
             if (!$stm->execute() || $stm->errno) {
@@ -164,10 +167,10 @@ class BaseModel
                 return true;
             }
         } catch (mysqli_sql_exception $e) {
-           echo ("Error: " . $e->getMessage());
-           $stm->close();
-           $conn->close();
-           return false;
+            echo ("Error: " . $e->getMessage());
+            $stm->close();
+            $conn->close();
+            return false;
         }
     }
 }

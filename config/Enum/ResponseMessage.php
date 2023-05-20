@@ -6,7 +6,7 @@ enum ResponseMessage {
     public const UPDATE_MESSAGE = "Cập nhật dữ liệu %s %s.";
     public const DELETE_MESSAGE = "Xoá dữ liệu %s %s.";
     public const SUCCESS_MESSAGE = "Thành công.";  
-    public const FAIL_MESSAGE = "Lỗi thực thi %s. Chi tiết lỗi: %s.";
+    public const FAIL_MESSAGE = "Lỗi thực thi %s.";
     public const INPUT_EMPTY_MESSAGE = "Vui lòng nhập đầy đủ thông tin %s.";
     public const INPUT_INVALID_TYPE_MESSAGE = "Thông tin %s sai định dạng.";
     public const DATA_EMPTY_MESSAGE = "Dữ liệu %s trống.";

@@ -5,6 +5,9 @@ class AdminModel extends BaseModel{
     private $connection;
     var $table = 'admin';
     var $idTable = 'ad_id';
+    var $view = 'admin';
+    var $viewJoin = 'admin';
+
     public function __construct(){
         //$this->connection = $this->get_connection();
     }

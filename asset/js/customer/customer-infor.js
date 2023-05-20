@@ -9,9 +9,8 @@ $(document).ready(function() {
         },
         dataType: 'json',
         success: function(response) {
-            console.log(response);
             //console.log(response);
-            if(response.responseCode == "01"){
+            if(response.responseCode == responseCode.success){
                 $('#ctm-name').append(response.data.customer.ctm_name);
                 $('#ctm-phone').append(response.data.customer.ctm_phone);
                 $('#ctm-address').append(response.data.customer.ctm_address);
