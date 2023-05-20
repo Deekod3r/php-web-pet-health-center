@@ -19,24 +19,24 @@ class ShopController extends BaseController
     public function data_shop()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE,"");
         $data[] = null; 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $shopModel = $this->get_model('shop');
             $shop = $shopModel->get_data("");
             if ($shop != null) {
-                $responseCode = "01";
-                $message = sprintf(ResponseMessage::SELECT_MESSAGE,"cửa hàng","thành công.");
+                $responseCode = ResponseCode::SUCCESS;
+                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"cửa hàng","thành công.");
                 $data = [
                     'shop' => $shop
                 ];
             } else {
-                $responseCode = "04";
-                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"cửa hàng");
+                $responseCode = ResponseCode::DATA_EMPTY;
+                $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"cửa hàng");
             }
         } else {
-            $responseCode = "98";
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            $responseCode = ResponseCode::REQUEST_INVALID;
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode,$message,$data);
     }

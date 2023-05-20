@@ -14,24 +14,24 @@ class CategoryNewsController extends BaseController
     public function data_category_news()
     {
         $responseCode = ResponseCode::FAIL;
-        $message = sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $categoryNewsModel = $this->get_model('categoryNews');
             $categoryNews = $categoryNewsModel->get_data("");              
             if ($categoryNews != null) {
                 $responseCode = ResponseCode::SUCCESS;
-                $message = sprintf(ResponseMessage::SELECT_MESSAGE,"danh mục tin tức","thành công.");
+                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"danh mục tin tức","thành công.");
                 $data = [
                     'categoryNews' => $categoryNews                
                 ];
             } else {
                 $responseCode = ResponseCode::DATA_EMPTY;
-                $message = sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"danh mục tin tức");
+                $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"danh mục tin tức");
             }
         } else {
             $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
         }
         $this->response($responseCode,$message,$data);
     }

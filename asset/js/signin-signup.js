@@ -33,36 +33,6 @@ login.addEventListener("click", () => {
 });
 
 
-function checkCharacter(input,num,lowChars,upChars,speChars,length,size) {
-    let check = true;
-    let number = /[0-9]/;
-    let lowerChars = /[a-z]/;
-    let upperChars = /[A-Z]/;
-    let specialChars = /[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
-    if (num) {
-       check = number.test(input);
-       if (!check) return false;
-    }
-    if (lowChars) {
-       check = lowerChars.test(input);
-       if (!check) return false;
-    }
-    if (upChars) {
-       check = upperChars.test(input);
-       if (!check) return false;
-    }
-    if (speChars) {
-       check = specialChars.test(input);
-       if (!check) return false;
-    }
-    if (length && Number.isInteger(size)) {
-       if (input.length < size) check = false;
-       if (!check) return false;
-    }
-    return check;
- }
-
-
 $(document).ready(function () {
 
     $('#login').submit(function (e) {
@@ -74,29 +44,29 @@ $(document).ready(function () {
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     if (response.responseCode == responseCode.success) {
                         sessionStorage.setItem("token", response.data.token);
                         if (response.data.typeAccount == "admin") {
                             window.location.href = '?controller=home&action=index_admin'
                         } else window.location.href = '?controller=home&action=index';
                     } else {
-                        $('#msg-login').html(response.message);
-                        $('#alert-login').show();
+                        $('#msg-login').html("RES: " + response.message);
+                        $('#msg-login').show();
                         window.setTimeout(function () {
-                            $('#alert-login').hide()
+                            $('#msg-login').hide()
                         }, 3000);
                     }
                 },
                 error: function (error) {
-                    $('#msg-login').html("Lỗi đăng nhập, vui lòng thử lại sau ít phút. " + error);
+                    $('#msg-login').html("ER: Lỗi đăng nhập, vui lòng thử lại sau ít phút. " + error);
                 }
             })
         } else {
-            $('#msg-login').html("Vui lòng điền đầy đủ thông tin đăng nhập.");
-            $('#alert-login').show();
+            $('#msg-login').html("CLI: Vui lòng điền đầy đủ thông tin đăng nhập.");
+            $('#msg-login').show();
             window.setTimeout(function () {
-                $('#alert-login').hide()
+                $('#msg-login').hide()
             }, 3000);
         }
         e.preventDefault();
@@ -112,7 +82,7 @@ $(document).ready(function () {
         let gender = $('#register').find('input[name="rgGender"]:checked').val();
         if (password != "" && confirmPassword != "" && name != "" && address != "" && phone != "" && gender != "") {
             if (name.length >= 2) {
-                if (phone.length >= 10 && phone.length <= 13 && checkCharacter(phone,true,false,false,false,false,false,0)) {
+                if (phone.length >= 10 && phone.length <= 13 && checkCharacter(phone,true,false,false,false,true,false,0)) {
                     if (password == confirmPassword) {
                         if (checkCharacter(password,true,true,true,true,true,8)) {
                             $.ajax({
@@ -121,32 +91,32 @@ $(document).ready(function () {
                                 data: $(this).serialize(),
                                 dataType: 'json',
                                 success: function (response) {
-                                    console.log(response);
+                                    //console.log(response);
                                     if (response.responseCode == responseCode.success) {
-                                        $('#msg-register').html("Tạo tài khoản thành công.");
+                                        $('#msg-register').html("RES: Tạo tài khoản thành công.");
                                         $('#msg-register').show();
                                         $('#register')[0].reset();
                                     } else {
-                                        $('#msg-register').html(response.message);
+                                        $('#msg-register').html("RES: " + response.message);
                                         $('#msg-register').show();
                                     }
                                 },
-                                error: function (error) {
-                                    $('#msg-login').html("Lỗi đăng ký, vui lòng thử lại sau ít phút. " + error);
+                                error: function (xhr) {
+                                    $('#msg-register').html("ER: Lỗi đăng ký, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
                                     $('#msg-register').show(); 
                                 }
                             })
-                        } else $('#msg-register').html("Mật khẩu phải bao gồm chữ cái hoa, chữ cái thường, số, ít nhất 1 ký tự đặc biệt và có độ dài tối thiểu 8 ký tự.");
+                        } else $('#msg-register').html("CLI: Mật khẩu phải bao gồm chữ cái hoa, chữ cái thường, số, ít nhất 1 ký tự đặc biệt và có độ dài tối thiểu 8 ký tự.");
                     } else {
-                        $('#msg-register').html("Mật khẩu chưa trùng khớp.");
+                        $('#msg-register').html("CLI: Mật khẩu chưa trùng khớp.");
                     }
                 } else {
-                    $('#msg-register').html("Số điện thoại không hợp lệ.");
+                    $('#msg-register').html("CLI: Số điện thoại chỉ được bao gồm số, độ dài từ 10-13.");
                 }
             } else {
-                $('#msg-register').html("Họ và tên có độ dài tối thiểu 2 ký tự.");
+                $('#msg-register').html("CLI: Họ và tên có độ dài tối thiểu 2 ký tự.");
             }
-        } else $('#msg-register').html("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+        } else $('#msg-register').html("CLI: Vui lòng nhập đầy đủ thông tin đăng ký.");
         $('#msg-register').show();
         window.setTimeout(function () {
             $('#msg-register').hide()

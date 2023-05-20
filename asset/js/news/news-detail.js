@@ -52,14 +52,7 @@ $(document).ready(function () {
             } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 
@@ -74,14 +67,7 @@ $(document).ready(function () {
             } else if (response.responseCode != responseCode.dataEmpty) alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 
@@ -96,17 +82,10 @@ $(document).ready(function () {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 loadDataRecentNews(response.data.news);
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 

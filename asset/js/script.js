@@ -1,8 +1,32 @@
-function checkSpecialCharacter(character) {
-    var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    var formatPassword = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    format.test("");
-}
+function checkCharacter(input,num,lowChars,upChars,speChars,length,size) {
+    let check = true;
+    let number = /[0-9]/;
+    let lowerChars = /[a-z]/;
+    let upperChars = /[A-Z]/;
+    let specialChars = /[ \.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
+    if (num) {
+       check = number.test(input);
+       if (!check) return false;
+    }
+    if (lowChars) {
+       check = lowerChars.test(input);
+       if (!check) return false;
+    }
+    if (upChars) {
+       check = upperChars.test(input);
+       if (!check) return false;
+    }
+    if (speChars) {
+       check = specialChars.test(input);
+       if (!check) return false;
+    }
+    if (length && Number.isInteger(size)) {
+       if (input.length < size) check = false;
+       if (!check) return false;
+    }
+    return check;
+ }
+
 
 function confirmAction(action, object) {
     return confirm("Bạn có muốn " + action + " " + object + " " + "không?");
@@ -22,10 +46,10 @@ function loadDataShop(){
                 $('.shop-phone').append(response.data.shop.shop_phone);
                 $('.shop-fb').attr('href',response.data.shop.shop_facebook);
                 $('.shop-desc').append(response.data.shop.shop_description);
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function(xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 }
@@ -40,10 +64,10 @@ function logout() {
             if(response.responseCode == responseCode.success){
                 sessionStorage.removeItem('token');
                 window.location.replace('?controller=home&action=index');
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
-        error: function(xhr) {
-            alert("Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 }

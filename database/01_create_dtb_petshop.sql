@@ -17,7 +17,7 @@ create table customer
 (
     ctm_id int primary key auto_increment, -- mã khách hàng --default
     ctm_name varchar(100) not null, -- họ tên
-    ctm_phone char(10) not null unique, -- số điện thoại
+    ctm_phone varchar(13) not null unique, -- số điện thoại
     ctm_email varchar(255) unique, -- email
     ctm_address varchar(255), -- địa chỉ
     ctm_password varchar(32), -- mật khẩu

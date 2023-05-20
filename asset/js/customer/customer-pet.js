@@ -29,17 +29,10 @@ $(document).ready(function() {
                 $('#body-table').html(petData);
             } else if (response.responseCode == responseCode.dataEmpty) {
                 $('.pet').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>");           
-            } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
-            alert(
-                "Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi  tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
         }
     })
 })
