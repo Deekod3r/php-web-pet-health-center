@@ -40,8 +40,8 @@ insert into pet (pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, 
                    (2,'Tun',1,'Corgy',1,'chân ngắn, lông vàng, 3kg',2),
                    (3,'Mun',0,'Anh lông ngắn',0,'Lông vàng, tai cụp, 2kg',3),
                    (4,'Tí',0,'Tam thể',0,'2kg, 6 tháng',4),
-                   (5,'Mập',0,'Anh lông dài',1,'3kg, 6 tháng',4),
-                   (6,'Mập',0,'Anh lông dài',1,'3kg, 6 tháng',5),
+                   (5,'Mập',0,'Anh lông dài',1,'2.5kg, 6 tháng',4),
+                   (6,'Mập',0,'Anh lông dài',1,'2.5kg, 6 tháng',5),
                    (7,'Bun',1,'Corgy',1,'Chân ngắn, lông vàng, 3kg',6),
                    (8,'Đen',1,'Corgy',0,'Chân ngắn, lông vàng, 3kg',7),
                    (9,'Mỹ Diệu',0,'Tam thể',0,'2kg, 12 tháng',7),
@@ -126,26 +126,26 @@ insert into news (news_id, news_title, news_description, news_content, news_img,
 -- select * from news;
 -- category_service
 insert into category_service (cs_id, cs_name, is_delete)
-            values (default,'Tiêm phòng', default),
-                   (default,'Tư vấn dinh dưỡng',default),
-                   (default,'Thẩm mỹ',default),
-                   (default,'Huấn luyện',default),
-                   (default,'Khám bệnh, điều trị',default);
+            values (1,'Tiêm phòng', default),
+                   (2,'Tư vấn dinh dưỡng',default),
+                   (3,'Vệ sinh, thẩm mỹ',default),
+                   (4,'Huấn luyện',default),
+                   (5,'Khám bệnh, điều trị',default);
 -- select * from category_service;
 -- service
 insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, is_delete, cs_id)
-            values (1,'Tiêm phòng dại cho chó','#',500000,'Tiêm phòng dại cho cún trên 1 năm tuổi',1,1,default,1),
+            values (1,'Tiêm phòng dại cho chó','#',50000,'Tiêm phòng dại cho cún trên 1 năm tuổi. CarePet chỉ sử dụng vacxin của Pháp và  Mỹ nhập khẩu trực tiếp, đảm bảo chất lượng.',1,1,default,1),
                    (2,'Tiêm phòng bệnh do Herpervirus cho mèo','#',500000,'Tiêm phòng bệnh Herper cho mèo',0,1,default,1),
-                   (3,'Cắt tỉa lông theo yêu cầu','#',200000,'Cắt tỉa lông',2,1,default,3),
+                   (3,'Cắt tỉa lông dưới 3kg','#',200000,'Chúng tôi luôn cố gắng làm sao để quyền lợi khách luôn được đảm bảo tốt nhất. Chi phí của dịch vụ cắt tỉa lông chó mèo tại Care Pet luôn đảm bảo hợp lý và cạnh tranh nhất hiện nay.',2,1,default,3),
                    (4,'Khám tổng quát chó','#',3000000,'Khám tổng quát chó',1,1,default,5),
                    (5,'Khám tổng quát mèo','#',2500000,'Khám tổng quát mèo',0,0,default,5),
-                   (6,'Điều trị viêm gan chó','#',0,'Tư vấn, điều trị viêm gan chó',1,0,default,5),
-                   (7,'Huấn luyện theo yêu cầu','#',0,'Huấn luyện theo yêu cầu',2,0,default,4),
-                   (8,'Tư vấn dinh dưỡng','#',0,'Tư vấn dinh dưỡng',2,0,default,2),
-                   (9,'Điều trị nấm mèo','#',0,'Tư vấn, điều trị nấm mèo',0,0,default,5),
-                   (10,'Điều trị FIP mèo','#',0,'Tư vấn, điều trị FIP mèo',0,0,default,5),
-                   (11,'Điều trị viêm đường hô hấp mèo','#',0,'Tư vấn, điều trị viêm đường hô hấp mèo',0,0,default,5),
-                   (12,'Điều trị viêm đường hô hấp chó','#',0,'Tư vấn, điều trị viêm đường hô hấp chó',1,0,default,5),
+                   (6,'Điều trị mổ viêm tai giữa chó','#',0,'Dịch vụ bao gồm: tư vấn, điều trị mổ viêm tai giữa chó. Giá sẽ được thỏa thuận trong khoảng từ 700.000đ đến 2.000.000đ tùy theo mức độ bệnh.',1,0,default,5),
+                   (7,'Huấn luyện theo yêu cầu','#',0,'Huấn luyện theo yêu cầu. Giá cả sẽ được thỏa thuận trung bình 100.000đ/ngày.',2,0,default,4),
+                   (8,'Tư vấn dinh dưỡng','#',0,'Dịch vụ tư vấn dinh dưỡng sẽ được thỏa thuận giá cả dao động 100.000đ - 300.000đ/lần',2,0,default,2),
+                   (9,'Điều trị nấm mèo','#',0,'Tư vấn, điều trị nấm mèo. Tùy theo mức độ bệnh, giá cả sẽ được thỏa thuận dao động 200.000đ - 500.000đ',0,0,default,5),
+                   (10,'Điều trị FIP mèo','#',0,'Tư vấn, điều trị FIP mèo. Tùy theo mức độ bệnh, giá cả sẽ được thỏa thuận dao động 200.000đ - 500.000đ',0,0,default,5),
+                   (11,'Điều trị viêm đường hô hấp mèo','#',0,'Tư vấn, điều trị viêm đường hô hấp mèo với giá thỏa thuận dao động từ 150.000đ - 500.000đ/lần',0,0,default,5),
+                   (12,'Điều trị viêm đường hô hấp chó','#',0,'Tư vấn, điều trị viêm đường hô hấp chó với giá thỏa thuận dao động từ 150.000đ - 500.000đ/lần',1,0,default,5),
                    (13, 'Tắm cho chó mèo dưới 2 kg, lông dài','#',100000,'Tắm cho chó mèo dưới 2 kg, lông dài',2,0,default,3),
                    (14, 'Tắm cho chó mèo dưới 2 kg, lông ngắn','#',80000,'Tắm cho chó mèo dưới 2 kg, lông ngắn',2,0,default,3),
                    (15, 'Tắm cho chó mèo từ 2 kg đến < 5 kg, lông dài','#',130000,'Tắm cho chó mèo từ 2 kg đến < 5 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
@@ -156,7 +156,36 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (20, 'Tắm cho chó mèo từ 7 kg đến < 10 kg, lông ngắn','#',190000,'Tắm cho chó mèo từ 7 kg đến < 10 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
                    (21, 'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông dài','#',290000,'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
                    (22, 'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông ngắn','#',250000,'Tắm cho chó mèo từ 10 kg đến < 15 kg, lông ngắn. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
-                   (23, 'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài','#',360000,'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3);
+                   (23, 'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài','#',360000,'Tắm cho chó mèo từ 15 kg đến < 20 kg, lông dài. Dịch vụ bao gồm: vệ sinh chân, móng, tai. Cạo gọn lông hậu môn, bụng. Chải lông trước khi tắm. Vắt tuyến hôi. Tắm 2 lần khử mùi và thơm. Sấy khô lông, chải lông. Thoa tinh dầu dưỡng lông, nước hoa.',2,0,default,3),
+                   (24,'Cắt tỉa lông từ 3 kg đến 5kg','#',350000,'Chúng tôi luôn cố gắng làm sao để quyền lợi khách luôn được đảm bảo tốt nhất. Chi phí của dịch vụ cắt tỉa lông chó mèo tại Care Pet luôn đảm bảo hợp lý và cạnh tranh nhất hiện nay.',2,1,default,3),
+                   (25,'Cắt tỉa lông từ 5 kg đến 10kg','#',450000,'Chúng tôi luôn cố gắng làm sao để quyền lợi khách luôn được đảm bảo tốt nhất. Chi phí của dịch vụ cắt tỉa lông chó mèo tại Care Pet luôn đảm bảo hợp lý và cạnh tranh nhất hiện nay.',2,1,default,3),
+                   (26,'Cắt tỉa lông từ 10 kg đến 15kg','#',550000,'Chúng tôi luôn cố gắng làm sao để quyền lợi khách luôn được đảm bảo tốt nhất. Chi phí của dịch vụ cắt tỉa lông chó mèo tại Care Pet luôn đảm bảo hợp lý và cạnh tranh nhất hiện nay.',2,1,default,3),
+                   (27,'Cắt tỉa lông từ 15 kg đến 20kg','#',650000,'Chúng tôi luôn cố gắng làm sao để quyền lợi khách luôn được đảm bảo tốt nhất. Chi phí của dịch vụ cắt tỉa lông chó mèo tại Care Pet luôn đảm bảo hợp lý và cạnh tranh nhất hiện nay.',2,1,default,3),
+                   (28,'Nhuộm lông 2 tai','#',200000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (29,'Nhuộm lông 4 chân','#',200000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (30,'Nhuộm lông 1 đuôi, lông ít','#',100000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (31,'Nhuộm lông 1 đuôi, lông nhiều','#',150000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (32,'Nhuộm lông 2 tai, 1 đuôi','#',260000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (33,'Nhuộm lông 2 tai, 4 chân','#',350000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (34,'Nhuộm lông họa tiết với thú cưng < 5 kg','#',100000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (35,'Nhuộm lông họa tiết với thú cưng > 5 kg''','#',150000,'Phí nhuộm lông trên không bao gồm tắm, cắt, vệ sinh cơ bản',2,1,default,3),
+                   (36,'Vắt tuyến hôi','#',50000,'Phí vắt tuyến hôi trên không bao gồm tắm hay các dịch vụ khác',2,1,default,3),
+                   (37,'Vệ sinh tai','#',100000,'Phí vệ sinh tai trên không bao gồm tắm hay các dịch vụ khác',2,1,default,3),
+                   (38,'Cắt, mài móng','#',100000,'Phí cắt móng trên không bao gồm tắm, vệ sinh cơ bản hay các dịch vụ khác',2,1,default,3),
+                   (39,'Lấy cao răng','#',600000,'Dịch vụ có sử dụng thuốc mê để gây mê',2,1,default,3),
+                   (40,'Triệt sản cho mèo, dưới 3kg','#',500000,'Dịch vụ triệt sản có sử dụng thuốc mê, thuốc tê.',0,1,default,5),
+                   (41,'Triệt sản cho mèo, trên 3kg','#',0,'Dịch vụ triệt sản có sử dụng thuốc mê, thuốc tê. Giá dao động 600.000đ - 1.000.000đ tùy giống loại',0,1,default,5),
+                   (42,'Triệt sản cho chó, dưới 3kg','#',1000000,'Dịch vụ triệt sản có sử dụng thuốc mê, thuốc tê.',1,1,default,5),
+                   (43,'Triệt sản cho chó, từ 3kg - 7 kg','#',1300000,'Dịch vụ triệt sản có sử dụng thuốc mê, thuốc tê.',1,1,default,5),
+                   (44,'Triệt sản cho chó, trên 7kg','#',0,'Dịch vụ triệt sản có sử dụng thuốc mê, thuốc tê. Giá dao động 1.600.000đ - 2.000.000đ tùy giống loại',1,1,default,5),
+                   (45,'Thiến cho mèo, dưới 3kg','#',400000,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê.',0,1,default,5),
+                   (46,'Thiến cho mèo, trên 3kg','#',0,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê. Giá dao động 450.000đ - 600.000đ tùy giống loại',0,1,default,5),
+                   (47,'Thiến cho chó, dưới 3kg','#',600000,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê.',1,1,default,5),
+                   (48,'Thiến cho chó, từ 3kg - 7 kg','#',850000,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê.',1,1,default,5),
+                   (49,'Thiến cho chó, trên 7kg','#',0,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê. Giá dao động 1.200.000đ - 2.000.000đ tùy giống loại',1,1,default,5);
+
+
+
 -- select * from service;
 -- appointment
  insert into appointment (apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, ctm_id, cs_id, is_delete)
@@ -179,7 +208,7 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
 -- select * from appointment;
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value)
-            values (1,'2023/03/16',1,default,1,3,1,200000,50000,150000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
+            values (1,'2023/03/16',1,default,1,3,1,550000,50000,500000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
                    (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
                    (3,'2023/04/01',1,default,1,2,null,250000,0,250000),
                    (4,'2023/04/06',1,default,2,3,null,130000,0,130000),
@@ -187,35 +216,25 @@ insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad
                    (6,'2023/04/10',1,default,5,3,null,2500000,0,2500000),
                    (7,'2023/05/01',1,default,5,6,4,200000,50000,150000),
                    (8,'2023/05/08',1,default,7,2,8,3000000,1500000,1500000),
-                   (9,'2023/05/08',1,default,7,6,null,0,0,0),
+                   (9,'2023/05/08',1,default,7,6,null,300000,0,300000),
                    (10,'2023/04/18',0,default,3,2,6,500000,50000,450000),
-                   (11,'2023/05/09',0,default,6,6,null,0,0,0);
-#             values (1,'2023/03/16',1,default,1,3,1), -- kh1, giảm 50k vs đơn tối thiểu 0đ
-#                    (2,'2023/04/10',1,default,3,2,null), -- kh3 ko đc giảm giá
-#                    (3,'2023/04/01',1,default,1,2,null),
-#                    (4,'2023/04/06',1,default,2,3,null),
-#                    (5,'2023/04/08',1,default,4,2,null),
-#                    (6,'2023/04/10',1,default,5,3,null),
-#                    (7,'2023/05/01',1,default,5,6,4),
-#                    (8,'2023/05/08',1,default,7,2,8),
-#                    (9,'2023/05/08',1,default,7,6,null),
-#                    (10,'2023/04/18',0,default,3,2,6),
-#                    (11,'2023/05/09',0,default,6,6,null);
+                   (11,'2023/05/09',0,default,6,6,null,10000000,0,10000000);
+
 -- select * from bill;
 -- detail_bill
 insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete)
-            values (default,1,3,1,200000,1,default), -- kh1 cắt tỉa lông cho chó
-                   (default,2,2,1,500000,3,default), -- kh3 tiêm phòng cho mèo lông ngắn
-                   (default,3,22,1,250000,1,default),
-                   (default,4,15,1,130000,2,default),
-                   (default,5,15,1,130000,4,default),
-                   (default,5,3,1,200000,5,default),
-                   (default,6,5,1,2500000,6,default),
-                   (default,7,3,1,200000,6,default),
-                   (default,8,4,1,3000000,9,default),
-                   (default,9,12,1,0,8,default),
-                   (default,10,2,1,500000,3,default),
-                   (default,11,6,1,0,7,default);
+            values (1,1,3,1,550000,1,default), -- kh1 cắt tỉa lông cho chó
+                   (2,2,2,1,500000,3,default), -- kh3 tiêm phòng cho mèo lông ngắn
+                   (3,3,22,1,250000,1,default),
+                   (4,4,15,1,130000,2,default),
+                   (5,5,15,1,130000,4,default),
+                   (6,5,3,1,200000,5,default),
+                   (7,6,5,1,2500000,6,default),
+                   (8,7,3,1,200000,6,default),
+                   (9,8,4,1,3000000,9,default),
+                   (10,9,12,1,300000,8,default),
+                   (11,10,2,1,500000,3,default),
+                   (12,11,6,1,10000000,7,default);
 -- select * from detail_bill;
 -- feedback
 insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
