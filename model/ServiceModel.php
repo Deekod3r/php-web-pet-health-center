@@ -20,4 +20,8 @@ class ServiceModel extends BaseModel{
         return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
     }
 
+    public function get_by_id($id){
+        return $this->find_by_id($id);
+    }
+    
 };

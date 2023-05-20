@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = 'a'; $ctr = null;?>
 <?php include("layout/asset-header.php")?>
 <body>
     <?php include("layout/header.php")?>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = "Dịch vụ";?>
-<?php include("layout/asset-header.php")?>
+<?php $title = "Dịch vụ"; ?>
+<?php include("layout/asset-header.php") ?>
+
 <body>
-    <?php include("layout/header.php")?>
+    <?php include("layout/header.php") ?>
     <!-- Services Start -->
     <div class="container-fluid bg-light pt-3 main">
         <div class="container py-5">
@@ -56,15 +57,15 @@
         </div>
     </div>
     <!-- Services End -->
-    
+
     <div class="container py-5">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-secondary mb-3"></h4>
             <h1 class="display-4 m-0">Trải nghiệm với <span class="text-primary">chi phí tốt nhất</span></h1>
         </div>
         <form action="?controller=service&action=data_service" style="margin-bottom: 40px" id="form-search-service" method="get">
-            <div class="form-group" >
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="svName" id="service-name"/>
+            <div class="form-group">
+                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="svName" id="service-name" />
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-4">
@@ -84,9 +85,47 @@
                 </div>
             </div>
             <div style="margin-top:10px; width: 250px;">
-                <button class="btn btn-lg btn-primary btn-block border-0" type="submit" >Tìm kiếm</button>
+                <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
             </div>
         </form>
+
+        <!-- modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="ml-3 mt-2 mb-0">Thông tin sản phẩm</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3" id="sv-id" style="font-size:17px; color:black"></div>
+                                <div class="col-md-8 col-lg-8 ms-auto" id="sv-name" style="font-size:17px; color:black"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4 ms-auto" id="typ-pet" style="font-size:17px; color:black"></div>
+                                <div class="col-md-6 col-lg-6 ms-auto" id="cs-name" style="font-size:17px; color:black"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7 col-lg-7 ms-auto" id="sv-price" style="font-size:17px; color:black"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 ms-auto" id="sv-desc" style="font-size:17px; color:black"></div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-3 col-lg-3"></div>
+                                <img  class="col-md-6 col-lg-6 ms-auto" src="asset/img/feature-2.jpg" alt="">
+                                <div class="col-md-3 col-lg-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" data-dismiss="modal">Đóng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
 
         <div class="row" id="data-service">
         </div>
@@ -98,7 +137,7 @@
     <div id="pop-up-service">
     </div>
 
-    <?php include("layout/footer.php")?>
+    <?php include("layout/footer.php") ?>
 
 
     <!-- Back to Top -->

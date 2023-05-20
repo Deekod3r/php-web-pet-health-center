@@ -37,9 +37,11 @@ function loadDataRecentNews(data) {
 
 $(document).ready(function () {
     
+    loadDataShop();
+
     $.ajax({
         type: 'GET',
-        url: '?controller=news&action=data_news',
+        url: '?controller=news&action=data_detail_news',
         data: {
             idNews: new URLSearchParams(document.location.href).get('id')
         },
@@ -47,8 +49,8 @@ $(document).ready(function () {
         success: function (response) {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
-                loadDataNews(response.data.news[0]);
-                loadDataShop();
+                document.title = response.data.news.news_title;
+                loadDataNews(response.data.news);
             } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {
@@ -79,7 +81,7 @@ $(document).ready(function () {
         },
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 loadDataRecentNews(response.data.news);
             } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");

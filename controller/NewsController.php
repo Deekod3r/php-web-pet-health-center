@@ -38,10 +38,6 @@ class NewsController extends BaseController
                     if ($key != '') $key = $key . " and ";
                     $key .= " cn_id = " . $_GET['categoryNews'];
                 }
-                if (isset($_GET['idNews']) and $_GET['idNews'] != '') {
-                    if ($key != '') $key = $key . " and ";
-                    $key .= " news_id = " . $_GET['idNews'];
-                }
                 if ($key != '') $key = "where " . $key;
                 $count = $newsModel->count_data($key);
                 if ($count > 0) {
@@ -83,5 +79,34 @@ class NewsController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
+    public function data_detail_news()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['idNews'])) {
+                $newsModel = $this->get_model('news');
+                $news = $newsModel->get_by_id($_GET['idNews']);
+                if ($news != null) {
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                    $data = [
+                        'news' => $news                    
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            } 
+        }  catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
 
 }
