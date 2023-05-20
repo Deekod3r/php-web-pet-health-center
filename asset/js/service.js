@@ -2,11 +2,11 @@ const limitServicePage = 6;
 
 var svName = new URLSearchParams(document.location.href).get('sv-name');
 var categoryService = new URLSearchParams(document.location.href).get('category-service');
-var typePet = new URLSearchParams(document.location.href).get('type-pet');
+var typPet = new URLSearchParams(document.location.href).get('type-pet');
 
 svName = svName != undefined && svName != null ? svName : '';
 categoryService = categoryService != undefined && categoryService != null ? categoryService : '';
-typePet = typePet != undefined && typePet != null ? typePet : '';
+typPet = typPet != undefined && typPet != null ? typPet : '';
 
 url = "?controller=service&action=service_page";
 
@@ -53,17 +53,16 @@ function loadDataPage(page) {
             index: page,
             svName: svName,
             categoryService: categoryService,
-            typePet: typePet
+            typePet: typPet
         },
-
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = ''
                 if (svName != null && svName != '') param += '&sv-name=' + svName;
                 if (categoryService != null && categoryService != '') param += '&category-service=' + categoryService;
-                if (typePet != null && typePet != '') param += '&type-pet=' + typePet;
+                if (typPet != null && typPet != '') param += '&type-pet=' + typPet;
                 if (page > 1) {
                     window.history.pushState(null, "", url + param + "&page=" + page);
                 } else window.history.pushState(null, "", url);
@@ -146,7 +145,7 @@ $(document).ready(function () {
     $('#form-search-service').submit(function (e) {
         svName = $('#service-name').val()
         categoryService = $('#category-service').val()
-        typePet = $('#type-pet').val()
+        typPet = $('#type-pet').val()
         $.ajax({
             type: 'GET',
             url: '?controller=service&action=data_service',
@@ -155,7 +154,7 @@ $(document).ready(function () {
                 index: 1,
                 svName: svName,
                 categoryService: categoryService,
-                typePet: typePet
+                typePet: typPet
             },
             dataType: 'json',
             success: function (response) {
@@ -164,7 +163,7 @@ $(document).ready(function () {
                     param = ''
                     if (svName != null && svName != '') param += '&sv-name=' + svName;
                     if (categoryService != null && categoryService != '') param += '&category-service=' + categoryService;
-                    if (typePet != null && typePet != '') param += '&type-pet=' + typePet;
+                    if (typPet != null && typPet != '') param += '&type-pet=' + typPet;
                     window.history.pushState(null, "", url + param);
                     loadDataService(response.data.service)
                     loadPaging(1, Math.ceil(response.data.count / limitServicePage));

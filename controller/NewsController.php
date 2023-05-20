@@ -35,11 +35,11 @@ class NewsController extends BaseController
                     $key .= "concat(news_title, news_content, news_description) like '%" . $_GET['newsKey'] . "%'";
                 }
                 if (isset($_GET['categoryNews']) and $_GET['categoryNews'] != '') {
-                    if ($key != '') $key = " and " . $key;
+                    if ($key != '') $key = $key . " and ";
                     $key .= " cn_id = " . $_GET['categoryNews'];
                 }
                 if (isset($_GET['idNews']) and $_GET['idNews'] != '') {
-                    if ($key != '') $key = " and " . $key;
+                    if ($key != '') $key = $key . " and ";
                     $key .= " news_id = " . $_GET['idNews'];
                 }
                 if ($key != '') $key = "where " . $key;

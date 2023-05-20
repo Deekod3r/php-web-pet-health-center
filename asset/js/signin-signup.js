@@ -38,25 +38,25 @@ function checkCharacter(input,num,lowChars,upChars,speChars,length,size) {
     let number = /[0-9]/;
     let lowerChars = /[a-z]/;
     let upperChars = /[A-Z]/;
-    let specialChars = /[\.\'^£$%&*()}{@#~?><,|=_+¬-]/;
+    let specialChars = /[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
     if (num) {
-       check = check && number.test(input);
+       check = number.test(input);
        if (!check) return false;
     }
     if (lowChars) {
-       check = check && lowerChars.test(input);
+       check = lowerChars.test(input);
        if (!check) return false;
     }
     if (upChars) {
-       check = check && upperChars.test(input);
+       check = upperChars.test(input);
        if (!check) return false;
     }
     if (speChars) {
-       check = check && specialChars.test(input);
+       check = specialChars.test(input);
        if (!check) return false;
     }
     if (length && Number.isInteger(size)) {
-       check = check && input.length >= size;
+       if (input.length < size) check = false;
        if (!check) return false;
     }
     return check;

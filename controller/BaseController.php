@@ -115,7 +115,7 @@ class BaseController
         $number = '/[0-9]/';
         $lowerChars = '/[a-z]/';
         $upperChars = '/[A-Z]/';
-        $specialChars = '/[\.\'^£$%&*()}{@#~?><,|=_+¬-]/';
+        $specialChars = '/[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/';
         if ($num) {
            $check = $check && preg_match($number, $input);
            if (!$check) return false;

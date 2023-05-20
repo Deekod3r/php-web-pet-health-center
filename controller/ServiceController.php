@@ -18,23 +18,28 @@ class ServiceController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                $key = "";
+                $key = '';
                 $limit = 0;
                 $offset = 0;
                 $serviceModel = $this->get_model('service');
                 if (isset($_GET['svName']) and $_GET['svName'] != '') {
                     $key .= "concat(sv_name,sv_description) like '%" . $_GET['svName'] . "%'";
                 }
-                if (isset($_GET['categoryService']) and $_GET['categoryService'] != '') {
-                    if ($key != '') $key = " and " . $key;
-                    $key .= " cs_id = " . $_GET['categoryService'];
-                }
                 if (isset($_GET['typePet']) and $_GET['typePet'] != '') {
-                    if ($key != '') $key = " and " . $key;
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
                     $key .= " sv_pet in (" . $_GET['typePet'] . "," . Enum::TYPE_BOTH . ")";
                 }
+                if (isset($_GET['categoryService']) and $_GET['categoryService'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " cs_id = " . $_GET['categoryService'];
+                }
                 if ($key != '') $key = "where " . $key;
-                //$message = $key;
+                // $message = $key;
+                // $data = $_GET;
                 $count = $serviceModel->count_data($key);
                 if ($count > 0) {
                     if (isset($_GET['limit']) and $_GET['limit'] != '') {
