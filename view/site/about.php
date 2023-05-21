@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="asset/img/dung.jpg" alt="" height=550px>
+                    <img class="card-img-top" src="asset/img/ThuyDung.png" alt="" height=550px>
                     <div class="card-body text-center p-0">
                         <div class="team-text d-flex flex-column justify-content-center bg-light">
                             <h5>Vũ Thị Thuỳ Dung</h5>
