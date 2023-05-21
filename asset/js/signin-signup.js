@@ -75,16 +75,16 @@ $(document).ready(function () {
     $('#register').submit(function (e) {
         let password = $('#register').find('input[name="rgPassword"]').val();
         let confirmPassword = $('#rg-confirm-password').val();
-        let name = $('#register').find('input[name="rgName"]').val();
-        let phone = $('#register').find('input[name="rgPhone"]').val();
+        let name = $('#register').find('input[name="rgName"]').val().trim();
+        let phone = $('#register').find('input[name="rgPhone"]').val().trim();
         //let email = $('#register').find('input[name="rgEmail"]').val();
-        let address = $('#register').find('input[name="rgAddress"]').val();
-        let gender = $('#register').find('input[name="rgGender"]:checked').val();
+        let address = $('#register').find('input[name="rgAddress"]').val().trim();
+        let gender = $('#register').find('input[name="rgGender"]:checked').val().trim();
         if (password != "" && confirmPassword != "" && name != "" && address != "" && phone != "" && gender != "") {
-            if (name.length >= 2 && checkCharacter(name,false,false,false,true,false,0)) {
-                if (phone.length >= 10 && phone.length <= 13 && checkCharacter(phone,true,false,false,false,true,false,0)) {
+            if (name.length >= 2 && !number.test(name) && !specialChars.test(name)) {
+                if (phone.length >= 10 && phone.length <= 13 && !lowerChars.test(phone) && !specialChars.test(phone) && !upperChars.test(phone)) {
                     if (password == confirmPassword) {
-                        if (checkCharacter(password,true,true,true,true,true,8)) {
+                        if (password.length >= 8 && number.test(password) && specialChars.test(password) && upperChars.test(password) && lowerChars.test(password)) {
                             $.ajax({
                                 type: $(this).attr('method'),
                                 url: $(this).attr('action'),

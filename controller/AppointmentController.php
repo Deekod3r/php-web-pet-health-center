@@ -158,11 +158,16 @@ class AppointmentController extends BaseController
                         $idApm = $_POST['idApm'];
                         $idCtm = json_decode($dataToken)->{'id'};
                         $appointmentModel = $this->get_model('appointment');
-                        if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
-                            $responseCode = ResponseCode::SUCCESS;
-                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thành công');
+                        $appointment = $appointmentModel->get_by_id($idApm);
+                        if ($appointment['apm_status'] == Enum::STATUS_APPOINTMENT_CONFIRMED_NO) {
+                            if ($appointmentModel->cancel_appointment($idApm, $idCtm)) {
+                                $responseCode = ResponseCode::SUCCESS;
+                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thành công');
+                            } else {
+                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thất bại');
+                            }
                         } else {
-                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,'lịch đang hẹn','thất bại');
+                            $message = "SERV: Lịch hẹn đã xác nhận, không thể huỷ.";
                         }
                     }
                 }

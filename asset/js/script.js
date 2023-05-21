@@ -1,31 +1,7 @@
-function checkCharacter(input,num,lowChars,upChars,speChars,length,size) {
-    let check = true;
-    let number = /[0-9]/;
-    let lowerChars = /[a-z]/;
-    let upperChars = /[A-Z]/;
-    let specialChars = /[ \.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
-    if (num) {
-       check = number.test(input);
-       if (!check) return false;
-    }
-    if (lowChars) {
-       check = lowerChars.test(input);
-       if (!check) return false;
-    }
-    if (upChars) {
-       check = upperChars.test(input);
-       if (!check) return false;
-    }
-    if (speChars) {
-       check = specialChars.test(input);
-       if (!check) return false;
-    }
-    if (length && Number.isInteger(size)) {
-       if (input.length < size) check = false;
-       if (!check) return false;
-    }
-    return check;
- }
+const number = /[0-9]/;
+const lowerChars = /[a-z]/;
+const upperChars = /[A-Z]/;
+const specialChars = /[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
 
 
 function confirmAction(action, object) {

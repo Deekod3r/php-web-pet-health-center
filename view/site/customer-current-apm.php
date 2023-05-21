@@ -28,6 +28,26 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="ml-3 mt-2 mb-0">Xác nhận huỷ lịch hẹn</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="ml-3 mt-2 mb-0" style="color:black">Bạn chắc chắn muốn huỷ lịch hẹn?</p>
+                        <p style="display:none" id="id-appointment"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-info" data-dismiss="modal">Đóng</a>
+                        <a class="btn btn-danger" id="confirm-cancel" data-dismiss="modal">Xác nhận</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
     </div>
 
     <?php include("layout/footer.php") ?>

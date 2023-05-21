@@ -68,17 +68,17 @@ class CustomerController extends BaseController
             if (isset($_POST['rgName']) && $_POST['rgName'] != '' && isset($_POST['rgPhone']) && $_POST['rgPhone'] != '' && isset($_POST['rgAddress']) && $_POST['rgAddress'] != '' && isset($_POST['rgPassword']) && $_POST['rgPassword'] != '' && isset($_POST['rgGender']) && $_POST['rgGender'] != '') {
                 $customerInfo = $_POST;
                 if (strlen($customerInfo['rgName']) >= 2) {
-                    if (strlen($customerInfo['rgPhone']) >= 10 && strlen($customerInfo['rgPhone']) <= 13 && !$this->checkChars($customerInfo['rgPhone'], true, false, false, true, false, 0)) {
-                        if ($this->checkChars($customerInfo['rgPassword'], true, true, true, true, true, 8)) {
+                    if (strlen($customerInfo['rgPhone']) >= 10 && strlen($customerInfo['rgPhone']) <= 13 && !preg_match($this->specialChars, $customerInfo['rgPhone']) && !preg_match($this->upperChars, $customerInfo['rgPhone']) && !preg_match($this->lowerChars, $customerInfo['rgPhone'])) {
+                        if (strlen($customerInfo['rgPassword']) >= 8 && preg_match($this->number, $customerInfo['rgPassword']) && preg_match($this->lowerChars, $customerInfo['rgPassword']) && preg_match($this->upperChars, $customerInfo['rgPassword']) && preg_match($this->specialChars, $customerInfo['rgPassword'])) {
                             $cus0 = $customerModel->get_by_phone($customerInfo['rgPhone'], 0);
                             $cus1 = $customerModel->get_by_phone($customerInfo['rgPhone'], 1);
                             if ($cus0 == null && $cus1 == null) {
                                 $data[] = 1;
                                 $dataRegister = [
-                                    'name' => $customerInfo['rgName'],
+                                    'name' => trim($customerInfo['rgName']),
                                     //'email' => $_POST['rgEmail'],
-                                    'phone' => $customerInfo['rgPhone'],
-                                    'address' => $customerInfo['rgAddress'],
+                                    'phone' => trim($customerInfo['rgPhone']),
+                                    'address' => trim($customerInfo['rgAddress']),
                                     'password' => md5($customerInfo['rgPassword']),
                                     'gender' => $customerInfo['rgGender'],
                                     'active' => 1
@@ -100,8 +100,8 @@ class CustomerController extends BaseController
                                 $dataRegister = [
                                     //'ctm_name' => $_POST['rgName'],
                                     //'ctm_email' => $_POST['rgEmail'],
-                                    'ctm_phone' => $customerInfo['rgPhone'],
-                                    'ctm_address' => $customerInfo['rgAddress'],
+                                    'ctm_phone' => trim($customerInfo['rgPhone']),
+                                    'ctm_address' => trim($customerInfo['rgAddress']),
                                     'ctm_password' => md5($customerInfo['rgPassword']),
                                     //'ctm_gender' => $_POST['rgGender'],
                                     'ctm_active' => 1

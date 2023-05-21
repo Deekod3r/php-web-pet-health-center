@@ -143,7 +143,7 @@ create table bill
     constraint fk_bill_discount foreign key (dc_id) references discount(dc_id),
     constraint check_value_reduced check(value_reduced >= 0),
     constraint check_total_value check(total_value >= 0),
-    constraint check_value_temp check(sub_total >= 0)
+    constraint check_sub_total check(sub_total >= 0)
 );
 
 create table detail_bill

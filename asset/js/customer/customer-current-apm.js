@@ -42,7 +42,7 @@ function loadDataCurrentApm() {
                     appointmentData += "<td>";
                     if (element.apm_status == 0) {
                         appointmentData +=
-                            "<a style='font-weight:600; cursor:pointer;' class='badge badge-danger' id='cancel-appointment' onclick='cancelAppointment(" +
+                            "<a style='font-weight:600; cursor:pointer;' class='badge badge-danger' data-toggle='modal' data-target='#myModal' id='cancel-appointment' onclick='cancelConfirm(" +
                             element.apm_id +
                             ")'>Huỷ</a>";
                     }
@@ -68,43 +68,45 @@ function loadDataCurrentApm() {
     });
 }
 
-function cancelAppointment(id) {
-    if (confirm("Are you sure you want to cancel?")) {
-        //console.log(sessionStorage.getItem("token"));
-        $.ajax({
-            type: "POST",
-            url: "?controller=appointment&action=cancel_appointment",
-            data: {
-                token: sessionStorage.getItem("token"),
-                idApm: id,
-            },
-            dataType: "json",
-            success: function (response) {
-                //console.log(response);
-                if (response.responseCode == responseCode.success) {
-                    $("#msg-cancel-appointment").html("Huỷ lịch hẹn thành công.");
-                    $("#msg-cancel-appointment").addClass(" alert-success");
-                    $("#msg-cancel-appointment").show();
-                    window.setTimeout(function () {
-                        $("#msg-cancel-appointment").hide();
-                    }, 3000);
-                    loadDataCurrentApm();
-                } else if (response.responseCode == responseCode.fail) {
-                    $("#msg-cancel-appointment").html(response.message);
-                    $("#msg-cancel-appointment").addClass(" alert-danger");
-                    $("#msg-cancel-appointment").show();
-                    window.setTimeout(function () {
-                        $("#msg-cancel-appointment").hide();
-                    }, 3000);
-                    loadDataCurrentApm();
-                } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
-            },
-            error: function (xhr) {
-                alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
-            }
-        });
-    }
+function cancelConfirm(id) {
+    $('#id-appointment').html(id);
 }
+
+$('#confirm-cancel').click(function(){
+    $.ajax({
+        type: "POST",
+        url: "?controller=appointment&action=cancel_appointment",
+        data: {
+            token: sessionStorage.getItem("token"),
+            idApm: $('#id-appointment').html(),
+        },
+        dataType: "json",
+        success: function (response) {
+            //console.log(response);
+            if (response.responseCode == responseCode.success) {
+                $("#msg-cancel-appointment").html("Huỷ lịch hẹn thành công.");
+                $("#msg-cancel-appointment").addClass(" alert-success");
+                $("#msg-cancel-appointment").show();
+                window.setTimeout(function () {
+                    $("#msg-cancel-appointment").hide();
+                }, 3000);
+                loadDataCurrentApm();
+            } else if (response.responseCode == responseCode.fail) {
+                $("#msg-cancel-appointment").html(response.message);
+                $("#msg-cancel-appointment").addClass(" alert-danger");
+                $("#msg-cancel-appointment").show();
+                window.setTimeout(function () {
+                    $("#msg-cancel-appointment").hide();
+                }, 3000);
+                loadDataCurrentApm();
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+        },
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        }
+    });
+})
+
 
 $(document).ready(function () {
     loadDataCurrentApm();

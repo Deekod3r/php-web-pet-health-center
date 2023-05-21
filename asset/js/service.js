@@ -1,4 +1,4 @@
-const limitServicePage = 6;
+const limitServicePage = 3;
 
 var svName = new URLSearchParams(document.location.href).get("sv-name");
 var categoryService = new URLSearchParams(document.location.href).get(
@@ -43,6 +43,7 @@ function loadPaging(index, endPage) {
     page += "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +index +")'>" + index +"</a></li>";
     for (let i = index + 1; i <= endPage; i++) {
         page += "    <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + i + ")'>" +i + "</a></li>";
+        if (i == index + 3) break;
     }
 
     page += "    <li class='page-item foot' id='next'>";
