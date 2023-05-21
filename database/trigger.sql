@@ -80,7 +80,7 @@ create trigger trigger_insert_DetailBill
 #         declare $discountValuePercent double; declare $discountValue double; declare $dcId int;
 #         select dc_id into $dcId from bill where bill.bill_id = NEW.bill_id;
         update bill
-        set value_temp = value_temp + NEW.value
+        set sub_total = sub_total + NEW.value
         where bill_id = NEW.bill_id;
 #         if($dcId is null) then
 #             update bill
@@ -95,13 +95,13 @@ create trigger trigger_insert_DetailBill
 #                   where discount.dc_id = $dcId;
 #             update bill
 #             set
-#                 value_reduced = (value_temp * $discountValuePercent/100)+ $discountValue
+#                 value_reduced = (sub_total * $discountValuePercent/100)+ $discountValue
 #             where bill.bill_id = NEW.bill_id;
 #         end;
 #         end if;
 #         update bill
 #         set
-#             total_value = value_temp - value_reduced
+#             total_value = sub_total - value_reduced
 #         where bill.bill_id = NEW.bill_id;
     end;
 
@@ -135,7 +135,7 @@ create trigger trigger_updateAfter_DetailBill
 #         declare $discountValuePercent double; declare $discountValue double; declare $dcId int;
 #         select dc_id into $dcId from bill where bill.bill_id = NEW.bill_id;
         update bill
-        set value_temp = value_temp + (NEW.quantity - OLD.quantity) * NEW.sv_price
+        set sub_total = sub_total + (NEW.quantity - OLD.quantity) * NEW.sv_price
         where bill_id = NEW.bill_id;
 #         if($dcId is null) then
 #             update bill
@@ -150,13 +150,13 @@ create trigger trigger_updateAfter_DetailBill
 #                   where discount.dc_id = $dcId;
 #             update bill
 #             set
-#                 value_reduced = (value_temp * $discountValuePercent/100)+ $discountValue
+#                 value_reduced = (sub_total * $discountValuePercent/100)+ $discountValue
 #             where bill.bill_id = NEW.bill_id;
 #         end;
 #         end if;
 #         update bill
 #         set
-#             total_value = value_temp - value_reduced
+#             total_value = sub_total - value_reduced
 #         where bill.bill_id = NEW.bill_id;
     end;
 
@@ -179,7 +179,7 @@ create trigger trigger_delete_DetailBill
 #         declare $discountValuePercent double; declare $discountValue double; declare $dcId int;
 #         select dc_id into $dcId from bill where bill.bill_id = OLD.bill_id;
         update bill
-        set value_temp = value_temp - OLD.value
+        set sub_total = sub_total - OLD.value
         where bill_id = OLD.bill_id;
 #         if($dcId is null) then
 #             update bill
@@ -194,13 +194,13 @@ create trigger trigger_delete_DetailBill
 #                   where discount.dc_id = $dcId;
 #             update bill
 #             set
-#                 value_reduced = (value_temp * $discountValuePercent/100)+ $discountValue
+#                 value_reduced = (sub_total * $discountValuePercent/100)+ $discountValue
 #             where bill.bill_id = OLD.bill_id;
 #         end;
 #         end if;
 #         update bill
 #         set
-#             total_value = value_temp - value_reduced
+#             total_value = sub_total - value_reduced
 #         where bill.bill_id = OLD.bill_id;
     end;
 
