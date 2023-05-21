@@ -138,12 +138,9 @@ $(document).ready(function () {
             if (response.responseCode == responseCode.success) {
                 var categoryNewsData = "";
                 response.data.categoryNews.forEach((element) => {
-                    categoryNewsData +=
-                        "<option value='" +
-                        element.cn_id +
-                        "'>" +
-                        element.cn_name +
-                        "</option>";
+                    select = "";
+                    if (categoryNews ==  element.cn_id) select = "selected";
+                    categoryNewsData += "<option value='" + element.cn_id +"' " + select + ">" +element.cn_name +"</option>";
                 });
                 $("#category-news").append(categoryNewsData);
             } else if (response.responseCode != responseCode.dataEmpty) alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");

@@ -38,7 +38,7 @@ function logout() {
         success: function(response) {
             //console.log(response);
             if(response.responseCode == responseCode.success){
-                sessionStorage.removeItem('token');
+                sessionStorage.clear();
                 window.location.replace('?controller=home&action=index');
             } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },

@@ -82,7 +82,7 @@
                     <a href="?controller=shop&action=about_page" class="nav-item nav-top nav-link <?php if ($title == "Thông tin shop") echo "active"; ?>">Thông tin shop</a>
                     <a href="?controller=shop&action=contact_page" class="nav-item nav-top nav-link <?php if ($title == "Liên hệ") echo "active"; ?>">Liên hệ</a>
                 </div>
-                <?php if (isset($_SESSION['login']) && $_SESSION['login'] == true) { ?>
+                <?php if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ROLE_CUSTOMER) { ?>
                     <div class="dropdown" id="" style="margin-right:20px">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thông tin tài khoản</a>
                         <ul class="dropdown-menu">

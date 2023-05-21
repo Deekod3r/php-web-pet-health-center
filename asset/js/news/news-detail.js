@@ -3,7 +3,7 @@ function loadDataCategoryNews(data) {
     var categoryNewsData = "";
     data.forEach(element => {
         categoryNewsData += "<li class='list-group-item d-flex justify-content-between align-items-center'>"
-        categoryNewsData += "<a class='text-dark mb-2' href=''>" + element.cn_name + "</a>"
+        categoryNewsData += "<a class='text-dark mb-2' href='?controller=news&action=news_page&category-news="+ element.cn_id +"'>" + element.cn_name + "</a>"
         categoryNewsData += "<span class='badge badge-primary badge-pill'>HOT</span>"
         categoryNewsData += "</li>"
     });

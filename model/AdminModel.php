@@ -16,6 +16,11 @@ class AdminModel extends BaseModel{
         return $this->find_all($key);
     }
     
+    public function get_by_id($id)
+    {
+        return $this->find_by_id($id);
+    }
+    
     public function get_by_username($username){
         $response = null;
         $conn = $this->get_connection();

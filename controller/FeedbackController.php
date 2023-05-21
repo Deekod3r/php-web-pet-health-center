@@ -8,7 +8,7 @@ class FeedbackController extends BaseController
             $this->render_view(
                 'feedback'
             );
-        } else include('view/error/error-400.php');
+        } else $this->render_error('400');
     }
 
     public function data_feedback()
@@ -16,42 +16,47 @@ class FeedbackController extends BaseController
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $limit = 0;
-            $offset = 0;
-            $feedbackModel = $this->get_model('feedback');
-            $count = $feedbackModel->count_data("");
-            if ($count > 0) {
-                $key = " order by fb_time DESC ";
-                if (isset($_GET['limit']) and $_GET['limit'] != '') {
-                    $limit = $_GET['limit'];
-                    if ($limit > 0) {
-                        $key .= " limit " . $limit;
-                        if (isset($_GET['index']) and $_GET['index'] != '') {
-                            $index = $_GET['index'];
-                            if ($index > 1) {
-                                $offset = ($index - 1) * $limit;
-                            }
-                            if ($offset > 0) {
-                                $key .= " offset " . $offset;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $limit = 0;
+                $offset = 0;
+                $feedbackModel = $this->get_model('feedback');
+                $count = $feedbackModel->count_data("");
+                if ($count > 0) {
+                    $key = " order by fb_time DESC ";
+                    if (isset($_GET['limit']) and $_GET['limit'] != '') {
+                        $limit = $_GET['limit'];
+                        if ($limit > 0) {
+                            $key .= " limit " . $limit;
+                            if (isset($_GET['index']) and $_GET['index'] != '') {
+                                $index = $_GET['index'];
+                                if ($index > 1) {
+                                    $offset = ($index - 1) * $limit;
+                                }
+                                if ($offset > 0) {
+                                    $key .= " offset " . $offset;
+                                }
                             }
                         }
                     }
+                    $feedbackData = $feedbackModel->get_data($key);
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "feedback", "thành công.");
+                    $data = [
+                        'feedback' => $feedbackData,
+                        'count' => $count
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "feedback");
                 }
-                $feedbackData = $feedbackModel->get_data($key);
-                $responseCode = ResponseCode::SUCCESS;
-                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "feedback", "thành công.");
-                $data = [
-                    'feedback' => $feedbackData,
-                    'count' => $count
-                ];
             } else {
-                $responseCode = ResponseCode::DATA_EMPTY;
-                $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "feedback");
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
             }
-        } else {
-            $responseCode = ResponseCode::REQUEST_INVALID;
-            $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
         }
         $this->response($responseCode, $message, $data);
     }

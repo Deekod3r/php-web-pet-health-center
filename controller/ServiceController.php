@@ -8,7 +8,7 @@ class ServiceController extends BaseController
             $this->render_view(
                 'service'
             );
-        }
+        } else $this->render_error('400');
     }
 
     public function data_service()
@@ -58,12 +58,17 @@ class ServiceController extends BaseController
                         }
                     }
                     $service = $serviceModel->get_data($key);
-                    $responseCode = ResponseCode::SUCCESS;
-                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"dịch vụ","thành công.");
-                    $data = [
-                        'service' => $service,
-                        'count' => $count
-                    ];
+                    if ($service != null) {
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"dịch vụ","thành công.");
+                        $data = [
+                            'service' => $service,
+                            'count' => $count
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::DATA_EMPTY;
+                        $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"dịch vụ");
+                    }
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
                     $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"dịch vụ");

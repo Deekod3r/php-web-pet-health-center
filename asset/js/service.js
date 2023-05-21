@@ -1,4 +1,4 @@
-const limitServicePage = 3;
+const limitServicePage = 6;
 
 var svName = new URLSearchParams(document.location.href).get("sv-name");
 var categoryService = new URLSearchParams(document.location.href).get(
@@ -80,7 +80,7 @@ function loadDataPage(page) {
         },
         dataType: "json",
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = "";
                 if (svName != null && svName != "") param += "&sv-name=" + svName;
@@ -138,7 +138,7 @@ function loadDataService(data) {
         serviceData +=
             "<div class='card-header position-relative border-0 p-0'>";
         serviceData +=
-            "<img class='card-img-top' src='"+ element.sv_img +"' alt='' height=180px>";
+            "<img class='card-img-top' src='"+ element.sv_img +"' alt='' height=200px>";
         serviceData +=
             "<div class='position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100' style='top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5); '>";
         serviceData += "<h3 class='text-primary mb-3'></h3>";

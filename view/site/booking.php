@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="bg-primary py-0 px-3 px-sm-5">
-                        <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
+                        <?php if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ROLE_CUSTOMER) { ?>
                             <form class="py-5" method="post" id="form-booking" action="?controller=appointment&action=booking">
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ngày</p>
@@ -44,7 +44,7 @@
                                 </div>
                             </form>
                         <?php } else { ?>
-                            <h4 style="margin-bottom:0">Vui lòng đăng nhập để đặt lịch</h4>
+                            <h4 class="m-0 pt-3 pb-3">Vui lòng đăng nhập để đặt lịch</h4>
                         <?php } ?>
                     </div>
                 </div>

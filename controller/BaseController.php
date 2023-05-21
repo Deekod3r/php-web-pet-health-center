@@ -23,16 +23,13 @@ class BaseController
 
     public function render_error($errorCode)
     {
-        $path = 'error/error-';
+        $path = 'view/error/error-';
         include($path . $errorCode . '.php');
     }
 
-    public function render_view_role($viewName, $role)
+    public function render_view_admin($viewName)
     {
-        $path = 'view/';
-        if ($role == 'admin') {
-            $path .= 'admin/';
-        } else $path .= 'site/';
+        $path = 'view/admin/';
         include($path . $viewName . '.php');
     }
 
@@ -50,17 +47,23 @@ class BaseController
 
     public function check_login()
     {
-        if (!isset($_SESSION['login']) || !$_SESSION['login']) {
-            return false;
-        } else return true;
+        if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ROLE_CUSTOMER) {
+            return true;
+        } else return false;
     }
 
     public function check_admin()
     {
-        if (!isset($_SESSION['admin']) || !$_SESSION['admin']) {
-            include('view/error/error-403.php');
-            return false;
-        } else return true;
+        if (isset($_SESSION['login']) && ($_SESSION['login'] == Enum::ADMIN)) {
+            return true;
+        } else return false;
+    }
+
+    public function check_admin_role($role)
+    {
+        if (isset($_SESSION['role']) && $_SESSION["ad".$role]) {
+            return true;
+        } else return false;
     }
 
     public function generate_token($id,$typeAccount,$role)

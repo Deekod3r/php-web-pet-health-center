@@ -1,9 +1,9 @@
 <?php
 include('controller/BaseController.php');
 include('model/BaseModel.php');
-include('config/Enum/Enum.php');
-include('config/Enum/ResponseCode.php');
-include('config/Enum/ResponseMessage.php');
+include('app/Enum/Enum.php');
+include('app/Enum/ResponseCode.php');
+include('app/Enum/ResponseMessage.php');
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     //echo $_GET['controller']. " " . $_GET['action'];

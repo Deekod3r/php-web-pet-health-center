@@ -44,7 +44,7 @@ $(document).ready(function () {
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (response) {
-                    //console.log(response);
+                    console.log(response);
                     if (response.responseCode == responseCode.success) {
                         sessionStorage.setItem("token", response.data.token);
                         if (response.data.typeAccount == "admin") {
@@ -58,8 +58,8 @@ $(document).ready(function () {
                         }, 3000);
                     }
                 },
-                error: function (error) {
-                    $('#msg-login').html("ER: Lỗi đăng nhập, vui lòng thử lại sau ít phút. " + error);
+                error: function (xhr) {
+                    $('#msg-login').html("ER: Lỗi đăng nhập, vui lòng thử lại sau ít phút. " + xhr);
                 }
             })
         } else {
@@ -79,7 +79,7 @@ $(document).ready(function () {
         let phone = $('#register').find('input[name="rgPhone"]').val().trim();
         //let email = $('#register').find('input[name="rgEmail"]').val();
         let address = $('#register').find('input[name="rgAddress"]').val().trim();
-        let gender = $('#register').find('input[name="rgGender"]:checked').val().trim();
+        let gender = $('#register').find('input[name="rgGender"]:checked').val();
         if (password != "" && confirmPassword != "" && name != "" && address != "" && phone != "" && gender != "") {
             if (name.length >= 2 && !number.test(name) && !specialChars.test(name)) {
                 if (phone.length >= 10 && phone.length <= 13 && !lowerChars.test(phone) && !specialChars.test(phone) && !upperChars.test(phone)) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
                                     $('#msg-register').show(); 
                                 }
                             })
-                        } else $('#msg-register').html("CLI: Mật khẩu phải bao gồm chữ cái hoa, chữ cái thường, số, ít nhất 1 ký tự đặc biệt và có độ dài tối thiểu 8 ký tự.");
+                        } else $('#msg-register').html("CLI: Mật khẩu phải bao gồm chữ cái hoa-thường-số, ít nhất 1 ký tự đặc biệt và độ dài tối thiểu 8 ký tự.");
                     } else {
                         $('#msg-register').html("CLI: Mật khẩu chưa trùng khớp.");
                     }
@@ -125,5 +125,4 @@ $(document).ready(function () {
         }, 5000);
         e.preventDefault();
     })
-
 })

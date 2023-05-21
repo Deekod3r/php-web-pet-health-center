@@ -8,7 +8,7 @@ class NewsController extends BaseController
             $this->render_view(
                 'blog'
             );
-        }
+        } else $this->render_error('400');
     }
 
     public function detail_news()
@@ -17,7 +17,7 @@ class NewsController extends BaseController
             $this->render_view(
                 'single'
             );
-        } else  $this->redirect('home', 'index');
+        } else $this->render_error('400');
     }
     
     public function data_news()
@@ -58,12 +58,17 @@ class NewsController extends BaseController
                         }
                     }
                     $news = $newsModel->get_data($key);
-                    $responseCode = ResponseCode::SUCCESS;
-                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
-                    $data = [
-                        'news' => $news,
-                        'count' => $count
-                    ];
+                    if ($news !== null) { 
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                        $data = [
+                            'news' => $news,
+                            'count' => $count
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::DATA_EMPTY;
+                        $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                    }
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
                     $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");

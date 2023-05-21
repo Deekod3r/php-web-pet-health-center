@@ -18,8 +18,13 @@
   <div class="container">
     <div class="forms">
       <div class="form login">
+        <div class="login-signup" style="margin-top:0px; margin-bottom:10px">
+          <i class="fa-sharp fa-solid fa-shield-dog text-secondary mr-2 fa-xl"  style="color: #ed6436; font-size:30px; margin-left:5px"></i>
+          <a class="title" href="?controller=home&action=index" style="font-size:18px;">CarePET</a>
+          <i class="fa-sharp fa-solid fa-shield-cat text-secondary mr-2 fa-xl"  style="color: #ed6436; font-size:30px; margin-left:5px"></i>
+          <!-- <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>         -->
+        </div>
         <span class="title">Đăng nhập</span>
-        <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=home&action=login_action" method="post" name="login" id="login">
           <div class="input-field">
             <input type="text" placeholder=" " class="form-input" name="lgUsername" id="lg-username">
@@ -54,8 +59,13 @@
       </div>
 
       <div class="form signup">
+        <div class="login-signup" style="margin-top:0px; margin-bottom:10px">
+          <i class="fa-sharp fa-solid fa-shield-dog text-secondary mr-2 fa-xl"  style="color: #ed6436; font-size:30px; margin-left:5px"></i>
+          <a class="title" href="?controller=home&action=index" style="font-size:18px;">CarePET</a>
+          <i class="fa-sharp fa-solid fa-shield-cat text-secondary mr-2 fa-xl"  style="color: #ed6436; font-size:30px; margin-left:5px"></i>
+          <!-- <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>         -->
+        </div>
         <span class="title">Đăng ký</span>
-        <i class="fa-solid fa-paw" style="color: #ed6436; font-size:30px; margin-left:5px"></i>        
         <form action="?controller=customer&action=register" name="register" id="register" method="POST">
           <div class="input-field">
             <input type="text" placeholder=" " class="form-input" name="rgName" id="rg-name">
@@ -90,18 +100,18 @@
             <i class="uil uil-eye-slash showHidePw"></i>
           </div>
           <div class="Gender">
-            <h4 class="mb-2 pb-1">Giới tính: </h4>
+            <h4 class="mb-2 pb-1" style="font-size:15px; color: #ED6436;">Giới tính: </h4>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-male" value="1" />
-              <label class="form-check-label" for="maleGender">Nam</label>
+              <label class="form-check-label" for="maleGender" style="font-size:15px; color: #ED6436;">Nam</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-female" value="0" />
-              <label class="form-check-label" for="femaleGender">Nữ</label>
+              <label class="form-check-label" for="femaleGender" style="font-size:15px; color: #ED6436;">Nữ</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="rgGender" id="rg-gender-other" value="2" />
-              <label class="form-check-label" for="otherGender">Khác</label>
+              <label class="form-check-label" for="otherGender" style="font-size:15px; color: #ED6436;">Khác</label>
             </div>
           </div>
           <div class="input-field button">
