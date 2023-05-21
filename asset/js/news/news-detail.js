@@ -15,13 +15,14 @@ function loadDataNews(data) {
     $('.category-news').append(data.cn_name);
     $('.news-content').append(data.news_content);
     $('.news-date-release').append(data.news_date_release);
+    $('.news-img').attr("src",data.news_img);
 }
 
 function loadDataRecentNews(data) {
     var recentNewsData = "";
     data.forEach(element => {
         recentNewsData += "<div class='d-flex align-items-center border-bottom mb-3 pb-3'>"
-        recentNewsData += "<img class='img-fluid' src='asset/img/blog-1.jpg' style='width: 30%; height: 30%;' alt=''>"
+        recentNewsData += "<img class='img-fluid' src='"+ element.news_img +"' style='width: 30%; height: 30%;' alt=''>"
         recentNewsData += "<div class='d-flex flex-column pl-3'>"
         recentNewsData += "<a class='text-dark mb-2' href='?controller=news&action=detail_news&id=" + element.news_id + "'>" + element.news_title + "</a>"
         recentNewsData += "<div class='d-flex'>"

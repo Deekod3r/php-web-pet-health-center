@@ -1,4 +1,4 @@
-const limitFeedbackPage = 5;
+const limitFeedbackPage = 4;
 
 url = "?controller=feedback&action=feedback_page"
 
@@ -9,23 +9,23 @@ function loadPaging(index, endPage) {
     page += "     <nav aria-label='Page navigation'>"
     page += "   <ul class='pagination justify-content-center mb-4'>"
     page += "   <li class='page-item ' id='previous'>"
-    page += "       <a class='page-link' aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>"
-    page += "       <span aria-hidden='true'>&laquo; Previous</span>"
+    page += "       <a class='page-link' aria-label='Previous' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>"
+    page += "       <span aria-hidden='true'>&laquo; Trước</span>"
     page += "       </a>"
     page += "   </li>"
     if (index > 2) {
-        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
-        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     } else if (index > 1) {
-        page += "   <li class='page-item'><a class='page-link' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>"
     }
-    page += "   <li class='page-item active'><a class='page-link' onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
+    page += "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + index + ")'>" + index + "</a></li>"
     for (let i = index + 1; i <= endPage; i++) {
-        page += "    <li class='page-item'><a class='page-link' onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
+        page += "    <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + i + ")'>" + i + "</a></li>"
     }
     page += "    <li class='page-item' id='next'>"
-    page += "        <a class='page-link'  aria-label='Next' onclick='loadDataPage(" + (index + 1) + ")'>"
-    page += "         <span aria-hidden='true'>Next &raquo;</span>"
+    page += "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" + (index + 1) + ")'>"
+    page += "         <span aria-hidden='true'>Sau &raquo;</span>"
     page += "        </a>"
     page += "     </li>"
     page += "     </ul>"
@@ -68,14 +68,14 @@ function loadDataFeedback(data) {
         feedbackData += "<div class='media mb-4'> "
         feedbackData += "   <img src='asset/img/customer.png' alt='Image' class='img-fluid mr-3 mt-1' style='width: 45px;'>"
         feedbackData += "   <div class='media-body'>"
-        feedbackData += "       <h6 style='margin-bottom:0'>" + element.ctm_name + " | <small>" + element.fb_time + "</small></h6>"
+        feedbackData += "       <h6 style='margin-bottom:0; font-weight:bold'>" + element.ctm_name + " | <small>" + element.fb_time + "</small></h6>"
         for (i = 0; i < element.fb_rating; i++) {
             feedbackData += "   <span style='font-size: 20px;'><img class='img-fluid' src='asset/img/star.png' style='width: 15px; height: 15px; display: inline' alt=''></span>"
         }
         for (i = element.fb_rating; i < 5; i++) {
             feedbackData += "   <span style='font-size: 20px;'><img class='img-fluid' src='asset/img/non-star.png' style='width: 13px; height: 13px; display: inline' alt=''></span>"
         }
-        feedbackData += "     <p>" + element.fb_content + "</p>"
+        feedbackData += "     <p style='color:black'>" + element.fb_content + "</p>"
         feedbackData += "      <button class='btn btn-sm btn-light' style='display:none'></button> "
         feedbackData += "  </div>"
         feedbackData += "</div>"

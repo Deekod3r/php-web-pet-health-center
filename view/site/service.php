@@ -65,20 +65,20 @@
         </div>
         <form action="?controller=service&action=data_service" style="margin-bottom: 40px" id="form-search-service" method="get">
             <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Nhập tên dịch vụ" name="svName" id="service-name" />
+                <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập tên dịch vụ: </p>
+                <input type="text" class="form-control border-1" placeholder="VD: Tiêm phòng" name="svName" id="service-name" />
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-4">
-                    <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục dịch vụ: </p>
+                    <p style="font-weight:bold; margin-bottom:0; color:black">&nbspDanh mục dịch vụ: </p>
                     <select name="categoryService" id="category-service" class="custom-select" style="width:250px;">
-                        <option value="">Chọn danh mục dịch vụ</option>
                         <option value="">Tất cả</option>
                     </select>
                 </div>
                 <div class="col-lg-8">
-                    <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục thú cưng: </p>
+                    <p style="font-weight:bold; margin-bottom:0;color:black">&nbspDanh mục thú cưng: </p>
                     <select name="typePet" id="type-pet" class="custom-select" style="width:250px;">
-                        <option value="">Chọn loại thú cưng</option>
+                        <option value="">Tất cả</option>
                         <option value="0">Mèo</option>
                         <option value="1">Chó</option>
                     </select>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="row mt-1">
                                 <div class="col-md-3 col-lg-3"></div>
-                                <img  class="col-md-6 col-lg-6 ms-auto" src="asset/img/feature-2.jpg" alt="">
+                                <img  class="col-md-6 col-lg-6 ms-auto" id="sv-img" src="" alt="">
                                 <div class="col-md-3 col-lg-3"></div>
                             </div>
                         </div>

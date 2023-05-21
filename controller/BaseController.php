@@ -51,7 +51,6 @@ class BaseController
     public function check_login()
     {
         if (!isset($_SESSION['login']) || !$_SESSION['login']) {
-            include('view/error/error-403.php');
             return false;
         } else return true;
     }

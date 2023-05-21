@@ -17,9 +17,8 @@
                         <span class="mr-3 news-date-release"><i class="fa fa-calendar text-muted"></i> </span>
                     </div>
                 </div>
-
                 <div class="mb-5">
-                    <img class="img-fluid w-100 mb-4" src="asset/img/carousel-1.jpg" alt="Image">
+                    <img class="img-fluid w-100 mb-4 news-img" src="" alt="Image">
                     <p class="news-content"></p>
                 </div>
             </div>

@@ -12,12 +12,12 @@
         </div>
         <form action="" style="margin-bottom: 40px" id="form-search-news">
             <div class="form-group">
-                <input type="text" class="form-control border-1" placeholder="Nhập nội dung tin tức" name="newsKey" id="news-key">
+                <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập nội dung tin tức: </p>
+                <input type="text" class="form-control border-1" placeholder="VD: Cách nuôi mèo anh lông ngắn..." name="newsKey" id="news-key">
             </div>
             <div>
-                <p style="font-weight:bold; margin-bottom:0">&nbspDanh mục tin tức: </p>
+                <p style="font-weight:bold; margin-bottom:0; color:black">&nbspDanh mục tin tức: </p>
                 <select name="categoryNews" id="category-news" class="custom-select" style="width:250px;">
-                    <option value="">Chọn danh mục tin tức</option>
                     <option value="">Tất cả</option>                   
                 </select>
             </div>

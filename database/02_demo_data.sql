@@ -23,6 +23,9 @@ insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_p
                    (12,'Hoàng Quốc Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true, false);
 
 -- select * from customer;
+update admin set ad_password = 'c4ca4238a0b923820dcc509a6f75849b' where 1=1;
+update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_active = 1;
+
 -- discount
 insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active, is_delete)
             values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
@@ -65,15 +68,15 @@ insert into news (news_id, news_title, news_description, news_content, news_img,
                     (default,'Hướng dẫn cách nuôi mèo Anh lông ngắn chi tiết cho người mới',
                     'Mèo Anh lông ngắn luôn nằm trong top những giống mèo đẹp nhất trên thế giới. Giống mèo này rất được ưa chuộng để lựa chọn làm thú cưng nhờ thân hình mũm mĩm, lông ngắn, khuôn mặt bầu bĩnh và tính cách thân thiện. Tuy nhiên, để chăm sóc cho chúng khỏe mạnh, ngoan ngoãn thì không phải ai cũng biết cách.' ,
                     'Các vấn đề, bệnh lý thường gặp Giống mèo Anh lông ngắn thường gặp những chứng bệnh đặc biệt, vì thế bạn cần tìm hiểu kỹ càng nguyên nhân để tìm ra phương pháp chữa trị đúng cách. Các loại bệnh mà mèo Anh lông ngắn thường hay mắc phải như: Bệnh tiểu đường Bệnh viêm nướu răng Bệnh Feline Leukemia Virus Bệnh dại Bệnh nhiễm trùng đường hô hấp Bệnh Chlamydia Bệnh ký sinh trùng Bệnh Hypertrophic Cardiomyopathy',
-                    'view/upload/admin/news/nuoi-cho-corgi2.jpg','2023/03/25',1,4,2, false),
+                    'view/upload/admin/news/meo-anh-long-ngan-de-thuong.jpg','2023/03/25',1,4,2, false),
                     (default,'Bật Mí Cách Nuôi Chó Corgi Hiệu Quả Cho Người Chưa Có Kinh Nghiệm P2',
                     'Corgi là giống cảnh khuyển xứ lạnh nên chúng khó có thể phát triển toàn diện tại khí hậu nắng nóng của Việt Nam. Trong quá trình nuôi dưỡng cún, bạn cần lưu ý đến cách chăm sóc và vệ sinh để Corgi có thể phòng tránh một số bệnh không đáng có.',
                     'Sở hữu bộ lông dày 2 lớp với tác dụng giữ nhiệt nên khi du nhập vào Việt Nam, công dụng này không còn phù hợp với cún. Để Corgi có thể thoải mái phát triển, Siêu Pet nhắc bạn nên chú ý cắt tỉa lông khoảng 2-3 tháng một lần. Ngoài việc cắt tỉa, bạn cũng nên tắm cho cún thường xuyên. Đồng thời, dùng lược chải lông cho Corgi mỗi ngày để loại bỏ phần lông chết. Nếu lông Corgi ẩm ướt, bạn nên dùng máy sấy sấy khô, tránh để vi khuẩn có cơ hội phát triển. Nếu không có thời gian chăm sóc lông cho Corgi, bạn có thể đưa chúng đến các Spa thú cưng.',
-                    'view/upload/admin/news/nuoi-cho-corgi3.jpg','2023/03/15',1,4,4,false),
+                    'view/upload/admin/news/nuoi-cho-corgi2.jpg','2023/03/15',1,4,4,false),
                     (default,'Bật Mí Cách Nuôi Chó Corgi Hiệu Quả Cho Người Chưa Có Kinh Nghiệm P3',
                     'Corgi thuộc vào nhóm những giống cảnh khuyển có tuổi thọ khá cao: Khoảng 12-15 năm. Để cún cưng được khỏe mạnh với số tuổi lâu hơn, bạn nên thực hiện tiêm phòng cho chúng định kỳ.',
                     'Vaccine dành cho Corgi thường có 3 loại là: 3 in 1, 5 in 1 và 7 in 1. Trong đó, loại 3 trong 1 bây giờ ít khi được sử dụng do có hiệu quả không cao. Các phòng khám thú y thường khuyên bạn dùng 2 loại 5 trong 1 và 7 trong 1. Các loại vaccine đó có thể phòng ngừa một số bệnh như: Care, Pravo, gan truyền nhiễm, cúm,… Theo kinh nghiệm của Siêu Pet, bạn nên bắt đầu tiêm phòng cho Corgi từ khi còn nhỏ, khoảng 3 tuần tuổi là bắt đầu mũi thứ nhất. Sau đó, liệu trình sẽ kéo dài đến khi chúng khoảng 3 tháng tuổi là kết thúc mũi cuối. Giá vaccine cũng không đắt, chỉ từ 120k – 250k một mũi, tùy từng loại thuốc. Khi cảnh khuyên chân ngắn Corgi được 8 tháng tuổi thì nên được tiêm phòng dại. Khi tiêm phòng thì bạn cũng nên hỏi các bác sĩ cho cún uống thuốc tẩy giun sán đều đặn.',
-                    'view/upload/admin/news/','2023/03/15',1,4,2,false),
+                    'view/upload/admin/news/nuoi-cho-corgi3.jpg','2023/03/15',1,4,2,false),
                     (default,'Mèo mẹ nhờ cô chủ trông hộ con',
                     'Cô chủ than: ''Đêm nào nó cũng tha con nó vào cho tui coi để nó đi chơi''.' ,
                     'Mèo mẹ nhờ cô chủ trông hộ con. Đêm nào nó cũng tha con nó vào cho cô chủ coi để nó đi chơi ',
@@ -184,6 +187,9 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (48,'Thiến cho chó, từ 3kg - 7 kg','view/upload/admin/service/thien-cho.jpg',850000,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê.',1,1,default,5),
                    (49,'Thiến cho chó, trên 7kg','view/upload/admin/service/thien-cho.jpg',0,'Dịch vụ thiến có sử dụng thuốc mê, thuốc tê. Giá dao động 1.200.000đ - 2.000.000đ tùy giống loại',1,1,default,5);
 
+insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, sv_status, is_delete, cs_id)
+            values (50,'Tam cho cho meo goi VIP','view/upload/admin/service/tam-cho-meo.png',5000000,'Tam cho ca cho va meo vo cung sach se thom tho VIP.',2,1,default,3);
+
 
 
 -- select * from service;
@@ -207,7 +213,7 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
                    (16,'2023/05/18','15:45:00','2023/05/16 8:39:00',null,0,3,3,false);
 -- select * from appointment;
 -- bill
-insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, value_temp, value_reduced, total_value)
+insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, sub_total, value_reduced, total_value)
             values (1,'2023/03/16',1,default,1,3,1,550000,50000,500000), -- kh1, giảm 50k vs đơn tối thiểu 0đ
                    (2,'2023/04/10',1,default,3,2,null,500000,0,500000), -- kh3 ko đc giảm giá
                    (3,'2023/04/01',1,default,1,2,null,250000,0,250000),

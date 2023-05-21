@@ -15,6 +15,7 @@
                 <thead class="">
                     <tr class="color-text">
                         <th scope="col">Mã lịch hẹn</th>
+                        <th scope="col">Thời gian đặt</th>
                         <th scope="col">Ngày hẹn</th>
                         <th scope="col">Giờ hẹn</th>
                         <th scope="col">Dịch vụ</th>

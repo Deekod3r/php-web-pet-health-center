@@ -22,11 +22,11 @@
                     <div class="col-md-3 mb-5">
                         <h5 class="text-primary mb-4">Website</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Thông tin shop</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Dịch vụ</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đặt lịch</a>
-                            <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                            <a class="text-white mb-2" href="?controller=home&action=index"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                            <a class="text-white mb-2" href="?controller=shop&action=about_page"><i class="fa fa-angle-right mr-2"></i>Thông tin shop</a>
+                            <a class="text-white mb-2" href="?controller=service&action=service_page"><i class="fa fa-angle-right mr-2"></i>Dịch vụ</a>
+                            <a class="text-white mb-2" href="?controller=appointment&action=appointment_page"><i class="fa fa-angle-right mr-2"></i>Đặt lịch</a>
+                            <a class="text-white" href="?controller=shop&action=contact_page"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                         </div>
                     </div>
                     <div class="col-md-6 mb-5">

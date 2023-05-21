@@ -17,67 +17,53 @@ url = "?controller=service&action=service_page";
 
 function loadPaging(index, endPage) {
     index = parseInt(index);
+    endPage = parseInt(endPage);
     page = "";
     page += "   <div class='col-lg-12'>";
-    page += "     <nav aria-label='Page navigation'>";
+    page += "   <nav aria-label='Page navigation'>";
     page += "   <ul class='pagination justify-content-center mb-4'>";
-    page += "   <li class='page-item ' id='previous'>";
-    page +=
-        "       <a class='page-link'  style='cursor:pointer' aria-label='Previous' onclick='loadDataPage(" +
-        (index - 1) +
-        ")'>";
-    page += "       <span aria-hidden='true'>&laquo; Previous</span>";
+    page += "   <li class='page-item head'>";
+    page +="       <a class='page-link'  style='cursor:pointer' onclick='loadDataPage(" + 1 + ")'>";
+    page += "       <span aria-hidden='true'>&laquo; Trang đầu</span>";
     page += "       </a>";
     page += "   </li>";
+
+    page += "   <li class='page-item head' id='previous'>";
+    page +="       <a class='page-link'  style='cursor:pointer' aria-label='Previous' onclick='loadDataPage(" +(index - 1) + ")'>";
+    page += "       <span aria-hidden='true'>&laquo; Trước</span>";
+    page += "       </a>";
+    page += "   </li>";
+
     if (index > 2) {
-        page +=
-            "   <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" +
-            (index - 2) +
-            ")'>" +
-            (index - 2) +
-            "</a></li>";
-        page +=
-            "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
-            (index - 1) +
-            ")'>" +
-            (index - 1) +
-            "</a></li>";
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + (index - 2) +")'>" + (index - 2) + "</a></li>";
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +(index - 1) + ")'>" + (index - 1) +"</a></li>";
     } else if (index > 1) {
-        page +=
-            "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
-            (index - 1) +
-            ")'>" +
-            (index - 1) +
-            "</a></li>";
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" +(index - 1) +"</a></li>";
     }
-    page +=
-        "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
-        index +
-        ")'>" +
-        index +
-        "</a></li>";
+    page += "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +index +")'>" + index +"</a></li>";
     for (let i = index + 1; i <= endPage; i++) {
-        page +=
-            "    <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" +
-            i +
-            ")'>" +
-            i +
-            "</a></li>";
+        page += "    <li class='page-item'><a class='page-link' style='cursor:pointer'  onclick='loadDataPage(" + i + ")'>" +i + "</a></li>";
     }
-    page += "    <li class='page-item' id='next'>";
-    page +=
-        "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" +
-        (index - 2 + 3) +
-        ")'>";
-    page += "         <span aria-hidden='true'>Next &raquo;</span>";
+
+    page += "    <li class='page-item foot' id='next'>";
+    page += "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" + (index + 1) +")'>";
+    page += "         <span aria-hidden='true'>Sau &raquo;</span>";
     page += "        </a>";
     page += "     </li>";
+    
+    page += "   <li class='page-item foot'>";
+    page +="       <a class='page-link'  style='cursor:pointer' onclick='loadDataPage(" + endPage + ")'>";
+    page += "       <span aria-hidden='true'>Trang cuối &raquo;</span>";
+    page += "       </a>";
+    page += "   </li>";
     page += "     </ul>";
     page += " </nav>";
     page += " </div> ";
     $("#page").html(page);
-    if (index <= 1) $("#previous").addClass("disabled");
-    if (index >= endPage) $("#next").addClass("disabled");
+    // if (index <= 1) $("#previous").addClass("disabled");
+    // if (index >= endPage) $("#next").addClass("disabled");
+    if (index <= 1) $('.head').addClass("disabled");
+    if (index >= endPage) $('.foot').addClass("disabled");
 }
 
 function loadDataPage(page) {
@@ -195,8 +181,8 @@ function detailService(id) {
         dataType: "json",
         success: function (response) {
             console.log(response);
-            sv = response.data.service;
             if (response.responseCode == responseCode.success) {
+                sv = response.data.service;
                 switch(sv.sv_pet) {
                     case typePet.both: type = "Chó và mèo"; break;
                     case typePet.cat: type = "Mèo"; break;
@@ -209,6 +195,7 @@ function detailService(id) {
                 $('#sv-price').html("<b class='text'>Giá</b>: " + sv_price);
                 $('#typ-pet').html("<b class='text'>Phân loại</b>: " + type);
                 $('#cs-name').html("<b class='text'>Danh mục</b>: " + sv.cs_name);
+                $('#sv-img').attr("src",sv.sv_img);
             } else  alert(
                     "RES: " +
                     response.responseCode +

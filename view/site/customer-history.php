@@ -28,8 +28,52 @@
         <div class="col-lg-12" id="page">
         </div>
 
-        <div id="pop-up-history">
+        <!-- modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="ml-3 mt-2 mb-0 ">Chi tiết hoá đơn: <span class="bill-id"></span></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="table-responsive">
+                                <table class="table table-primary table-striped table-hover table-borderless align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="color:black">Mã thú cưng</th>
+                                            <th scope="col" style="color:black">Tên thú cưng</th>
+                                            <th scope="col" style="color:black">Mã dịch vụ</th>
+                                            <th scope="col" style="color:black">Tên dịch vụ</th>
+                                            <th scope="col" style="color:black">Đơn giá</th>
+                                            <th scope="col" style="color:black">Số lượng</th>
+                                            <th scope="col" style="color:black">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail-body">                                      
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="color:black"><b>Tạm tính:</b></td>
+                                            <td style="color:black" id='sub-total'></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" data-dismiss="modal">Đóng</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- modal -->
     </div>
 
     <?php include("layout/footer.php") ?>

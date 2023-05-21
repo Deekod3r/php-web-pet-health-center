@@ -14,30 +14,30 @@ function loadPaging(index, endPage) {
     page += "     <nav aria-label='Page navigation'>";
     page += "   <ul class='pagination justify-content-center mb-4'>";
     page += "   <li class='page-item ' id='previous'>";
-    page += "       <a class='page-link'  aria-label='Previous' onclick='loadDataPage(" + (index - 1) + ")'>";
-    page += "       <span aria-hidden='true'>&laquo; Previous</span>";
+    page += "       <a class='page-link'  aria-label='Previous' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>";
+    page += "       <span aria-hidden='true'>&laquo; Trước</span>";
     page += "       </a>";
     page += "   </li>";
     if (index > 2) {
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>";
-        page += "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>";
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 2) + ")'>" + (index - 2) + "</a></li>";
+        page += "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" + (index - 1) + ")'>" + (index - 1) + "</a></li>";
     } else if (index > 1) {
         page +=
-            "   <li class='page-item'><a class='page-link'  onclick='loadDataPage(" +
+            "   <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
             (index - 1) +
             ")'>" +
             (index - 1) +
             "</a></li>";
     }
     page +=
-        "   <li class='page-item active'><a class='page-link'  onclick='loadDataPage(" +
+        "   <li class='page-item active'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
         index +
         ")'>" +
         index +
         "</a></li>";
     for (let i = index + 1; i <= endPage; i++) {
         page +=
-            "    <li class='page-item'><a class='page-link'   onclick='loadDataPage(" +
+            "    <li class='page-item'><a class='page-link' style='cursor:pointer' onclick='loadDataPage(" +
             i +
             ")'>" +
             i +
@@ -45,10 +45,10 @@ function loadPaging(index, endPage) {
     }
     page += "    <li class='page-item' id='next'>";
     page +=
-        "        <a class='page-link'  aria-label='Next' onclick='loadDataPage(" +
+        "        <a class='page-link'  aria-label='Next' style='cursor:pointer' onclick='loadDataPage(" +
         (index + 1) +
         ")'>";
-    page += "         <span aria-hidden='true'>Next &raquo;</span>";
+    page += "         <span aria-hidden='true'>Sau &raquo;</span>";
     page += "        </a>";
     page += "     </li>";
     page += "     </ul>";
@@ -99,7 +99,7 @@ function loadDataNews(data) {
     data.forEach((element) => {
         newsData += "<div class='col-lg-4 mb-4'>";
         newsData += "   <div class='card border-0 mb-2'>";
-        newsData +="       <img class='card-img-top' src='asset/img/blog-1.jpg' alt=''>";
+        newsData +="       <img class='card-img-top' src='"+ element.news_img +"' alt='' height=230px>";
         newsData += "       <div class='card-body bg-light p-4'>";
         newsData +="           <h4 class='card-title text-truncate text-wrap block-ellipsis-title'>" + element.news_title +"</h4>";
         newsData += "           <div class='mb-3'>";

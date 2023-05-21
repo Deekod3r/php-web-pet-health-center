@@ -7,37 +7,42 @@ function loadDataCurrentApm() {
         },
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.responseCode == responseCode.success) {
                 var appointmentData = "";
                 response.data.appointment.forEach((element) => {
                     let statusApm = element.apm_status;
+                    let colorStatus = 'black';
                     switch (element.apm_status) {
                         case statusAppointment.cancel:
+                            colorStatus = "red";
                             statusApm = "Đã huỷ";
                             break;
                         case statusAppointment.confirmNo:
                             statusApm = "Chờ xác nhận";
                             break;
                         case statusAppointment.confirmYes:
+                            colorStatus = "#ED6436";
                             statusApm = "Đã xác nhận";
                             break;
                         case statusAppointment.done:
+                            colorStatus = "green";
                             statusApm = "Hoàn thành";
                             break;
                     }
                     appointmentData += "<tr class=''>";
                     appointmentData +=
-                        "<td scope='row' class=''>" + element.apm_id + "</td>";
+                        "<td scope='row'>" + element.apm_id + "</td>";
+                    appointmentData += "<td>" + element.apm_booking_at + "</td>";
                     appointmentData += "<td>" + element.apm_date + "</td>";
                     appointmentData += "<td>" + element.apm_time + "</td>";
                     appointmentData += "<td>" + element.cs_name + "</td>";
                     appointmentData += "<td>" + element.apm_note + "</td>";
-                    appointmentData += "<td>" + statusApm + "</td>";
+                    appointmentData += "<td style='color: "+ colorStatus + ";font-weight:bold'>" + statusApm + "</td>";
                     appointmentData += "<td>";
                     if (element.apm_status == 0) {
                         appointmentData +=
-                            "<a class='btn btn-danger' id='cancel-appointment' onclick='cancelAppointment(" +
+                            "<a style='font-weight:600; cursor:pointer;' class='badge badge-danger' id='cancel-appointment' onclick='cancelAppointment(" +
                             element.apm_id +
                             ")'>Huỷ</a>";
                     }
