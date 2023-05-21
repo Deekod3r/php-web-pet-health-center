@@ -162,7 +162,7 @@ function loadDataService(data) {
         serviceData +=
             "<a class='btn btn-info' style='border-radius: 0; background-color: #65C178; border-color: #65C178;' data-toggle='modal' data-target='#myModal' onclick='detailService(" + element.sv_id + ")'>Xem chi tiết</a>";
         serviceData +=
-            "<a href='?controller=appointment&action=appointment_page' class='btn btn-primary' style='border-radius: 0; background-color: #ED6436; border-color: #ED6436; '>Đặt lịch</a>";
+            "<a href='?controller=appointment&action=appointment_page' class='btn btn-primary' style='border-radius: 0; background-color: #ED6436; border-color: #ED6436;' onclick='setService("+ element.cs_id +")'>Đặt lịch</a>";
         //serviceData += "</div>"
         //serviceData += "</div>"
         serviceData += "</div>";

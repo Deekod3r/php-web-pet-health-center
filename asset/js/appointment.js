@@ -12,7 +12,12 @@ $(document).ready(function () {
                 if (response.responseCode == responseCode.success) {
                     var categoryServiceData = "";
                     response.data.categoryService.forEach(element => {
-                        categoryServiceData += "<option value='" + element.cs_id + "'>" + element.cs_name + "</option>"
+                        let select = '';
+                        if (element.cs_id == sessionStorage.getItem('csId')) {
+                            select = 'selected';
+                            sessionStorage.removeItem('csId');
+                        }
+                        categoryServiceData += "<option value='" + element.cs_id + "' "+ select +">" + element.cs_name + "</option>"
                     });
                     $('#category-service').append(categoryServiceData);
                 } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");

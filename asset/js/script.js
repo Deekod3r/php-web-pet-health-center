@@ -48,6 +48,10 @@ function logout() {
     })
 }
 
+function setService(idCS){
+    sessionStorage.setItem('csId',idCS);
+}
+
 const responseCode = {
     fail : "00",
     success: "01",
