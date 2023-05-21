@@ -81,7 +81,7 @@ $(document).ready(function () {
         let address = $('#register').find('input[name="rgAddress"]').val();
         let gender = $('#register').find('input[name="rgGender"]:checked').val();
         if (password != "" && confirmPassword != "" && name != "" && address != "" && phone != "" && gender != "") {
-            if (name.length >= 2) {
+            if (name.length >= 2 && checkCharacter(name,false,false,false,true,false,0)) {
                 if (phone.length >= 10 && phone.length <= 13 && checkCharacter(phone,true,false,false,false,true,false,0)) {
                     if (password == confirmPassword) {
                         if (checkCharacter(password,true,true,true,true,true,8)) {
@@ -94,6 +94,7 @@ $(document).ready(function () {
                                     //console.log(response);
                                     if (response.responseCode == responseCode.success) {
                                         $('#msg-register').html("RES: Tạo tài khoản thành công.");
+                                        $('#msg-register').css('color','green');
                                         $('#msg-register').show();
                                         $('#register')[0].reset();
                                     } else {
@@ -114,12 +115,13 @@ $(document).ready(function () {
                     $('#msg-register').html("CLI: Số điện thoại chỉ được bao gồm số, độ dài từ 10-13.");
                 }
             } else {
-                $('#msg-register').html("CLI: Họ và tên có độ dài tối thiểu 2 ký tự.");
+                $('#msg-register').html("CLI: Họ và tên có độ dài tối thiểu 2 ký tự, và không được chứa ký tự đặc biệt.");
             }
         } else $('#msg-register').html("CLI: Vui lòng nhập đầy đủ thông tin đăng ký.");
         $('#msg-register').show();
         window.setTimeout(function () {
             $('#msg-register').hide()
+            $('#msg-register').css('color','red');
         }, 5000);
         e.preventDefault();
     })

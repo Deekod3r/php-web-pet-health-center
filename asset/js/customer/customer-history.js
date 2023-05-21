@@ -85,7 +85,7 @@ function detailBill(id) {
     $('#detail-body').html('');
     $.ajax({
         type: "GET",
-        url: "?controller=bill&action=data_detail_bil'",
+        url: "?controller=bill&action=data_detail_bill",
         data : {
             idBill: id,
             token: sessionStorage.getItem('token')

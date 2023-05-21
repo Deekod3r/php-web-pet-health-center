@@ -132,7 +132,7 @@ class BaseController
            if (!$check) return false;
         }
         if ($length && is_numeric($size)) {
-           $check = $check && strlen($input) > $size;
+           $check = $check && strlen($input) >= $size;
            if (!$check) return false;
         }
         return $check;

@@ -129,6 +129,9 @@ function loadDataService(data) {
                     style: "currency",
                     currency: "VND",
                 }).format(element.sv_price);
+        icon = "fa-solid fa-paw text-secondary mr-2 fa-lg";
+        if (element.sv_pet == typePet.cat) icon = "fa-sharp fa-solid fa-shield-cat text-secondary mr-2 fa-xl";
+        else if (element.sv_pet == typePet.dog) icon = "fa-sharp fa-solid fa-shield-dog text-secondary mr-2 fa-xl";
         serviceData += "<div class='col-lg-4 mb-4'>";
         serviceData += "<div class='card border-1'>";
         serviceData +=
@@ -147,7 +150,7 @@ function loadDataService(data) {
         serviceData += "<div class='card-body text-center p-0'>";
         serviceData += "<ul class='list-group list-group-flush'>";
         serviceData +=
-            "<li class='list-group-item p-2' style='font-size: 17px; font-weight: bold; height: 60px'><i class='fa fa-solid fa-cat text-secondary mr-2'></i>" +
+            "<li class='list-group-item p-2' style='font-size: 17px; font-weight: bold; height: 60px'><i class='"+ icon +"'></i>" +
             element.sv_name +
             "</li>";
         serviceData += "<li class='list-group-item p-1' style='font-size: 15px; font-weight: bold;'><i class='fa fa-solid fa-dollar-sign text-secondary mr-2' aria-hidden='true'></i>Giá: " + sv_price + "</li>";

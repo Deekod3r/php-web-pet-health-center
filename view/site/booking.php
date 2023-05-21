@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <div class="bg-primary py-1 px-4 px-sm-5">
+                    <div class="bg-primary py-0 px-3 px-sm-5">
                         <?php if (isset($_SESSION['login']) && $_SESSION['login']) { ?>
                             <form class="py-5" method="post" id="form-booking" action="?controller=appointment&action=booking">
                                 <div class="form-group">
@@ -28,8 +28,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Dịch vụ</p>
                                     <select class="custom-select border-0 px-4" style="height: 47px;" name="categoryService" id="category-service">
-                                        <option value="">Chọn dịch vụ</option>                                       
+                                        <option value="">...</option>                                       
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -59,7 +59,7 @@ class AppointmentController extends BaseController
                                 $dateTimeBooking = $date." ".$time;
                                 if ($back == 'PM') $dateTimeBooking = strtotime($dateTimeBooking) + 43200;
                                 else $dateTimeBooking = strtotime($dateTimeBooking);
-                                if ($dateTimeBooking - 7200 >= strtotime($dateTimeToday)) {
+                                if ($dateTimeBooking - 7000 >= strtotime($dateTimeToday)) {
                                     $dataBooking = [
                                         'ctmId' => $id,
                                         'date' => $date,
