@@ -48,10 +48,13 @@ $(document).ready(function () {
         },
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 document.title = response.data.news.news_title;
                 loadDataNews(response.data.news);
+            } else if (response.responseCode == responseCode.dataEmpty) {
+                document.title = "Không tìm thấy thông tin phù hợp";
+                $('#detail-news').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Tin tức trống.</p>");
             } else alert(response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },
         error: function (xhr) {

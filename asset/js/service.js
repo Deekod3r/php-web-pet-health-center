@@ -135,16 +135,12 @@ function loadDataService(data) {
         else if (element.sv_pet == typePet.dog) icon = "fa-sharp fa-solid fa-shield-dog text-secondary mr-2 fa-xl";
         serviceData += "<div class='col-lg-4 mb-4'>";
         serviceData += "<div class='card border-1'>";
-        serviceData +=
-            "<div class='card-header position-relative border-0 p-0'>";
-        serviceData +=
-            "<img class='card-img-top' src='"+ element.sv_img +"' alt='' height=200px>";
-        serviceData +=
-            "<div class='position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100' style='top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5); '>";
+        serviceData += "<div class='card-header position-relative border-0 p-0'>";
+        serviceData += "<img class='card-img-top' src='"+ element.sv_img +"' alt='' height=200px>";
+        serviceData +="<div class='position-absolute d-flex flex-column align-items-center justify-content-center w-100 h-100' style='top: 0; left: 0; z-index: 1; background: rgba(0, 0, 0, .5); '>";
         serviceData += "<h3 class='text-primary mb-3'></h3>";
         serviceData += "<h1 class='display-5 text-white mb-0'>";
-        serviceData +=
-            "<small class='align-top' style='font-size: 22px; line-height: 45px; '></small>CarePET<small class='align-bottom' style='font-size: 16px; line-height: 40px; '></small>";
+        serviceData += "<small class='align-top' style='font-size: 22px; line-height: 45px; '></small>CarePET<small class='align-bottom' style='font-size: 16px; line-height: 40px; '></small>";
         serviceData += "</h1>";
         serviceData += "</div>";
         serviceData += "</div>";
@@ -294,7 +290,7 @@ $(document).ready(function () {
                 } else if (response.responseCode == responseCode.dataEmpty) {
                     window.history.pushState(null, "", url);
                     $("#data-service").html(
-                        "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có dịch vụ phù hợp.</p>"
+                        "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>"
                     );
                     $("#page").html("");
                 } else

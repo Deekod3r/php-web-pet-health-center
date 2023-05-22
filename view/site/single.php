@@ -7,7 +7,7 @@
     <!-- Detail Start -->
     <div class="container py-5 main">
         <div class="row pt-5">
-            <div class="col-lg-8">
+            <div class="col-lg-8" id="detail-news">
                 <div class="d-flex flex-column text-left mb-4">
                     <h4 class="text-secondary mb-3">Tin tức</h4>
                     <h1 class="mb-3 news-title"></h1>

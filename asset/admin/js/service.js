@@ -144,9 +144,9 @@ function loadDataService(data) {
         serviceData += "<td>" + element.cs_name + "</td>"
         serviceData += "<td>" + sv_status + "</td>"
         serviceData += "<td>"
-        serviceData += "<a href='?controller=service&action=edit_service_page&id="+ element.sv_id +"' class='badge badge-info'>Sửa</a>"
+        serviceData += "<a href='?controller=service&action=edit_service_page&id="+ element.sv_id +"' class='btn btn-info'>Sửa</a>"
         serviceData += " "
-        serviceData += "<a href='' class='badge badge-danger' data-toggle='modal' data-target='#myModal' onclick='deleteConfirm("+ element.sv_id +")'>Xoá</a>"
+        serviceData += "<a href='' class='btn btn-danger' data-toggle='modal' data-target='#myModal' onclick='deleteConfirm("+ element.sv_id +")'>Xoá</a>"
         serviceData += "</td>"
         serviceData += "</tr>"
     });

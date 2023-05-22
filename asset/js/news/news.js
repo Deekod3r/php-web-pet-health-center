@@ -102,11 +102,11 @@ function loadDataNews(data) {
         newsData += "   <div class='card border-0 mb-2'>";
         newsData +="       <img class='card-img-top' src='"+ element.news_img +"' alt='' height=230px>";
         newsData += "       <div class='card-body bg-light p-4'>";
-        newsData +="           <h4 class='card-title text-truncate text-wrap block-ellipsis-title'>" + element.news_title +"</h4>";
+        newsData +="           <h4 class='card-title text-truncate text-wrap block-ellipsis-title'><a style='color:black' href='?controller=news&action=detail_news&id=" +element.news_id + "'>" + element.news_title +"</a></h4>";
         newsData += "           <div class='mb-3'>";
         newsData += "              <div class='row'>";
         newsData +="               <small class='mr-2 col-lg-3 col-md-3 col-sm-3'><i class='fa fa-user text-muted'></i> Admin</small>";
-        newsData +="               <small class='mr-2 col-lg-8 col-md-8 col-sm-8'><i class='fa fa-calendar text-muted'></i> " +element.news_date_release + "</small>";
+        newsData +="               <small class='mr-2 col-lg-8 col-md-8 col-sm-8'><i class='fa fa-calendar text-muted'></i> " + element.news_date_release + "</small>";
         newsData += "              </div>";
         newsData +="               <small class='mr-2'><i class='fa fa-folder text-muted'></i> " + element.cn_name + "</small>";
         newsData += "           </div>";

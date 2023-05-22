@@ -59,7 +59,7 @@ class BaseModel
 
     protected function find_by_id($id)
     {
-        $response[] = null;
+        $response = null;
         $conn = $this->get_connection();
         try {
             $stm = $conn->prepare("SELECT * FROM  {$this->viewJoin} WHERE {$this->idTable} = ?");
