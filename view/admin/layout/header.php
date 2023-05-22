@@ -10,29 +10,32 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-1" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="" class="navbar-brand d-none d-lg-block">
-                        <h1 class="m-0 display-5 text-capitalize">
+                    <!-- <a href="" class="navbar-brand d-none d-lg-block">
+                        <h5 class="m-0 display-5 text-capitalize">
                             <span class="text-primary">CarePET</span>
-                        </h1>
-                    </a>
-                    <a href="?controller=home&action=index" class="nav-item nav-top nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
-                    <a href="?controller=service&action=service_page" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
-                    <a href="?controller=appointment&action=appointment_page" class="nav-item nav-top nav-link <?php if ($title == "Đặt lịch") echo "active"; ?>">Đặt lịch</a>
-                    <a href="?controller=news&action=news_page" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
-                    <a href="?controller=feedback&action=feedback_page" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
-                    <a href="?controller=shop&action=about_page" class="nav-item nav-top nav-link <?php if ($title == "Thông tin shop") echo "active"; ?>">Thông tin shop</a>
-                    <a href="?controller=shop&action=contact_page" class="nav-item nav-top nav-link <?php if ($title == "Liên hệ") echo "active"; ?>">Liên hệ</a>
+                        </h5>
+                    </a> -->
+                    <a href="?controller=home&action=index_admin" class="nav-item nav-top nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
+                    <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
+                    <a href="?controller=discount&action=discount_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Giảm giá") echo "active"; ?>">Giảm giá</a>
+                    <a href="?controller=appointment&action=appointment_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Lịch hẹn") echo "active"; ?>">Lịch hẹn</a>
+                    <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoán đơn</a>
+                    <a href="?controller=news&action=news_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
+                    <a href="?controller=feedback&action=feedback_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
+                    <a href="?controller=customer&action=customer_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Khách hàng") echo "active"; ?>">Khách hàng</a>
+                    <a href="?controller=pet&action=pet_page_ad" class="nav-item nav-top nav-link <?php if ($title == "PET") echo "active"; ?>">PET</a>
+                    <a href="?controller=shop&action=shop_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Thông tin shop") echo "active"; ?>">Thông tin shop</a>
+                    <a href="?controller=admin&action=admin_page" class="nav-item nav-top nav-link <?php if ($title == "Admin") echo "active"; ?>">Admin</a>
                 </div>
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ADMIN) { ?>
                     <div class="dropdown" id="" style="margin-right:20px">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thông tin tài khoản</a>
-                        <ul class="dropdown-menu">
-                            <!-- rounded-0 m-0 -->
+                        <!-- <ul class="dropdown-menu">
                             <li><a href="?controller=customer&action=customer_info" class="dropdown-item">Trang cá nhân</a></li>
                             <li><a href="?controller=pet&action=customer_pet" class="dropdown-item">Thú cưng của bạn</a></li>
                             <li><a href="?controller=bill&action=customer_history" class="dropdown-item">Lịch sử dịch vụ</a></li>
                             <li><a href="?controller=appointment&action=customer_current_apm" class="dropdown-item">Lịch đang hẹn</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <a onclick="logout()" class="nav-link" style="cursor:pointer">Đăng xuất</a>
                 <?php } else { ?>
@@ -42,4 +45,8 @@
         </nav>
     </div>
     <!-- Navbar End -->
+    <div class="container-fluid pt-1 mb-1 head">
+        <h2 class="ml-5 display-5"><?php echo $title?></h2>
+        <p class="ml-5"><a href="?controller=home&action=index_admin">Trang chủ</a> / <?php echo $title?></p>
+    </div>
 </div>

@@ -13,6 +13,16 @@ class PetController extends BaseController
         } else $this->render_error('400');
     }
 
+    public function pet_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                $this->render_view(
+                    'pet'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
     public function data_customer_pet()
     {
         $responseCode = ResponseCode::FAIL;

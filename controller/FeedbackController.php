@@ -11,6 +11,17 @@ class FeedbackController extends BaseController
         } else $this->render_error('400');
     }
 
+    public function feedback_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
+                $this->render_view(
+                    'feedback'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
+
     public function data_feedback()
     {
         $responseCode = ResponseCode::FAIL;

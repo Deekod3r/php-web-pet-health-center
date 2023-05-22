@@ -14,10 +14,9 @@ class BaseController
 
     public function render_view($viewName)
     {
-        $path = 'view/';
-        if (isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
-            $path .= 'admin/';
-        } else $path .= 'site/';
+        if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ADMIN) $view = "admin";
+        else $view = "site";
+        $path = "view/$view/";
         include($path . $viewName . '.php');
     }
 
@@ -26,13 +25,7 @@ class BaseController
         $path = 'view/error/error-';
         include($path . $errorCode . '.php');
     }
-
-    public function render_view_admin($viewName)
-    {
-        $path = 'view/admin/';
-        include($path . $viewName . '.php');
-    }
-
+    
     public function get_model($model)
     {
         include('model/' . $model . 'Model.php');
@@ -61,7 +54,7 @@ class BaseController
 
     public function check_admin_role($role)
     {
-        if (isset($_SESSION['role']) && $_SESSION["ad".$role]) {
+        if (isset($_SESSION["ad".$role]) && $_SESSION["ad".$role]) {
             return true;
         } else return false;
     }

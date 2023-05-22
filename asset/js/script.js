@@ -82,3 +82,8 @@ const statusAppointment = {
     cancel : 2,
     done : 3
 }
+
+const statusObject = {
+    active: 1,
+    inActive: 0
+}

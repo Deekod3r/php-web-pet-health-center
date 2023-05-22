@@ -22,7 +22,7 @@ class HomeController extends BaseController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_admin()) {
-                $this->render_view_admin(
+                $this->render_view(
                     'index'        
                 );
             } else $this->render_error('403');

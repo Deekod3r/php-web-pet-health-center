@@ -2,6 +2,16 @@
 class DiscountController extends BaseController
 {
 
+    public function discount_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                $this->render_view(
+                    'discount'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
     public function data_discount(){
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");

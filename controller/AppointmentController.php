@@ -28,6 +28,17 @@ class AppointmentController extends BaseController
         }
     }
 
+    public function appointment_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                $this->render_view(
+                    'appointment'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
+
     public function booking()
     {
         $responseCode = ResponseCode::FAIL;

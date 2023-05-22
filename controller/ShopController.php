@@ -20,6 +20,17 @@ class ShopController extends BaseController
         } else $this->render_error('400');
     }
 
+    public function shop_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                $this->render_view(
+                    'shop'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
+
     public function data_shop()
     {
         $responseCode = ResponseCode::FAIL;

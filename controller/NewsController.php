@@ -20,6 +20,17 @@ class NewsController extends BaseController
         } else $this->render_error('400');
     }
     
+    public function news_page_ad()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
+                $this->render_view(
+                    'news'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
+
     public function data_news()
     {
         $responseCode = ResponseCode::FAIL;
