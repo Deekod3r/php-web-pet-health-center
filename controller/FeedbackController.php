@@ -50,11 +50,11 @@ class FeedbackController extends BaseController
                             }
                         }
                     }
-                    $feedbackData = $feedbackModel->get_data($key);
+                    $feedbacks = $feedbackModel->get_data($key);
                     $responseCode = ResponseCode::SUCCESS;
                     $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "feedback", "thành công.");
                     $data = [
-                        'feedback' => $feedbackData,
+                        'feedbacks' => $feedbacks,
                         'count' => $count
                     ];
                 } else {

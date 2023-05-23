@@ -31,9 +31,9 @@ insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc
             values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
                    (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,1,default),
                    (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,10,'2023/12/01','2024/2/01',null,0,default),
-                   (4, 'HAPPYPET66','Mã giảm giá HAPPYPET66 nhân giày 6/6',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
-                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88 nhân giày 8/8',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
-                   (6, 'HAPPY99','Mã giảm giá HAPPY99 nhân giày 9/9',default,default,10,'2023/04/15','2023/04/22',null,1,default),
+                   (4, 'HAPPYPET66','Mã giảm giá HAPPYPET66 nhân ngày 6/6',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
+                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88 nhân ngày 8/8',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
+                   (6, 'HAPPY99','Mã giảm giá HAPPY99 nhân ngày 9/9',default,default,10,'2023/04/15','2023/04/22',null,1,default),
                    (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/9/01','2024/10/01',null,0,default),
                    (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,0,default);
 -- select * from discount;

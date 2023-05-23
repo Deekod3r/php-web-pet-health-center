@@ -10,7 +10,7 @@ function loadDataCurrentApm() {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 var appointmentData = "";
-                response.data.appointment.forEach((element) => {
+                response.data.appointments.forEach((element) => {
                     let statusApm = element.apm_status;
                     let colorStatus = 'black';
                     switch (element.apm_status) {

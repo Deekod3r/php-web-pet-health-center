@@ -80,7 +80,7 @@ function loadDataPage(page) {
         },
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = "";
                 if (svName != null && svName != "") param += "&sv-name=" + svName;
@@ -89,8 +89,8 @@ function loadDataPage(page) {
                 if (typPet != null && typPet != "") param += "&type-pet=" + typPet;
                 if (page > 1) {
                     window.history.pushState(null, "", url + param + "&page=" + page);
-                } else window.history.pushState(null, "", url);
-                loadDataService(response.data.service);
+                } else window.history.pushState(null, "", url + param);
+                loadDataService(response.data.services);
                 loadPaging(page, Math.ceil(response.data.count / limitServicePage));
             } else if (response.responseCode == responseCode.dataEmpty) {
                 window.history.pushState(null, "", url);
@@ -231,7 +231,7 @@ $(document).ready(function () {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 var categoryServiceData = "";
-                response.data.categoryService.forEach((element) => {
+                response.data.categoryServices.forEach((element) => {
                     categoryServiceData +=
                         "<option value='" +
                         element.cs_id +
@@ -265,54 +265,55 @@ $(document).ready(function () {
         svName = $("#service-name").val();
         categoryService = $("#category-service").val();
         typPet = $("#type-pet").val();
-        $.ajax({
-            type: "GET",
-            url: "?controller=service&action=data_service",
-            data: {
-                limit: limitServicePage,
-                index: 1,
-                svName: svName,
-                categoryService: categoryService,
-                typePet: typPet,
-            },
-            dataType: "json",
-            success: function (response) {
-                //console.log(response);
-                if (response.responseCode == responseCode.success) {
-                    param = "";
-                    if (svName != null && svName != "") param += "&sv-name=" + svName;
-                    if (categoryService != null && categoryService != "")
-                        param += "&category-service=" + categoryService;
-                    if (typPet != null && typPet != "") param += "&type-pet=" + typPet;
-                    window.history.pushState(null, "", url + param);
-                    loadDataService(response.data.service);
-                    loadPaging(1, Math.ceil(response.data.count / limitServicePage));
-                } else if (response.responseCode == responseCode.dataEmpty) {
-                    window.history.pushState(null, "", url);
-                    $("#data-service").html(
-                        "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>"
-                    );
-                    $("#page").html("");
-                } else
-                    alert(
-                        "RES: " +
-                        response.responseCode +
-                        ": " +
-                        response.message +
-                        "Vui lòng thử lại sau ít phút."
-                    );
-            },
-            error: function (xhr) {
-                alert(
-                    "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
-                    xhr.responseText +
-                    ", " +
-                    xhr.status +
-                    ", " +
-                    xhr.error
-                );
-            },
-        });
+        loadDataPage(1);
+        // $.ajax({
+        //     type: "GET",
+        //     url: "?controller=service&action=data_service",
+        //     data: {
+        //         limit: limitServicePage,
+        //         index: 1,
+        //         svName: svName,
+        //         categoryService: categoryService,
+        //         typePet: typPet,
+        //     },
+        //     dataType: "json",
+        //     success: function (response) {
+        //         //console.log(response);
+        //         if (response.responseCode == responseCode.success) {
+        //             param = "";
+        //             if (svName != null && svName != "") param += "&sv-name=" + svName;
+        //             if (categoryService != null && categoryService != "")
+        //                 param += "&category-service=" + categoryService;
+        //             if (typPet != null && typPet != "") param += "&type-pet=" + typPet;
+        //             window.history.pushState(null, "", url + param);
+        //             loadDataService(response.data.service);
+        //             loadPaging(1, Math.ceil(response.data.count / limitServicePage));
+        //         } else if (response.responseCode == responseCode.dataEmpty) {
+        //             window.history.pushState(null, "", url);
+        //             $("#data-service").html(
+        //                 "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Thông tin trống.</p>"
+        //             );
+        //             $("#page").html("");
+        //         } else
+        //             alert(
+        //                 "RES: " +
+        //                 response.responseCode +
+        //                 ": " +
+        //                 response.message +
+        //                 "Vui lòng thử lại sau ít phút."
+        //             );
+        //     },
+        //     error: function (xhr) {
+        //         alert(
+        //             "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
+        //             xhr.responseText +
+        //             ", " +
+        //             xhr.status +
+        //             ", " +
+        //             xhr.error
+        //         );
+        //     },
+        // });
         e.preventDefault();
     });
 

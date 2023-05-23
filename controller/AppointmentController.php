@@ -134,12 +134,12 @@ class AppointmentController extends BaseController
                     } else {
                         $id = json_decode($data)->{'id'};
                         $appointmentModel = $this->get_model('appointment');
-                        $appointment = $appointmentModel->get_by_customer($id, " and ( apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . " ," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")) ORDER BY apm_date,apm_time");
-                        if ($appointment != null) {
+                        $appointments = $appointmentModel->get_by_customer($id, " and ( apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . " ," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")) ORDER BY apm_date,apm_time");
+                        if ($appointments != null) {
                             $responseCode = ResponseCode::SUCCESS;
                             $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'lịch đang hẹn', 'thành công');
                             $data = [
-                                'appointment' => $appointment
+                                'appointments' => $appointments
                             ];
                         } else {
                             $responseCode = ResponseCode::DATA_EMPTY;

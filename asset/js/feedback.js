@@ -70,7 +70,7 @@ function loadDataPage(page) {
                 if (page > 1) {
                     window.history.pushState(null, "", url + "&page=" + page);
                 } else window.history.pushState(null, "", url);
-                loadDataFeedback(response.data.feedback);
+                loadDataFeedback(response.data.feedbacks);
                 loadPaging(page, Math.ceil(response.data.count / limitFeedbackPage));
             } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
         },

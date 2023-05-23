@@ -40,14 +40,13 @@ class PetController extends BaseController
                         $id = json_decode($dataToken)->{'id'};
                         $role = json_decode($dataToken)->{'role'}; 
                         $petModel = $this->get_model('pet');
-                        $pet = null;
                         if ($role == -1) {
-                            $pet = $petModel->get_by_customer($id);
-                            if ($pet != null) {
+                            $pets = $petModel->get_by_customer($id);
+                            if ($pets != null) {
                                 $responseCode = ResponseCode::SUCCESS;
                                 $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,'thú cưng','thành công');
                                 $data = [
-                                    'pet' => $pet
+                                    'pets' => $pets
                                 ];
                             } else {
                                 $responseCode = ResponseCode::DATA_EMPTY;

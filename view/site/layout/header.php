@@ -34,7 +34,7 @@
                 <a href="" class="navbar-brand d-none d-lg-block">
                     <h1 class="m-0 display-5 text-capitalize">
                         <span class="text-primary">Care</span>PET
-                        <span style="font-size:20px">Hệ thống chăm sóc thú cưng</span>
+                        <!-- <span style="font-size:15px">Hệ thống chăm sóc thú cưng</span> -->
                     </h1>
                 </a>
             </div>
@@ -76,6 +76,7 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="?controller=home&action=index" class="nav-item nav-top nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
                     <a href="?controller=service&action=service_page" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
+                    <a href="?controller=discount&action=discount_page" class="nav-item nav-top nav-link <?php if ($title == "Khuyến mại") echo "active"; ?>">Khuyến mại</a>
                     <a href="?controller=appointment&action=appointment_page" class="nav-item nav-top nav-link <?php if ($title == "Đặt lịch") echo "active"; ?>">Đặt lịch</a>
                     <a href="?controller=news&action=news_page" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
                     <a href="?controller=feedback&action=feedback_page" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>

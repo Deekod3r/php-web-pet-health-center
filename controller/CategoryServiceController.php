@@ -19,12 +19,12 @@ class CategoryServiceController extends BaseController
         try {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $categoryServiceModel = $this->get_model('categoryService');
-                $categoryService = $categoryServiceModel->get_data("");
-                if ($categoryService != null) {
+                $categoryServices = $categoryServiceModel->get_data("");
+                if ($categoryServices != null) {
                     $responseCode = "01";
                     $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"danh mục dịch vụ","thành công.");
                     $data = [
-                        'categoryService' => $categoryService                
+                        'categoryServices' => $categoryServices                
                     ];
                 } else {
                     $responseCode = "04";

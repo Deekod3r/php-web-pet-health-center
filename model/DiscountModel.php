@@ -22,5 +22,10 @@ class DiscountModel extends BaseModel{
     }
     
     
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
+    }
+
+
     
 };

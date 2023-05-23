@@ -154,37 +154,38 @@ $(document).ready(function () {
     $("#form-search-news").submit(function (e) {
         newsKey = $("#news-key").val()
         categoryNews = $("#category-news").val()
-        $.ajax({
-            type: "GET",
-            url: "?controller=news&action=data_news",
-            data: {
-                limit: limitNewsPage,
-                index: 1,
-                newsKey: newsKey,
-                categoryNews: categoryNews
-            },
-            dataType: "json",
-            success: function (response) {
-                //console.log(response);
-                if (response.responseCode == responseCode.success) {
-                    param = "";
-                    if (newsKey != null && newsKey != "")
-                        param += "&news-key=" + newsKey;
-                    if (categoryNews != null && categoryNews != "")
-                        param += "&category-news=" + categoryNews;
-                    window.history.pushState(null, "", url + param);
-                    loadDataNews(response.data.news);
-                    loadPaging(1, Math.ceil(response.data.count / limitNewsPage));
-                } else if (response.responseCode == responseCode.dataEmpty) {
-                    window.history.pushState(null, "", url);
-                    $('#data-news').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có tin tức phù hợp.</p>");
-                    $('#page').html("");
-                } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
-            },
-            error: function (xhr) {
-                alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
-            }
-        });
+        loadDataPage(1);
+        // $.ajax({
+        //     type: "GET",
+        //     url: "?controller=news&action=data_news",
+        //     data: {
+        //         limit: limitNewsPage,
+        //         index: 1,
+        //         newsKey: newsKey,
+        //         categoryNews: categoryNews
+        //     },
+        //     dataType: "json",
+        //     success: function (response) {
+        //         //console.log(response);
+        //         if (response.responseCode == responseCode.success) {
+        //             param = "";
+        //             if (newsKey != null && newsKey != "")
+        //                 param += "&news-key=" + newsKey;
+        //             if (categoryNews != null && categoryNews != "")
+        //                 param += "&category-news=" + categoryNews;
+        //             window.history.pushState(null, "", url + param);
+        //             loadDataNews(response.data.news);
+        //             loadPaging(1, Math.ceil(response.data.count / limitNewsPage));
+        //         } else if (response.responseCode == responseCode.dataEmpty) {
+        //             window.history.pushState(null, "", url);
+        //             $('#data-news').html("<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có tin tức phù hợp.</p>");
+        //             $('#page').html("");
+        //         } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+        //     },
+        //     error: function (xhr) {
+        //         alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        //     }
+        // });
         e.preventDefault();
     });
 });

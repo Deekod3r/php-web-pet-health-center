@@ -58,12 +58,12 @@ class BillController extends BaseController
                                     }
                                 }
                             }
-                            $bill = $billModel->get_data(" where ctm_id = $id " . $key);
+                            $bills = $billModel->get_data(" where ctm_id = $id " . $key);
                             $responseCode = ResponseCode::SUCCESS;
                             $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'hoá đơn', 'thành công');
                             //$message = "SERV: " . " where ctm_id = $id " . $key;
                             $data = [
-                                'bill' => $bill,
+                                'bills' => $bills,
                                 'count' => $count
                             ];
                         } else {

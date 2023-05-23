@@ -51,7 +51,7 @@ function loadDataPage(page) {
                 if (page > 1) {
                     window.history.pushState(null, "", url + "&page=" + page);
                 } else window.history.pushState(null, "", url);
-                loadDataHistory(response.data.bill);
+                loadDataHistory(response.data.bills);
                 loadPaging(page, Math.ceil(response.data.count / limitBillPage));
             } else if (response.responseCode == responseCode.dataEmpty) {
                 $('#page').html("");

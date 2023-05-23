@@ -14,7 +14,7 @@ $(document).ready(function() {
             console.log(response);
             if(response.responseCode == responseCode.success) {
                 var petData = "";
-                response.data.pet.forEach(element => {
+                response.data.pets.forEach(element => {
                     petType = element.pet_type == typePet.cat ? "Mèo" : "Chó";
                     petGender = element.pet_gender == gender.female ? "Cái" : "Đực";
                     petData += "<tr class='color-text'>"

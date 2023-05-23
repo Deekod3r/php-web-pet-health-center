@@ -68,12 +68,12 @@ class ServiceController extends BaseController
                             }
                         }
                     }
-                    $service = $serviceModel->get_data($key);
-                    if ($service != null) {
+                    $services = $serviceModel->get_data($key);
+                    if ($services != null) {
                         $responseCode = ResponseCode::SUCCESS;
                         $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"dịch vụ","thành công.");
                         $data = [
-                            'service' => $service,
+                            'services' => $services,
                             'count' => $count
                         ];
                     } else {
