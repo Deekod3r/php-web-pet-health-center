@@ -39,7 +39,7 @@ function loadDataDiscount(data) {
         discountData += "                <li><b>Thời gian kết thúc:</b> "+ element.dc_end_time +"</li>";
         discountData += "                <li><b>Số lượng còn lại:</b> "+ quantity +"</li>";
         discountData += "            </ul>";
-        discountData += "            <a href='?controller=appointment&action=appointment_page' class='w-100 btn btn-lg btn-outline-primary'>Đặt lịch ngay</a>";
+        discountData += "            <a href='?controller=appointment&action=appointment_page' class='w-100 btn btn-lg btn-outline-secondary'><b>Đặt lịch ngay</b></a>";
         discountData += "        </div>";
         discountData += "    </div>";
         discountData += "</div>";

@@ -49,6 +49,12 @@ class NewsController extends BaseController
                     if ($key != '') $key = $key . " and ";
                     $key .= " cn_id = " . $_GET['categoryNews'];
                 }
+                if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " news_active = 1 ";
+                }
                 if ($key != '') $key = "where " . $key;
                 $count = $newsModel->count_data($key);
                 if ($count > 0) {

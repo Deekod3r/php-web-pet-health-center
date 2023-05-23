@@ -63,7 +63,7 @@
             <h4 class="text-secondary mb-3"></h4>
             <h1 class="display-4 m-0">Trải nghiệm với <span class="text-primary">chi phí tốt nhất</span></h1>
         </div>
-        <form action="?controller=service&action=data_service" style="margin-bottom: 40px" id="form-search-service" method="get">
+        <form action="" style="margin-bottom: 40px" id="form-search-service" method="get">
             <div class="form-group">
                 <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập tên dịch vụ: </p>
                 <input type="text" class="form-control border-1" placeholder="VD: Tiêm phòng" name="svName" id="service-name" />

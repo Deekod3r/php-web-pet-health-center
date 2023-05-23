@@ -45,8 +45,4 @@
         </nav>
     </div>
     <!-- Navbar End -->
-    <div class="container-fluid pt-1 mb-1 head">
-        <h2 class="ml-5 display-5"><?php echo $title?></h2>
-        <p class="ml-5"><a href="?controller=home&action=index_admin">Trang chủ</a> / <?php echo $title?></p>
-    </div>
 </div>

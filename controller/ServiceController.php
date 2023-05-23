@@ -48,6 +48,12 @@ class ServiceController extends BaseController
                     }
                     $key .= " cs_id = " . $_GET['categoryService'];
                 }
+                if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " sv_status = 1 ";
+                }
                 if ($key != '') $key = "where " . $key;
                 // $message = "SERV: " . $key;
                 // $data = $_GET;

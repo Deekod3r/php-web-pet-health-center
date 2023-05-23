@@ -5,12 +5,34 @@
 
 <body>
     <?php include("view/admin/layout/header.php") ?>
-    <div class="container-fluid main pr-5 pl-5">
-        <form action="">
-            <div>
-                <input type="text">
-            </div>
-        </form>
+    <div class="container-fluid main-admin pr-5 pl-5">
+        <div class="container">
+            <form action="" style="margin-bottom: 40px" id="form-search-service" method="get">
+                <div class="row" style="margin-top: 10px">
+                    <div class="form-group col-lg-4">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập tên dịch vụ:</p>
+                        <input type="text" class="form-control border-1" placeholder="VD: Tiêm phòng" name="svName" id="service-name" />
+                    </div>
+                    <div class="col-lg-3">
+                        <p style="font-weight:bold; margin-bottom:0; color:black" class="w-100">&nbspDanh mục dịch vụ:</p>
+                        <select name="categoryService" id="category-service" class="custom-select" style="width:250px;">
+                            <option value="">Tất cả</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <p style="font-weight:bold; margin-bottom:0;color:black">&nbspDanh mục thú cưng:</p>
+                        <select name="typePet" id="type-pet" class="custom-select" style="width:250px;">
+                            <option value="">Tất cả</option>
+                            <option value="0">Mèo</option>
+                            <option value="1">Chó</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:10px; width: 250px;">
+                    <button class="btn btn-lg btn-primary btn-block border-0" type="submit">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
         <a href="#" class="btn btn-primary mb-3 mt-3">Thêm dịch vụ</a>
         <div class="alert" role="alert" style="display: none" id="msg-delete-service">
         </div>
