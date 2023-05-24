@@ -16,7 +16,13 @@
                         </h5>
                     </a> -->
                     <a href="?controller=home&action=index_admin" class="nav-item nav-top nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
-                    <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
+                    <div class="nav-item nav-top dropdown <?php if ($title == "Dịch vụ") echo "active"; ?>">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dịch vụ</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
+                            <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Nhóm dịch vụ</a>
+                        </div>
+                    </div>
                     <a href="?controller=discount&action=discount_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Giảm giá") echo "active"; ?>">Giảm giá</a>
                     <a href="?controller=appointment&action=appointment_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Lịch hẹn") echo "active"; ?>">Lịch hẹn</a>
                     <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoán đơn</a>
