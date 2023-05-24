@@ -72,7 +72,7 @@ select * from view_news;
 create or replace view view_news_join
 as
     select
-        news_id, news_title, news_description, news_content, news_img, news_date_release, news.ad_id as ad_id, ad_username,news.cn_id as cn_id, cn_name
+        news_id, news_title, news_description, news_content, news_img, news_date_release, news_active, news.ad_id as ad_id, ad_username,news.cn_id as cn_id, cn_name
     from (news inner join admin a on news.ad_id = a.ad_id) inner join category_news cn on news.cn_id = cn.cn_id
     where news.is_delete = false and cn.is_delete = false;
 
