@@ -11,7 +11,7 @@ $(document).ready(function () {
                 console.log(response);
                 if (response.responseCode == responseCode.success) {
                     var categoryServiceData = "";
-                    response.data.categoryService.forEach(element => {
+                    response.data.categoryServices.forEach(element => {
                         let select = '';
                         if (element.cs_id == sessionStorage.getItem('csId')) {
                             select = 'selected';

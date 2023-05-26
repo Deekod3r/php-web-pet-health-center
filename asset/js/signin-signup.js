@@ -82,7 +82,7 @@ $(document).ready(function () {
         let gender = $('#register').find('input[name="rgGender"]:checked').val();
         if (password != "" && confirmPassword != "" && name != "" && address != "" && phone != "" && gender != "") {
             if (name.length >= 2 && !number.test(name) && !specialChars.test(name)) {
-                if (phone.length >= 10 && phone.length <= 13 && !lowerChars.test(phone) && !specialChars.test(phone) && !upperChars.test(phone)) {
+                if (phone.length >= 10 && phone.length <= 13 && regPhone.test(phone)) {
                     if (password == confirmPassword) {
                         if (password.length >= 8 && number.test(password) && specialChars.test(password) && upperChars.test(password) && lowerChars.test(password)) {
                             $.ajax({

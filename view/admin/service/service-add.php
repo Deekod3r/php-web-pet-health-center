@@ -6,7 +6,7 @@
 <body>
     <?php include("view/admin/layout/header.php") ?>
     <div class="container main-admin mb-5">
-        <form class="" id="form-add-service" enctype="multipart/form-data" method="post" action="?controller=service&action=add_service">
+        <form class="" id="form-add-service" enctype="multipart/form-data" method="post">
             <h3 class="mb-3 text-primary">Thêm dịch vụ</h3>
             <div class="row g-3">
                 <div class="col-12">

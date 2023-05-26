@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <?php $title = "Dịch vụ" ?>
-<?php include("view/admin/layout/asset-header.php") ?>
+<?php include "view/admin/layout/asset-header.php" ?>
 
 <body>
-    <?php include("view/admin/layout/header.php") ?>
+    <?php include "view/admin/layout/header.php" ?>
     <div class="container-fluid main-admin">
         <div class="container">
             <form action="" style="margin-bottom: 40px" id="form-search-service" method="get">
@@ -16,7 +16,6 @@
                     <div class="col-lg-3">
                         <p style="font-weight:bold; margin-bottom:0; color:black" class="w-100">&nbspDanh mục dịch vụ:</p>
                         <select name="categoryService" id="category-service" class="custom-select" style="width:250px;">
-                            <option value="">Tất cả</option>
                         </select>
                     </div>
                     <div class="col-lg-3">
@@ -55,13 +54,14 @@
                     </div>
                 </div>
                 <div>
-                    <input  class="btn btn-primary" type="reset">
-                    <button class="btn btn-primary" type="submit " id="submit" >Tìm kiếm</button>
+                    <input class="btn btn-primary" type="reset">
+                    <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
                 </div>
             </form>
         </div>
         <div class="container-fluid">
-            <a href="?controller=service&action=service_add_page" class='btn btn-secondary mb-3' style='color:white'>Thêm dịch vụ</a>
+            <a href="?controller=service&action=service_add_page" class='btn btn-primary mb-3' style='color:white'>Thêm dịch vụ</a>
+            <button class='btn btn-secondary mb-3' style='color:white' data-toggle='modal' data-target='#myModal2'>Danh sách nhóm dịch vụ</button>
             <div class="alert" role="alert" style="display: none" id="msg-service"></div>
             <table class="table table-hover">
                 <thead>
@@ -104,8 +104,90 @@
             </div>
         </div>
         <!-- modal -->
+
+
+        <!-- modal2 -->
+        <div class="modal fade" id="myModal2" tabindex="-1" aria-hidden="true" style="margin-left: -15%">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="ml-3 mt-2 mb-0">Danh sách nhóm dịch vụ</h3>
+                    </div>
+                    <div class="modal-body">
+                        <button class='btn btn-info mb-3' style='color:white' data-toggle='modal' data-target='#myModal1'>Thêm nhóm dịch vụ</button>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tên nhóm dịch vụ</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-cs">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal2 -->
+
+        <!-- modal1 -->
+        <div class="modal fade" id="myModal1" tabindex="-1" aria-hidden="true" style="margin-left: 15%">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="form-add-cs" method="post">
+                        <div class="modal-header">
+                            <h3 class="ml-3 mt-2 mb-0">Thêm nhóm dịch vụ</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert" role="alert" style="display: none" id="msg-cs"></div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Tên nhóm dịch vụ</label>
+                                <input type="text" class="form-control" id="cs-name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
+                            <button class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- modal1 -->
+
+        <!-- modal3 -->
+        <div class="modal fade" id="myModal3" tabindex="-1" aria-hidden="true" style="margin-left: 15%">
+            <div class="modal-dialog">
+                <form id="form-edit-cs">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="ml-3 mt-2 mb-0">Sửa nhóm dịch vụ</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert" role="alert" style="display: none" id="msg-cs-edit"></div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Tên nhóm dịch vụ</label>
+                                <input type="hidden" id="cs-id-edit">
+                                <input type="text" class="form-control" id="cs-name-edit">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
+                            <button class="btn btn-primary">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- modal3 -->
+
     </div>
-    <?php include("view/admin/layout/asset-footer.php") ?>
+    <?php include "view/admin/layout/asset-footer.php" ?>
     <script src="asset/admin/js/service/service.js?v=<?php echo time() ?>" async></script>
 </body>
 

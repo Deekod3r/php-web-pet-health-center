@@ -7,6 +7,7 @@ class CategoryServiceModel extends BaseModel{
     var $idTable = 'cs_id';
     var $view = 'view_category_service';
     var $viewJoin = 'view_category_service';
+    var $insert = ['cs_name'];
 
     public function __construct(){
         //$this->connection = $this->get_connection();
@@ -17,4 +18,12 @@ class CategoryServiceModel extends BaseModel{
         return $result;
     }
 
+    public function save_data($data){
+        $value = "'".$data['csName']."'";
+        return $this->save($value);
+    }
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
 };

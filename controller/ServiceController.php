@@ -83,17 +83,17 @@ class ServiceController extends BaseController
                     if ($_GET['startPrice'] > 0) {
                         $startPrice = $_GET['startPrice'];
                     }
-                }
-                if ($endPrice >= $startPrice && $endPrice > 0) {
-                    if ($key != '') {
-                        $key .= ' and ';
+                    if ($endPrice >= $startPrice && $endPrice > 0) {
+                        if ($key != '') {
+                            $key .= ' and ';
+                        }
+                        $key .= " sv_price between " . $_GET['startPrice'] . " and " . $_GET['endPrice'];
+                    } else {
+                        if ($key != '') {
+                            $key .= ' and ';
+                        }
+                        $key .= " sv_price >= " . $_GET['startPrice'];
                     }
-                    $key .= " sv_price between " . $_GET['startPrice'] . " and " . $_GET['endPrice'];
-                } else {
-                    if ($key != '') {
-                        $key .= ' and ';
-                    }
-                    $key .= " sv_price >= " . $_GET['startPrice'];
                 }
                 if (isset($_GET['statusSV']) and $_GET['statusSV'] != '') {
                     if ($key != '') {

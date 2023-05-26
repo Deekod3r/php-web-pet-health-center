@@ -21,7 +21,9 @@ class CustomerModel extends BaseModel
         $result = $this->find_all($key);
         return $result;
     }
-
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
+    }
     public function get_by_phone($phone, $active)
     {
         $response = null;

@@ -15,7 +15,7 @@ class CustomerController extends BaseController
     public function customer_page_ad()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
                 $this->render_view(
                     'customer'
                 );
@@ -128,22 +128,22 @@ class CustomerController extends BaseController
                                         $responseCode = ResponseCode::FAIL;
                                         $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, 'người dùng', 'thất bại');
                                     }
-                                } 
+                                }
                             } else {
                                 $responseCode = ResponseCode::INPUT_INVALID_TYPE;
-                                $message = "SERV: " . "Mật khẩu phải bao gồm chữ cái hoa-thường-số, ít nhất 1 ký tự đặc biệt và độ dài tối thiểu 8 ký tự."; 
+                                $message = "SERV: " . "Mật khẩu phải bao gồm chữ cái hoa-thường-số, ít nhất 1 ký tự đặc biệt và độ dài tối thiểu 8 ký tự.";
                             }
                         } else {
                             $responseCode = ResponseCode::INPUT_INVALID_TYPE;
-                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_INVALID_TYPE_MESSAGE,'số điện thoại');  
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_INVALID_TYPE_MESSAGE, 'số điện thoại');
                         }
                     } else {
                         $responseCode = ResponseCode::INPUT_INVALID_TYPE;
-                        $message = "SERV: " . "Tên người dùng tối thiểu 2 ký tự.";      
+                        $message = "SERV: " . "Tên người dùng tối thiểu 2 ký tự.";
                     }
                 } else {
                     $responseCode = ResponseCode::INPUT_EMPTY;
-                    $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE,'đăng ký');          
+                    $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, 'đăng ký');
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
@@ -207,7 +207,8 @@ class CustomerController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function data_customer(){
+    public function data_customer()
+    {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
@@ -222,20 +223,71 @@ class CustomerController extends BaseController
                 //     } else {
                 //         $id = json_decode($data)->{'id'};
                 //         $role = json_decode($data)->{'role'};
-                        $customerModel = $this->get_model('customer');
                 //        $admin = $adminModel->get_by_id($id);
-                        // if ($role == Enum::ROLE_MANAGER && $role == $admin['ad_role']) {
-                            $customers = $customerModel->get_data("");
-                            if ($customers != null) {
-                                $responseCode = ResponseCode::SUCCESS;
-                                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'khách hàng', 'thành công');
-                                $data = [
-                                    'customers' => $customers
-                                ];
-                            } else {
-                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
-                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'khách hàng');
+                // if ($role == Enum::ROLE_MANAGER && $role == $admin['ad_role']) {
+                $key = '';
+                $limit = 0;
+                $offset = 0;
+                if (isset($_GET['ctmName']) and $_GET['ctmName'] != '') {
+                    $key .= "ctm_name like '%" . $_GET['ctmName'] . "%'";
+                }
+                if (isset($_GET['ctmPhone']) and $_GET['ctmPhone'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= "ctm_phone like '%" . $_GET['ctmPhone'] . "%'";
+                }
+                if (isset($_GET['ctmAddress']) and $_GET['ctmAddress'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= "ctm_address like '%" . $_GET['ctmAddress'] . "%'";
+                }
+                if (isset($_GET['ctmActive']) and $_GET['ctmActive'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " ctm_active = " . $_GET['ctmActive'];
+                }
+
+                if ($key != '') $key = "where " . $key;
+                // $message = "SERV: " . $key;
+                // $data = $_GET;
+                $customerModel = $this->get_model('customer');
+                $count = $customerModel->count_data($key);
+                if ($count > 0) {
+                    if (isset($_GET['limit']) and $_GET['limit'] != '') {
+                        $key .= " order by ctm_active DESC ";
+                        $limit = $_GET['limit'];
+                        if ($limit > 0) {
+                            $key .= " limit " . $limit;
+                            if (isset($_GET['index']) and $_GET['index'] != '') {
+                                $index = $_GET['index'];
+                                if ($index > 1) {
+                                    $offset = ($index - 1) * $limit;
+                                }
+                                if ($offset > 0) {
+                                    $key .= " offset " . $offset;
+                                }
                             }
+                        }
+                    }
+                    $customers = $customerModel->get_data($key);
+                    if ($customers != null) {
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'khách hàng', 'thành công');
+                        $data = [
+                            'customers' => $customers,
+                            'count' => $count
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'khách hàng');
+                    }
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "khách hàng");
+                }
                 //         } else {
                 //             $responseCode = ResponseCode::ACCESS_DENIED;
                 //             $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
@@ -245,6 +297,74 @@ class CustomerController extends BaseController
                 //     $responseCode = ResponseCode::ACCESS_DENIED;
                 //     $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 // }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function add_customer()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = $_POST;
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['ctmName']) && $_POST['ctmName'] != '' && isset($_POST['ctmAddress']) && $_POST['ctmAddress'] != '' && isset($_POST['ctmPhone']) && $_POST['ctmPhone'] != '') {
+                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_SALE) {
+                                    //$img = $_FILES["svImg"];
+                                    //if ($this->save_img(customerController::PATH_IMG_customer,$img)) {
+                                    $dataCustomer = [
+                                        'name' => $_POST['ctmName'],
+                                        'address' => $_POST['ctmAddress'],
+                                        'phone' => $_POST['ctmPhone'],
+                                        'password' => '',
+                                        'gender' => -1,
+                                        'active' => 0
+                                    ];
+                                    $customerModel = $this->get_model('customer');
+                                    if ($customerModel->save_data($dataCustomer)) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thành công");
+                                    } else {
+                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thất bại");
+                                    }
+                                    //} else {
+                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh khách hàng","thất bại");
+                                    //}
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "khách hàng");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
                 $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);

@@ -21,7 +21,7 @@ create table customer
     ctm_email varchar(255) unique, -- email
     ctm_address varchar(255), -- địa chỉ
     ctm_password varchar(32), -- mật khẩu
-    ctm_gender boolean not null, -- giới tính: 1-nam, 0-nữ
+    ctm_gender boolean, -- giới tính: 1-nam, 0-nữ
     ctm_can_feedback boolean default false not null, -- khả năng đánh giá: 1-có, 0-không --default
     ctm_active boolean default true not null, -- 1: có, 0: không
     is_delete boolean not null default false,
@@ -172,19 +172,15 @@ create table feedback
     constraint fk_feedback_ctm foreign key (ctm_id) references customer(ctm_id),
     constraint check_feedback_rating check(fb_rating >= 0 and fb_rating <=5)
 );
-
-
 create table shop_info
 (
-    shop_name varchar(150) primary key , -- Tên shop
+    shop_id int primary key default 1,
+    shop_name varchar(150), -- Tên shop
     shop_address varchar(150) not null, -- địa chỉ
     shop_phone char(20) not null, -- số điện thoại
     shop_mail varchar(30) not null, -- số điện thoại
     shop_description text, -- mô tả
-    shop_facebook varchar(255), -- địa chỉ facebook
-    shop_website varchar(255), -- địa chỉ website
-    shop_banner varchar(255) not null, -- banner hiển thị trên website
-    shop_logo varchar(255) not null, -- logo shop
+    shop_facebook varchar(255) not null, -- địa chỉ facebook
     is_delete boolean not null default false
 )
 
