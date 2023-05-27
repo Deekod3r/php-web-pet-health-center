@@ -28,14 +28,14 @@ update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_
 
 -- discount
 insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active, is_delete)
-            values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
-                   (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,1,default),
-                   (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,10,'2023/12/01','2024/2/01',null,0,default),
+            values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,0,default),
+                   (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,0,default),
+                   (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,default,'2023/12/01','2024/2/01',null,0,default),
                    (4, 'HAPPYPET66','Mã giảm giá tháng 5 cùng CarePET',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
-                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
-                   (6, 'HAPPY99','Mã giảm giá HAPPY99',default,default,10,'2023/04/15','2023/04/22',null,1,default),
-                   (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/9/01','2024/10/01',null,0,default),
-                   (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,0,default);
+                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88',500000,100000,default,'2023/05/15','2023/07/22',10,1,default),
+                   (6, 'HAPPY99','Mã giảm giá HAPPY99',default,default,10,'2023/04/15','2023/04/22',null,0,default),
+                   (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/6/01','2023/7/01',null,0,default),
+                   (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,1,default);
 -- select * from discount;
 -- pet
 insert into pet (pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, ctm_id)
@@ -252,9 +252,9 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
-insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_mail)
+insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_website, shop_banner, shop_logo, shop_mail)
             value ('CarePET','55 Giải Phóng, Đồng Tâm, Hai Bà Trưng, Hà Nội','+84 987 654 321','Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.',
-                   'https://www.facebook.com/carepet.nhom2','carepet@huce.com');
+                   'https://www.facebook.com/carepet.nhom2','https://carepet.com','#','#','carepet@huce.com');
 -- select * from shop_info;
 
 # update shop_info set shop_description = 'Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.' where 1=1
