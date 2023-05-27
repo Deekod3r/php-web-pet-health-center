@@ -30,14 +30,14 @@ update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_
 
 -- discount
 insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active, is_delete)
-            values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,1,default),
-                   (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,1,default),
-                   (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,0,'2023/12/01','2024/2/01',null,0,default),
-                   (4, 'HAPPYPET66','Mã giảm giá HAPPYPET66 nhân giày 6/6',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
-                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88 nhân giày 8/8',500000,100000,default,'2023/05/15','2023/05/22',10,1,default),
-                   (6, 'HAPPY99','Mã giảm giá HAPPY99 nhân giày 9/9',default,default,10,'2023/04/15','2023/04/22',null,1,default),
-                   (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/9/01','2024/10/01',null,0,default),
-                   (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,0,default);
+            values (1, 'HAPPYPET','Mã giảm giá ngày khai trương',default,50000,default,'2023/03/15','2023/03/22',null,0,default),
+                   (2, 'DOCLAP75','Mã giảm giá sự kiện 30/4 - 1/5',300000,0 ,5,'2023/04/29','2023/05/01',50,0,default),
+                   (3, 'TET88','Mã giảm giá cho sự kiện tết nguyên đán',200000,50000,default,'2023/12/01','2024/2/01',null,0,default),
+                   (4, 'HAPPYPET66','Mã giảm giá tháng 5 cùng CarePET',200000,50000,default,'2023/05/01','2023/06/01',null,1,default),
+                   (5, 'HAPPYPET88','Mã giảm giá HAPPYPET88',500000,100000,default,'2023/05/15','2023/07/22',10,1,default),
+                   (6, 'HAPPY99','Mã giảm giá HAPPY99',default,default,10,'2023/04/15','2023/04/22',null,0,default),
+                   (7, 'FUN88','Mã giảm giá FUN88 tài trợ bởi nhà cái FUN88',200000,default,10,'2023/6/01','2023/7/01',null,0,default),
+                   (8, 'FUN99','Mã giảm giá FUN99 tài trợ bởi nhà cái FUN99',default,default,50,'2023/5/01','2024/6/01',5,1,default);
 -- select * from discount;
 -- pet
 insert into pet (pet_id, pet_name, pet_type, pet_species, pet_gender, pet_note, ctm_id)
@@ -197,22 +197,22 @@ insert into service (sv_id, sv_name, sv_img, sv_price, sv_description, sv_pet, s
 -- select * from service;
 -- appointment
  insert into appointment (apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, ctm_id, cs_id, is_delete)
-            values (1,'2023/04/16','9:30:00','2023/04/16 7:30:00','2023/04/16 8:30:00',2,2,1,false), -- kh2 đặt onl-> hủy
-                   (2,'2023/03/10','9:30:00','2023/03/10 9:28:00',null,3,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
-                   (3,'2023/04/16','10:30:00','2023/04/16 7:30:00',null,3,3,2,false), -- kh3 đặt onl -> đã hoàn thành
-                   (4,'2023/04/18','14:45:00','2023/04/18 14:40:00',null,1,3,2,false), -- kh3 đặt onl -> đã xác nhận
-                   (5,'2023/04/01','14:30:00','2023/04/1 8:30:10',null,3,1,3,false),
-                   (6,'2023/04/06','9:45:00','2023/04/6 7:30:30',null,3,2,3,false),
-                   (7,'2023/04/08','9:45:00','2023/04/7 7:30:00','2023/04/8 7:30:28',2,4,3,false),
-                   (8,'2023/04/08','15:45:00','2023/04/8 9:56:00',null,3,4,3,false),
-                   (9,'2023/04/10','15:00:00','2023/04/10 10:35:30',null,3,5,5,false),
-                   (10,'2023/05/01','10:15:00','2023/04/28 7:30:00','2023/04/30 7:46:30',2,5,3,false),
-                   (11,'2023/05/01','14:15:00','2023/05/1 9:30:12',null,3,5,3,false),
-                   (12,'2023/05/09','16:00:00','2023/05/2 7:12:20',null,1,6,5,false),
-                   (13,'2023/05/08','15:45:00','2023/05/6 9:30:59',null,3,7,5,false),
-                   (14,'2023/05/08','16:45:00','2023/05/7 7:33:00',null,3,7,5,false),
-                   (15,'2023/05/15','13:35:00','2023/05/15 9:29:24',null,0,8,2,false),
-                   (16,'2023/05/18','15:45:00','2023/05/16 8:39:00',null,0,3,3,false);
+            values (1,'2023/04/16','9:30:00','2023/04/16 7:30:00','2023/04/16 8:30:00',0,2,1,false), -- kh2 đặt onl-> hủy
+                   (2,'2023/03/10','9:30:00','2023/03/10 9:28:00',null,1,1,3,false), -- kh1 đặt trực tiếp -> đã hoàn thành
+                   (3,'2023/04/16','10:30:00','2023/04/16 7:30:00',null,1,3,2,false), -- kh3 đặt onl -> đã hoàn thành
+                   (4,'2023/04/18','14:45:00','2023/04/18 14:40:00',null,2,3,2,false), -- kh3 đặt onl -> đã xác nhận
+                   (5,'2023/04/01','14:30:00','2023/04/1 8:30:10',null,1,1,3,false), -- đã hoàn thành
+                   (6,'2023/04/06','9:45:00','2023/04/6 7:30:30',null,1,2,3,false), -- đã hoàn thành
+                   (7,'2023/04/08','9:45:00','2023/04/7 7:30:00','2023/04/8 7:30:28',0,4,3,false), -- huy
+                   (8,'2023/04/08','15:45:00','2023/04/8 9:56:00',null,1,4,3,false), -- đã hoàn thành
+                   (9,'2023/04/10','15:00:00','2023/04/10 10:35:30',null,1,5,5,false), -- đã hoàn thành
+                   (10,'2023/05/01','10:15:00','2023/04/28 7:30:00','2023/04/30 7:46:30',0,5,3,false), -- huy
+                   (11,'2023/05/01','14:15:00','2023/05/1 9:30:12',null,1,5,3,false), -- đã hoàn thành
+                   (12,'2023/05/09','16:00:00','2023/05/2 7:12:20',null,2,6,5,false),
+                   (13,'2023/05/08','15:45:00','2023/05/6 9:30:59',null,1,7,5,false), -- đã hoàn thành
+                   (14,'2023/05/08','16:45:00','2023/05/7 7:33:00',null,1,7,5,false), -- đã hoàn thành
+                   (15,'2023/05/15','13:35:00','2023/05/15 9:29:24',null,3,8,2,false),
+                   (16,'2023/05/18','15:45:00','2023/05/16 8:39:00',null,3,3,3,false);
 -- select * from appointment;
 -- bill
 insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad_id, dc_id, sub_total, value_reduced, total_value)
@@ -254,9 +254,9 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
-insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_mail)
+insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_website, shop_banner, shop_logo, shop_mail)
             value ('CarePET','55 Giải Phóng, Đồng Tâm, Hai Bà Trưng, Hà Nội','+84 987 654 321','Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.',
-                   'https://www.facebook.com/carepet.nhom2','carepet@huce.com');
+                   'https://www.facebook.com/carepet.nhom2','https://carepet.com','#','#','carepet@huce.com');
 -- select * from shop_info;
 
 # update shop_info set shop_description = 'Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.' where 1=1
