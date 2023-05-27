@@ -53,7 +53,7 @@ class NewsController extends BaseController
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= " news_active = 1 ";
+                    $key .= " news_active = true ";
                 }
                 if ($key != '') $key = "where " . $key;
                 $count = $newsModel->count_data($key);

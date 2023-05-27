@@ -2,6 +2,7 @@ const number = /[0-9]/;
 const lowerChars = /[a-z]/;
 const upperChars = /[A-Z]/;
 const specialChars = /[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/;
+const regPhone = /^\d+$/;
 
 
 function confirmAction(action, object) {

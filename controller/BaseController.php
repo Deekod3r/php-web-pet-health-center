@@ -4,7 +4,8 @@ class BaseController
 
     private $secureKey = "nhom2@65pm2!@#$";
 
-    public function get_secure_key(){
+    public function get_secure_key()
+    {
         return $this->secureKey;
     }
     public function __construct()
@@ -25,7 +26,7 @@ class BaseController
         $path = 'view/error/error-';
         include($path . $errorCode . '.php');
     }
-    
+
     public function get_model($model)
     {
         include('model/' . $model . 'Model.php');
@@ -54,12 +55,12 @@ class BaseController
 
     public function check_admin_role($role)
     {
-        if (isset($_SESSION["ad".$role]) && $_SESSION["ad".$role]) {
+        if (isset($_SESSION["ad" . $role]) && $_SESSION["ad" . $role]) {
             return true;
         } else return false;
     }
 
-    public function generate_token($id,$typeAccount,$role)
+    public function generate_token($id, $typeAccount, $role)
     {
         $header = json_encode([
             'typ' => 'JWT',
@@ -80,23 +81,24 @@ class BaseController
 
     public function verify_and_decode_token($jwt)
     {
-        $endOfHeader = stripos($jwt,".");
-        $headerSub = substr($jwt,0,$endOfHeader);
-        $jwt = substr($jwt,$endOfHeader+1);
-        $endOfPayload = stripos($jwt,".");
-        $payloadSub = substr($jwt,0,$endOfPayload);
-        $signatureSub = substr($jwt,$endOfPayload+1);
+        $endOfHeader = stripos($jwt, ".");
+        $headerSub = substr($jwt, 0, $endOfHeader);
+        $jwt = substr($jwt, $endOfHeader + 1);
+        $endOfPayload = stripos($jwt, ".");
+        $payloadSub = substr($jwt, 0, $endOfPayload);
+        $signatureSub = substr($jwt, $endOfPayload + 1);
         $signatureSub = str_replace(['-', '_', '|'], ['+', '/', '='], $signatureSub);
         $signatureSub = base64_decode($signatureSub);
         if (hash_hmac('sha256', $headerSub . "." . $payloadSub, $this->get_secure_key(), true) == $signatureSub) {
             $payloadSub = str_replace(['-', '_', '|'], ['+', '/', '='], $payloadSub);
             $payloadSub = base64_decode($payloadSub);
             return $payloadSub;
-        }  
+        }
         return false;
     }
 
-    public function response($responseCode, $message, $data) {
+    public function response($responseCode, $message, $data)
+    {
         $result = [
             'responseCode' => $responseCode,
             'message' => $message,
@@ -110,6 +112,40 @@ class BaseController
     public $upperChars = '/[A-Z]/';
     public $specialChars = '/[\.!\'^£$%&*()}{@#~?><,|=_+¬-]/';
     //preg_match($number, $input);
-   
-}
 
+    public function save_img($path, $file)
+    {
+        $target_dir = $path;
+        $target_file = $target_dir . basename($file["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($file["tmp_name"]);
+            if ($check == false) {
+                return false;
+            }
+        }
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            echo "Sorry, file already exists.";
+            return false;
+        }
+        // Check file size
+        if ($file["size"] > 500000) {
+            echo "Sorry, your file is too large.";
+            return false;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            return false;
+        }
+
+        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

@@ -7,6 +7,8 @@ class ServiceModel extends BaseModel{
     var $idTable = 'sv_id';
     var $view = 'view_service';
     var $viewJoin = 'view_service_join';
+    var $insert = ['sv_name','sv_description', 'sv_price','sv_img','sv_pet','sv_status','cs_id'];
+
     public function __construct(){
         //$this->connection = $this->get_connection();
     }
@@ -24,4 +26,17 @@ class ServiceModel extends BaseModel{
         return $this->find_by_id($id);
     }
     
+    public function save_data($data){
+        $value = "'".$data['name']."','".$data['description']."',".$data['price'].",' ',".$data['pet'].",".$data['status'].",".$data['cs'];
+        return $this->save($value);
+    }
+
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
+
+    public function delete_data($id) {
+        return $this->delete_soft($id);
+    }
 };

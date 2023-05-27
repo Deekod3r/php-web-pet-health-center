@@ -19,7 +19,7 @@
                     <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
                     <a href="?controller=discount&action=discount_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Giảm giá") echo "active"; ?>">Giảm giá</a>
                     <a href="?controller=appointment&action=appointment_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Lịch hẹn") echo "active"; ?>">Lịch hẹn</a>
-                    <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoán đơn</a>
+                    <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoá đơn</a>
                     <a href="?controller=news&action=news_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
                     <a href="?controller=feedback&action=feedback_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
                     <a href="?controller=customer&action=customer_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Khách hàng") echo "active"; ?>">Khách hàng</a>

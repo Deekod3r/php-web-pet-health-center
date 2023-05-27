@@ -252,9 +252,9 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
-insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_website, shop_banner, shop_logo, shop_mail)
+insert into shop_info (shop_name, shop_address, shop_phone, shop_description, shop_facebook, shop_mail)
             value ('CarePET','55 Giải Phóng, Đồng Tâm, Hai Bà Trưng, Hà Nội','+84 987 654 321','Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.',
-                   'https://www.facebook.com/carepet.nhom2','https://carepet.com','#','#','carepet@huce.com');
+                   'https://www.facebook.com/carepet.nhom2','carepet@huce.com');
 -- select * from shop_info;
 
 # update shop_info set shop_description = 'Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.' where 1=1
