@@ -207,7 +207,8 @@ class AppointmentController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function data_appointment(){
+    public function data_appointment()
+    {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
@@ -222,20 +223,81 @@ class AppointmentController extends BaseController
                 //     } else {
                 //         $id = json_decode($data)->{'id'};
                 //         $role = json_decode($data)->{'role'};
-                        $appointmentModel = $this->get_model('appointment');
+
                 //        $admin = $adminModel->get_by_id($id);
-                        // if ($role == Enum::ROLE_MANAGER && $role == $admin['ad_role']) {
-                            $appointments = $appointmentModel->get_data(" order by apm_booking_at DESC");
-                            if ($appointments != null) {
-                                $responseCode = ResponseCode::SUCCESS;
-                                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'lịch hẹn', 'thành công');
-                                $data = [
-                                    'appointments' => $appointments
-                                ];
-                            } else {
-                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
-                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'lịch hẹn');
+                // if ($role == Enum::ROLE_MANAGER && $role == $admin['ad_role']) {
+                $key = '';
+                $limit = 0;
+                $offset = 0;
+                $appointmentModel = $this->get_model('appointment');
+                if (isset($_GET['appointmentCode']) and $_GET['appointmentCode'] != '') {
+                    $key .= "dc_code like '%" . $_GET['appointmentCode'] . "%'";
+                }
+                if (isset($_GET['appointmentCondition']) and $_GET['appointmentCondition'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " dc_condition <= " . $_GET['appointmentCondition'];
+                }
+                if (isset($_GET['appointmentStatus']) and $_GET['appointmentStatus'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " dc_active = " . $_GET['appointmentStatus'];
+                }
+                if (isset($_GET['appointmentValue']) and $_GET['appointmentValue'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= $_GET['appointmentValue'] . " > 0 ";
+                }
+                if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " dc_active = 1 ";
+                }
+                if ($key != '') $key = "where " . $key;
+                // $message = "SERV: " . $key;
+                // $data = $_GET;
+                $count = $appointmentModel->count_data($key);
+                if ($count > 0) {
+                    $key .= " order by apm_status desc";
+                    if (isset($_GET['appointmentQuantity']) && $_GET['appointmentQuantity'] != '') {
+                        $key = sprintf($key, "-dc_quantity " . $_GET['appointmentQuantity'] . ",");
+                    } else $key = sprintf($key, "");
+                    if (isset($_GET['limit']) and $_GET['limit'] != '') {
+                        $limit = $_GET['limit'];
+                        if ($limit > 0) {
+                            $key .= " limit " . $limit;
+                            if (isset($_GET['index']) and $_GET['index'] != '') {
+                                $index = $_GET['index'];
+                                if ($index > 1) {
+                                    $offset = ($index - 1) * $limit;
+                                }
+                                if ($offset > 0) {
+                                    $key .= " offset " . $offset;
+                                }
                             }
+                        }
+                    }
+                    $appointments = $appointmentModel->get_data($key);
+                    if ($appointments != null) {
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'lịch hẹn', 'thành công');
+                        $data = [
+                            'appointments' => $appointments,
+                            'count' => $count
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'lịch hẹn');
+                    }
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "dịch vụ");
+                }
+
                 //         } else {
                 //             $responseCode = ResponseCode::ACCESS_DENIED;
                 //             $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
@@ -245,6 +307,124 @@ class AppointmentController extends BaseController
                 //     $responseCode = ResponseCode::ACCESS_DENIED;
                 //     $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 // }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function data_detail_appointment()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                // if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                //     $token = $_GET['token'] != null ? $_GET['token'] : '';
+                //     $data = $this->verify_and_decode_token($token);
+                //     if (!$data) {
+                //         $responseCode = ResponseCode::TOKEN_INVALID;
+                //         $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                //     } else {
+                //         $id = json_decode($data)->{'id'};
+                //         $role = json_decode($data)->{'role'};
+                //        $admin = $adminModel->get_by_id($id);
+                // if ($role == Enum::ROLE_MANAGER && $role == $admin['ad_role']) {
+                if (isset($_GET['appointmentId']) && $_GET['appointmentId'] != '') {
+                    $appointmentModel = $this->get_model('appointment');
+                    $appointment = $appointmentModel->get_by_id($_GET['appointmentId']);
+                    if ($appointment != null) {
+                        $responseCode = ResponseCode::SUCCESS;
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'lịch hẹn', 'thành công');
+                        $data = [
+                            'appointment' => $appointment
+                        ];
+                    } else {
+                        $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'lịch hẹn');
+                    }
+                } else {
+                    $responseCode = ResponseCode::INPUT_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "lịch hẹn");
+                }
+                //         } else {
+                //             $responseCode = ResponseCode::ACCESS_DENIED;
+                //             $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                //         }
+                //     }
+                // } else {
+                //     $responseCode = ResponseCode::ACCESS_DENIED;
+                //     $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                // }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function edit_appointment()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['appointmentIdEdit']) && $_POST['appointmentIdEdit'] != '' && isset($_POST['appointmentStatusEdit']) && $_POST['appointmentStatusEdit'] != '') {
+                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
+                                    //$img = $_FILES["svImg"];
+                                    //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
+                                    $dataappointment = [
+                                        'apm_status' => $_POST['appointmentStatusEdit']
+                                    ];
+                                    $appointmentModel = $this->get_model('appointment');
+                                    if ($appointmentModel->update_data($dataappointment,$_POST['appointmentIdEdit'])) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thành công");
+                                    } else {
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thất bại");
+                                    }
+                                    //} else {
+                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
+                                    //}
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "lịch hẹn");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE ;
+                }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
                 $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);

@@ -78,10 +78,10 @@ const gender = {
 }
 
 const statusAppointment = {
-    confirmNo : 0,
-    confirmYes : 1,
-    cancel : 2,
-    done : 3
+    confirmNo : 3,
+    confirmYes : 2,
+    cancel : 0,
+    done : 1
 }
 
 const statusObject = {

@@ -83,4 +83,13 @@ class AppointmentModel extends BaseModel
             return false;
         }
     }
+
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
+    }
+
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
 };

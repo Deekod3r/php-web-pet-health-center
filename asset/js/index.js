@@ -44,9 +44,9 @@ function loadDataPage() {
         },
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
-                loadDataFeedback(response.data.feedback);
+                loadDataFeedback(response.data.feedbacks);
             } else if (response.responseCode != responseCode.dataEmpty) alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
 
         },

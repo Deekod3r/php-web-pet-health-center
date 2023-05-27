@@ -1,17 +1,17 @@
-const limitDiscountPage = 6;
+const limitaAppointmentPage = 6;
 
-var discountCode = new URLSearchParams(document.location.href).get("discount-code") || "";
-var discountCondition = new URLSearchParams(document.location.href).get("discount-conditon") || "";
-var discountStatus = new URLSearchParams(document.location.href).get("discount-status") || "";
-var discountQuantity = new URLSearchParams(document.location.href).get("discount-value") || "";
-var discountValue = new URLSearchParams(document.location.href).get("discount-value") || "";
+var appointmentCode = new URLSearchParams(document.location.href).get("appointment-code") || "";
+var appointmentCondition = new URLSearchParams(document.location.href).get("appointment-conditon") || "";
+var appointmentStatus = new URLSearchParams(document.location.href).get("appointment-status") || "";
+var appointmentQuantity = new URLSearchParams(document.location.href).get("appointment-value") || "";
+var appointmentValue = new URLSearchParams(document.location.href).get("appointment-value") || "";
 
-// discountName = discountName != undefined && discountName != null ? discountName : "";
-// discountType = discountType != undefined && discountType != null ? discountType : "";
+// appointmentName = appointmentName != undefined && appointmentName != null ? appointmentName : "";
+// appointmentType = appointmentType != undefined && appointmentType != null ? appointmentType : "";
 // ctmPhone = ctmPhone != undefined && ctmPhone != null ? ctmPhone : "";
-// genderdiscount = genderdiscount != undefined && genderdiscount != null ? genderdiscount : "";
+// genderappointment = genderappointment != undefined && genderappointment != null ? genderappointment : "";
 
-url = "?controller=discount&action=discount_page_ad";
+url = "?controller=appointment&action=appointment_page_ad";
 
 function loadPaging(index, endPage) {
     index = parseInt(index);
@@ -105,15 +105,15 @@ function loadPaging(index, endPage) {
 function loadDataPage(page){
     $.ajax({
         type: "GET",
-        url: "?controller=discount&action=data_discount",
+        url: "?controller=appointment&action=data_appointment",
         data: {
-            discountCode: discountCode,
-            discountCondition: discountCondition,
-            discountStatus: discountStatus,
-            discountQuantity: discountQuantity,
-            discountValue: discountValue,
+            appointmentCode: appointmentCode,
+            appointmentCondition: appointmentCondition,
+            appointmentStatus: appointmentStatus,
+            appointmentQuantity: appointmentQuantity,
+            appointmentValue: appointmentValue,
             index: page,
-            limit: limitDiscountPage,
+            limit: limitaAppointmentPage,
             token: sessionStorage.getItem("token")
         },
         dataType: "json",
@@ -121,20 +121,20 @@ function loadDataPage(page){
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 // param = "";
-                // if (discountName != null && discountName != "") param += "&discount-name=" + discountName;
+                // if (appointmentName != null && appointmentName != "") param += "&appointment-name=" + appointmentName;
                 // if (ctmPhone != null && ctmPhone != "")
-                //     param += "&discount-status=" + ctmPhone;
-                // if (discountType != null && discountType != "") param += "&discount-conditon=" + discountType;
-                // if (genderdiscount != null && genderdiscount != "") param += "&discount-value=" + genderdiscount;
+                //     param += "&appointment-status=" + ctmPhone;
+                // if (appointmentType != null && appointmentType != "") param += "&appointment-conditon=" + appointmentType;
+                // if (genderappointment != null && genderappointment != "") param += "&appointment-value=" + genderappointment;
                 // if (page > 1) {
                 //     window.history.pushState(null, "", url + param + "&page=" + page);
                 // } else window.history.pushState(null, "", url + param);
-                loadDataDiscount(response.data.discounts);
-                loadPaging(page, Math.ceil(response.data.count / limitDiscountPage));
+                loadDataAppointment(response.data.appointments);
+                loadPaging(page, Math.ceil(response.data.count / limitaAppointmentPage));
             } else if (response.responseCode == responseCode.dataEmpty) {
                 window.history.pushState(null, "", url);
                 $("#page").html("");
-                $("#data-discount").html(
+                $("#data-appointment").html(
                     "<p style='font-size:20px; color:red; font-weight:bold; text-align:center'>Thông tin trống.</p>"
                 );
             } else
@@ -159,53 +159,64 @@ function loadDataPage(page){
     });
 }
 
-function loadDataDiscount(data){
-    var discountData = "";
+function loadDataAppointment(data){
+    var appointmentData = "";
     data.forEach((element) => {
-        if (element.dc_value == 0) value = element.dc_value_percent + "%";
-        else value = new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.dc_value);
-        quantity = element.dc_quantity != null ? element.dc_quantity : "Không giới hạn";
-        isActive = element.dc_active == statusObject.active ? "Hoạt động" : "Không hiệu lực";
-        now = Date.now();
-        check = new Date(element.dc_end_time + " " + "00:00:00");
-        edit = "";
-        if (check.getTime() - now > 0) {
-            edit = "<a class='btn btn-primary' onclick='loadDataDetailDiscount("+ element.dc_id  +")'  data-toggle='modal' data-target='#myModal1'>Sửa</a>";
+        apmStatus = "";
+        switch (element.apm_status) {
+            case statusAppointment.confirmNo:
+                apmStatus = "Chờ xác nhận"
+                break;
+            case statusAppointment.confirmYes:
+                apmStatus = "Đã xác nhận"
+                break;
+            case statusAppointment.cancel:
+                apmStatus = "Đã huỷ"
+                break;
+            case statusAppointment.done:
+                apmStatus = "Hoàn thành"
+                break;
+            default:
+                break;
         }
-        discountData += "<tr>";
-        discountData += "<th scope='row'>" + element.dc_id + "</th>";
-        discountData += "<td>" + element.dc_code + "</td>";
-        discountData += "<td>" + element.dc_description + "</td>";
-        discountData += "<td>Đơn tối thiểu: " + new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.dc_condition) + "</td>";
-        discountData += "<td>" + value + "</td>";
-        discountData += "<td>" + element.dc_start_time + "</td>";
-        discountData += "<td>" + element.dc_end_time + "</td>";
-        discountData += "<td>" + quantity + "</td>";
-        discountData += "<td>" + isActive + "</td>";
-        discountData += "<td>" + edit +"</td>";
-        discountData += "</tr>";
+        if (element.apm_status == statusAppointment.confirmYes || element.apm_status == statusAppointment.confirmNo) {
+            edit = "<a class='btn btn-primary' onclick='loadDataDetailAppointment("+ element.apm_id  +")'  data-toggle='modal' data-target='#myModal1'>Sửa</a>";
+        } else edit = '';
+        apmCancelAt = element.apm_cancel_at != null ? element.apm_cancel_at :  '';
+        appointmentData += "<tr>";
+        appointmentData += "<th scope='row'>" + element.apm_id + "</th>";
+        appointmentData += "<td>" + element.apm_booking_at + "</td>";
+        appointmentData += "<td>" + element.apm_date + "</td>";
+        appointmentData += "<td>" + element.apm_time + "</td>";
+        appointmentData += "<td>" + element.cs_id + " - " + element.cs_name + "</td>";
+        appointmentData += "<td>" + element.ctm_id + " - " + element.ctm_name + "</td>";
+        appointmentData += "<td>" + element.apm_note + "</td>";
+        appointmentData += "<td>" + apmStatus + "</td>";
+        appointmentData += "<td>" + apmCancelAt + "</td>";
+        appointmentData += "<td>"+ edit +"</td>";
+        appointmentData += "</tr>";
     });
-    $("#data-discount").html(discountData);
+    $("#data-appointment").html(appointmentData);
 }
 
 function resetAddForm() {
-    $("#form-add-discount")[0].reset();
+    $("#form-add-appointment")[0].reset();
 }
 
-function loadDataDetailDiscount(id) {
+function loadDataDetailAppointment(id) {
     $.ajax({
         type: "GET",
-        url: "?controller=discount&action=data_detail_discount",
+        url: "?controller=appointment&action=data_detail_appointment",
         data: {
-            discountId: id,
+            appointmentId: id,
             token: sessionStorage.getItem("token")
         },
         dataType: "json",
         success: function (response) {
             console.log(response);
             if (response.responseCode == responseCode.success) {
-                $("#discount-id-edit").val(id)
-                $("#discount-status-edit").val(response.data.discount.dc_active)
+                $("#appointment-id-edit").val(id)
+                $("#appointment-status-edit").val(response.data.appointment.apm_status)
             } else
                 alert(
                     "RES: " +
@@ -236,80 +247,80 @@ $(document).ready(function(){
 
     loadDataPage(indexPage);
 
-    $("#form-add-discount").submit(function (e) {
-        discountCodeAdd = $("#discount-code-add").val().trim();
-        discountConditionAdd = $("#discount-condition-add").val();
-        discountQuantityAdd = $("#discount-quantity-add").val();
-        discountStartTimeAdd = $("#discount-start-time-add").val();
-        discountEndTimeAdd = $("#discount-end-time-add").val();
-        discountTypeAdd = $("#discount-type-add").val().trim();
-        discountValueAdd = $("#discount-value-add").val();
-        discountDescAdd = $("#discount-desc-add").val().trim();
+    $("#form-add-appointment").submit(function (e) {
+        appointmentCodeAdd = $("#appointment-code-add").val().trim();
+        appointmentConditionAdd = $("#appointment-condition-add").val();
+        appointmentQuantityAdd = $("#appointment-quantity-add").val();
+        appointmentStartTimeAdd = $("#appointment-start-time-add").val();
+        appointmentEndTimeAdd = $("#appointment-end-time-add").val();
+        appointmentTypeAdd = $("#appointment-type-add").val().trim();
+        appointmentValueAdd = $("#appointment-value-add").val();
+        appointmentDescAdd = $("#appointment-desc-add").val().trim();
         
-        if (discountCodeAdd == "" || discountConditionAdd == "" ||  discountStartTimeAdd == "" || discountEndTimeAdd == "" || discountTypeAdd == "" || discountValueAdd == "" || discountDescAdd == "" ) {
-            $("#msg-discount").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-discount").addClass(" alert-danger");
-            $("#msg-discount").show();
+        if (appointmentCodeAdd == "" || appointmentConditionAdd == "" ||  appointmentStartTimeAdd == "" || appointmentEndTimeAdd == "" || appointmentTypeAdd == "" || appointmentValueAdd == "" || appointmentDescAdd == "" ) {
+            $("#msg-appointment").html("CLI: Thông tin không được bỏ trống.");
+            $("#msg-appointment").addClass(" alert-danger");
+            $("#msg-appointment").show();
             window.setTimeout(function () {
-                $("#msg-discount").hide();
-                $("#msg-discount").removeClass(" alert-danger");
+                $("#msg-appointment").hide();
+                $("#msg-appointment").removeClass(" alert-danger");
             }, 3000);
             return false;
         } 
-        if (!regNumber.test(discountConditionAdd) || !regNumber.test(discountValueAdd)) {
-            $("#msg-discount").html("CLI: Giá trị tiền phải là số.");
-            $("#msg-discount").addClass(" alert-danger");
-            $("#msg-discount").show();
+        if (!regNumber.test(appointmentConditionAdd) || !regNumber.test(appointmentValueAdd)) {
+            $("#msg-appointment").html("CLI: Giá trị tiền phải là số.");
+            $("#msg-appointment").addClass(" alert-danger");
+            $("#msg-appointment").show();
             window.setTimeout(function () {
-                $("#msg-discount").hide();
-                $("#msg-discount").removeClass(" alert-danger");
+                $("#msg-appointment").hide();
+                $("#msg-appointment").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
-        if (discountQuantityAdd != '') {
-            if (!regNumber.test(discountQuantityAdd) || discountQuantityAdd < 0) {
-                $("#msg-discount").html("CLI: Số lượng phải là số lớn hơn hoặc bằng 0.");
-                $("#msg-discount").addClass(" alert-danger");
-                $("#msg-discount").show();
+        if (appointmentQuantityAdd != '') {
+            if (!regNumber.test(appointmentQuantityAdd) || appointmentQuantityAdd < 0) {
+                $("#msg-appointment").html("CLI: Số lượng phải là số lớn hơn hoặc bằng 0.");
+                $("#msg-appointment").addClass(" alert-danger");
+                $("#msg-appointment").show();
                 window.setTimeout(function () {
-                    $("#msg-discount").hide();
-                    $("#msg-discount").removeClass(" alert-danger");
+                    $("#msg-appointment").hide();
+                    $("#msg-appointment").removeClass(" alert-danger");
                 }, 3000);
                 return false;
             }
         }
-        let timeStart = $('#discount-start-time-add').val()
-        let timeEnd = $('#discount-end-time-add').val()
+        let timeStart = $('#appointment-start-time-add').val()
+        let timeEnd = $('#appointment-end-time-add').val()
         if (timeStart >= timeEnd) {
-            $("#msg-discount").html("CLI: Thời gian kết thúc phải sau thời gian bắt đầu.");
-            $("#msg-discount").addClass(" alert-danger");
-            $("#msg-discount").show();
+            $("#msg-appointment").html("CLI: Thời gian kết thúc phải sau thời gian bắt đầu.");
+            $("#msg-appointment").addClass(" alert-danger");
+            $("#msg-appointment").show();
             window.setTimeout(function () {
-                $("#msg-discount").hide();
-                $("#msg-discount").removeClass(" alert-danger");
+                $("#msg-appointment").hide();
+                $("#msg-appointment").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
         now = Date.now();
-        check = new Date($("#discount-start-time-add").val() + " " + "00:00:00");
+        check = new Date($("#appointment-start-time-add").val() + " " + "00:00:00");
         diff = check.getTime() - now;
         if (diff < 86400000) {
-            $("#msg-discount").html("CLI: Mã giảm giá phải tạo tối thiểu trước 24 tiếng ngày bắt đầu.");
-            $("#msg-discount").addClass(" alert-danger");
-            $("#msg-discount").show();
+            $("#msg-appointment").html("CLI: Mã giảm giá phải tạo tối thiểu trước 24 tiếng ngày bắt đầu.");
+            $("#msg-appointment").addClass(" alert-danger");
+            $("#msg-appointment").show();
             window.setTimeout(function () {
-                $("#msg-discount").hide();
-                $("#msg-discount").removeClass(" alert-danger");
+                $("#msg-appointment").hide();
+                $("#msg-appointment").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
         //return false;
-        formData= new FormData($("#form-add-discount")[0]);
+        formData= new FormData($("#form-add-appointment")[0]);
         formData.append('token',sessionStorage.getItem("token"))
         //return false;
         $.ajax({
             type: "POST",
-            url: "?controller=discount&action=add_discount",
+            url: "?controller=appointment&action=add_appointment",
             processData: false,
             contentType: false,
             data: formData,
@@ -317,22 +328,22 @@ $(document).ready(function(){
             success: function (response) {
                 console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-discount").html("CLI: Thêm mã giảm giá thành công.");
-                    $("#msg-discount").addClass(" alert-success");
-                    $("#msg-discount").show();
-                    $("#form-add-discount")[0].reset();
+                    $("#msg-appointment").html("CLI: Thêm mã giảm giá thành công.");
+                    $("#msg-appointment").addClass(" alert-success");
+                    $("#msg-appointment").show();
+                    $("#form-add-appointment")[0].reset();
                     window.setTimeout(function () {
-                        $("#msg-discount").hide();
-                        $("#msg-discount").removeClass(" alert-success");
+                        $("#msg-appointment").hide();
+                        $("#msg-appointment").removeClass(" alert-success");
                     }, 3000);
                     loadDataPage(1);
                 } else {
-                    $("#msg-discount").html(response.message);
-                    $("#msg-discount").addClass(" alert-danger");
-                    $("#msg-discount").show();
+                    $("#msg-appointment").html(response.message);
+                    $("#msg-appointment").addClass(" alert-danger");
+                    $("#msg-appointment").show();
                     window.setTimeout(function () {
-                        $("#msg-discount").hide();
-                        $("#msg-discount").removeClass(" alert-danger");
+                        $("#msg-appointment").hide();
+                        $("#msg-appointment").removeClass(" alert-danger");
                     }, 3000);
                 }
             },
@@ -350,35 +361,35 @@ $(document).ready(function(){
         e.preventDefault();
     });
 
-    $("#form-search-discount").submit(function (e) {
-        discountCode = $("#discount-code").val().trim();
-        discountCondition = $("#discount-condition").val();
-        discountStatus = $("#discount-status").val().trim();
-        discountQuantity = $("#discount-quantity").val().trim();
-        discountValue = $("#discount-value").val().trim();
+    $("#form-search-appointment").submit(function (e) {
+        appointmentCode = $("#appointment-code").val().trim();
+        appointmentCondition = $("#appointment-condition").val();
+        appointmentStatus = $("#appointment-status").val().trim();
+        appointmentQuantity = $("#appointment-quantity").val().trim();
+        appointmentValue = $("#appointment-value").val().trim();
         loadDataPage(1);
         e.preventDefault();
     });
 
-    $("#form-edit-discount").submit(function (e) {
-        discountIdEdit = $("#discount-id-edit").val().trim();
-        discountStatusEdit = $("#discount-status-edit").val().trim();
-        if (discountIdEdit == "" || discountStatusEdit == "") {
-            $("#msg-discount-edit").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-discount-edit").addClass(" alert-danger");
-            $("#msg-discount-edit").show();
+    $("#form-edit-appointment").submit(function (e) {
+        appointmentIdEdit = $("#appointment-id-edit").val().trim();
+        appointmentStatusEdit = $("#appointment-status-edit").val().trim();
+        if (appointmentIdEdit == "" || appointmentStatusEdit == "") {
+            $("#msg-appointment-edit").html("CLI: Thông tin không được bỏ trống.");
+            $("#msg-appointment-edit").addClass(" alert-danger");
+            $("#msg-appointment-edit").show();
             window.setTimeout(function () {
-                $("#msg-discount-edit").hide();
-                $("#msg-discount-edit").removeClass(" alert-danger");
+                $("#msg-appointment-edit").hide();
+                $("#msg-appointment-edit").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
         //return false;
-        formData= new FormData($("#form-edit-discount")[0]);
+        formData= new FormData($("#form-edit-appointment")[0]);
         formData.append('token',sessionStorage.getItem("token"))
         $.ajax({
             type: "POST",
-            url: "?controller=discount&action=edit_discount",
+            url: "?controller=appointment&action=edit_appointment",
             data: formData,
             processData: false,
             contentType: false,
@@ -386,22 +397,22 @@ $(document).ready(function(){
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-discount-edit").html("CLI: Sửa giảm giá thành công.");
-                    $("#msg-discount-edit").addClass(" alert-success");
-                    $("#msg-discount-edit").show();
-                    $("#form-add-discount")[0].reset();
+                    $("#msg-appointment-edit").html("CLI: Sửa lịch hẹn thành công.");
+                    $("#msg-appointment-edit").addClass(" alert-success");
+                    $("#msg-appointment-edit").show();
+                    $("#form-add-appointment")[0].reset();
                     window.setTimeout(function () {
-                        $("#msg-discount-edit").hide();
-                        $("#msg-discount-edit").removeClass(" alert-success");
+                        $("#msg-appointment-edit").hide();
+                        $("#msg-appointment-edit").removeClass(" alert-success");
                     }, 3000);
                     loadDataPage(new URLSearchParams(document.location.href).get("page") || 1);
                 } else {
-                    $("#msg-discount-edit").html(response.message);
-                    $("#msg-discount-edit").addClass(" alert-danger");
-                    $("#msg-discount-edit").show();
+                    $("#msg-appointment-edit").html(response.message);
+                    $("#msg-appointment-edit").addClass(" alert-danger");
+                    $("#msg-appointment-edit").show();
                     window.setTimeout(function () {
-                        $("#msg-discount-edit").hide();
-                        $("#msg-discount-edit").removeClass(" alert-danger");
+                        $("#msg-appointment-edit").hide();
+                        $("#msg-appointment-edit").removeClass(" alert-danger");
                     }, 3000);
                 }
             },

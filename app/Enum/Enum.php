@@ -36,9 +36,9 @@ enum Enum {
     public  const TYPE_BOTH = 2;
 
     //STATUS APPOINTMENT
-    public const STATUS_APPOINTMENT_CONFIRMED_NO = 0;
-    public const STATUS_APPOINTMENT_CONFIRMED_YES = 1;
-    public const STATUS_APPOINTMENT_CANCEL = 2;
-    public const STATUS_APPOINTMENT_COMPLETED = 3;
+    public const STATUS_APPOINTMENT_CONFIRMED_NO = 3;
+    public const STATUS_APPOINTMENT_CONFIRMED_YES = 2;
+    public const STATUS_APPOINTMENT_CANCEL = 0;
+    public const STATUS_APPOINTMENT_COMPLETED = 1;
 
 }

@@ -40,7 +40,7 @@ function loadDataCurrentApm() {
                     appointmentData += "<td>" + element.apm_note + "</td>";
                     appointmentData += "<td style='color: "+ colorStatus + ";font-weight:bold'>" + statusApm + "</td>";
                     appointmentData += "<td>";
-                    if (element.apm_status == 0) {
+                    if (element.apm_status == statusAppointment.confirmNo) {
                         appointmentData +=
                             "<a style='font-weight:600; cursor:pointer;' class='badge badge-danger' data-toggle='modal' data-target='#myModal' id='cancel-appointment' onclick='cancelConfirm(" +
                             element.apm_id +
