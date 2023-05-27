@@ -8,6 +8,7 @@ class PetModel extends BaseModel
     var $idTable = 'pet_id';
     var $view = 'view_pet';
     var $viewJoin = 'view_pet_join';
+    var $insert = ['pet_name', 'pet_type', 'pet_species', 'pet_gender', 'pet_note', 'ctm_id'];
 
     public function __construct()
     {
@@ -19,7 +20,9 @@ class PetModel extends BaseModel
         $result = $this->find_all($key);
         return $result;
     }
-
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
+    }
     public function get_by_id($id)
     {
         return $this->find_by_id($id);
@@ -53,5 +56,16 @@ class PetModel extends BaseModel
             echo ("Error: " . $e->getMessage());
             return false;
         }
+    }
+
+    public function save_data($data)
+    {
+        $value = "'" . $data['name'] . "'," . $data['type'] . ",'" . $data['species'] . "'," . $data['gender'] . ",'" . $data['note'] . "'," . $data['ctm'];
+        return $this->save($value);
+    }
+
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
     }
 };

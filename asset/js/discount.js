@@ -22,7 +22,6 @@ function loadDataPage() {
 function loadDataDiscount(data) {
     var discountData = "";
     data.forEach((element) => {
-        value = "";
         if (element.dc_value == 0) value = element.dc_value_percent + "%";
         else value = new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.dc_value);
         quantity = element.dc_quantity != null ? element.dc_quantity : "Không giới hạn";

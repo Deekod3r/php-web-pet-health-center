@@ -66,7 +66,7 @@ class HomeController extends BaseController
                 //var_dump($requestLogin);
                 if ($requestLogin['lgUsername'] != '' && $requestLogin['lgPassword'] != '') {
                     $adminModel = $this->get_model('admin');
-                    $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']));
+                    $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']),Enum::ADMIN_STATUS_ACTIVE);
                     // , htmlspecialchars($requestLogin['lgPassword'])
                     if ($admin == null) {
                         $customerModel = $this->get_model('customer');

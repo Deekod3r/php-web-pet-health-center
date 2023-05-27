@@ -114,7 +114,7 @@ class ServiceController extends BaseController
                 $count = $serviceModel->count_data($key);
                 if ($count > 0) {
                     if (isset($_GET['limit']) and $_GET['limit'] != '') {
-                        $key .= " order by sv_status DESC ";
+                        $key .= " order by sv_status DESC, sv_id DESC ";
                         $limit = $_GET['limit'];
                         if ($limit > 0) {
                             $key .= " limit " . $limit;

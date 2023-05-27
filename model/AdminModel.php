@@ -21,13 +21,13 @@ class AdminModel extends BaseModel{
         return $this->find_by_id($id);
     }
     
-    public function get_by_username($username){
+    public function get_by_username($username,$status){
         $response = null;
         $conn = $this->get_connection();
         //echo $query;
         try {
-            $stm = $conn->prepare("SELECT * FROM  {$this->table} WHERE ad_username = ?");
-            $stm->bind_param('s', $username);
+            $stm = $conn->prepare("SELECT * FROM  {$this->table} WHERE ad_username = ? and ad_status = ?");
+            $stm->bind_param('si', $username,$status);
             if ($stm->execute() && !$stm->errno) {
                 $result = $stm->get_result();
                 if ($result->num_rows > 0) {

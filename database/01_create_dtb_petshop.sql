@@ -31,7 +31,7 @@ create table customer
 create table discount
 (
     dc_id int auto_increment primary key,
-    dc_code varchar(50), -- mã giảm giá
+    dc_code varchar(50) not null, -- mã giảm giá
     dc_description varchar(500) not null, -- mô tả
     dc_condition double not null default 0, -- điều kiện (VD: điều kiện tối thiểu 500.000 -> value = 500.000)
     dc_value double not null default 0, -- giá trị giảm trực tiếp (VD: giảm 10.000 -> value = 10.000)
@@ -44,8 +44,7 @@ create table discount
     constraint check_discount_time check(dc_start_time < dc_end_time),
     constraint check_discount_percent check(dc_value_percent >= 0 and dc_value_percent <= 100),
     constraint check_discount_value check(dc_value >= 0),
-    constraint check_discount_quantity check(dc_quantity > 0),
-    constraint unique_discount unique(dc_code, is_delete)
+    constraint check_discount_quantity check(dc_quantity > 0)
 );
 
 

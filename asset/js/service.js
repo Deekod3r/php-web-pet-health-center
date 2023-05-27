@@ -1,17 +1,12 @@
 const limitServicePage = 6;
 
-var svName = new URLSearchParams(document.location.href).get("sv-name");
-var categoryService = new URLSearchParams(document.location.href).get(
-    "category-service"
-);
-var typPet = new URLSearchParams(document.location.href).get("type-pet");
+var svName = new URLSearchParams(document.location.href).get("sv-name") || "";
+var categoryService = new URLSearchParams(document.location.href).get("category-service") || "";
+var typPet = new URLSearchParams(document.location.href).get("type-pet") || "";
 
-svName = svName != undefined && svName != null ? svName : "";
-categoryService =
-    categoryService != undefined && categoryService != null
-        ? categoryService
-        : "";
-typPet = typPet != undefined && typPet != null ? typPet : "";
+// svName = svName != undefined && svName != null ? svName : "";
+// categoryService = categoryService != undefined && categoryService != null ? categoryService : "";
+// typPet = typPet != undefined && typPet != null ? typPet : "";
 
 url = "?controller=service&action=service_page";
 
@@ -80,7 +75,7 @@ function loadDataPage(page) {
         },
         dataType: "json",
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = "";
                 if (svName != null && svName != "") param += "&sv-name=" + svName;

@@ -269,7 +269,7 @@ class CustomerController extends BaseController
                                 if ($offset > 0) {
                                     $key .= " offset " . $offset;
                                 }
-                            }
+                           }
                         }
                     }
                     $customers = $customerModel->get_data($key);

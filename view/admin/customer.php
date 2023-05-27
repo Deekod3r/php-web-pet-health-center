@@ -5,7 +5,7 @@
 
 <body>
     <?php include("view/admin/layout/header.php") ?>
-    <div class="container-fluid main">
+    <div class="container-fluid main-admin">
         <div class="container">
             <form action="" style="margin-bottom: 40px" id="form-search-customer" method="get">
                 <div class="row" style="margin-top: 10px">

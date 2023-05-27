@@ -112,7 +112,7 @@ function loadDataPage(page){
         },
         dataType: "json",
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = "";
                 if (ctmName != null && ctmName != "") param += "&ctm-name=" + ctmName;
@@ -199,7 +199,7 @@ $(document).ready(function(){
             }, 3000);
             return false;
         } 
-        if (!regPhone.test(ctmPhoneAdd)) {
+        if (!regNumber.test(ctmPhoneAdd)) {
             $("#msg-ctm").html("CLI: Số điện thoại không hợp lệ.");
             $("#msg-ctm").addClass(" alert-danger");
             $("#msg-ctm").show();
