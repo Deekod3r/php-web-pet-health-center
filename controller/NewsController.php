@@ -25,7 +25,7 @@ class NewsController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
                 $this->render_view(
-                    'news'
+                    'news/news'
                 );
             } else $this->render_error('403');
         } else $this->render_error('400');

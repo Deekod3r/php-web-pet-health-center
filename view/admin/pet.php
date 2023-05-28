@@ -9,12 +9,12 @@
         <div class="container">
             <form action="" style="margin-bottom: 40px" id="form-search-pet" method="get">
                 <div class="row" style="margin-top: 10px">
-                    <div class="form-group col-lg-5">
+                    <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập tên thú cưng:</p>
                         <input type="text" class="form-control border-1" name="petName" id="pet-name" />
                     </div>
-                    <div class="form-group col-lg-5">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập số điện thoại chủ:</p>
+                    <div class="form-group col-lg-2">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspSố điện thoại chủ:</p>
                         <input type="text" class="form-control border-1" name="ctmPhone" id="ctm-phone" />
                     </div>
                     <div class="col-lg-3">

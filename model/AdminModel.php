@@ -7,6 +7,7 @@ class AdminModel extends BaseModel{
     var $idTable = 'ad_id';
     var $view = 'admin';
     var $viewJoin = 'admin';
+    var $insert = ['ad_username', 'ad_password', 'ad_role'];
 
     public function __construct(){
         //$this->connection = $this->get_connection();
@@ -21,6 +22,10 @@ class AdminModel extends BaseModel{
         return $this->find_by_id($id);
     }
     
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
+    }
+
     public function get_by_username($username,$status){
         $response = null;
         $conn = $this->get_connection();
@@ -43,5 +48,14 @@ class AdminModel extends BaseModel{
         $conn->close();
         return $response;
     }
-    
+    public function save_data($data)
+    {
+        $value = "'" . $data['username'] . "','" . $data['password'] . "'," . $data['role'];
+        return $this->save($value);
+    }
+
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
 };

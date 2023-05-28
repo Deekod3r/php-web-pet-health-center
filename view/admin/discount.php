@@ -18,7 +18,7 @@
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspĐiều kiện áp dụng:</p>
                         <input type="number" class="form-control border-1" name="discountCondition" id="discount-condition" min=0/>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspTrạng thái:</p>
                         <select name="discountStatus" id="discount-status" class="custom-select">
                             <option value="">Tất cả</option>
@@ -26,7 +26,7 @@
                             <option value="0">Ngừng</option>
                         </select>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspSố lượng:</p>
                         <select name="discountQuantity" id="discount-quantity" class="custom-select">
                             <option value="">Tất cả</option>
@@ -41,6 +41,14 @@
                             <option value="dc_value">Giá trực tiếp</option>
                             <option value="dc_value_percent">%</option>
                         </select>
+                    </div>
+                    <div class="col-lg-1">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspGiảm giá tháng:</p>
+                        <input type="number" class="form-control border-1" name="dcMonth" id="discount-month" min=1 max=12 />
+                    </div>
+                    <div class="col-lg-1">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspGiảm giá năm:</p>
+                        <input type="number" class="form-control border-1" name="dcYear" id="discount-year" min=0 max=2300 />
                     </div>
                     <div class="form-group col-lg-1"></div>
                     <div class="form-group col-lg-1"></div>
@@ -144,7 +152,7 @@
                             <input type="hidden" id="discount-id-edit" name="discountIdEdit">
                             <div class="mb-3">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Trạng thái</p>
-                                <select name="discountStatusEdit" id="discount-status-edit" class="custom-select" style="width:250px;">
+                                <select name="discountStatusEdit" id="discount-status-edit" class="custom-select">
                                     <option value="0">Không hiệu lực</option>
                                     <option value="1">Hoạt động</option>
                                 </select>

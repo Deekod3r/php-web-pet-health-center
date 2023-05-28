@@ -88,3 +88,10 @@ const statusObject = {
     active: 1,
     inActive: 0
 }
+
+const role = {
+    customer: 0,
+    adminManager: 1,
+    adminNews: 2,
+    adminSale: 3
+}

@@ -1,15 +1,10 @@
 const limitaAppointmentPage = 6;
 
-var appointmentCode = new URLSearchParams(document.location.href).get("appointment-code") || "";
-var appointmentCondition = new URLSearchParams(document.location.href).get("appointment-conditon") || "";
-var appointmentStatus = new URLSearchParams(document.location.href).get("appointment-status") || "";
-var appointmentQuantity = new URLSearchParams(document.location.href).get("appointment-value") || "";
-var appointmentValue = new URLSearchParams(document.location.href).get("appointment-value") || "";
-
-// appointmentName = appointmentName != undefined && appointmentName != null ? appointmentName : "";
-// appointmentType = appointmentType != undefined && appointmentType != null ? appointmentType : "";
-// ctmPhone = ctmPhone != undefined && ctmPhone != null ? ctmPhone : "";
-// genderappointment = genderappointment != undefined && genderappointment != null ? genderappointment : "";
+var ctmPhone = new URLSearchParams(document.location.href).get("ctm-phone") || "";
+var apmDate = new URLSearchParams(document.location.href).get("apm-date") || "";
+var apmMonth = new URLSearchParams(document.location.href).get("apm-month") || "";
+var apmYear = new URLSearchParams(document.location.href).get("apm-year") || "";
+var apmStatus = new URLSearchParams(document.location.href).get("apm-status") || "";
 
 url = "?controller=appointment&action=appointment_page_ad";
 
@@ -107,28 +102,29 @@ function loadDataPage(page){
         type: "GET",
         url: "?controller=appointment&action=data_appointment",
         data: {
-            appointmentCode: appointmentCode,
-            appointmentCondition: appointmentCondition,
-            appointmentStatus: appointmentStatus,
-            appointmentQuantity: appointmentQuantity,
-            appointmentValue: appointmentValue,
+            ctmPhone: ctmPhone,
+            apmDate: apmDate,
+            apmMonth: apmMonth,
+            apmYear: apmYear,
+            apmStatus: apmStatus,
             index: page,
             limit: limitaAppointmentPage,
             token: sessionStorage.getItem("token")
         },
         dataType: "json",
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
-                // param = "";
-                // if (appointmentName != null && appointmentName != "") param += "&appointment-name=" + appointmentName;
-                // if (ctmPhone != null && ctmPhone != "")
-                //     param += "&appointment-status=" + ctmPhone;
-                // if (appointmentType != null && appointmentType != "") param += "&appointment-conditon=" + appointmentType;
-                // if (genderappointment != null && genderappointment != "") param += "&appointment-value=" + genderappointment;
-                // if (page > 1) {
-                //     window.history.pushState(null, "", url + param + "&page=" + page);
-                // } else window.history.pushState(null, "", url + param);
+                param = "";
+                if (ctmPhone != null && ctmPhone != "") param += "&ctm-phone=" + ctmPhone;
+                if (apmStatus != null && apmStatus != "")
+                    param += "&apm-status=" + apmStatus;
+                if (apmDate != null && apmDate != "") param += "&apm-date=" + apmDate;
+                if (apmYear != null && apmYear != "") param += "&apm-year=" + apmYear;
+                if (apmMonth != null && apmMonth != "") param += "&apm-month=" + apmMonth;
+                if (page > 1) {
+                    window.history.pushState(null, "", url + param + "&page=" + page);
+                } else window.history.pushState(null, "", url + param);
                 loadDataAppointment(response.data.appointments);
                 loadPaging(page, Math.ceil(response.data.count / limitaAppointmentPage));
             } else if (response.responseCode == responseCode.dataEmpty) {
@@ -162,19 +158,19 @@ function loadDataPage(page){
 function loadDataAppointment(data){
     var appointmentData = "";
     data.forEach((element) => {
-        apmStatus = "";
+        statusApm = "";
         switch (element.apm_status) {
             case statusAppointment.confirmNo:
-                apmStatus = "Chờ xác nhận"
+                statusApm = "Chờ xác nhận"
                 break;
             case statusAppointment.confirmYes:
-                apmStatus = "Đã xác nhận"
+                statusApm = "Đã xác nhận"
                 break;
             case statusAppointment.cancel:
-                apmStatus = "Đã huỷ"
+                statusApm = "Đã huỷ"
                 break;
             case statusAppointment.done:
-                apmStatus = "Hoàn thành"
+                statusApm = "Hoàn thành"
                 break;
             default:
                 break;
@@ -188,10 +184,10 @@ function loadDataAppointment(data){
         appointmentData += "<td>" + element.apm_booking_at + "</td>";
         appointmentData += "<td>" + element.apm_date + "</td>";
         appointmentData += "<td>" + element.apm_time + "</td>";
-        appointmentData += "<td>" + element.cs_id + " - " + element.cs_name + "</td>";
-        appointmentData += "<td>" + element.ctm_id + " - " + element.ctm_name + "</td>";
+        appointmentData += "<td>" + element.cs_name + "</td>";
+        appointmentData += "<td>" + element.ctm_phone + " - " + element.ctm_name + "</td>";
         appointmentData += "<td>" + element.apm_note + "</td>";
-        appointmentData += "<td>" + apmStatus + "</td>";
+        appointmentData += "<td>" + statusApm + "</td>";
         appointmentData += "<td>" + apmCancelAt + "</td>";
         appointmentData += "<td>"+ edit +"</td>";
         appointmentData += "</tr>";
@@ -247,17 +243,37 @@ $(document).ready(function(){
 
     loadDataPage(indexPage);
 
+    $.ajax({
+        type: 'GET',
+        url: '?controller=categoryservice&action=data_category_service',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.responseCode == responseCode.success) {
+                var categoryServiceData = "";
+                response.data.categoryServices.forEach(element => {
+                    let select = '';
+                    if (element.cs_id == sessionStorage.getItem('csId')) {
+                        select = 'selected';
+                        sessionStorage.removeItem('csId');
+                    }
+                    categoryServiceData += "<option value='" + element.cs_id + "' "+ select +">" + element.cs_name + "</option>"
+                });
+                $('#category-service').append(categoryServiceData);
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+        },
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        }
+    });
+
     $("#form-add-appointment").submit(function (e) {
-        appointmentCodeAdd = $("#appointment-code-add").val().trim();
-        appointmentConditionAdd = $("#appointment-condition-add").val();
-        appointmentQuantityAdd = $("#appointment-quantity-add").val();
-        appointmentStartTimeAdd = $("#appointment-start-time-add").val();
-        appointmentEndTimeAdd = $("#appointment-end-time-add").val();
-        appointmentTypeAdd = $("#appointment-type-add").val().trim();
-        appointmentValueAdd = $("#appointment-value-add").val();
-        appointmentDescAdd = $("#appointment-desc-add").val().trim();
+        apmDate = $("#apm-date").val().trim();
+        apmTime = $("#apm-time").val().trim();
+        ctmPhone = $("#ctm-phone").val().trim();
+        categoryService = $("#category-service").val().trim();
         
-        if (appointmentCodeAdd == "" || appointmentConditionAdd == "" ||  appointmentStartTimeAdd == "" || appointmentEndTimeAdd == "" || appointmentTypeAdd == "" || appointmentValueAdd == "" || appointmentDescAdd == "" ) {
+        if (apmDate == "" || apmTime == "" ||  ctmPhone == "" || categoryService == "") {
             $("#msg-appointment").html("CLI: Thông tin không được bỏ trống.");
             $("#msg-appointment").addClass(" alert-danger");
             $("#msg-appointment").show();
@@ -267,8 +283,8 @@ $(document).ready(function(){
             }, 3000);
             return false;
         } 
-        if (!regNumber.test(appointmentConditionAdd) || !regNumber.test(appointmentValueAdd)) {
-            $("#msg-appointment").html("CLI: Giá trị tiền phải là số.");
+        if (!regNumber.test(ctmPhone)) {
+            $("#msg-appointment").html("CLI: Số điện thoại không hợp lệ.");
             $("#msg-appointment").addClass(" alert-danger");
             $("#msg-appointment").show();
             window.setTimeout(function () {
@@ -276,18 +292,6 @@ $(document).ready(function(){
                 $("#msg-appointment").removeClass(" alert-danger");
             }, 3000);
             return false;
-        }
-        if (appointmentQuantityAdd != '') {
-            if (!regNumber.test(appointmentQuantityAdd) || appointmentQuantityAdd < 0) {
-                $("#msg-appointment").html("CLI: Số lượng phải là số lớn hơn hoặc bằng 0.");
-                $("#msg-appointment").addClass(" alert-danger");
-                $("#msg-appointment").show();
-                window.setTimeout(function () {
-                    $("#msg-appointment").hide();
-                    $("#msg-appointment").removeClass(" alert-danger");
-                }, 3000);
-                return false;
-            }
         }
         let timeStart = $('#appointment-start-time-add').val()
         let timeEnd = $('#appointment-end-time-add').val()
@@ -301,11 +305,17 @@ $(document).ready(function(){
             }, 3000);
             return false;
         }
+        let date = $('#apm-date').val()
+        let time = $('#apm-time').val()
         now = Date.now();
-        check = new Date($("#appointment-start-time-add").val() + " " + "00:00:00");
+        check = new Date(date + " " + time);
         diff = check.getTime() - now;
-        if (diff < 86400000) {
-            $("#msg-appointment").html("CLI: Mã giảm giá phải tạo tối thiểu trước 24 tiếng ngày bắt đầu.");
+        console.log(now);
+        console.log(check);
+        console.log(diff);
+        //return false;
+        if (diff/1000 <= 7000) {
+            $("#msg-appointment").html("CLI: Lịch hẹn cần đặt tối thiểu trước 2 tiếng.");
             $("#msg-appointment").addClass(" alert-danger");
             $("#msg-appointment").show();
             window.setTimeout(function () {
@@ -328,7 +338,7 @@ $(document).ready(function(){
             success: function (response) {
                 console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-appointment").html("CLI: Thêm mã giảm giá thành công.");
+                    $("#msg-appointment").html("CLI: Thêm lịch hẹn thành công.");
                     $("#msg-appointment").addClass(" alert-success");
                     $("#msg-appointment").show();
                     $("#form-add-appointment")[0].reset();
@@ -362,11 +372,11 @@ $(document).ready(function(){
     });
 
     $("#form-search-appointment").submit(function (e) {
-        appointmentCode = $("#appointment-code").val().trim();
-        appointmentCondition = $("#appointment-condition").val();
-        appointmentStatus = $("#appointment-status").val().trim();
-        appointmentQuantity = $("#appointment-quantity").val().trim();
-        appointmentValue = $("#appointment-value").val().trim();
+        ctmPhone = $("#phone-ctm").val().trim();
+        apmDate = $("#date-apm").val();
+        apmMonth = $("#month-apm").val().trim();
+        apmYear = $("#year-apm").val().trim();
+        apmStatus = $("#apm-status").val().trim();
         loadDataPage(1);
         e.preventDefault();
     });

@@ -9,41 +9,35 @@
         <div class="container-fluid">
             <form action="" style="margin-bottom: 40px" id="form-search-appointment" method="get">
                 <div class="row" style="margin-top: 10px">
-                    <div class="form-group col-lg-1"></div>
+                    <div class="form-group col-lg-2"></div>
                     <div class="form-group col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập mã giảm giá:</p>
-                        <input type="text" class="form-control border-1" name="appointmentCode" id="appointment-code" />
-                    </div>
-                    <div class="form-group col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspĐiều kiện áp dụng:</p>
-                        <input type="number" class="form-control border-1" name="appointmentCondition" id="appointment-condition" min=0 />
-                    </div>
-                    <div class="col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspTrạng thái:</p>
-                        <select name="appointmentStatus" id="appointment-status" class="custom-select">
-                            <option value="">Tất cả</option>
-                            <option value="1">Hoạt động</option>
-                            <option value="0">Ngừng</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspSố lượng:</p>
-                        <select name="appointmentQuantity" id="appointment-quantity" class="custom-select">
-                            <option value="">Tất cả</option>
-                            <option value="desc">Tăng dần</option>
-                            <option value="asc">Giảm dần</option>
-                        </select>
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspSố điện thoại khách:</p>
+                        <input type="text" class="form-control border-1" name="ctmPhone" id="phone-ctm" />
                     </div>
                     <div class="form-group col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0;color:black">&nbspGiá trị giảm giá:</p>
-                        <select name="appointmentValue" id="appointment-value" class="custom-select mt-0 mb-0">
-                            <option value="">Tất cả</option>
-                            <option value="dc_value">Giá trực tiếp</option>
-                            <option value="dc_value_percent">%</option>
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNgày hẹn:</p>
+                        <input type="date" class="form-control border-1" name="apmDate" id="date-apm"/>
+                    </div>
+                    <div class="col-lg-1">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspLịch hẹn tháng:</p>
+                        <input type="number" class="form-control border-1" name="apmMonth" id="month-apm" min=1 max=12 />
+                    </div>
+                    <div class="col-lg-1">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspLịch hẹn năm:</p>
+                        <input type="number" class="form-control border-1" name="apmYear" id="year-apm" min=0 max=2300 />
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <p style="font-weight:bold; margin-bottom:0;color:black">&nbspTrạng thái:</p>
+                        <select name="apmStatus" id="apm-status" class="custom-select mt-0 mb-0">
+                            <option value="">...</option>
+                            <option value="0">Huỷ</option>
+                            <option value="1">Hoàn thành</option>
+                            <option value="2">Đã xác nhận</option>
+                            <option value="3">Chưa xác nhận</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-1"></div>
-                    <div class="form-group col-lg-1"></div>
+                    <div class="form-group col-lg-2"></div>
+                    <div class="form-group col-lg-2"></div>
                     <div class="col-lg-3">
                         <input class="btn btn-primary" type="reset">
                         <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
@@ -61,7 +55,7 @@
                         <th class="col-lg-2" scope="col">Thời gian đặt</th>
                         <th class="col-lg-1" scope="col">Ngày hẹn</th>
                         <th class="col-lg-0" scope="col">Giờ hẹn</th>
-                        <th class="col-lg-2" scope="col">Dịch vụ</th>
+                        <th class="col-lg-1" scope="col">Dịch vụ</th>
                         <th class="col-lg-2" scope="col">Khách hàng</th>
                         <th class="col-lg-2" scope="col">Ghi chú</th>
                         <th class="col-lg-1" scope="col">Trạng thái</th>
@@ -99,7 +93,7 @@
                             <div class="form-group col-6">
                                 <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Số điện thoại</p>
                                 <div class="time" id="time" data-target-input="nearest">
-                                    <input type="text" class="form-control p-4 " name="apmTime" id="apm-time" placeholder="" />
+                                    <input type="text" class="form-control p-4 " name="ctmPhone" id="ctm-phone" placeholder="" />
                                 </div>
                             </div>
                             <div class="form-group col-6">

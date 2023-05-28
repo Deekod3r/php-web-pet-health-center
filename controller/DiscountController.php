@@ -52,6 +52,18 @@ class DiscountController extends BaseController
                     }
                     $key .= $_GET['discountValue'] . " > 0 ";
                 }
+                if (isset($_GET['discountMonth']) and $_GET['discountMonth'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= $_GET['discountMonth'] . " >= month(dc_start_time) and " . $_GET['discountMonth'] . " <= month(dc_end_time) ";
+                }
+                if (isset($_GET['discountYear']) and $_GET['discountYear'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= $_GET['discountYear'] . " >= year(dc_start_time) and " . $_GET['discountYear'] . " <= year(dc_end_time) ";
+                }
                 if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
                     if ($key != '') {
                         $key .= ' and ';

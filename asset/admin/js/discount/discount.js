@@ -5,6 +5,8 @@ var discountCondition = new URLSearchParams(document.location.href).get("discoun
 var discountStatus = new URLSearchParams(document.location.href).get("discount-status") || "";
 var discountQuantity = new URLSearchParams(document.location.href).get("discount-value") || "";
 var discountValue = new URLSearchParams(document.location.href).get("discount-value") || "";
+var discountMonth = new URLSearchParams(document.location.href).get("discount-month") || "";
+var discountYear = new URLSearchParams(document.location.href).get("discount-year") || "";
 
 // discountName = discountName != undefined && discountName != null ? discountName : "";
 // discountType = discountType != undefined && discountType != null ? discountType : "";
@@ -112,6 +114,8 @@ function loadDataPage(page){
             discountStatus: discountStatus,
             discountQuantity: discountQuantity,
             discountValue: discountValue,
+            discountMonth: discountMonth,
+            discountYear: discountYear,
             index: page,
             limit: limitDiscountPage,
             token: sessionStorage.getItem("token")
@@ -356,6 +360,8 @@ $(document).ready(function(){
         discountStatus = $("#discount-status").val().trim();
         discountQuantity = $("#discount-quantity").val().trim();
         discountValue = $("#discount-value").val().trim();
+        discountYear = $("#discount-year").val().trim();
+        discountMonth = $("#discount-month").val().trim();
         loadDataPage(1);
         e.preventDefault();
     });

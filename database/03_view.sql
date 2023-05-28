@@ -108,10 +108,11 @@ as
 select * from view_appointment;
 
 # appointment_join_category_service_and_customer
+
 create or replace view view_appointment_join
 as
     select
-        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, apm_note, appointment.ctm_id as ctm_id, ctm_name, appointment.cs_id as cs_id, cs_name
+        apm_id, apm_date, apm_time, apm_booking_at, apm_cancel_at, apm_status, apm_note, appointment.ctm_id as ctm_id, ctm_name, appointment.cs_id as cs_id, cs_name, ctm_phone
     from (appointment join category_service cs on cs.cs_id = appointment.cs_id) join customer c on c.ctm_id = appointment.ctm_id
     where appointment.is_delete = false;
 
