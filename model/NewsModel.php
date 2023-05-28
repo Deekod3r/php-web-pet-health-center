@@ -23,4 +23,8 @@ class NewsModel extends BaseModel{
     public function get_by_id($id){
         return $this->find_by_id($id);
     }
+
+    public function delete_data($id) {
+        return $this->delete_soft($id);
+    }
 };

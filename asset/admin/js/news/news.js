@@ -1,27 +1,11 @@
 const limitnewsPage = 6;
 
-var newsName = new URLSearchParams(document.location.href).get("news-name");
-var categorynews = new URLSearchParams(document.location.href).get(
-    "category-news"
-);
-var typPet = new URLSearchParams(document.location.href).get("type-pet");
-var startPrice = new URLSearchParams(document.location.href).get("start-price");
-var endPrice = new URLSearchParams(document.location.href).get("end-price");
-var statusnews = new URLSearchParams(document.location.href).get("status");
+var newsKey = new URLSearchParams(document.location.href).get("news-key") || '';
+var categoryNews = new URLSearchParams(document.location.href).get("category-news") || '';
+var newsMonth = new URLSearchParams(document.location.href).get("month-news") || '';
+var newsYear = new URLSearchParams(document.location.href).get("year-news") || '';
+var newsStatus = new URLSearchParams(document.location.href).get("status-news") || '';
 
-newsName = newsName != undefined && newsName != null ? newsName : "";
-categorynews =
-    categorynews != undefined && categorynews != null
-        ? categorynews
-        : "";
-typPet = typPet != undefined && typPet != null ? typPet : "";
-startPrice =
-    startPrice != undefined && startPrice != null && startPrice > 0
-        ? startPrice
-        : 0;
-endPrice =
-    endPrice != undefined && endPrice != null && endPrice > 0 ? endPrice : 0;
-statusnews = statusnews != undefined && statusnews != null ? statusnews : "";
 
 url = "?controller=news&action=news_page_ad";
 
@@ -121,28 +105,25 @@ function loadDataPage(page) {
         data: {
             limit: limitnewsPage,
             index: page,
-            newsName: newsName,
-            categorynews: categorynews,
-            typePet: typPet,
-            endPrice: endPrice,
-            startPrice: startPrice,
-            statusnews: statusnews,
+            newsKey: newsKey,
+            categoryNews: categoryNews,
+            newsMonth: newsMonth,
+            newsYear: newsYear,
+            newsStatus: newsStatus,
         },
         dataType: "json",
         success: function (response) {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
                 param = "";
-                if (newsName != null && newsName != "") param += "&news-name=" + newsName;
-                if (categorynews != null && categorynews != "")
-                    param += "&category-news=" + categorynews;
-                if (typPet != null && typPet != "") param += "&type-pet=" + typPet;
-                if (startPrice != null && startPrice != 0)
-                    param += "&price-start=" + startPrice;
-                if (endPrice != null && endPrice != 0)
-                    param += "&price-end=" + endPrice;
-                if (statusnews != null && statusnews != "")
-                    param += "&status-news=" + statusnews;
+                if (newsKey != null && newsKey != "") param += "&news-key=" + newsKey;
+                if (categoryNews != null && categoryNews != "")
+                    param += "&category-news=" + categoryNews;
+                if (newsMonth != null && newsMonth != "") param += "&month-news=" + newsMonth;
+                if (newsYear != null && newsYear != 0)
+                    param += "&year-news=" + newsYear;
+                if (newsStatus != null && newsStatus != "")
+                    param += "&status-news=" + newsStatus;
                 if (page > 1) {
                     window.history.pushState(null, "", url + param + "&page=" + page);
                 } else window.history.pushState(null, "", url + param);
@@ -213,28 +194,28 @@ function deleteConfirm(id) {
     $("#id-news").html(id);
 }
 
-function loadDataCategoryNews() {
+function loadDatacategoryNews() {
     $("#category-news").html("<option value=''>Tất cả</option>");
     //$("#data-cn").html("");
     $.ajax({
         type: "GET",
-        url: "?controller=categorynews&action=data_category_news",
+        url: "?controller=categoryNews&action=data_category_news",
         dataType: "json",
         success: function (response) {
             //console.log(response);
             if (response.responseCode == responseCode.success) {
-                var categorynewsDataCbx = "";
-                var categorynewsDataTbl = "";
+                var categoryNewsDataCbx = "";
+                var categoryNewsDataTbl = "";
                 response.data.categoryNews.forEach((element) => {
-                    categorynewsDataCbx += "<option value='" + element.cn_id +"'>" +element.cn_name + "</option>";
-                    categorynewsDataTbl += "<tr>";
-                    categorynewsDataTbl += "<th scope='row'>"+ element.cn_id +"</th>"
-                    categorynewsDataTbl += "<td>"+ element.cn_name +"</td>"
-                    categorynewsDataTbl += "<td><a class='btn btn-dark' data-toggle='modal' data-target='#myModal3' onclick='editcn(\""+ element.cn_id + "\",\""+ element.cn_name +"\")' >Sửa</a></td>"
-                    categorynewsDataTbl += "</tr>";
+                    categoryNewsDataCbx += "<option value='" + element.cn_id +"'>" +element.cn_name + "</option>";
+                    categoryNewsDataTbl += "<tr>";
+                    categoryNewsDataTbl += "<th scope='row'>"+ element.cn_id +"</th>"
+                    categoryNewsDataTbl += "<td>"+ element.cn_name +"</td>"
+                    categoryNewsDataTbl += "<td><a class='btn btn-dark' data-toggle='modal' data-target='#myModal3' onclick='editcn(\""+ element.cn_id + "\",\""+ element.cn_name +"\")' >Sửa</a></td>"
+                    categoryNewsDataTbl += "</tr>";
                 });
-                $("#category-news").append(categorynewsDataCbx);
-                $("#data-cn").html(categorynewsDataTbl);
+                $("#category-news").append(categoryNewsDataCbx);
+                $("#data-cn").html(categoryNewsDataTbl);
             } else 
                 alert(
                     "RES: " +
@@ -283,68 +264,51 @@ $(document).ready(function () {
 
     loadDataPage(indexPage);
 
-    loadDataCategoryNews();
+    loadDatacategoryNews();
 
     // $('#submit').click(function () {
-    //     newsName = $("#news-name").val();
-    //     categorynews = $("#category-news").val();
-    //     typPet = $("#type-pet").val();
-    //     startPrice = $("#price-start").val();
+    //     newsKey = $("#news-key").val();
+    //     categoryNews = $("#category-news").val();
+    //     newsMonth = $("#month-news").val();
+    //     newsYear = $("#year-news").val();
     //     endPrice = $("#price-end").val();
-    //     statusnews = $("#news-status").val();
-    //     console.log(newsName, categorynews, typPet, startPrice, endPrice,statusnews);
+    //     newsStatus = $("#news-status").val();
+    //     console.log(newsKey, categoryNews, newsMonth, newsYear, endPrice,newsStatus);
     // })
 
     $("#form-search-news").submit(function (e) {
-        newsName = $("#news-name").val();
-        categorynews = $("#category-news").val();
-        typPet = $("#type-pet").val();
-        startPrice =
-            $("#price-start").val() != "" && $("#price-start").val() > 0
-                ? $("#price-start").val()
-                : 0;
-        endPrice =
-            $("#price-end").val() != "" && $("#price-end").val() > 0
-                ? $("#price-end").val()
-                : 0;
-        statusnews = $("#news-status").val();
-        if (endPrice >= startPrice && endPrice >= 0) {
-            loadDataPage(1);
-        } else {
-            $("#msg-news").html("Khoảng giá tiền chưa hợp lệ.");
-            $("#msg-news").addClass(" alert-danger");
-            $("#msg-news").show();
-            window.setTimeout(function () {
-                $("#msg-news").hide();
-                $("#msg-news").removeClass(" alert-danger");
-            }, 3000);
-        }
+        newsKey = $("#news-key").val().trim();
+        categoryNews = $("#category-news").val().trim();
+        newsMonth = $("#month-news").val().trim();
+        newsYear = $("#year-news").val().trim();
+        newsStatus = $("#news-status").val().trim();
+        loadDataPage(1);
         // $.ajax({
         //     type: "GET",
         //     url: "?controller=news&action=data_news",
         //     data: {
         //         limit: limitnewsPage,
         //         index: 1,
-        //         newsName: newsName,
-        //         categorynews: categorynews,
-        //         typePet: typPet,
+        //         newsKey: newsKey,
+        //         categoryNews: categoryNews,
+        //         typePet: newsMonth,
         //     },
         //     dataType: "json",
         //     success: function (response) {
         //         //console.log(response);
         //         if (response.responseCode == responseCode.success) {
         //             param = "";
-        //             if (newsName != null && newsName != "") param += "&news-name=" + newsName;
-        //             if (categorynews != null && categorynews != "")
-        //                 param += "&category-news=" + categorynews;
-        //             if (typPet != null && typPet != "") param += "&type-pet=" + typPet;
+        //             if (newsKey != null && newsKey != "") param += "&news-key=" + newsKey;
+        //             if (categoryNews != null && categoryNews != "")
+        //                 param += "&category-news=" + categoryNews;
+        //             if (newsMonth != null && newsMonth != "") param += "&month-news=" + newsMonth;
         //             window.history.pushState(null, "", url + param);
         //             loadDatanews(response.data.newss);
         //             loadPaging(1, Math.ceil(response.data.count / limitnewsPage));
         //         } else if (response.responseCode == responseCode.dataEmpty) {
         //             window.history.pushState(null, "", url);
         //             $("#data-news").html(
-        //                 "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có dịch vụ phù hợp.</p>"
+        //                 "<p style='margin:auto; margin-bottom:20px; color:black; font-size:20px; color:red; font-weight:bold'>Không có tin tức phù hợp.</p>"
         //             );
         //             $("#page").html("");
         //         } else
@@ -384,12 +348,12 @@ $(document).ready(function () {
             }, 3000);
             return false;
         }
-        //console.log(newsName, newsDescription, categorynews, newsPrice, newsStatus, typPet,newsImg.name, sessionStorage.getItem('token'));
+        //console.log(newsKey, newsDescription, categoryNews, newsPrice, newsStatus, newsMonth,newsImg.name, sessionStorage.getItem('token'));
         let token = sessionStorage.getItem("token");
         //return false;
         $.ajax({
             type: "POST",
-            url: "?controller=categorynews&action=add_category_news",
+            url: "?controller=categoryNews&action=add_category_news",
             data: {
                 token: token,
                 cnName: cnName,
@@ -402,7 +366,7 @@ $(document).ready(function () {
                     $("#msg-cn").addClass(" alert-success");
                     $("#msg-cn").show();
                     $("#cn-name").val("");
-                    loadDataCategoryNews();
+                    loadDatacategoryNews();
                     window.setTimeout(function () {
                         $("#msg-cn").hide();
                         $("#msg-cn").removeClass(" alert-success");
@@ -446,12 +410,12 @@ $(document).ready(function () {
             }, 3000);
             return false;
         }
-        //console.log(newsName, newsDescription, categorynews, newsPrice, newsStatus, typPet,newsImg.name, sessionStorage.getItem('token'));
+        //console.log(newsKey, newsDescription, categoryNews, newsPrice, newsStatus, newsMonth,newsImg.name, sessionStorage.getItem('token'));
         let token = sessionStorage.getItem("token");
         //return false;
         $.ajax({
             type: "POST",
-            url: "?controller=categorynews&action=edit_category_news",
+            url: "?controller=categoryNews&action=edit_category_news",
             data: {
                 token: token,
                 cnName: cnName,
@@ -466,7 +430,7 @@ $(document).ready(function () {
                     $("#msg-cn-edit").show();
                     $("#cn-name-edit").val("");
                     $("#cn-id-edit").val("");
-                    loadDataCategoryNews();
+                    loadDatacategoryNews();
                     window.setTimeout(function () {
                         $("#msg-cn-edit").hide();
                         $("#msg-cn-edit").removeClass(" alert-success");
@@ -501,13 +465,13 @@ $(document).ready(function () {
             url: "?controller=news&action=delete_news",
             data: {
                 token: sessionStorage.getItem("token"),
-                idnews: $("#id-news").html(),
+                idNews: $("#id-news").html(),
             },
             dataType: "json",
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-news").html("Xoá dịch vụ thành công.");
+                    $("#msg-news").html("Xoá tin tức thành công.");
                     $("#msg-news").addClass(" alert-success");
                     $("#msg-news").show();
                     window.setTimeout(function () {
@@ -516,7 +480,7 @@ $(document).ready(function () {
                     }, 3000);
                     loadDataPage(1);
                 } else if (response.responseCode == responseCode.fail) {
-                    $("#msg-news").html("Xoá dịch vụ thất bại.");
+                    $("#msg-news").html("Xoá tin tức thất bại.");
                     $("#msg-news").addClass(" alert-danger");
                     $("#msg-news").show();
                     window.setTimeout(function () {

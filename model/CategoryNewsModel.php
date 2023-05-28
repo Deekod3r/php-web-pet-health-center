@@ -7,6 +7,8 @@ class CategoryNewsModel extends BaseModel{
     var $idTable = 'cn_id';
     var $view = 'view_category_news';
     var $viewJoin = 'view_category_news';
+    var $insert = ['cn_name'];
+
     public function __construct(){
         //$this->connection = $this->get_connection();
     }
@@ -14,6 +16,14 @@ class CategoryNewsModel extends BaseModel{
     public function get_data($key){
         $result = $this->find_all($key);
         return $result;
+    }
+    public function save_data($data){
+        $value = "'".$data['cnName']."'";
+        return $this->save($value);
+    }
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
     }
 
 };

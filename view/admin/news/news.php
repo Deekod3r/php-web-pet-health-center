@@ -12,24 +12,24 @@
                     <div class="col-2"></div>
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNội dung tin tức:</p>
-                        <input type="text" class="form-control border-1" placeholder="VD: Tiêm phòng" name="svName" id="news-name" />
+                        <input type="text" class="form-control border-1" placeholder="VD: Tiêm phòng" name="newsKey" id="news-key" />
                     </div>
                     <div class="col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspDanh mục:</p>
-                        <select name="categorynews" id="category-news" class="custom-select">
+                        <select name="categoryNews" id="category-news" class="custom-select">
                         </select>
                     </div>
                     <div class="col-lg-1">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspTin tức tháng:</p>
-                        <input type="number" class="form-control border-1" name="apmMonth" id="month-apm" min=1 max=12 />
+                        <input type="number" class="form-control border-1" name="newsMonth" id="month-news" min=1 max=12 />
                     </div>
                     <div class="col-lg-1">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspTin tức năm:</p>
-                        <input type="number" class="form-control border-1" name="apmYear" id="year-apm" min=0 max=2300 />
+                        <input type="number" class="form-control border-1" name="newsYear" id="year-news" min=0 max=2300 />
                     </div>
                     <div class="col-lg-2">
                         <p style="font-weight:bold;color:black" class="mb-0">&nbspTrạng thái:</p>
-                        <select name="svStatus" id="sv-status" class="custom-select">
+                        <select name="newsStatus" id="news-status" class="custom-select">
                             <option value="">Tất cả</option>
                             <option value="1">Công khai</option>
                             <option value="0">Ẩn</option>

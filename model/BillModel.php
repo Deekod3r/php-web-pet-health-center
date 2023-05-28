@@ -8,6 +8,8 @@ class BillModel extends BaseModel
     var $idTable = 'bill_id';
     var $view = 'view_bill';
     var $viewJoin = 'view_bill_join';
+    var $insert = ['ctm_id','ad_id'];
+
     public function __construct()
     {
         //$this->connection = $this->get_connection();
@@ -24,9 +26,8 @@ class BillModel extends BaseModel
         return $this->find_by_id($id);
     }
 
-    public function count_data($key)
-    {
-        return count($this->get_data($key));
+    public function count_data($key){
+        return $this->get_data($key) != null ? count($this->get_data($key)) : 0;
     }
 
     public function count_data_by_customer($customer)
@@ -87,4 +88,12 @@ class BillModel extends BaseModel
         }
     }
 
+    public function save_data($data){
+        $value = "'".$data['ctm']."',".$data['ad'];
+        return $this->save($value);
+    }
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
 };

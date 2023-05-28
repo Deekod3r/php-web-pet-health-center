@@ -132,8 +132,8 @@ select * from view_bill;
 create or replace view view_bill_join
 as
     select
-        bill_id, bill_date_release, bill_status, bill.ctm_id as ctm_id, ctm_name, bill.ad_id as ad_id, ad_username, bill.dc_id as dc_id, dc_code, sub_total, value_reduced, total_value
-    from ((bill join customer c on c.ctm_id = bill.ctm_id) join admin a on a.ad_id = bill.ad_id) left join discount d on d.dc_id = bill.dc_id
+        bill_id, bill_date_release, bill_status, bill.ctm_id as ctm_id, ctm_name, ctm_phone, bill.ad_id as ad_id, ad_username, bill.dc_id as dc_id, dc_code, sub_total, value_reduced, total_value
+    from ((bill join customer c on c.ctm_id = bill.ctm_id) left join admin a on a.ad_id = bill.ad_id) left join discount d on d.dc_id = bill.dc_id
     where bill.is_delete = false;
 
 select * from view_bill_join;
