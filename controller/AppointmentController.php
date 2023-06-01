@@ -74,7 +74,7 @@ class AppointmentController extends BaseController
                                         $dataBooking = [
                                             'ctmId' => $id,
                                             'date' => $date,
-                                            'time' => $time,
+                                            'time' => date("H:i", strtotime($time . " " . $back)),
                                             'categoryService' => $_POST['categoryService'],
                                             'note' => $_POST['apmNote'],
                                         ];
