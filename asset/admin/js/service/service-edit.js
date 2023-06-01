@@ -90,13 +90,13 @@ $(document).ready(function () {
     // })
 
     $("#form-edit-service").submit(function (e) {
-        svId = $('#service-id').val();
-        svName = $("#service-name").val();
-        svDescription = $("#service-description").val();
-        categoryService = $("#category-service").val();
-        typPet = $("#type-pet").val();
+        svId = $('#service-id').val().trim();
+        svName = $("#service-name").val().trim();
+        svDescription = $("#service-description").val().trim();
+        categoryService = $("#category-service").val().trim();
+        typPet = $("#type-pet").val().trim();
         servicePrice = $("#service-price").val() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
-        svStatus = $("#service-status").val();
+        svStatus = $("#service-status").val().trim();
         //svImg = $("#service-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
         if (svId == '' || svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '') {

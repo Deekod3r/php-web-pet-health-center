@@ -60,7 +60,7 @@ class ServiceController extends BaseController
                 $offset = 0;
                 $serviceModel = $this->get_model('service');
                 if (isset($_GET['svName']) and $_GET['svName'] != '') {
-                    $key .= "concat(sv_name,sv_description) like '%" . $_GET['svName'] . "%'";
+                    $key .= "sv_name like '%" . $_GET['svName'] . "%'";
                 }
                 if (isset($_GET['typePet']) and $_GET['typePet'] != '') {
                     if ($key != '') {

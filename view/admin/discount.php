@@ -12,7 +12,7 @@
                     <div class="form-group col-lg-1"></div>
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập mã giảm giá:</p>
-                        <input type="text" class="form-control border-1" name="discountCode" id="discount-code" />
+                        <input type="text" class="form-control border-1" name="discountCode" id="discount-code" placeholder="VD: HAPPY99"/>
                     </div>
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspĐiều kiện áp dụng:</p>
@@ -104,7 +104,12 @@
                                 <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Số lượng</label>
                                 <input type="number" class="form-control" name="discountQuantityAdd"  id="discount-quantity-add">
                             </div>
-                             
+                            <div class="form-group col-4">
+                                <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Ngày bắt đầu</label>
+                                <div class="date" id="date1" data-target-input="nearest"> 
+                                    <input type="date" class="form-control " name="discountStartTimeAdd" id="discount-start-time-add" placeholder="" />
+                                </div>
+                            </div>
                             <div class="form-group col-4">
                                 <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Ngày kết thúc</label>
                                 <div class="date" id="date1" data-target-input="nearest">

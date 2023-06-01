@@ -396,8 +396,8 @@ $(document).ready(function () {
     });
 
     $("#form-edit-cn").submit(function (e) {
-        let cnId = $("#cn-id-edit").val();
-        let cnName = $("#cn-name-edit").val();
+        let cnId = $("#cn-id-edit").val().trim();
+        let cnName = $("#cn-name-edit").val().trim();
         //newsImg = $("#news-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
         if (cnName == "" || cnId == "") {

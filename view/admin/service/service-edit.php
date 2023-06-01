@@ -48,7 +48,7 @@
                     <select name="svStatus" id="service-status" class="custom-select" style="width:250px;">
                         <option value="">Chọn</option>
                         <option value="1">Hoạt động</option>
-                        <option value="0">Ngừng kinh doanh</option>
+                        <option value="0">Tạm dừng</option>
                     </select>
                 </div>
                 <div class="col-4 mt-3">

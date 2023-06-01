@@ -306,22 +306,16 @@ $(document).ready(function () {
     // })
 
     $("#form-search-service").submit(function (e) {
-        svName = $("#service-name").val();
-        categoryService = $("#category-service").val();
+        svName = $("#service-name").val().trim();
+        categoryService = $("#category-service").val().trim();
         typPet = $("#type-pet").val();
-        startPrice =
-            $("#price-start").val() != "" && $("#price-start").val() > 0
-                ? $("#price-start").val()
-                : 0;
-        endPrice =
-            $("#price-end").val() != "" && $("#price-end").val() > 0
-                ? $("#price-end").val()
-                : 0;
-        statusSV = $("#sv-status").val();
+        startPrice = $("#price-start").val().trim() != "" && $("#price-start").val() > 0 ? parseInt($("#price-start").val()) : 0;
+        endPrice = $("#price-end").val().trim() != "" && $("#price-end").val() > 0 ? parseInt($("#price-end").val()) : 100000000;
+        statusSV = $("#sv-status").val().trim();
         if (endPrice >= startPrice && endPrice >= 0) {
             loadDataPage(1);
         } else {
-            $("#msg-service").html("Khoảng giá tiền chưa hợp lệ.");
+            $("#msg-service").html("CLI: Khoảng giá tiền chưa hợp lệ.");
             $("#msg-service").addClass(" alert-danger");
             $("#msg-service").show();
             window.setTimeout(function () {
@@ -381,7 +375,7 @@ $(document).ready(function () {
     });
 
     $("#form-add-cs").submit(function (e) {
-        let csName = $("#cs-name").val();
+        let csName = $("#cs-name").val().trim();
         //svImg = $("#service-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
         if (csName == "") {
@@ -442,8 +436,8 @@ $(document).ready(function () {
     });
 
     $("#form-edit-cs").submit(function (e) {
-        let csId = $("#cs-id-edit").val();
-        let csName = $("#cs-name-edit").val();
+        let csId = $("#cs-id-edit").val().trim();
+        let csName = $("#cs-name-edit").val().trim();
         //svImg = $("#service-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
         if (csName == "" || csId == "") {

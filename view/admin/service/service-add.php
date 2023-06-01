@@ -30,23 +30,24 @@
                 <div class="col-5 mt-3">
                     <label for="" class="form-label mr-2">Phân loại</label>
                     <select name="typePet" id="type-pet" class="custom-select" style="width:250px;">
-                        <option value="">Tất cả</option>
+                        <option value="">Chọn</option>
                         <option value="0">Mèo</option>
                         <option value="1">Chó</option>
+                        <option value="2">Chó và mèo</option>
                     </select>
                 </div>
                 <div class="col-5 mt-3">
                     <label for="" class="form-label mr-2">Danh mục</label>
                     <select name="categoryService" id="category-service" class="custom-select" style="width:250px;">
-                        <option value="">Tất cả</option>
+                        <option value="">Chọn</option>
                     </select>
                 </div>
                 <div class="col-5 mt-3">
                     <label for="" class="form-label mr-2">Trạng thái</label>
                     <select name="svStatus" id="service-status" class="custom-select" style="width:250px;">
-                        <option value="">Tất cả</option>
+                        <option value="">Chọn</option>
                         <option value="1">Hoạt động</option>
-                        <option value="0">Ngừng kinh doanh</option>
+                        <option value="0">Tạm dừng</option>
                     </select>
                 </div>
                 <div class="col-4 mt-3">

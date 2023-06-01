@@ -25,6 +25,7 @@
                             <option value="">Tất cả</option>
                             <option value="0">Mèo</option>
                             <option value="1">Chó</option>
+                            <option value="2">Chó và mèo</option>
                         </select>
                     </div>
                     <div class="col-lg-3">
@@ -38,7 +39,7 @@
                         <select name="svStatus" id="sv-status" class="custom-select">
                             <option value="">Tất cả</option>
                             <option value="1">Hoạt động</option>
-                            <option value="0">Ngừng kinh doanh</option>
+                            <option value="0">Tạm dừng</option>
                         </select>
                     </div>
                     <div class="col-1"></div>
@@ -144,7 +145,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
+                            <a class="btn btn-danger" data-dismiss="modal" onclick="$('#form-add-cs')[0].reset()">Đóng</a>
                             <button class="btn btn-primary">Lưu</button>
                         </div>
                     </form>

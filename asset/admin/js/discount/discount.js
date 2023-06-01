@@ -122,17 +122,17 @@ function loadDataPage(page){
         },
         dataType: "json",
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success) {
-                // param = "";
+                param = "";
                 // if (discountName != null && discountName != "") param += "&discount-name=" + discountName;
                 // if (ctmPhone != null && ctmPhone != "")
                 //     param += "&discount-status=" + ctmPhone;
                 // if (discountType != null && discountType != "") param += "&discount-conditon=" + discountType;
                 // if (genderdiscount != null && genderdiscount != "") param += "&discount-value=" + genderdiscount;
-                // if (page > 1) {
-                //     window.history.pushState(null, "", url + param + "&page=" + page);
-                // } else window.history.pushState(null, "", url + param);
+                if (page > 1) {
+                    window.history.pushState(null, "", url + param + "&page=" + page);
+                } else window.history.pushState(null, "", url + param);
                 loadDataDiscount(response.data.discounts);
                 loadPaging(page, Math.ceil(response.data.count / limitDiscountPage));
             } else if (response.responseCode == responseCode.dataEmpty) {
@@ -206,7 +206,7 @@ function loadDataDetailDiscount(id) {
         },
         dataType: "json",
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.responseCode == responseCode.success) {
                 $("#discount-id-edit").val(id)
                 $("#discount-status-edit").val(response.data.discount.dc_active)
@@ -242,12 +242,12 @@ $(document).ready(function(){
 
     $("#form-add-discount").submit(function (e) {
         discountCodeAdd = $("#discount-code-add").val().trim();
-        discountConditionAdd = $("#discount-condition-add").val();
-        discountQuantityAdd = $("#discount-quantity-add").val();
+        discountConditionAdd = $("#discount-condition-add").val().trim();
+        discountQuantityAdd = $("#discount-quantity-add").val().trim();
         discountStartTimeAdd = $("#discount-start-time-add").val();
         discountEndTimeAdd = $("#discount-end-time-add").val();
-        discountTypeAdd = $("#discount-type-add").val().trim();
-        discountValueAdd = $("#discount-value-add").val();
+        discountTypeAdd = $("#discount-type-add").val().trim().trim();
+        discountValueAdd = $("#discount-value-add").val().trim();
         discountDescAdd = $("#discount-desc-add").val().trim();
         
         if (discountCodeAdd == "" || discountConditionAdd == "" ||  discountStartTimeAdd == "" || discountEndTimeAdd == "" || discountTypeAdd == "" || discountValueAdd == "" || discountDescAdd == "" ) {
@@ -319,7 +319,7 @@ $(document).ready(function(){
             data: formData,
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response.responseCode == responseCode.success) {
                     $("#msg-discount").html("CLI: Thêm mã giảm giá thành công.");
                     $("#msg-discount").addClass(" alert-success");

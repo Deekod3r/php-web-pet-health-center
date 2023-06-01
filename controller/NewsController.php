@@ -42,7 +42,7 @@ class NewsController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['newsKey']) and $_GET['newsKey'] != '') {
-                    $key .= "concat(news_title, news_content, news_description) like '%" . $_GET['newsKey'] . "%'";
+                    $key .= "news_title like '%" . $_GET['newsKey'] . "%'";
                 }
                 if (isset($_GET['categoryNews']) and $_GET['categoryNews'] != '') {
                     if ($key != '') $key = $key . " and ";

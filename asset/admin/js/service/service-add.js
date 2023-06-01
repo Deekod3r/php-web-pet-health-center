@@ -50,12 +50,12 @@ $(document).ready(function () {
     // })
 
     $("#form-add-service").submit(function (e) {
-        svName = $("#service-name").val();
-        svDescription = $("#service-description").val();
-        categoryService = $("#category-service").val();
-        typPet = $("#type-pet").val();
-        servicePrice = $("#service-price").val() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
-        svStatus = $("#service-status").val();
+        svName = $("#service-name").val().trim();
+        svDescription = $("#service-description").val().trim();
+        categoryService = $("#category-service").val().trim();
+        typPet = $("#type-pet").val().trim();
+        servicePrice = $("#service-price").val().trim() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
+        svStatus = $("#service-status").val().trim();
         //svImg = $("#service-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
         if (svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '') {

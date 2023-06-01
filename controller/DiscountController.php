@@ -75,10 +75,11 @@ class DiscountController extends BaseController
                 // $data = $_GET;
                 $count = $discountModel->count_data($key);
                 if ($count > 0) {
-                    $key .= " order by %s dc_active desc, dc_end_time desc, dc_start_time desc";
+                    $key .= " order by ";
                     if (isset($_GET['discountQuantity']) && $_GET['discountQuantity'] != '') {
-                        $key = sprintf($key, "-dc_quantity " . $_GET['discountQuantity'] . ",");
-                    } else $key = sprintf($key, "");
+                        $key .= "-dc_quantity " . $_GET['discountQuantity'] . ",";
+                    } 
+                    $key .= " dc_active desc, dc_end_time desc, dc_start_time desc";
                     if (isset($_GET['limit']) and $_GET['limit'] != '') {
                         $limit = $_GET['limit'];
                         if ($limit > 0) {

@@ -257,9 +257,9 @@ $(document).ready(function () {
     });
 
     $("#form-search-service").submit(function (e) {
-        svName = $("#service-name").val();
-        categoryService = $("#category-service").val();
-        typPet = $("#type-pet").val();
+        svName = $("#service-name").val().trim();
+        categoryService = $("#category-service").val().trim();
+        typPet = $("#type-pet").val().trim();
         loadDataPage(1);
         // $.ajax({
         //     type: "GET",
