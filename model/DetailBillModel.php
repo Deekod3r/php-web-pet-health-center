@@ -129,6 +129,26 @@ class DetailBillModel extends BaseModel
         return $response;
     }
 
+    public function delete_by_bill($idBill){
+        $conn = $this->get_connection();
+        try {
+            $stm = $conn->prepare("DELETE FROM  {$this->table} where bill_id = ?");
+            $stm->bind_param('i', $idBill);
+            if ($stm->execute() && !$stm->errno) {
+                $stm->close();
+                $conn->close();
+                return true;
+            } else {
+                throw new mysqli_sql_exception("Statement error: " . $stm->error);
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo ("Error: " . $e->getMessage());
+        }
+        $stm->close();
+        $conn->close();
+        return false;
+    }
+
     public function save_data($data){
         $value = $data['bill_id'].",".$data['sv_id'].",".$data['quantity'].",".$data['sv_price'];
         return $this->save($value);

@@ -119,23 +119,14 @@ class BaseController
         $target_file = $target_dir . basename($file["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Check if image file is a actual image or fake image
-        if (isset($_POST["submit"])) {
-            $check = getimagesize($file["tmp_name"]);
-            if ($check == false) {
-                return false;
-            }
-        }
         // Check if file already exists
         if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
             return false;
         }
-        // Check file size
-        if ($file["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            return false;
-        }
+        // // Check file size
+        // if ($file["size"] > 500000) {
+        //     return false;
+        // }
 
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {

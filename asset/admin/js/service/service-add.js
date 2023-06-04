@@ -56,9 +56,10 @@ $(document).ready(function () {
         typPet = $("#type-pet").val().trim();
         servicePrice = $("#service-price").val().trim() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
         svStatus = $("#service-status").val().trim();
-        //svImg = $("#service-img")[0].files[0];
+        svImg = $("#service-img")[0].files[0];
+        //return false;
         // console.log(sessionStorage.getItem('token')); return false;
-        if (svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '') {
+        if (svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '' || svImg == null) {
             $('#msg-service').html("CLI: Thông tin không được bỏ trống.");
             $('#msg-service').show()
             window.setTimeout(function () {
@@ -74,24 +75,35 @@ $(document).ready(function () {
             }, 3000);
             return false;
         }
+        //return false;
+        type = svImg.type.substring(6);
+        if (type != 'jpg' && type != 'jpeg' && type != 'png' && type != 'gif') {
+            $('#msg-service').html("CLI: Định dạng file không phù hợp. Vui lòng tải các file có đinh dạng: jpg, jpeg, png, gif");
+            $('#msg-service').show()
+            window.setTimeout(function () {
+                $('#msg-service').hide()
+            }, 3000);
+            return false;
+        }
+        //return false;
+        let formData = new FormData();
+        formData.append('svName', svName);
+        formData.append('categoryService', categoryService);
+        formData.append('typePet', typPet);
+        formData.append('svDescription', svDescription);
+        formData.append('svPrice', servicePrice);
+        formData.append('svStatus', svStatus);
+        formData.append('token', sessionStorage.getItem('token'));
+        formData.append('svImg',svImg,Date.now()+svImg.name);
         //console.log(svName, svDescription, categoryService, servicePrice, svStatus, typPet,svImg.name, sessionStorage.getItem('token'));
-        let token = sessionStorage.getItem('token')
         //return false;
         $.ajax({
             type: "POST",
             url: "?controller=service&action=add_service",
-            data: {
-                token: token,
-                svName: svName,
-                categoryService: categoryService,
-                typePet: typPet,
-                svDescription: svDescription,
-                svPrice: servicePrice,
-                svStatus: svStatus,
-                //svImg: svImg,
-                // test: 1
-            },
+            data: formData,
             dataType: "json",
+            processData: false,
+            contentType: false,
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {

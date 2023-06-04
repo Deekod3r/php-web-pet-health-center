@@ -391,51 +391,47 @@ $(document).ready(function () {
     })
 
     $('#save').click(function () {
-        if (listService.length > 0) {
-            services = JSON.stringify(listService);
-            $.ajax({
-                type: "POST",
-                url: "?controller=bill&action=add_detail_bill",
-                data: {
-                    billId: billId,
-                    services: services,
-                    token: sessionStorage.getItem('token')
-                },
-                dataType: "json",
-                success: function (response) {
-                    if (response.responseCode == responseCode.success) {
-                        $('#alert-bill').html("Lưu chi tiết hoá đơn thành công.");
-                        $('#alert-bill').addClass('alert-success');
-                        $('#alert-bill').show();
-                        window.setTimeout(function () {
-                            $("#alert-bill").hide();
-                            $("#alert-bill").removeClass(" alert-success");
-                        }, 3000);
-                        save = true;
-                    } else {
-                        $('#alert-bill').html(response.message);
-                        $('#alert-bill').addClass('alert-danger');
-                        $('#alert-bill').show();
-                        window.setTimeout(function () {
-                            $("#alert-bill").hide();
-                            $("#alert-bill").removeClass(" alert-danger");
-                        }, 3000);
-                    }
-                },
-                error: function (xhr) {
-                    alert(
-                        "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
-                        xhr.responseText +
-                        ", " +
-                        xhr.status +
-                        ", " +
-                        xhr.error
-                    );
-                },
-            })
-        } else {
-            alert("Không có dịch vụ nào");
-        }
+        services = JSON.stringify(listService);
+        $.ajax({
+            type: "POST",
+            url: "?controller=bill&action=add_detail_bill",
+            data: {
+                billId: billId,
+                services: services,
+                token: sessionStorage.getItem('token')
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.responseCode == responseCode.success) {
+                    $('#alert-bill').html("Lưu chi tiết hoá đơn thành công.");
+                    $('#alert-bill').addClass('alert-success');
+                    $('#alert-bill').show();
+                    window.setTimeout(function () {
+                        $("#alert-bill").hide();
+                        $("#alert-bill").removeClass(" alert-success");
+                    }, 3000);
+                    save = true;
+                } else {
+                    $('#alert-bill').html(response.message);
+                    $('#alert-bill').addClass('alert-danger');
+                    $('#alert-bill').show();
+                    window.setTimeout(function () {
+                        $("#alert-bill").hide();
+                        $("#alert-bill").removeClass(" alert-danger");
+                    }, 3000);
+                }
+            },
+            error: function (xhr) {
+                alert(
+                    "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
+                    xhr.responseText +
+                    ", " +
+                    xhr.status +
+                    ", " +
+                    xhr.error
+                );
+            },
+        })
     })
 
     $('#pay').click(function () {

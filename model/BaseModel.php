@@ -99,7 +99,7 @@ class BaseModel
             echo ("Error: " . $e->getMessage());
             $stm->close();
             $conn->close();
-            return false;
+            return true;
         }
     }
 

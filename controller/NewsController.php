@@ -1,12 +1,31 @@
 <?php
 class NewsController extends BaseController
 {
+    const PATH_IMG_NEWS = 'view/upload/admin/news/';
 
     public function news_page()
     {
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $this->render_view(
                 'blog'
+            );
+        } else $this->render_error('400');
+    }
+
+    public function news_add_page()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $this->render_view(
+                'news/news-add'
+            );
+        } else $this->render_error('400');
+    }
+
+    public function news_edit_page()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $this->render_view(
+                'news/news-edit'
             );
         } else $this->render_error('400');
     }
@@ -174,6 +193,163 @@ class NewsController extends BaseController
                                         $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                         $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE,"Tin tức");
                                     }
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "tin tức");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function add_news()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['newsTitle']) && $_POST['newsTitle'] != '' && isset($_POST['newsDescription']) && $_POST['newsDescription'] != '' && isset($_POST['categoryNews']) && $_POST['categoryNews'] != '' && isset($_POST['newsContent']) && $_POST['newsContent'] != '' && isset($_POST['newsStatus']) && $_POST['newsStatus'] != '' && isset($_FILES["newsImg"]) && $_FILES["newsImg"]["name"] != '') {
+                            //&& isset($_FILES["newsImg"]) && !$_FILES["newsImg"]["name"] != ''
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
+                                    $img = $_FILES["newsImg"];
+                                    if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
+                                        $dataNews = [
+                                            'title' => $_POST['newsTitle'],
+                                            'content' => $_POST['newsContent'],
+                                            'description' => $_POST['newsDescription'],
+                                            'img' => newsController::PATH_IMG_NEWS . $img['name'],
+                                            'cn' => $_POST['categoryNews'],
+                                            'status' => $_POST['newsStatus'],
+                                            'ad' => $id
+                                        ];
+                                        $newsModel = $this->get_model('news');
+                                        // $data = $newsModel->save_data($dataNews);
+                                        if ($newsModel->save_data($dataNews)) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thất bại2");
+                                        }
+                                    } else {
+                                        $data = $img['name'];
+                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"tin tức","thất bại1");
+                                    }
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "tin tức");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function edit_news()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['newsTitle']) && $_POST['newsTitle'] != '' && isset($_POST['newsDescription']) && $_POST['newsDescription'] != '' && isset($_POST['categoryNews']) && $_POST['categoryNews'] != '' && isset($_POST['newsContent']) && $_POST['newsContent'] != '' && isset($_POST['newsStatus']) && $_POST['newsStatus'] != '') {
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
+                                    $newsModel = $this->get_model('news');
+                                    if (isset($_FILES["newsImg"]) && $_FILES["newsImg"]["name"] != '') {
+                                        $img = $_FILES["newsImg"];
+                                        if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
+                                            $dataNews = [
+                                                'news_img' => newsController::PATH_IMG_NEWS . $img['name'],
+                                                'news_title' => $_POST['newsTitle'],
+                                                'news_content' => $_POST['newsContent'],
+                                                'news_description' => $_POST['newsDescription'],
+                                                'cn_id' => $_POST['categoryNews'],
+                                                'news_active' => $_POST['newsStatus'],
+                                                'ad_id' => $id
+                                            ];
+                                            if ($newsModel->update_data($dataNews,$_POST['newsId'])) {
+                                                $responseCode = ResponseCode::SUCCESS;
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thành công");
+                                            } else {
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
+                                            }
+                                        } else {
+                                            $data = $img['name'];
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,"tin tức","thất bại");
+                                        }
+                                    } else {
+                                        $dataNews = [
+                                            'news_title' => $_POST['newsTitle'],
+                                            'news_content' => $_POST['newsContent'],
+                                            'news_description' => $_POST['newsDescription'],
+                                            'cn_id' => $_POST['categoryNews'],
+                                            'news_active' => $_POST['newsStatus'],
+                                            'ad_id' => $id
+                                        ];
+                                        if ($newsModel->update_data($dataNews,$_POST['newsId'])) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
+                                        }
+                                    }  
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;
                                     $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;

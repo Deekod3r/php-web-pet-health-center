@@ -27,7 +27,7 @@ class ServiceModel extends BaseModel{
     }
     
     public function save_data($data){
-        $value = "'".$data['name']."','".$data['description']."',".$data['price'].",' ',".$data['pet'].",".$data['status'].",".$data['cs'];
+        $value = "'".$data['name']."','".$data['description']."',".$data['price'].",'".$data['img']."',".$data['pet'].",".$data['status'].",".$data['cs'];
         return $this->save($value);
     }
 

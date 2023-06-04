@@ -7,6 +7,8 @@ class NewsModel extends BaseModel{
     var $idTable = 'news_id';
     var $view = 'view_news';
     var $viewJoin = 'view_news_join';
+    var $insert = ['news_title','news_description', 'news_content','news_img','news_active','cn_id','ad_id'];
+
     public function __construct(){
         //$this->connection = $this->get_connection();
     }
@@ -26,5 +28,14 @@ class NewsModel extends BaseModel{
 
     public function delete_data($id) {
         return $this->delete_soft($id);
+    }
+    public function save_data($data){
+        $value = "'".$data['title']."','".$data['description']."','".$data['content']."','".$data['img']."',".$data['status'].",".$data['cn'].",".$data['ad'];
+        return $this->save($value);
+    }
+
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
     }
 };
