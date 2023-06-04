@@ -41,4 +41,8 @@ enum Enum {
     public const STATUS_APPOINTMENT_CANCEL = 0;
     public const STATUS_APPOINTMENT_COMPLETED = 1;
 
+    // BILL 
+    public const BILL_PAYED = 1;
+    public const BILL_NOT_PAY = 0;
+
 }

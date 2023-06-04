@@ -243,6 +243,12 @@ class CustomerController extends BaseController
                     }
                     $key .= "ctm_address like '%" . $_GET['ctmAddress'] . "%'";
                 }
+                if (isset($_GET['ctmId']) and $_GET['ctmId'] != '') {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= "ctm_id = " . $_GET['ctmId'];
+                }
                 if (isset($_GET['ctmActive']) and $_GET['ctmActive'] != '') {
                     if ($key != '') {
                         $key .= ' and ';

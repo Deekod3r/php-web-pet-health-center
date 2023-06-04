@@ -152,7 +152,6 @@ create table detail_bill
     sv_id int, -- mã dịch vụ
     quantity int not null, -- số lượng dịch vụ
     sv_price double not null, -- giá dịch vụ
-    pet_id int not null, -- mã thú cưng
     is_delete boolean default false not null, -- default
     value float not null default (sv_price * quantity), --
     constraint fk_do_service foreign key (sv_id) references service (sv_id),

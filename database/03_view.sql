@@ -142,7 +142,7 @@ select * from view_bill_join;
 create or replace view view_detail_bill
 as
     select
-        detail_id, bill_id, sv_id, quantity, sv_price, pet_id, value
+        detail_id, bill_id, sv_id, quantity, sv_price, value
     from detail_bill
     where is_delete = false;
 
@@ -152,8 +152,8 @@ select * from view_detail_bill;
 create or replace view view_detail_bill_join
 as
     select
-        detail_id, bill_id, detail_bill.sv_id as sv_id, sv_name, quantity, detail_bill.sv_price, detail_bill.pet_id as pet_id, pet_name, value
-    from (detail_bill join service s on s.sv_id = detail_bill.sv_id) join pet p on p.pet_id = detail_bill.pet_id
+        detail_id, bill_id, detail_bill.sv_id as sv_id, sv_name, quantity, detail_bill.sv_price, value
+    from (detail_bill join service s on s.sv_id = detail_bill.sv_id)
     where detail_bill.is_delete = false;
 
 select * from view_detail_bill_join;

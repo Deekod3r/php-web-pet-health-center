@@ -159,7 +159,7 @@ function loadDataCustomer(data){
         else ctm_active = "Chưa kích hoạt";
         address = element.ctm_address != null ? element.ctm_address : '';
         ctmGender = element.ctm_gender == gender.male ? "Nam" : "Nữ";
-        canFeedback = element.ctm_can_eedback == statusObject.active ? "Có thể" : "Không thể"
+        canFeedback = element.ctm_can_feedback == statusObject.active ? "Có thể" : "Không thể"
         customerData += "<tr>";
         customerData += "<th scope='row'>" + element.ctm_id + "</th>";
         customerData += "<td>" + element.ctm_name + "</td>";

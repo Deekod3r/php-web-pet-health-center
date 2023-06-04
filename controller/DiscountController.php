@@ -78,7 +78,7 @@ class DiscountController extends BaseController
                     $key .= " order by ";
                     if (isset($_GET['discountQuantity']) && $_GET['discountQuantity'] != '') {
                         $key .= "-dc_quantity " . $_GET['discountQuantity'] . ",";
-                    } 
+                    }
                     $key .= " dc_active desc, dc_end_time desc, dc_start_time desc";
                     if (isset($_GET['limit']) and $_GET['limit'] != '') {
                         $limit = $_GET['limit'];
@@ -110,7 +110,7 @@ class DiscountController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
-                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "dịch vụ");
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "mã giảm giá");
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
@@ -137,7 +137,7 @@ class DiscountController extends BaseController
                         $responseCode = ResponseCode::TOKEN_INVALID;
                         $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
                     } else {
-                        if (isset($_POST['discountCodeAdd']) && $_POST['discountCodeAdd'] != '' && isset($_POST['discountConditionAdd']) && $_POST['discountConditionAdd'] != '' && isset($_POST['discountQuantityAdd']) && isset($_POST['discountStartTimeAdd']) && $_POST['discountStartTimeAdd'] != '' && isset($_POST['discountEndTimeAdd']) && $_POST['discountEndTimeAdd'] != '' && isset($_POST['discountTypeAdd']) && $_POST['discountTypeAdd'] != '' && isset($_POST['discountValueAdd']) && $_POST['discountValueAdd'] != '' && isset($_POST['discountDescAdd']) && $_POST['discountDescAdd'] != '' ) {
+                        if (isset($_POST['discountCodeAdd']) && $_POST['discountCodeAdd'] != '' && isset($_POST['discountConditionAdd']) && $_POST['discountConditionAdd'] != '' && isset($_POST['discountQuantityAdd']) && isset($_POST['discountStartTimeAdd']) && $_POST['discountStartTimeAdd'] != '' && isset($_POST['discountEndTimeAdd']) && $_POST['discountEndTimeAdd'] != '' && isset($_POST['discountTypeAdd']) && $_POST['discountTypeAdd'] != '' && isset($_POST['discountValueAdd']) && $_POST['discountValueAdd'] != '' && isset($_POST['discountDescAdd']) && $_POST['discountDescAdd'] != '') {
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
@@ -298,14 +298,14 @@ class DiscountController extends BaseController
                                         'dc_active' => $_POST['discountStatusEdit']
                                     ];
                                     $discountModel = $this->get_model('discount');
-                                    if ($discountModel->update_data($dataDiscount,$_POST['discountIdEdit'])) {
+                                    if ($discountModel->update_data($dataDiscount, $_POST['discountIdEdit'])) {
                                         $responseCode = ResponseCode::SUCCESS;
                                         $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thành công");
                                     } else {
                                         $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thất bại");
                                     }
                                     //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
+                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh mã giảm giá","thất bại");
                                     //}
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;
@@ -322,7 +322,62 @@ class DiscountController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::ACCESS_DENIED;
-                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE ;
+                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function execute_discount()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $discountModel = $this->get_model('discount');
+                if (isset($_GET['discountCode']) && $_GET['discountCode'] != '' && isset($_GET['valueBill']) && $_GET['valueBill'] != '') {
+                    $key = "dc_code = '" . $_GET['discountCode'] . "'";
+                    if ($key != '') $key = "where " . $key;
+                    // $message = "SERV: " . $key;
+                    // $data = $_GET;
+                    $discount = $discountModel->get_data($key);
+                    if ($discount != null) {
+                        $discount = $discount[0];
+                        //$data = $discount;
+                        if ($discount['dc_active'] == 1) {
+                            if ($discount['dc_start_time'] > date('Y-m-d') || $discount['dc_end_time'] < date('Y-m-d')) {
+                                $message = "SERV: Mã giảm giá không trong thời gian áp dụng";
+                            } else if ($discount['dc_quantity'] == 0) {
+                                $message = "SERV: Số lượng mã giảm giá đã hết";
+                            } else if ($discount['dc_condition'] > $_GET['valueBill']) {
+                                $message = "SERV: Giá trị đơn hàng không đủ để áp dụng mã giảm giá";
+                            } else {
+                                $responseCode = ResponseCode::SUCCESS;
+                                $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'mã giảm giá', 'thành công');
+                                $data = [
+                                    'dcId' => $discount['dc_id'],
+                                    'dcCode' => $discount['dc_code'],
+                                    'dcValue' => $discount['dc_value'],
+                                    'dcValuePercent' => $discount['dc_value_percent']
+                                ];
+                            }
+                        } else {
+                            $message = "SERV: Mã giảm giá không còn hiệu lực";
+                        }
+                    } else {
+                        $message = "SERV: Mã giảm giá không tồn tại";
+                    }
+                } else {
+                    $responseCode = ResponseCode::INPUT_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "mã giảm giá");
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;

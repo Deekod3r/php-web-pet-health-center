@@ -1,3 +1,7 @@
 .head{
     background-color:#ACFFAD
 }
+
+.hidden{
+    display: none;
+}

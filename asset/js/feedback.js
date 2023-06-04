@@ -154,7 +154,7 @@ function checkCanFeedback(){
         },
         dataType: 'json',
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == responseCode.success && response.data.canFeedback) {
                 $('#btn-send-feedback').val('Gửi');
             } else {

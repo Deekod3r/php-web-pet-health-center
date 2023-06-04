@@ -34,7 +34,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="mt-2">
+                <div >
                     <input class="btn btn-primary" type="reset">
                     <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
                 </div>

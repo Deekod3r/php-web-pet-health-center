@@ -173,7 +173,7 @@ function loadDatabill(data){
         billData += "<td>" + new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.value_reduced) + "</td>";
         billData += "<td>" + new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.total_value) + "</td>";
         billData += "<td>" + statusBill + "</td>";
-        billData += "<td><a class='btn btn-primary' onclick='loadDataDetailBill("+ element.bill_id  +")' >Sửa</a></td>";
+        billData += "<td><a class='btn btn-primary' href='?controller=bill&action=bill_edit_page&bill="+ element.bill_id +"' >Chi tiết</a></td>";
         billData += "</tr>";
     });
     $("#data-bill").html(billData);
@@ -181,43 +181,6 @@ function loadDatabill(data){
 
 function resetAddForm() {
     $("#form-add-bill")[0].reset();
-}
-
-function loadDataDetailBill(id) {
-    return false;
-    $.ajax({
-        type: "GET",
-        url: "?controller=bill&action=data_detail_bill",
-        data: {
-            billId: id,
-            token: sessionStorage.getItem("token")
-        },
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
-            if (response.responseCode == responseCode.success) {
-                $("#bill-id-edit").val(id)
-                $("#bill-active").val(response.data.bill.fb_active)
-            } else
-                alert(
-                    "RES: " +
-                    response.responseCode +
-                    ": " +
-                    response.message +
-                    "Vui lòng thử lại sau ít phút."
-                );
-        },
-        error: function (xhr) {
-            alert(
-                "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
-        },
-    });
 }
 
 $(document).ready(function(){
@@ -305,62 +268,4 @@ $(document).ready(function(){
         e.preventDefault();
     });
 
-    $("#form-edit-bill").submit(function (e) {
-        billIdEdit = $("#bill-id-edit").val().trim();
-        billActiveEdit = $("#bill-active").val().trim();
-        if (billIdEdit == "" || billActiveEdit == "") {
-            $("#msg-bill-edit").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-bill-edit").addClass(" alert-danger");
-            $("#msg-bill-edit").show();
-            window.setTimeout(function () {
-                $("#msg-bill-edit").hide();
-                $("#msg-bill-edit").removeClass(" alert-danger");
-            }, 3000);
-            return false;
-        } 
-        return false;
-        $.ajax({
-            type: "POST",
-            url: "?controller=bill&action=edit_bill",
-            data: {
-                billId: billIdEdit,
-                billActiveEdit: billActiveEdit,
-                token: sessionStorage.getItem("token")
-            },
-            dataType: "json",
-            success: function (response) {
-                //console.log(response);
-                if (response.responseCode == responseCode.success) {
-                    $("#msg-bill-edit").html("CLI: Sửa hoá đơn thành công.");
-                    $("#msg-bill-edit").addClass(" alert-success");
-                    $("#msg-bill-edit").show();
-                    $("#form-add-bill")[0].reset();
-                    window.setTimeout(function () {
-                        $("#msg-bill-edit").hide();
-                        $("#msg-bill-edit").removeClass(" alert-success");
-                    }, 3000);
-                    loadDataPage(new URLSearchParams(document.location.href).get("page") || 1);
-                } else {
-                    $("#msg-bill-edit").html(response.message);
-                    $("#msg-bill-edit").addClass(" alert-danger");
-                    $("#msg-bill-edit").show();
-                    window.setTimeout(function () {
-                        $("#msg-bill-edit").hide();
-                        $("#msg-bill-edit").removeClass(" alert-danger");
-                    }, 3000);
-                }
-            },
-            error: function (xhr) {
-                alert(
-                    "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
-                    xhr.responseText +
-                    ", " +
-                    xhr.status +
-                    ", " +
-                    xhr.error
-                );
-            },
-        });
-        e.preventDefault();
-    });
 })

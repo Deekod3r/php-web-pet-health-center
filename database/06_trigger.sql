@@ -7,37 +7,34 @@ create trigger trigger_update_Bill
         if(NEW.bill_status = 1) then
             update customer
                 set ctm_can_feedback = true
-            where ctm_id = NEW.ctm_id and ctm_email is not null;
-        end if;
-        if(NEW.dc_id is not null ) then
-            if(NEW.dc_id != OLD.dc_id) then
-                update discount
-                    set dc_quantity = dc_quantity + 1
-                where dc_id = OLD.dc_id;
-                update discount
-                    set dc_quantity = dc_quantity - 1
-                where dc_id = NEW.dc_id;
+            where ctm_id = NEW.ctm_id and ctm_active = 1;
+            if(NEW.dc_id is not null ) then
+                begin
+                    update discount
+                        set dc_quantity = dc_quantity - 1
+                    where dc_id = NEW.dc_id and dc_quantity is not null and dc_quantity > 0;
+                end;
             end if;
         end if;
     end;
 
-drop trigger if exists trigger_insert_Bill;
-create trigger trigger_insert_Bill
-    after insert
-    on bill
-    for each row
-    begin
-        if(NEW.bill_status = 1) then
-            update customer
-                set ctm_can_feedback = true
-            where ctm_id = NEW.ctm_id and ctm_email is not null;
-        end if;
-        if(NEW.dc_id is not null ) then
-                update discount
-                    set dc_quantity = dc_quantity + 1
-                where dc_id = NEW.dc_id;
-        end if;
-    end;
+# drop trigger if exists trigger_insert_Bill;
+# create trigger trigger_insert_Bill
+#     after insert
+#     on bill
+#     for each row
+#     begin
+#         if(NEW.bill_status = 1) then
+#             update customer
+#                 set ctm_can_feedback = true
+#             where ctm_id = NEW.ctm_id and ctm_active = 1;
+#         end if;
+# #         if(NEW.dc_id is not null ) then
+# #                 update discount
+# #                     set dc_quantity = dc_quantity + 1
+# #                 where dc_id = NEW.dc_id;
+# #         end if;
+#     end;
 
 # test
 # select * from bill;
@@ -117,14 +114,14 @@ create trigger trigger_insert_DetailBill
 # select * from detail_bill;
 
 
-drop trigger if exists trigger_updateBefore_DetailBill;
-create trigger trigger_updateBefore_DetailBill
-    before update
-    on detail_bill
-    for each row
-    begin
-        set NEW.value = NEW.sv_price * NEW.quantity;
-    end;
+# drop trigger if exists trigger_updateBefore_DetailBill;
+# create trigger trigger_updateBefore_DetailBill
+#     before update
+#     on detail_bill
+#     for each row
+#     begin
+#         set NEW.value = NEW.sv_price * NEW.quantity;
+#     end;
 
 drop trigger if exists trigger_updateAfter_DetailBill;
 create trigger trigger_updateAfter_DetailBill

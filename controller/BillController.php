@@ -22,6 +22,17 @@ class BillController extends BaseController
             } else $this->render_error('403');
         } else $this->render_error('400');
     }
+
+    public function bill_edit_page()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                $this->render_view(
+                    'bill/bill-edit'
+                );
+            } else $this->render_error('403');
+        } else $this->render_error('400');
+    }
     public function data_customer_history()
     {
         $responseCode = ResponseCode::FAIL;
@@ -93,7 +104,7 @@ class BillController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                if ($this->check_login()) {
+                if ($this->check_login() || ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
                     $token = isset($_GET['token']) ? $_GET['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -277,6 +288,154 @@ class BillController extends BaseController
                                     } else {
                                         $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                         $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Khách hàng");
+                                    }
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "hoá đơn");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function add_detail_bill() {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data = []; 
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['services']) && !empty(json_decode($_POST['services'])) && isset($_POST['billId']) && $_POST['billId'] != '') {
+                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            $detailBillModel = $this->get_model('detailbill');
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_SALE) {
+                                    $services = json_decode($_POST['services'],true);
+                                    foreach($services as $service) {
+                                        $detail = $detailBillModel->get_detail($_POST['billId'],$service['id']);
+                                        if ($detail != null) {
+                                            $detail = $detail[0];
+                                            $dataDetail = [
+                                                'quantity' => $service['quantity'],
+                                                'value' => $service['quantity'] * $service['price']
+                                            ];
+                                            if ($detailBillModel->update_data($dataDetail,$detail['detail_id'])) {
+                                                $responseCode = ResponseCode::SUCCESS;
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "chi tiết hoá đơn", "thành công");
+                                            } else {
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "chi tiết hoá đơn", "thất bại");
+                                            }
+                                        } else {
+                                            $dataDetail = [
+                                                'bill_id' => $_POST['billId'],
+                                                'sv_id' => $service['id'],
+                                                'sv_price' => $service['price'],
+                                                'quantity' => $service['quantity']
+                                            ];
+                                            if ($detailBillModel->save_data($dataDetail)) {
+                                                $responseCode = ResponseCode::SUCCESS;
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "chi tiết hoá đơn", "thành công");
+                                            } else {
+                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "chi tiết hoá đơn", "thất bại");
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    $responseCode = ResponseCode::ACCESS_DENIED;
+                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                }
+                            } else {
+                                $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
+                            }
+                        } else {
+                            $responseCode = ResponseCode::INPUT_EMPTY;
+                            $message = "SERV: " . sprintf(ResponseMessage::INPUT_EMPTY_MESSAGE, "hoá đơn");
+                        }
+                    }
+                } else {
+                    $responseCode = ResponseCode::ACCESS_DENIED;
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function pay_bill(){
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data = []; 
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
+                    $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
+                    $dataToken = $this->verify_and_decode_token($token);
+                    if (!$dataToken) {
+                        $responseCode = ResponseCode::TOKEN_INVALID;
+                        $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
+                    } else {
+                        if (isset($_POST['dcId']) && isset($_POST['billId']) && $_POST['billId'] != '') {
+                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
+                            $id = json_decode($dataToken)->{'id'};
+                            $admin = $this->get_model('admin')->get_by_id($id);
+                            if ($admin != null) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_SALE) {
+                                    $billModel = $this->get_model('bill');
+                                    $bill = $billModel->get_by_id($_POST['billId']);
+                                    if ($_POST['dcId'] != '') {
+                                        $discountModel = $this->get_model('discount');
+                                        $discount = $discountModel->get_by_id($_POST['dcId']);
+                                        $dataBill = [
+                                            'dc_id' => $discount['dc_id'],
+                                            'value_reduced' => $bill['sub_total'] * $discount['dc_value_percent'] / 100 + $discount['dc_value'],
+                                            'total_value' => $bill['sub_total'] - $bill['sub_total'] * $discount['dc_value_percent'] / 100 + $discount['dc_value'],
+                                            'bill_status' => Enum::BILL_PAYED
+                                        ];
+                                    } else {
+                                        $dataBill = [
+                                            'bill_status' => Enum::BILL_PAYED,
+                                            'total_value' => $bill['sub_total']
+                                        ];
+                                    }
+                                    if ($billModel->update_data($dataBill, $_POST['billId'])) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thành công");
+                                    } else {
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thất bại");
                                     }
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;

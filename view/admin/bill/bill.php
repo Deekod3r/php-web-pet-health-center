@@ -38,7 +38,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="mt-2">
+                <div>
                     <input class="btn btn-primary" type="reset">
                     <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
                 </div>
@@ -55,7 +55,7 @@
                         <th class="col-lg-1" scope="col">Người tạo</th>
                         <th class="col-lg-2" scope="col">Khách hàng</th>
                         <th class="col-lg-1" scope="col">Mã giảm giá</th>
-                        <th class="col-lg-2" scope="col">Tạm tính</th>
+                        <th class="col-lg-1" scope="col">Tạm tính</th>
                         <th class="col-lg-1" scope="col">Giảm giá</th>
                         <th class="col-lg-2" scope="col">Tổng tiền</th>
                         <th class="col-lg-1" scope="col">Trạng thái</th>

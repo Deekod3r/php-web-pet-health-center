@@ -230,19 +230,19 @@ insert into bill (bill_id, bill_date_release, bill_status, is_delete, ctm_id, ad
 
 -- select * from bill;
 -- detail_bill
-insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, pet_id, is_delete)
-            values (1,1,3,1,550000,1,default), -- kh1 cắt tỉa lông cho chó
-                   (2,2,2,1,500000,3,default), -- kh3 tiêm phòng cho mèo lông ngắn
-                   (3,3,22,1,250000,1,default),
-                   (4,4,15,1,130000,2,default),
-                   (5,5,15,1,130000,4,default),
-                   (6,5,3,1,200000,5,default),
-                   (7,6,5,1,2500000,6,default),
-                   (8,7,3,1,200000,6,default),
-                   (9,8,4,1,3000000,9,default),
-                   (10,9,12,1,300000,8,default),
-                   (11,10,2,1,500000,3,default),
-                   (12,11,6,1,10000000,7,default);
+insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, is_delete)
+            values (1,1,3,1,550000,default), -- kh1 cắt tỉa lông cho chó
+                   (2,2,2,1,500000,default), -- kh3 tiêm phòng cho mèo lông ngắn
+                   (3,3,22,1,250000,default),
+                   (4,4,15,1,130000,default),
+                   (5,5,15,1,130000,default),
+                   (6,5,3,1,200000,default),
+                   (7,6,5,1,2500000,default),
+                   (8,7,3,1,200000,default),
+                   (9,8,4,1,3000000,default),
+                   (10,9,12,1,300000,default),
+                   (11,10,2,1,500000,default),
+                   (12,11,6,1,10000000,default);
 -- select * from detail_bill;
 -- feedback
 insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
