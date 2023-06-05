@@ -111,10 +111,14 @@ function loadService() {
             str += "        <div class='wrapper m-0'>";
             if (active) {
                 str += "            <span class='minus ' onclick='changeQuantity(this,\"minus\")'>-</span>";
+            } else {
+                str += "            <span></span>";
             }
             str += "            <span class='num' id='quantity'>" + element.quantity + "</span>";
             if (active) {
                 str += "            <span class='plus ' onclick='changeQuantity(this,\"plus\")'>+</span>";
+            } else {
+                str += "            <span></span>";
             }
             str += "        </div>";
             str += "    </td>";
@@ -124,6 +128,8 @@ function loadService() {
             }).format((element.price * element.quantity)) + "</td>";
             if (active) {
                 str += "    <td><a class='border-0 ' onclick='deleteRow(this)' type='button'>Xoá</a></td>";
+            } else {
+                str += "            <td><span></span></td>";
             }
             str += "</tr>";
             $('#list-service').append(str);
@@ -223,6 +229,7 @@ function loadDataBill(){
                 } else {
                     $('.change-value').attr('disabled', true);
                 }
+                loadService(); 
             } else
                 alert(
                     "RES: " +
