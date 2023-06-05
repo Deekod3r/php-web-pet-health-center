@@ -114,7 +114,7 @@
                                 </div>
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Trạng thái</p>
                                 <select name="adminStatusEdit" id="admin-status-edit" class="custom-select">
-                                    <option value="0">Khoá</option>
+                                    <option value="0">Nghỉ làm</option>
                                     <option value="1">Hoạt động</option>
                                 </select>
                             </div>

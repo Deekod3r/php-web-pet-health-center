@@ -109,16 +109,22 @@ function loadService() {
             }
             str += "    <td style='width:25%; height: 10%;' class=''>";
             str += "        <div class='wrapper m-0'>";
-            str += "            <span class='minus hidden' onclick='changeQuantity(this,\"minus\")'>-</span>";
+            if (active) {
+                str += "            <span class='minus ' onclick='changeQuantity(this,\"minus\")'>-</span>";
+            }
             str += "            <span class='num' id='quantity'>" + element.quantity + "</span>";
-            str += "            <span class='plus hidden' onclick='changeQuantity(this,\"plus\")'>+</span>";
+            if (active) {
+                str += "            <span class='plus ' onclick='changeQuantity(this,\"plus\")'>+</span>";
+            }
             str += "        </div>";
             str += "    </td>";
             str += "    <td style='width:11.95%'>" + new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
             }).format((element.price * element.quantity)) + "</td>";
-            str += "    <td><a class='border-0 hidden' onclick='deleteRow(this)' type='button'>Xoá</a></td>";
+            if (active) {
+                str += "    <td><a class='border-0 ' onclick='deleteRow(this)' type='button'>Xoá</a></td>";
+            }
             str += "</tr>";
             $('#list-service').append(str);
         });
@@ -140,7 +146,7 @@ function select(service) {
         if (i == listService.length) {
             price = Number(service.children[2].textContent.replace(/[^\d,]/g, ''));
             price = price != null && price != '' ? price : 0;
-            alert(price)
+            //alert(price)
             let obj = {
                 id: service.children[0].textContent,
                 name: service.children[1].textContent,
@@ -152,7 +158,7 @@ function select(service) {
     } else {
         price = Number(service.children[2].textContent.replace(/[^\d,]/g, ''));
         price = price != null && price != '' ? price : 0;
-        alert(price)
+        //alert(price)
         let obj = {
             id: service.children[0].textContent,
             name: service.children[1].textContent,
@@ -193,7 +199,7 @@ function loadDataBill(){
         dataType: "json",
         success: function (response) {
             if (response.responseCode == responseCode.success) {
-                //console.log(response)
+                console.log(response)
                 $('#dc-code').html(response.data.bills[0].dc_code);
                 $('#value-discount').html(new Intl.NumberFormat("vi-VN", {
                     style: "currency",
@@ -207,8 +213,13 @@ function loadDataBill(){
                     billStatus = "Đã thanh toán"
                 } else billStatus = "Chưa thanh toán"
                 $('#bill-status').val(billStatus)
+                $('#total-value').html(new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(response.data.bills[0].total_value));
                 if (response.data.bills[0].bill_status == statusObject.inActive) {
                     $('.hidden').show()
+                    active = true;
                 } else {
                     $('.change-value').attr('disabled', true);
                 }
@@ -258,7 +269,6 @@ $(document).ready(function () {
                 });
                 loadService(); 
                 save = true;
-                loadDataBill();
             } else if(response.responseCode == responseCode.dataEmpty) {
                 $('#alert-bill').html(response.message);
                 $('#alert-bill').addClass('alert-danger');
@@ -274,6 +284,7 @@ $(document).ready(function () {
                 response.message +
                 "Vui lòng thử lại sau ít phút."
             );
+            loadDataBill();
         },
         error: function (xhr) {
             alert(

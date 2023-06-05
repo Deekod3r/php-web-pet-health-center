@@ -267,9 +267,9 @@ $(document).ready(function(){
     });
 
     $("#form-search-customer").submit(function (e) {
-        ctmName = $("#customer-name").val();
-        ctmPhone = $("#customer-phone").val();
-        ctmAddress = $("#customer-address").val();
+        ctmName = $("#customer-name").val().trim();
+        ctmPhone = $("#customer-phone").val().trim();
+        ctmAddress = $("#customer-address").val().trim();
         loadDataPage(1);
         e.preventDefault();
     });
