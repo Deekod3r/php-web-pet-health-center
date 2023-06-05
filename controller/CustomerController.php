@@ -328,7 +328,7 @@ class CustomerController extends BaseController
                         $responseCode = ResponseCode::TOKEN_INVALID;
                         $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
                     } else {
-                        if (isset($_POST['ctmName']) && $_POST['ctmName'] != '' && isset($_POST['ctmAddress']) && $_POST['ctmAddress'] != '' && isset($_POST['ctmPhone']) && $_POST['ctmPhone'] != '') {
+                        if (isset($_POST['ctmName']) && $_POST['ctmName'] != '' && isset($_POST['ctmAddress']) && $_POST['ctmAddress'] != '' && isset($_POST['ctmPhone']) && $_POST['ctmPhone'] != '' && isset($_POST['ctmGender']) && $_POST['ctmGender'] != '') {
                             //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
@@ -341,7 +341,7 @@ class CustomerController extends BaseController
                                         'address' => $_POST['ctmAddress'],
                                         'phone' => $_POST['ctmPhone'],
                                         'password' => '',
-                                        'gender' => -1,
+                                        'gender' => $_POST['ctmGender'],
                                         'active' => 0
                                     ];
                                     $customerModel = $this->get_model('customer');

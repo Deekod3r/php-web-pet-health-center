@@ -189,7 +189,8 @@ $(document).ready(function(){
         ctmNameAdd = $("#ctm-name").val();
         ctmPhoneAdd = $("#ctm-phone").val();
         ctmAddressAdd = $("#ctm-address").val();
-        if (ctmNameAdd == "" || ctmPhoneAdd == "" || ctmAddressAdd == "") {
+        ctmGenderAdd = $("#ctm-gender").val();
+        if (ctmNameAdd == "" || ctmPhoneAdd == "" || ctmAddressAdd == "" || ctmGenderAdd == "") {
             $("#msg-ctm").html("CLI: Thông tin không được bỏ trống.");
             $("#msg-ctm").addClass(" alert-danger");
             $("#msg-ctm").show();
@@ -199,6 +200,16 @@ $(document).ready(function(){
             }, 3000);
             return false;
         } 
+        if (ctmNameAdd.length < 2) {
+            $("#msg-ctm").html("CLI: Tên quá ngắn.");
+            $("#msg-ctm").addClass(" alert-danger");
+            $("#msg-ctm").show();
+            window.setTimeout(function () {
+                $("#msg-ctm").hide();
+                $("#msg-ctm").removeClass(" alert-danger");
+            }, 3000);
+            return false;
+        }
         if (!regNumber.test(ctmPhoneAdd)) {
             $("#msg-ctm").html("CLI: Số điện thoại không hợp lệ.");
             $("#msg-ctm").addClass(" alert-danger");
@@ -216,6 +227,7 @@ $(document).ready(function(){
                 ctmName: ctmNameAdd,
                 ctmAddress: ctmAddressAdd,
                 ctmPhone: ctmPhoneAdd,
+                ctmGender: ctmGenderAdd,
                 token: sessionStorage.getItem("token")
             },
             dataType: "json",

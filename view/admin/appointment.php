@@ -29,7 +29,7 @@
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0;color:black">&nbspTrạng thái:</p>
                         <select name="apmStatus" id="apm-status" class="custom-select mt-0 mb-0">
-                            <option value="">...</option>
+                            <option value="">Tất cả</option>
                             <option value="0">Huỷ</option>
                             <option value="1">Hoàn thành</option>
                             <option value="2">Đã xác nhận</option>
@@ -59,7 +59,7 @@
                         <th class="col-lg-2" scope="col">Khách hàng</th>
                         <th class="col-lg-2" scope="col">Ghi chú</th>
                         <th class="col-lg-1" scope="col">Trạng thái</th>
-                        <th class="col-lg-1" scope="col">Huỷ</th>
+                        <th class="col-lg-1" scope="col">Thời gian huỷ</th>
                         <th class="col-lg-0"></th>
                     </tr>
                 </thead>
@@ -99,7 +99,7 @@
                             <div class="form-group col-6">
                                 <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Dịch vụ</p>
                                 <select class="custom-select px-4" style="height: 47px;" name="categoryService" id="category-service">
-                                    <option value="">...</option>
+                                    <option value="">Chọn</option>
                                 </select>
                             </div>
                             <div class="form-group col-12">

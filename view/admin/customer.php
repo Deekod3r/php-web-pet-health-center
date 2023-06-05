@@ -60,16 +60,24 @@
                         <div class="modal-body">
                             <div class="alert" role="alert" style="display: none" id="msg-ctm"></div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Họ và tên</label>
+                                <label for="" class="form-label" style="font-weight:bold;color:black">Họ và tên</label>
                                 <input type="text" class="form-control" id="ctm-name">
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Số điện thoại</label>
+                                <label for="" class="form-label" style="font-weight:bold;color:black">Số điện thoại</label>
                                 <input type="text" class="form-control" id="ctm-phone">
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Địa chỉ</label>
+                                <label for="" class="form-label" style="font-weight:bold;color:black">Địa chỉ</label>
                                 <input type="text" class="form-control" id="ctm-address">
+                            </div>
+                            <div class="mb-3">
+                                <p style="font-weight:bold;color:black" class="mb-0">&nbspGiới tính:</p>
+                                <select name="ctmGender" id="ctm-gender" class="custom-select">
+                                    <option value="">Chọn</option>
+                                    <option value="1">Nam</option>
+                                    <option value="0">Nữ</option>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">

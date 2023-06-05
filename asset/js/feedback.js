@@ -1,6 +1,66 @@
 const limitFeedbackPage = 3;
-
+const allStar = document.querySelectorAll('.rating .star')
+const ratingValue = document.querySelector('.rating input')
 url = "?controller=feedback&action=feedback_page"
+
+var rating = {
+	"r1": 0,
+	"r2": 0,
+	"r3": 0,
+	"r4": 0,
+	"r5": 0
+}
+
+function calculatePercentage() {
+	let totalStars = 0;
+
+	// Tính tổng số sao
+	Object.values(rating).forEach(value => {
+		totalStars += value;
+	});
+	// Tính phần trăm và cập nhật giá trị cho mỗi loại sao
+	Object.keys(rating).forEach(key => {
+		let percentage = (rating[key] / totalStars) * 100;
+		rating[key] = percentage.toFixed(2); // Làm tròn đến 2 chữ số thập phân
+	});
+    console.log(rating);
+}
+
+function initializeStatistics() {
+	Object.keys(rating).forEach(key => {
+        $("#c-" + key).html(`${rating[key]}%`)
+        $(".bar-" + key)[0].style.width = `${rating[key]}%`
+    })
+}
+
+
+allStar.forEach((item, idx) => {
+	item.addEventListener('click', function () {
+		let click = 0
+		ratingValue.value = idx + 1
+
+		allStar.forEach(i => {
+			i.classList.replace('bxs-star', 'bx-star')
+			i.classList.remove('active')
+		})
+		for (let i = 0; i < allStar.length; i++) {
+			if (i <= idx) {
+				allStar[i].classList.replace('bx-star', 'bxs-star')
+				allStar[i].classList.add('active')
+			} else {
+				allStar[i].style.setProperty('--i', click)
+				click++
+			}
+		}
+	})
+})
+
+function resetStar(){
+    allStar.forEach(i => {
+        i.classList.replace('bxs-star', 'bx-star')
+        i.classList.remove('active')
+    })
+}
 
 function loadPaging(index, endPage) {
     index = parseInt(index);
@@ -55,6 +115,7 @@ function loadPaging(index, endPage) {
 }
 
 function loadDataPage(page) {
+    
     $.ajax({
         type: 'GET',
         url: '?controller=feedback&action=data_feedback',
@@ -102,49 +163,6 @@ function loadDataFeedback(data) {
     //loadDataFeedback(response.data.feedback);
 }
 
-if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
-    let form = "";
-    form += "<form action='?controller=feedback&action=send_feedback' method='post' id='form-feedback'>"
-    form += "    <div class='form-group'>"
-    form += "        <input type='text' class='form-control border-1' placeholder='Hãy chia sẻ trải nghiệm sử dụng dịch vụ của bạn' name='fbContent'/>"
-    form += "   </div>"
-    form += "   <div class='form-check' style='display: inline;'>"
-    form += "       <input class='form-check-input' type='radio' name='rating' id='rating-1' value=1>"
-    form += "       <label class='form-check-label' for='rating-1'>"
-    form += "            1<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px;' alt=''> |"
-    form += "        </label>"
-    form += "    </div>"
-    form += "    <div class='form-check' style='display: inline;'>"
-    form += "        <input class='form-check-input' type='radio' name='rating' id='rating-2' value=2>"
-    form += "        <label class='form-check-label' for='rating-2'>"
-    form += "            2<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
-    form += "        </label>"
-    form += "    </div>"
-    form += "  <div class='form-check' style='display: inline;'>"
-    form += "     <input class='form-check-input' type='radio' name='rating' id='rating-3' value=3>"
-    form += "     <label class='form-check-label' for='rating-3'>"
-    form += "         3<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
-    form += "     </label>"
-    form += "  </div>"
-    form += "  <div class='form-check' style='display: inline;'>"
-    form += "      <input class='form-check-input' type='radio' name='rating' id='rating-4' value=4>"
-    form += "      <label class='form-check-label' for='rating-4'>"
-    form += "           4<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> |"
-    form += "       </label>"
-    form += "   </div>"
-    form += "   <div class='form-check' style='display: inline;'>"
-    form += "       <input class='form-check-input' type='radio' name='rating' id='rating-5' value=5>"
-    form += "      <label class='form-check-label' for='rating-5'>"
-    form += "           5<img class='img-fluid' src='asset/img/star.png' style='width: 18px; height: 18px; margin-right:5px; margin-left:5px ' alt=''> "
-    form += "       </label>"
-    form += "   </div>"
-    form += "    <div style='margin-top: 10px; margin-bottom: 10px'>"
-    form += "        <input class='btn btn-lg btn-primary btn-block border-0' id='btn-send-feedback' type='submit' value='Hãy trải nghiệm dịch vụ của CarePET và để lại phản hồi'>"
-    form += "    </div>"
-    form += "</form>";
-    $('#form').html(form);
-}
-
 function checkCanFeedback(){
     $.ajax({
         type: 'GET',
@@ -154,12 +172,13 @@ function checkCanFeedback(){
         },
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.responseCode == responseCode.success && response.data.canFeedback) {
+                $('#btn-send-feedback').prop('disabled',false);
                 $('#btn-send-feedback').val('Gửi');
             } else {
                 $('#btn-send-feedback').prop('disabled',true);
-                $('#btn-send-feedback').val('Hãy trải nghiệm dịch vụ của CarePET và để lại phản hồi');
+                $('#btn-send-feedback').val('Hãy trải nghiệm dịch vụ của CarePET và để lại phản hồi sau');
             }
         },
         error: function (xhr) {
@@ -168,7 +187,39 @@ function checkCanFeedback(){
     });
 }
 
+function loadStatistics() {
+    $.ajax({
+        type: 'GET',
+        url: '?controller=feedback&action=data_statistic_feedback',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.responseCode == responseCode.success) {
+                //$('#countFeedback').html(response.data.count + " đánh giá")
+                response.data.feedbacks.forEach(element => {
+                    rate = element.fb_rating;
+                    rating["r"+rate+""] = parseInt(rating["r"+rate+""]) + element.count;
+                    //console.log(rating["r"+rate+""]);
+                })
+                calculatePercentage(rating);
+                initializeStatistics();
+                //console.log(rating);
+            } else alert("RES: " + response.responseCode + ": " + response.message + "Vui lòng thử lại sau ít phút.");
+        },
+        error: function (xhr) {
+            alert("ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " + xhr.responseText + ", " + xhr.status + ", " + xhr.error);
+        }
+    });
+}
+
 $(document).ready(function () {
+
+
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+        $('#form').show();
+    }
+
+    loadStatistics();
 
     loadDataShop();
 
@@ -182,14 +233,14 @@ $(document).ready(function () {
 
     $('#form-feedback').submit(function (e) {
         if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
-            if ($("input[name=rating]:checked").val() != null && $("input[name=fbContent]").val() != '') {
+            if ($("#rating").val() != null && $("#fb-content").val() != '') {
                 $.ajax({
                     type: 'POST',
                     url: '?controller=feedback&action=send_feedback',
                     data: {
                         token: sessionStorage.getItem('token'),
-                        rating: $("input[name=rating]:checked").val(),
-                        fbContent: $("input[name=fbContent]").val()
+                        rating: $("#rating").val().trim(),
+                        fbContent: $("#fb-content").val().trim()
                     },                 
                     dataType: 'json',
                     success: function (response) {
@@ -204,6 +255,8 @@ $(document).ready(function () {
                                 $('#msg-send-feedback').removeClass(' alert-success');
                             }, 3000);
                             checkCanFeedback();
+                            resetStar();
+                            loadStatistics();
                             $('#form-feedback')[0].reset();
                         } else if (response.responseCode == responseCode.fail) {
                             $('#msg-send-feedback').html(response.message);

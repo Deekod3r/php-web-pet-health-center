@@ -2,54 +2,159 @@
 <html lang="en">
 <?php $title = "Đánh giá" ?>
 <?php include("view/admin/layout/asset-header.php") ?>
+<style type="text/css">
+    .heading {
+        font-size: 25px;
+        margin-right: 25px;
+    }
 
+    .fa {
+        font-size: 25px;
+    }
+
+    .checked {
+        color: orange;
+    }
+
+    /* Three column layout */
+    .side {
+        float: left;
+        width: 15%;
+        margin-top: 10px;
+    }
+
+    .middle {
+        margin-top: 10px;
+        float: left;
+        width: 70%;
+    }
+
+    /* Place text to the right */
+    .right {
+        text-align: right;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* The bar container */
+    .bar-container {
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        color: white;
+    }
+
+    /* Individual bars */
+    .bar-r5 {
+        width: 60%;
+        height: 18px;
+        background-color: #04AA6D;
+    }
+
+    .bar-r4 {
+        width: 30%;
+        height: 18px;
+        background-color: #2196F3;
+    }
+
+    .bar-r3 {
+        width: 10%;
+        height: 18px;
+        background-color: #00bcd4;
+    }
+
+    .bar-r2 {
+        width: 4%;
+        height: 18px;
+        background-color: #ff9800;
+    }
+
+    .bar-r1 {
+        width: 15%;
+        height: 18px;
+        background-color: #f44336;
+    }
+</style>
 <body>
     <?php include("view/admin/layout/header.php") ?>
     <div class="container-fluid main-admin">
-        <div class="container">
-            <!-- <form action="" style="margin-bottom: 40px" id="form-search-feedback" method="get">
-                <div class="row" style="margin-top: 10px">
-                    <div class="form-group col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập tên thú cưng:</p>
-                        <input type="text" class="form-control border-1" name="feedbackName" id="feedback-name" />
-                    </div>
-                    <div class="form-group col-lg-2">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspSố điện thoại chủ:</p>
-                        <input type="text" class="form-control border-1" name="ctmPhone" id="ctm-phone" />
-                    </div>
-                    <div class="col-lg-3">
-                        <p style="font-weight:bold; margin-bottom:0;color:black">&nbspDanh mục thú cưng:</p>
-                        <select name="typefeedback" id="type-feedback" class="custom-select" style="width:250px;">
-                            <option value="">Tất cả</option>
-                            <option value="0">Mèo</option>
-                            <option value="1">Chó</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3">
-                        <p style="font-weight:bold; margin-bottom:0;color:black">&nbspGiới tính:</p>
-                        <select name="genderfeedback" id="gender-feedback" class="custom-select" style="width:250px;">
-                            <option value="">Tất cả</option>
-                            <option value="0">Cái</option>
-                            <option value="1">Đực</option>
-                        </select>
-                    </div>
+        <div class="container m-auto">
+        <h3 class="mb-3" id="countFeedback"></h3>
+        <h5 class="mb-3" onclick="searchFeedback(0)" style="cursor:pointer">Tất cả</h5>
+        <div class="row m-3 mb-5">
+            <a class="side" onclick="searchFeedback(5)" style="cursor:pointer">
+                <div>5 <i class="fa-solid fa-star"></i></div>
+            </a>
+            <div class="middle">
+                <div class="bar-container">
+                    <div class="bar-r5"></div>
                 </div>
-                <div class="mt-2">
-                    <input class="btn btn-primary" type="reset">
-                    <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
+            </div>
+            <div class="side right">
+                <div id="c-r5"></div>
+            </div>
+            <a class="side" onclick="searchFeedback(4)" style="cursor:pointer">
+                <div>4 <i class="fa-solid fa-star"></i></div>
+            </a>
+            <div class="middle">
+                <div class="bar-container">
+                    <div class="bar-r4"></div>
                 </div>
-            </form> -->
+            </div>
+            <div class="side right">
+                <div id="c-r4"></div>
+            </div>
+            <a class="side" onclick="searchFeedback(3)" style="cursor:pointer">
+                <div>3 <i class="fa-solid fa-star"></i></div>
+            </a>
+            <div class="middle">
+                <div class="bar-container">
+                    <div class="bar-r3"></div>
+                </div>
+            </div>
+            <div class="side right">
+                <div id="c-r3"></div>
+            </div>
+            <a class="side" onclick="searchFeedback(2)" style="cursor:pointer">
+                <div>2 <i class="fa-solid fa-star"></i></div>
+            </a>
+            <div class="middle">
+                <div class="bar-container">
+                    <div class="bar-r2"></div>
+                </div>
+            </div>
+            <div class="side right">
+                <div id="c-r2"></div>
+            </div>
+            <a class="side" onclick="searchFeedback(1)" style="cursor:pointer">
+                <div>1 <i class="fa-solid fa-star"></i></div>
+            </a>
+            <div class="middle">
+                <div class="bar-container">
+                    <div class="bar-r1"></div>
+                </div>
+            </div>
+            <div class="side right">
+                <div id="c-r1"></div>
+            </div>
+        </div>
         </div>
         <div class="container-fluid">
-            <div class="alert" role="alert" style="display: none" id="msg-feedback"></div>
+            <div class="search" role="search" style="display: none" id="msg-feedback"></div>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-1" scope="col">#</th>
-                        <th class="col-lg-5" scope="col">Nội dung</th>
+                        <th class="col-0" scope="col">#</th>
+                        <th class="col-lg-4" scope="col">Nội dung</th>
                         <th class="col-lg-1" scope="col">Đánh giá</th>
                         <th class="col-lg-2" scope="col">Thời gian</th>
                         <th class="col-lg-2" scope="col">Khách hàng</th>
+                        <th class="col-lg-2" scope="col">Trạng thái</th>
                         <th class="col-lg-1"></th>
                     </tr>
                 </thead>
@@ -67,18 +172,18 @@
                             <h3 class="ml-3 mt-2 mb-0">Sửa feedback</h3>
                         </div>
                         <div class="modal-body row">
-                            <div class="alert col-12 " role="alert" style="display: none" id="msg-feedback-edit"></div>
+                            <div class="search col-12 " role="search" style="display: none" id="msg-feedback-edit"></div>
                             <input type="hidden" id="feedback-id-edit">
                             <div class="col-lg-4 mb-3">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Loại</p>
-                                <select name="typefeedbackEdit" id="feedback-active" class="custom-select">
+                                <select name="feedbackActive" id="feedback-active" class="custom-select">
                                     <option value="0">Ẩn</option>
                                     <option value="1">Hiển thị</option>
                                 </select>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" data-dismiss="modal" onclick="reseteditForm()">Đóng</a>
+                            <a class="btn btn-danger" data-dismiss="modal" onclick="resetEditForm()">Đóng</a>
                             <button class="btn btn-primary">Lưu</button>
                         </div>
                     </form>

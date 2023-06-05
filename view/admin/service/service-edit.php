@@ -75,26 +75,13 @@
             <div class="row mr-1 ml-1">
                 <button class="col-5 btn btn-primary" type="submit" id="submit">Lưu</button>
                 <p class="col-lg-2"></p>
-                <button class="col-5 btn btn-primary" type="reset" onclick="clearImage()">Làm mới</button>
+                <button class="col-5 btn btn-primary" type="button" id="reset">Làm mới</button>
             </div>
             <div class="alert alert-danger mt-3 mr-1 ml-1" role="alert" style="display: none" id="msg-service"></div>
         </form>
     </div>
     <?php include("view/admin/layout/asset-footer.php") ?>
     <script src="asset/admin/js/service/service-edit.js?v=<?php echo time() ?>" async></script>
-    <script>
-        function preview() {
-            frame.src = URL.createObjectURL(event.target.files[0]);
-            $('#frame').show();
-            $('#clear-img').show();
-        }
-        function clearImage() {
-            document.getElementById('service-img').value = null;
-            frame.src = "";
-            $('#frame').hide();
-            $('#clear-img').hide();
-        }
-    </script>
 </body>
 
 </html>

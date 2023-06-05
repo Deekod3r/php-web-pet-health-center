@@ -261,7 +261,7 @@ $(document).ready(function(){
             return false;
         } 
         if (!regNumber.test(discountConditionAdd) || !regNumber.test(discountValueAdd)) {
-            $("#msg-discount").html("CLI: Giá trị tiền phải là số.");
+            $("#msg-discount").html("CLI: Giá trị tiền phải là số và lớn hơn hoặc bằng 0.");
             $("#msg-discount").addClass(" alert-danger");
             $("#msg-discount").show();
             window.setTimeout(function () {
@@ -319,7 +319,7 @@ $(document).ready(function(){
             data: formData,
             dataType: "json",
             success: function (response) {
-                //console.log(response);
+                console.log(response);
                 if (response.responseCode == responseCode.success) {
                     $("#msg-discount").html("CLI: Thêm mã giảm giá thành công.");
                     $("#msg-discount").addClass(" alert-success");
@@ -356,12 +356,12 @@ $(document).ready(function(){
 
     $("#form-search-discount").submit(function (e) {
         discountCode = $("#discount-code").val().trim();
-        discountCondition = $("#discount-condition").val();
+        discountCondition = $("#discount-condition").val().trim();
         discountStatus = $("#discount-status").val().trim();
         discountQuantity = $("#discount-quantity").val().trim();
         discountValue = $("#discount-value").val().trim();
-        discountYear = $("#discount-year").val().trim();
-        discountMonth = $("#discount-month").val().trim();
+        discountYear = $("#discount-year").val();
+        discountMonth = $("#discount-month").val();
         loadDataPage(1);
         e.preventDefault();
     });

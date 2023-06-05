@@ -325,8 +325,14 @@ $(document).ready(function(){
             return false;
         }
         //return false;
-        formData= new FormData($("#form-add-appointment")[0]);
+        formData= new FormData();
         formData.append('token',sessionStorage.getItem("token"))
+        formData.append('apmDate',$("#apm-date").val().trim())
+        formData.append('apmTime',$("#apm-time").val().trim())
+        formData.append('ctmPhone',$("#ctm-phone").val().trim())
+        formData.append('categoryService',$("#category-service").val().trim())
+        formData.append('apmNote',$("#apm-note").val().trim())
+
         //return false;
         $.ajax({
             type: "POST",

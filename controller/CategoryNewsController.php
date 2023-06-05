@@ -19,7 +19,7 @@ class CategoryNewsController extends BaseController
         try {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $categoryNewsModel = $this->get_model('categoryNews');
-                $categoryNews = $categoryNewsModel->get_data("");              
+                $categoryNews = $categoryNewsModel->get_data(" order by cn_id DESC");              
                 if ($categoryNews != null) {
                     $responseCode = ResponseCode::SUCCESS;
                     $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"danh mục tin tức","thành công.");
@@ -61,15 +61,20 @@ class CategoryNewsController extends BaseController
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    $dataCategorynews = [
-                                        'cnName' => $_POST['cnName']
-                                    ];
                                     $categorynewsModel = $this->get_model('categorynews');
-                                    if ($categorynewsModel->save_data($dataCategorynews)) {
-                                        $responseCode = ResponseCode::SUCCESS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "nhóm tin tức", "thành công");
+                                    if ($categorynewsModel->get_data("where cn_name = '".$_POST['cnName']."'") == null) {
+                                        $dataCategorynews = [
+                                            'cnName' => $_POST['cnName']
+                                        ];
+                                        if ($categorynewsModel->save_data($dataCategorynews)) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "nhóm tin tức", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "nhóm tin tức", "thất bại");
+                                        }
                                     } else {
-                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "nhóm tin tức", "thất bại");
+                                        $responseCode = ResponseCode::OBJECT_EXISTS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_EXISTS_MESSAGE, 'danh mục tin tức');
                                     }
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;
@@ -119,21 +124,21 @@ class CategoryNewsController extends BaseController
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    //$img = $_FILES["svImg"];
-                                    //if ($this->save_img(newsController::PATH_IMG_news,$img)) {
-                                    $dataCategorynews = [
-                                        'cn_name' => $_POST['cnName'],
-                                    ];
                                     $categorynewsModel = $this->get_model('categorynews');
-                                    if ($categorynewsModel->update_data($dataCategorynews,$_POST['cnId'])) {
-                                        $responseCode = ResponseCode::SUCCESS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "nhóm tin tức", "thành công");
+                                    if ($categorynewsModel->get_data("where cn_name = '".$_POST['cnName']."'") == null) {
+                                        $dataCategorynews = [
+                                            'cn_name' => $_POST['cnName'],
+                                        ];
+                                        if ($categorynewsModel->update_data($dataCategorynews,$_POST['cnId'])) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "nhóm tin tức", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "nhóm tin tức", "thất bại");
+                                        }
                                     } else {
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "nhóm tin tức", "thất bại");
+                                        $responseCode = ResponseCode::OBJECT_EXISTS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_EXISTS_MESSAGE, 'danh mục tin tức');
                                     }
-                                    //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
-                                    //}
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;
                                     $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;

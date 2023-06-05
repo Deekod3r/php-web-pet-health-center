@@ -54,12 +54,12 @@ $(document).ready(function () {
         svDescription = $("#service-description").val().trim();
         categoryService = $("#category-service").val().trim();
         typPet = $("#type-pet").val().trim();
-        servicePrice = $("#service-price").val().trim() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
+        servicePrice = $("#service-price").val().trim() != '' && $("#service-price").val() >= 0 ? parseInt($("#service-price").val()) : 0;
         svStatus = $("#service-status").val().trim();
         svImg = $("#service-img")[0].files[0];
         //return false;
         // console.log(sessionStorage.getItem('token')); return false;
-        if (svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '' || svImg == null) {
+        if (svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || svImg == null) {
             $('#msg-service').html("CLI: Thông tin không được bỏ trống.");
             $('#msg-service').show()
             window.setTimeout(function () {

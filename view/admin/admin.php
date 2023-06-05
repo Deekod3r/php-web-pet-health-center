@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0;color:black">&nbspQuyền:</p>
-                        <select name="adminRole" id="admin-role" class="custom-select" >
+                        <select name="adminRole" id="admin-role" class="custom-select">
                             <option value="">Tất cả</option>
                             <option value="1">Quản lý</option>
                             <option value="2">NV Tin tức</option>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0;color:black">&nbspTrạng thái:</p>
-                        <select name="adminStatus" id="admin-status" class="custom-select" >
+                        <select name="adminStatus" id="admin-status" class="custom-select">
                             <option value="">Tất cả</option>
                             <option value="0">Khoá</option>
                             <option value="1">Hoạt động</option>
@@ -35,7 +35,7 @@
                         <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         <div class="container">
@@ -69,11 +69,11 @@
                             <div class="alert col-12 " role="alert" style="display: none" id="msg-admin-add"></div>
                             <div class="mb-3 col-4">
                                 <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Tài khoản</label>
-                                <input type="text" class="form-control" id="admin-username-add" name="adminUsernameAdd" >
+                                <input type="text" class="form-control" id="admin-username-add" name="adminUsernameAdd">
                             </div>
                             <div class="mb-3 col-4">
                                 <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Mật khẩu</label>
-                                <input type="text" class="form-control" id="admin-password-add" name="adminPasswordAdd" >
+                                <input type="text" class="form-control" id="admin-password-add" name="adminPasswordAdd">
                             </div>
                             <div class="col-lg-4 mb-3">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Quyền</p>
@@ -106,7 +106,12 @@
                         <div class="modal-body row">
                             <div class="alert col-12 " role="alert" style="display: none" id="msg-admin-edit"></div>
                             <input type="hidden" id="admin-id-edit">
+
                             <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Mật khẩu</label>
+                                    <input type="text" class="form-control" name="adminPassword" id="admin-password">
+                                </div>
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Trạng thái</p>
                                 <select name="adminStatusEdit" id="admin-status-edit" class="custom-select">
                                     <option value="0">Khoá</option>

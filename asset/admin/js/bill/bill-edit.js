@@ -77,9 +77,10 @@ function changeQuantity(service, type) {
 function changePrice(id, service) {
     if (active) {
         let i = 0;
+        price = service.value != null && service.value != '' ? service.value : 0;
         while (i < listService.length) {
             if (listService[i].id == id) {
-                listService[i].price = service.value;
+                listService[i].price = price;
                 break;
             }
             i++;
@@ -99,7 +100,7 @@ function loadService() {
             str += "    <td style='width:30.15%'>" + element.name + "</td>";
             str += "    <td style='width:8.05%'>Thú cưng</td>";
             if (element.price == 0) {
-                str += "    <td style='width:12.6%'><input class='w-100 form-control' type='number' onchange='changePrice(" + element.id + ",this)' value='" + element.price + "'/></td>";
+                str += "    <td style='width:12.6%'><input class='w-100 form-control change-value' type='number' onchange='changePrice(" + element.id + ",this)' value='" + element.price + "'/></td>";
             } else {
                 str += "    <td style='width:12.6%'>" + new Intl.NumberFormat("vi-VN", {
                     style: "currency",
@@ -108,16 +109,16 @@ function loadService() {
             }
             str += "    <td style='width:25%; height: 10%;' class=''>";
             str += "        <div class='wrapper m-0'>";
-            str += "            <span class='minus' onclick='changeQuantity(this,\"minus\")'>-</span>";
+            str += "            <span class='minus hidden' onclick='changeQuantity(this,\"minus\")'>-</span>";
             str += "            <span class='num' id='quantity'>" + element.quantity + "</span>";
-            str += "            <span class='plus' onclick='changeQuantity(this,\"plus\")'>+</span>";
+            str += "            <span class='plus hidden' onclick='changeQuantity(this,\"plus\")'>+</span>";
             str += "        </div>";
             str += "    </td>";
             str += "    <td style='width:11.95%'>" + new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
             }).format((element.price * element.quantity)) + "</td>";
-            str += "    <td><a class='border-0' onclick='deleteRow(this)' type='button'>Xoá</a></td>";
+            str += "    <td><a class='border-0 hidden' onclick='deleteRow(this)' type='button'>Xoá</a></td>";
             str += "</tr>";
             $('#list-service').append(str);
         });
@@ -137,19 +138,25 @@ function select(service) {
             i++;
         }
         if (i == listService.length) {
+            price = Number(service.children[2].textContent.replace(/[^\d,]/g, ''));
+            price = price != null && price != '' ? price : 0;
+            alert(price)
             let obj = {
                 id: service.children[0].textContent,
                 name: service.children[1].textContent,
-                price: Number(service.children[2].textContent.replace(/[^\d,]/g, '')),
+                price: price,
                 quantity: 1
             }
             listService.push(obj);
         }
     } else {
+        price = Number(service.children[2].textContent.replace(/[^\d,]/g, ''));
+        price = price != null && price != '' ? price : 0;
+        alert(price)
         let obj = {
             id: service.children[0].textContent,
             name: service.children[1].textContent,
-            price: Number(service.children[2].textContent.replace(/[^\d,]/g, '')),
+            price: price,
             quantity: 1
         }
         listService.push(obj);
@@ -175,9 +182,7 @@ function deleteRow(r) {
     }
 }
 
-
-$(document).ready(function () {
-    
+function loadDataBill(){
     $.ajax({
         type: "GET",
         url: "?controller=bill&action=data_bill",
@@ -204,7 +209,8 @@ $(document).ready(function () {
                 $('#bill-status').val(billStatus)
                 if (response.data.bills[0].bill_status == statusObject.inActive) {
                     $('.hidden').show()
-                    active = true;
+                } else {
+                    $('.change-value').attr('disabled', true);
                 }
             } else
                 alert(
@@ -226,7 +232,10 @@ $(document).ready(function () {
             );
         },
     })
+}
 
+$(document).ready(function () {
+    
     $.ajax({
         type: "GET",
         url: "?controller=bill&action=data_detail_bill",
@@ -249,6 +258,15 @@ $(document).ready(function () {
                 });
                 loadService(); 
                 save = true;
+                loadDataBill();
+            } else if(response.responseCode == responseCode.dataEmpty) {
+                $('#alert-bill').html(response.message);
+                $('#alert-bill').addClass('alert-danger');
+                $('#alert-bill').show();
+                window.setTimeout(function () {
+                    $("#alert-bill").hide();
+                    $("#alert-bill").removeClass(" alert-danger");
+                }, 3000);
             } else alert(
                 "RES: " +
                 response.responseCode +
@@ -268,7 +286,6 @@ $(document).ready(function () {
             );
         }
     })
-
 
 
     $('#service-name').keyup(function () {
@@ -447,7 +464,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (response) {
                     if (response.responseCode == responseCode.success) {
-                        $('#alert-bill').html("Thanh toasn thanhf coong.");
+                        $('#alert-bill').html("Thanh toán thành công.");
                         $('#alert-bill').addClass('alert-success');
                         $('#alert-bill').show();
                         window.setTimeout(function () {

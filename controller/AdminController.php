@@ -131,7 +131,7 @@ class AdminController extends BaseController
                             $admin = $adminModel->get_by_id($id);
                             if ($admin != null) {
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    if ($adminModel->get_data("where ad_username = '". $_POST['adminUsername'] . "'") == null) {
+                                    if ($adminModel->get_data("where ad_username = '" . $_POST['adminUsername'] . "'") == null) {
                                         $dataAdmin = [
                                             'username' => $_POST['adminUsername'],
                                             'role' => $_POST['adminRole'],
@@ -251,10 +251,15 @@ class AdminController extends BaseController
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
                                     //$img = $_FILES["svImg"];
                                     //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
-                                    $dataadmin = [
+                                    if (isset($_POST['adminPasswordEdit']) && $_POST['adminPasswordEdit'] != '') {
+                                        $dataAdmin = [
+                                            'ad_status' => $_POST['adminStatusEdit'],
+                                            'ad_password' => md5($_POST['adminPasswordEdit'])
+                                        ];
+                                    } else $dataAdmin = [
                                         'ad_status' => $_POST['adminStatusEdit']
                                     ];
-                                    if ($adminModel->update_data($dataadmin,$_POST['adminIdEdit'])) {
+                                    if ($adminModel->update_data($dataAdmin, $_POST['adminIdEdit'])) {
                                         $responseCode = ResponseCode::SUCCESS;
                                         $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "admin", "thành công");
                                     } else {
@@ -275,7 +280,7 @@ class AdminController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::ACCESS_DENIED;
-                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE ;
+                    $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;

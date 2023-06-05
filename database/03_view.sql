@@ -162,7 +162,7 @@ select * from view_detail_bill_join;
 create or replace view view_feedback
 as
     select
-        fb_id, fb_content, fb_rating, fb_time, ctm_id
+        fb_id, fb_content, fb_rating, fb_time, ctm_id, fb_status
     from feedback
     where is_delete = false;
 
@@ -172,7 +172,7 @@ select * from view_feedback;
 create or replace view view_feedback_join
 as
     select
-        fb_id, fb_content, fb_rating, fb_time, feedback.ctm_id as ctm_id, ctm_name
+        fb_id, fb_content, fb_rating, fb_time, feedback.ctm_id as ctm_id, ctm_name, fb_status
     from feedback join customer c on c.ctm_id = feedback.ctm_id
     where feedback.is_delete = false and c.is_delete = false;
 

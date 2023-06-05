@@ -251,6 +251,7 @@ insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3),
                    (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5),
                    (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
+update feedback set fb_status = 1 where 1=1;
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info

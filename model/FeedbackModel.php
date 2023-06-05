@@ -24,4 +24,17 @@ class FeedbackModel extends BaseModel{
         return $this->save($value);
     }
    
+    public function native_query($query)
+    {
+        return $this->navtive_query($query);
+    }
+
+    public function get_by_id($id)
+    {
+        return $this->find_by_id($id);
+    }
+    public function update_data($data, $id)
+    {
+        return $this->update($data, $id);
+    }
 };

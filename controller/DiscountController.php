@@ -56,13 +56,13 @@ class DiscountController extends BaseController
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= $_GET['discountMonth'] . " >= month(dc_start_time) and " . $_GET['discountMonth'] . " <= month(dc_end_time) ";
+                    $key .= " dc_start_time >= '" . $_GET['discountMonth'] . "'";
                 }
                 if (isset($_GET['discountYear']) and $_GET['discountYear'] != '') {
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= $_GET['discountYear'] . " >= year(dc_start_time) and " . $_GET['discountYear'] . " <= year(dc_end_time) ";
+                    $key .= " dc_end_time <= '" . $_GET['discountYear'] . "'";
                 }
                 if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
                     if ($key != '') {
@@ -143,7 +143,7 @@ class DiscountController extends BaseController
                             if ($admin != null) {
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
                                     $discountModel = $this->get_model('discount');
-                                    $discount = $discountModel->get_data("where dc_code = '" . $_POST['discountCodeAdd'] . "' and dc_active = 1");
+                                    $discount = $discountModel->get_data("where dc_code = '" . $_POST['discountCodeAdd'] . "'");
                                     if ($discount == null) {
                                         if ($_POST['discountStartTimeAdd'] < $_POST['discountEndTimeAdd']) {
                                             $date = date("Y/m/d", strtotime($_POST['discountStartTimeAdd']));
@@ -153,29 +153,35 @@ class DiscountController extends BaseController
                                             if (strtotime($dateTimeStart) - strtotime($dateTimeToday) > 86400) {
                                                 $value = 0;
                                                 $valuePercent = 0;
-                                                if ($_POST['discountTypeAdd'] == 'value') $value = $_POST['discountValueAdd'];
-                                                else $valuePercent = $_POST['discountValueAdd'];
-                                                $quantiy = $_POST['discountQuantityAdd'] != '' ? $_POST['discountQuantityAdd'] : 'null';
-                                                $dataDiscount = [
-                                                    'code' => $_POST['discountCodeAdd'],
-                                                    'condition' => $_POST['discountConditionAdd'],
-                                                    'quantity' => $quantiy,
-                                                    'start' => $_POST['discountStartTimeAdd'],
-                                                    'end' => $_POST['discountEndTimeAdd'],
-                                                    'value' => $value,
-                                                    'valuePercent' => $valuePercent,
-                                                    'desc' => $_POST['discountDescAdd']
-                                                ];
-                                                // $data = [
-                                                //     'start' => $dateTimeStart,
-                                                //     'today' => $dateTimeToday,
-                                                //     'diff' => strtotime($dateTimeStart) - strtotime($dateTimeToday)
-                                                // ];
-                                                if ($discountModel->save_data($dataDiscount)) {
-                                                    $responseCode = ResponseCode::SUCCESS;
-                                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "mã giảm giá", "thành công");
+                                                if ($_POST['discountTypeAdd'] == 'dc_value') {
+                                                    $value = $_POST['discountValueAdd'];
+                                                } else $valuePercent = $_POST['discountValueAdd'];
+                                                if ($valuePercent <= 100) {
+                                                    $quantiy = $_POST['discountQuantityAdd'] != '' ? $_POST['discountQuantityAdd'] : 'null';
+                                                    $dataDiscount = [
+                                                        'code' => $_POST['discountCodeAdd'],
+                                                        'condition' => $_POST['discountConditionAdd'],
+                                                        'quantity' => $quantiy,
+                                                        'start' => $_POST['discountStartTimeAdd'],
+                                                        'end' => $_POST['discountEndTimeAdd'],
+                                                        'value' => $value,
+                                                        'valuePercent' => $valuePercent,
+                                                        'desc' => $_POST['discountDescAdd']
+                                                    ];
+                                                    // $data = [
+                                                    //     'start' => $dateTimeStart,
+                                                    //     'today' => $dateTimeToday,
+                                                    //     'diff' => strtotime($dateTimeStart) - strtotime($dateTimeToday)
+                                                    // ];
+                                                    if ($discountModel->save_data($dataDiscount)) {
+                                                        $responseCode = ResponseCode::SUCCESS;
+                                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "mã giảm giá", "thành công");
+                                                    } else {
+                                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "mã giảm giá", "thất bại");
+                                                    }
                                                 } else {
-                                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "mã giảm giá", "thất bại");
+                                                    $responseCode = ResponseCode::INPUT_INVALID_TYPE;
+                                                    $message = "SERV: Giá trị % giảm không được vượt quá 100.";
                                                 }
                                             } else {
                                                 $responseCode = ResponseCode::INPUT_INVALID_TYPE;
@@ -344,8 +350,7 @@ class DiscountController extends BaseController
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $discountModel = $this->get_model('discount');
                 if (isset($_GET['discountCode']) && $_GET['discountCode'] != '' && isset($_GET['valueBill']) && $_GET['valueBill'] != '') {
-                    $key = "dc_code = '" . $_GET['discountCode'] . "'";
-                    if ($key != '') $key = "where " . $key;
+                    $key = " where dc_code = '" . $_GET['discountCode'] . "'";
                     // $message = "SERV: " . $key;
                     // $data = $_GET;
                     $discount = $discountModel->get_data($key);
@@ -363,6 +368,9 @@ class DiscountController extends BaseController
                                 $responseCode = ResponseCode::SUCCESS;
                                 $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'mã giảm giá', 'thành công');
                                 $data = [
+                                    'date' => date('Y-m-d'),
+                                    'start' => $discount['dc_start_time'],
+                                    'end' => $discount['dc_end_time'],
                                     'dcId' => $discount['dc_id'],
                                     'dcCode' => $discount['dc_code'],
                                     'dcValue' => $discount['dc_value'],

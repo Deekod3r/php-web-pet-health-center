@@ -42,7 +42,7 @@
                 <div class="d-inline-flex align-items-center">
                     <div class="d-inline-flex flex-column text-center pr-3 border-right">
                         <h6>Giờ mở cửa</h6>
-                        <p class="m-0">8.00AM - 9.00PM</p>
+                        <p class="m-0">8.00 AM - 9.00 PM</p>
                     </div>
                     <div class="d-inline-flex flex-column text-center px-3 border-right">
                         <h6>Địa chỉ</h6>

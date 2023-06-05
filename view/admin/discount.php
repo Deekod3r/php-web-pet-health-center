@@ -9,21 +9,21 @@
         <div class="container-fluid">
             <form action="" style="margin-bottom: 40px" id="form-search-discount" method="get">
                 <div class="row" style="margin-top: 10px">
-                    <div class="form-group col-lg-1"></div>
+                <!-- <div class="form-group col-lg-1"></div> -->
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspNhập mã giảm giá:</p>
                         <input type="text" class="form-control border-1" name="discountCode" id="discount-code" placeholder="VD: HAPPY99"/>
                     </div>
                     <div class="form-group col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspĐiều kiện áp dụng:</p>
-                        <input type="number" class="form-control border-1" name="discountCondition" id="discount-condition" min=0/>
+                        <input type="number" class="form-control border-1" name="discountCondition" id="discount-condition" min=0 placeholder="Nhập giá trị đơn hàng"/>
                     </div>
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                         <p style="font-weight:bold; margin-bottom:0; color:black">&nbspTrạng thái:</p>
                         <select name="discountStatus" id="discount-status" class="custom-select">
                             <option value="">Tất cả</option>
                             <option value="1">Hoạt động</option>
-                            <option value="0">Ngừng</option>
+                            <option value="0">Không hiệu lực</option>
                         </select>
                     </div>
                     <div class="col-lg-1">
@@ -34,24 +34,23 @@
                             <option value="asc">Giảm dần</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col-lg-1">
                         <p style="font-weight:bold; margin-bottom:0;color:black">&nbspGiá trị giảm giá:</p>
                         <select name="discountValue" id="discount-value" class="custom-select mt-0 mb-0">
                             <option value="">Tất cả</option>
-                            <option value="dc_value">Giá trực tiếp</option>
-                            <option value="dc_value_percent">%</option>
+                            <option value="dc_value">Giảm trực tiếp</option>
+                            <option value="dc_value_percent">Giảm %</option>
                         </select>
                     </div>
-                    <div class="col-lg-1">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspGiảm giá tháng:</p>
-                        <input type="number" class="form-control border-1" name="dcMonth" id="discount-month" min=1 max=12 />
+                    <div class="col-lg-2">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspBắt đầu từ:</p>
+                        <input type="date" class="form-control border-1" name="dcMonth" id="discount-month" />
                     </div>
-                    <div class="col-lg-1">
-                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspGiảm giá năm:</p>
-                        <input type="number" class="form-control border-1" name="dcYear" id="discount-year" min=0 max=2300 />
+                    <div class="col-lg-2">
+                        <p style="font-weight:bold; margin-bottom:0; color:black">&nbspKết thúc:</p>
+                        <input type="date" class="form-control border-1" name="dcYear" id="discount-year" />
                     </div>
-                    <div class="form-group col-lg-1"></div>
-                    <div class="form-group col-lg-1"></div>
+                    <!-- <div class="form-group col-lg-1"></div> -->
                     <div class="col-lg-3">
                         <input class="btn btn-primary" type="reset">
                         <button class="btn btn-primary" type="submit " id="submit">Tìm kiếm</button>

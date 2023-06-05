@@ -109,17 +109,19 @@
                     </div>
                     <div class="modal-body">
                         <button class='btn btn-info mb-3' style='color:white' data-toggle='modal' data-target='#myModal1'>Thêm nhóm dịch vụ</button>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Tên nhóm dịch vụ</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-cs">
-                            </tbody>
-                        </table>
+                        <div class="table-responsive" style="max-height:500px">
+                            <table class="table table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Tên nhóm dịch vụ</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-cs">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-danger" data-dismiss="modal">Đóng</a>

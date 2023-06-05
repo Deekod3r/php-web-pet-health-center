@@ -1,3 +1,57 @@
+function loadData(){
+    $.ajax({
+        type: "GET",
+        url: "?controller=service&action=data_detail_service",
+        data : {
+            idService: new URLSearchParams(document.location.href).get("id")
+        },
+        dataType: "json",
+        success: function (response) {
+            //console.log(response);
+            if (response.responseCode == responseCode.success) {
+                sv = response.data.service;
+                // sv_price = sv.sv_price == 0 ? "Liên hệ" : new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(sv.sv_price);
+                $('#service-id').val(sv.sv_id);
+                $('#service-name').html(sv.sv_name);
+                $('#service-description').html(sv.sv_description);
+                $('#service-price').val(parseInt(sv.sv_price));
+                $('#type-pet').val(sv.sv_pet);
+                $('#category-service').val(sv.cs_id);
+                $('#service-status').val(sv.sv_status);
+                //$('#service-status').attr("src",sv.sv_img);
+            } else  alert(
+                    "RES: " +
+                    response.responseCode +
+                    ": " +
+                    response.message +
+                    "Vui lòng thử lại sau ít phút."
+            );
+        },
+        error: function (xhr) {
+            alert(
+                "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
+                xhr.responseText +
+                ", " +
+                xhr.status +
+                ", " +
+                xhr.error
+            );
+        }
+    });
+}
+
+function preview() {
+    frame.src = URL.createObjectURL(event.target.files[0]);
+    $('#frame').show();
+    $('#clear-img').show();
+}
+function clearImage() {
+    document.getElementById('service-img').value = null;
+    frame.src = "";
+    $('#frame').hide();
+    $('#clear-img').hide();
+}
+
 $(document).ready(function () {
 
     $.ajax({
@@ -38,56 +92,12 @@ $(document).ready(function () {
         }
     });
 
-    $.ajax({
-        type: "GET",
-        url: "?controller=service&action=data_detail_service",
-        data : {
-            idService: new URLSearchParams(document.location.href).get("id")
-        },
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
-            if (response.responseCode == responseCode.success) {
-                sv = response.data.service;
-                // sv_price = sv.sv_price == 0 ? "Liên hệ" : new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(sv.sv_price);
-                $('#service-id').val(sv.sv_id);
-                $('#service-name').html(sv.sv_name);
-                $('#service-description').html(sv.sv_description);
-                $('#service-price').val(parseInt(sv.sv_price));
-                $('#type-pet').val(sv.sv_pet);
-                $('#category-service').val(sv.cs_id);
-                $('#service-status').val(sv.sv_status);
-                //$('#service-status').attr("src",sv.sv_img);
-            } else  alert(
-                    "RES: " +
-                    response.responseCode +
-                    ": " +
-                    response.message +
-                    "Vui lòng thử lại sau ít phút."
-            );
-        },
-        error: function (xhr) {
-            alert(
-                "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
-                xhr.responseText +
-                ", " +
-                xhr.status +
-                ", " +
-                xhr.error
-            );
-        }
-    });
+    loadData();
 
-    // $("#submit").click(function (e) {
-    //     svName = $("#service-name").val();
-    //     svDescription = $("#service-description").val();
-    //     categoryService = $("#category-service").val();
-    //     typPet = $("#type-pet").val();
-    //     servicePrice = $("#service-price").val() != '' && $("#service-price").val() > 0 ? $("#service-price").val() : 0 ;
-    //     svStatus = $("#service-status").val();
-    //     svImg = $("#service-img")[0].files[0];
-    //     console.log(svName, svDescription, categoryService, servicePrice, svStatus, typPet,svImg.name);
-    // })
+    $("#reset").click(function () {
+        loadData();
+        clearImage();
+    })
 
     $("#form-edit-service").submit(function (e) {
         svId = $('#service-id').val().trim();

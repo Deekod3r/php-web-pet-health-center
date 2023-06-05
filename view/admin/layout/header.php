@@ -16,16 +16,22 @@
                         </h5>
                     </a> -->
                     <a href="?controller=home&action=index_admin" class="nav-item nav-top nav-link <?php if ($title == "Trang chủ") echo "active"; ?>">Trang chủ</a>
+                    <?php if((isset($_SESSION["ad".Enum::ROLE_SALE]) && $_SESSION["ad".Enum::ROLE_SALE]) || (isset($_SESSION["ad".Enum::ROLE_MANAGER]) && $_SESSION["ad".Enum::ROLE_MANAGER])):?>
                     <a href="?controller=service&action=service_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Dịch vụ") echo "active"; ?>">Dịch vụ</a>
                     <a href="?controller=discount&action=discount_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Giảm giá") echo "active"; ?>">Giảm giá</a>
                     <a href="?controller=appointment&action=appointment_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Lịch hẹn") echo "active"; ?>">Lịch hẹn</a>
                     <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoá đơn</a>
-                    <a href="?controller=news&action=news_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
-                    <a href="?controller=feedback&action=feedback_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
                     <a href="?controller=customer&action=customer_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Khách hàng") echo "active"; ?>">Khách hàng</a>
                     <a href="?controller=pet&action=pet_page_ad" class="nav-item nav-top nav-link <?php if ($title == "PET") echo "active"; ?>">PET</a>
+                    <?php endif; ?>
+                    <?php if((isset($_SESSION["ad".Enum::ROLE_NEWS]) && $_SESSION["ad".Enum::ROLE_NEWS]) || (isset($_SESSION["ad".Enum::ROLE_MANAGER]) && $_SESSION["ad".Enum::ROLE_MANAGER])):?>
+                    <a href="?controller=news&action=news_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>
+                    <a href="?controller=feedback&action=feedback_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Đánh giá") echo "active"; ?>">Đánh giá</a>
+                    <?php endif; ?>
+                    <?php if((isset($_SESSION["ad".Enum::ROLE_MANAGER]) && $_SESSION["ad".Enum::ROLE_MANAGER])):?>
                     <a href="?controller=shop&action=shop_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Thông tin shop") echo "active"; ?>">Thông tin shop</a>
                     <a href="?controller=admin&action=admin_page" class="nav-item nav-top nav-link <?php if ($title == "Admin") echo "active"; ?>">Admin</a>
+                    <?php endif; ?>
                 </div>
                 <?php if (isset($_SESSION['login']) && $_SESSION['login'] == Enum::ADMIN) { ?>
                     <div class="dropdown" id="" style="margin-right:20px">

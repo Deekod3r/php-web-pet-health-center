@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Dịch vụ</p>
                                     <select class="custom-select border-0 px-4" style="height: 47px;" name="categoryService" id="category-service">
-                                        <option value="">...</option>                                       
+                                        <option value="">Chọn</option>                                       
                                     </select>
                                 </div>
                                 <div class="form-group">

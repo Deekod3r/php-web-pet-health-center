@@ -301,6 +301,7 @@ $(document).ready(function(){
     $("#form-edit-admin").submit(function (e) {
         adminIdEdit = $("#admin-id-edit").val().trim();
         adminStatusEdit = $("#admin-status-edit").val().trim();
+        adminPasswordEdit = $("#admin-password").val();
         if (adminIdEdit == "" || adminStatusEdit == "") {
             $("#msg-admin-edit").html("CLI: Thông tin không được bỏ trống.");
             $("#msg-admin-edit").EditClass(" alert-danger");
@@ -317,6 +318,7 @@ $(document).ready(function(){
             data: {
                 adminIdEdit: adminIdEdit,
                 adminStatusEdit: adminStatusEdit,
+                adminPasswordEdit: adminPasswordEdit,
                 token: sessionStorage.getItem("token")
             },
             dataType: "json",

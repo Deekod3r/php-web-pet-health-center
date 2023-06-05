@@ -61,7 +61,7 @@ class NewsController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['newsKey']) and $_GET['newsKey'] != '') {
-                    $key .= "news_title like '%" . $_GET['newsKey'] . "%'";
+                    $key .= "news_title like '%" . htmlspecialchars($_GET['newsKey']) . "%'";
                 }
                 if (isset($_GET['categoryNews']) and $_GET['categoryNews'] != '') {
                     if ($key != '') $key = $key . " and ";

@@ -128,7 +128,7 @@ create table appointment
 create table bill
 (
     bill_id int primary key auto_increment, -- mã hóa đơn -- default
-    bill_date_release datetime not null default now(), -- ngày thanh toán -- linh hoạt
+    bill_date_release datetime not null default current_timestamp, -- ngày thanh toán -- linh hoạt
     is_delete boolean default false not null, -- -- default
     bill_status tinyint(1) default 0 not null, -- 2: huỷ, 1: đã thanh toán, 0: chờ thanh toán
     ctm_id int, -- mã khách hàng
@@ -170,6 +170,9 @@ create table feedback
     constraint fk_feedback_ctm foreign key (ctm_id) references customer(ctm_id),
     constraint check_feedback_rating check(fb_rating >= 0 and fb_rating <=5)
 );
+
+alter table feedback add column fb_status boolean default true not null;
+
 create table shop_info
 (
     shop_id int primary key default 1,

@@ -173,4 +173,32 @@ class BaseModel
             return false;
         }
     }
+
+    public function navtive_query($query)
+    {
+        $response = null;
+        $conn = $this->get_connection();
+        try {
+            $stm = $conn->prepare("{$query}");
+            if ($stm->execute() && !$stm->errno) {
+                $result = $stm->get_result();
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $data[] = $row;
+                    }
+                    $response = $data;
+                    $stm->close();
+                    $conn->close();
+                    return $response;
+                }
+            } else {
+                throw new mysqli_sql_exception("Statement error: " . $stm->error);
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo ("Error: " . $e->getMessage());
+        }
+        $stm->close();
+        $conn->close();
+        return $response;
+    }
 }

@@ -3,46 +3,6 @@
 <?php $title = "Hoá đơn" ?>
 <?php include("view/admin/layout/asset-header.php") ?>
 <style>
-    .scrollbox {
-        max-height: 200px;
-        overflow-y: scroll;
-        background-color: #f6f6f6;
-
-        &::-webkit-scrollbar {
-            background-color: transparent;
-            width: 8px;
-        }
-    }
-
-    .scrollbox:hover {
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, .2)
-        }
-    }
-
-    @media (hover: none) {
-        .scrollbox {
-            &::-webkit-scrollbar {
-                width: 8px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background-color: rgba(0, 0, 0, .2)
-            }
-        }
-    }
-
-    .menu {
-        list-type: none;
-        margin: 0;
-        padding: 0;
-
-
-    }
 
     body {
         font-family: sans-serif;
@@ -293,7 +253,6 @@
                             </table>
                             <div class="scrollbox w-100 ">
                                 <table id="list-service">
-                                
                                 </table>
                             </div>
                         </div>

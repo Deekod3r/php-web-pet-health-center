@@ -101,17 +101,19 @@
                     </div>
                     <div class="modal-body">
                         <button class='btn btn-info mb-3' style='color:white' data-toggle='modal' data-target='#myModal1'>Thêm nhóm tin tức</button>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Tên nhóm tin tức</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="data-cn">
-                            </tbody>
-                        </table>
+                        <div  class="table-responsive" style="max-height:500px">
+                            <table class="table table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Tên nhóm tin tức</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data-cn">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
@@ -137,7 +139,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-danger" data-dismiss="modal">Đóng</a>
+                            <a class="btn btn-danger" data-dismiss="modal" onclick="$('#form-add-cn')[0].reset()">Đóng</a>
                             <button class="btn btn-primary">Lưu</button>
                         </div>
                     </form>
