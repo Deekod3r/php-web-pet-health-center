@@ -226,10 +226,11 @@ function loadDataBill(){
                 if (response.data.bills[0].bill_status == statusObject.inActive) {
                     $('.hidden').show()
                     active = true;
-                } else {
+                } 
+                loadService(); 
+                if (response.data.bills[0].bill_status == statusObject.active) {
                     $('.change-value').attr('disabled', true);
                 }
-                loadService(); 
             } else
                 alert(
                     "RES: " +

@@ -520,4 +520,68 @@ class AppointmentController extends BaseController
         }
         $this->response($responseCode, $message, $data);
     }
+
+    public function data_statistic_appointment() {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $appointmentModel = $this->get_model('appointment');
+                $count = $appointmentModel->count_data("");
+                if ($count > 0) {
+                    $appointments = $appointmentModel->native_query("select month(apm_booking_at) as month, count(apm_id) as appointments from appointment
+                    where month(apm_booking_at) <= month(now()) and year(apm_booking_at) = year(now()) and apm_status = 1
+                    group by month(apm_booking_at)");
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "lịch hẹn", "thành công.");
+                    $data = [
+                        'appointments' => $appointments,
+                        //'count' => $count
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "lịch hẹn");
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
+    public function new_appointment() {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $appointmentModel = $this->get_model('appointment');
+                $count = $appointmentModel->count_data("");
+                if ($count > 0) {
+                    $newAppointment = $appointmentModel->native_query("select count(apm_id) as count from appointment where apm_status = ". Enum::STATUS_APPOINTMENT_CONFIRMED_NO);
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "lịch hẹn", "thành công.");
+                    $data = [
+                        'newAppointment' => $newAppointment[0]['count'],
+                        //'count' => $count
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "lịch hẹn");
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
 }

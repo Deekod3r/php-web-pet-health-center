@@ -289,4 +289,35 @@ class FeedbackController extends BaseController
         }
         $this->response($responseCode, $message, $data);
     }
+
+    public function new_feedback() {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $feedbackModel = $this->get_model('feedback');
+                $count = $feedbackModel->count_data("");
+                if ($count > 0) {
+                    $newFeedback = $feedbackModel->native_query("select count(fb_id) as count from feedback where hour(TIMEDIFF(now(),fb_time)) <= 72");
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "lịch hẹn", "thành công.");
+                    $data = [
+                        'newFeedback' => $newFeedback[0]['count'],
+                        //'count' => $count
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "lịch hẹn");
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
 }

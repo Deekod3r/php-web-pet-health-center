@@ -92,4 +92,9 @@ class AppointmentModel extends BaseModel
     {
         return $this->update($data, $id);
     }
+
+    public function native_query($query)
+    {
+        return $this->navtive_query($query);
+    }
 };

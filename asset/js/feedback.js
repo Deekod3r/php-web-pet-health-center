@@ -254,6 +254,13 @@ $(document).ready(function () {
                                 $('#msg-send-feedback').hide()
                                 $('#msg-send-feedback').removeClass(' alert-success');
                             }, 3000);
+                            rating = {
+                                "r1": 0,
+                                "r2": 0,
+                                "r3": 0,
+                                "r4": 0,
+                                "r5": 0
+                            }
                             checkCanFeedback();
                             resetStar();
                             loadStatistics();

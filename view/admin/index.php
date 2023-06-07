@@ -6,41 +6,93 @@
 
 <body>
     <?php include "view/admin/layout/header.php" ?>
-    <div class="container main">
-        <h1>trang chủ</h1>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-        <script>
-            const xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-            const yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+    <div class="container-fluid main-admin">
+        <!-- Content Row -->
+        <div class="row">
 
-            new Chart("myChart", {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        fill: false,
-                        lineTension: 0,
-                        backgroundColor: "rgba(0,0,255,1.0)",
-                        borderColor: "rgba(0,0,255,0.1)",
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                min: yValues[0] - 1,
-                                max: yValues[yValues.length-1] + 1
-                            }
-                        }],
-                    }
-                }
-            });
-        </script>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Doanh thu tháng hiện tại</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="revenue-current-month"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu năm hiện tại</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="revenue-current-year"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Lịch hẹn cần duyệt</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="new-appointment"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Đánh giá mới</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="new-feedback"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row mb-5">
+            <div class="col-6">
+                <canvas id="myChart" style="width:100%;max-width:1000px"></canvas>
+            </div>
+            <div class="col-6">
+                <canvas id="myChart1" style="width:100%;max-width:1000px"></canvas>
+            </div>
+            <div class="col-12">
+                <canvas id="myChart2" style="width:100%; height:500px"></canvas>
+            </div>
+        </div>
     </div>
+    <script src="asset/admin/js/dashboard.js?v=<?php echo time() ?>" async></script>
     <?php include "view/admin/layout/asset-footer.php" ?>
 </body>
 

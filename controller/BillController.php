@@ -473,4 +473,39 @@ class BillController extends BaseController
         }
         $this->response($responseCode, $message, $data);
     }
+
+    public function data_statistic_revenue_bill()
+    {
+        $responseCode = ResponseCode::FAIL;
+        $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
+        $data[] = null;
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $billModel = $this->get_model('bill');
+                $count = $billModel->count_data("");
+                if ($count > 0) {
+                    $bills = $billModel->native_query("select month(bill_date_release) as month1, sum(total_value) as revenue from bill
+                    where month(bill_date_release) <= month(now()) and year(bill_date_release) = year(now())
+                    group by month(bill_date_release)");
+                    $responseCode = ResponseCode::SUCCESS;
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "bill", "thành công.");
+                    $data = [
+                        'bills' => $bills,
+                        //'count' => $count
+                    ];
+                } else {
+                    $responseCode = ResponseCode::DATA_EMPTY;
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "bill");
+                }
+            } else {
+                $responseCode = ResponseCode::REQUEST_INVALID;
+                $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
+            }
+        } catch (Exception $e) {
+            $responseCode = ResponseCode::UNKNOWN_ERROR;
+            $message = "SERV: " . $e->getMessage();
+        }
+        $this->response($responseCode, $message, $data);
+    }
+
 }
