@@ -72,6 +72,7 @@ function changeQuantity(service, type) {
         clearDiscount();
         loadService();
     }
+    save = false;
 }
 
 function changePrice(id, service) {
@@ -88,6 +89,7 @@ function changePrice(id, service) {
         clearDiscount();
         loadService();
     }
+    save = false;
 }
 
 function loadService() {
@@ -134,6 +136,9 @@ function loadService() {
             str += "</tr>";
             $('#list-service').append(str);
         });
+        $('#pay').prop("disabled",false)
+    } else {
+        $('#pay').prop("disabled",true)
     }
     // clearDiscount();
     calSubTotal();
@@ -173,6 +178,7 @@ function select(service) {
         }
         listService.push(obj);
     }
+    save = false;
     clearDiscount();
     loadService();
 }
@@ -192,6 +198,7 @@ function deleteRow(r) {
         }
         loadService();
     }
+    save = false;
 }
 
 function loadDataBill(){
@@ -278,13 +285,13 @@ $(document).ready(function () {
                 loadService(); 
                 save = true;
             } else if(response.responseCode == responseCode.dataEmpty) {
-                $('#alert-bill').html(response.message);
-                $('#alert-bill').addClass('alert-danger');
-                $('#alert-bill').show();
-                window.setTimeout(function () {
-                    $("#alert-bill").hide();
-                    $("#alert-bill").removeClass(" alert-danger");
-                }, 3000);
+                // $('#alert-bill').html(response.message);
+                // $('#alert-bill').addClass('alert-danger');
+                // $('#alert-bill').show();
+                // window.setTimeout(function () {
+                //     $("#alert-bill").hide();
+                //     $("#alert-bill").removeClass(" alert-danger");
+                // }, 3000);
             } else alert(
                 "RES: " +
                 response.responseCode +
@@ -458,6 +465,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr) {
+                console.log(xhr.responseText);
                 alert(
                     "ER: Hệ thống gặp sự cố, vui lòng thử lại sau ít phút. Chi tiết lỗi: " +
                     xhr.responseText +

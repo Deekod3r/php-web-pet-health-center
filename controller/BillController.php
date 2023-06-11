@@ -51,7 +51,7 @@ class BillController extends BaseController
                         $offset = 0;
                         $id = json_decode($dataToken)->{'id'};
                         $billModel = $this->get_model('bill');
-                        $count = $billModel->count_data_by_customer($id);
+                        $count = $billModel->count_data("where ctm_id = {$id} and bill_status = 1");
                         if ($count > 0) {
                             $key = " order by bill_date_release DESC ";
                             if (isset($_GET['limit']) and $_GET['limit'] != '') {
@@ -69,7 +69,7 @@ class BillController extends BaseController
                                     }
                                 }
                             }
-                            $bills = $billModel->get_data(" where ctm_id = $id " . $key);
+                            $bills = $billModel->get_data(" where ctm_id = {$id} and bill_status = 1 $key");
                             $responseCode = ResponseCode::SUCCESS;
                             $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, 'hoá đơn', 'thành công');
                             //$message = "SERV: " . " where ctm_id = $id " . $key;
@@ -190,10 +190,18 @@ class BillController extends BaseController
                     if ($key != '') $key = $key . " and ";
                     $key .= " date(bill_date_release) = '" . $_GET['billDate'] . "'";
                 }
-                if (isset($_GET['billStatus']) and $_GET['billStatus'] != '') {
-                    if ($key != '') $key = $key . " and ";
-                    $key .= " bill_status = " . $_GET['billStatus'];
+                if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " bill_status = 1 ";
+                } else {
+                    if (isset($_GET['billStatus']) and $_GET['billStatus'] != '') {
+                        if ($key != '') $key = $key . " and ";
+                        $key .= " bill_status = " . $_GET['billStatus'];
+                    }
                 }
+                $data = $key;
                 if ($key != '') $key = "where " . $key;
                 $billModel = $this->get_model('bill');
                 $count = $billModel->count_data($key);

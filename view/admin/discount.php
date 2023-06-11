@@ -119,11 +119,11 @@
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Giá trị</p>
                                 <div class="input-group">
                                     <span class="input-group-text">
-                                    <select name="discountTypeAdd" id="discount-type-add" class="custom-select">
-                                        <option value="">Chọn</option>
-                                        <option value="dc_value">Trực tiếp</option>
-                                        <option value="dc_value_percent">%</option>
-                                    </select>
+                                        <select name="discountTypeAdd" id="discount-type-add" class="custom-select">
+                                            <option value="">Chọn</option>
+                                            <option value="dc_value">Trực tiếp</option>
+                                            <option value="dc_value_percent">%</option>
+                                        </select>
                                     </span>
                                     <input type="number" class="form-control " name="discountValueAdd" id="discount-value-add" style="height:52px" />
                                 </div>

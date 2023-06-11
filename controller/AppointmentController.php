@@ -60,7 +60,7 @@ class AppointmentController extends BaseController
                             if ($customerModel->get_by_id($id) != null && $role == -1) {
                                 $appointmentModel = $this->get_model('appointment');
                                 $countCurrentApm = count($appointmentModel->get_by_customer($id, " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")"));
-                                if ($countCurrentApm <= 2) {
+                                if ($countCurrentApm <= 2 || $countCurrentApm == null) {
                                     $pos = strripos($_POST['apmTime'], " ");
                                     $back = substr($_POST['apmTime'], $pos + 1);
                                     $time = substr($_POST['apmTime'], 0, $pos) . ":00";

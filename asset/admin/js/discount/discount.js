@@ -260,7 +260,7 @@ $(document).ready(function(){
             }, 3000);
             return false;
         } 
-        if (!regNumber.test(discountConditionAdd) || !regNumber.test(discountValueAdd)) {
+        if (!regNumber.test(discountConditionAdd) || !regNumber.test(discountValueAdd) || discountValueAdd <= 0) {
             $("#msg-discount").html("CLI: Giá trị tiền phải là số và lớn hơn hoặc bằng 0.");
             $("#msg-discount").addClass(" alert-danger");
             $("#msg-discount").show();
@@ -270,6 +270,17 @@ $(document).ready(function(){
             }, 3000);
             return false;
         }
+        if (discountTypeAdd == 'dc_value_percent' && discountValueAdd > 100) {
+            $("#msg-discount").html("CLI: Phần trăm giảm giá không được vượt quá 100.");
+            $("#msg-discount").addClass(" alert-danger");
+            $("#msg-discount").show();
+            window.setTimeout(function () {
+                $("#msg-discount").hide();
+                $("#msg-discount").removeClass(" alert-danger");
+            }, 3000);
+            return false;
+        }
+
         if (discountQuantityAdd != '') {
             if (!regNumber.test(discountQuantityAdd) || discountQuantityAdd < 0) {
                 $("#msg-discount").html("CLI: Số lượng phải là số lớn hơn hoặc bằng 0.");

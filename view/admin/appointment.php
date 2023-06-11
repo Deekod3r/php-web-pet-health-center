@@ -33,7 +33,7 @@
                             <option value="0">Huỷ</option>
                             <option value="1">Hoàn thành</option>
                             <option value="2">Đã xác nhận</option>
-                            <option value="3">Chưa xác nhận</option>
+                            <option value="3">Chờ xác nhận</option>
                         </select>
                     </div>
                     <div class="form-group col-lg-2"></div>
@@ -134,7 +134,7 @@
                                     <option value="0">Huỷ</option>
                                     <option value="1">Hoàn thành</option>
                                     <option value="2">Đã xác nhận</option>
-                                    <option value="3">Chưa xác nhận</option>
+                                    <option value="3">Chờ xác nhận</option>
                                 </select>
                             </div>
                         </div>

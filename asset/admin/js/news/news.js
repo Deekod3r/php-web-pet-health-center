@@ -245,16 +245,16 @@ function editcn(id,name) {
 
 $(document).ready(function () {
     
-    if (sessionStorage.getItem("addnews")) {
-        $("#msg-news").html(sessionStorage.getItem("msgnews"));
+    if (sessionStorage.getItem("addNews")) {
+        $("#msg-news").html(sessionStorage.getItem("msgNews"));
         $("#msg-news").addClass(" alert-success");
         $("#msg-news").show();
         window.setTimeout(function () {
             $("#msg-news").hide();
             $("#msg-news").html("");
             $("#msg-news").removeClass(" alert-success");
-            sessionStorage.removeItem("addnews");
-            sessionStorage.removeItem("msgnews");
+            sessionStorage.removeItem("addNews");
+            sessionStorage.removeItem("msgNews");
         }, 3000);
     }
 

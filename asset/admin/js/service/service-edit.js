@@ -12,8 +12,8 @@ function loadData(){
                 sv = response.data.service;
                 // sv_price = sv.sv_price == 0 ? "Liên hệ" : new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(sv.sv_price);
                 $('#service-id').val(sv.sv_id);
-                $('#service-name').html(sv.sv_name);
-                $('#service-description').html(sv.sv_description);
+                $('#service-name').val(sv.sv_name);
+                $('#service-description').val(sv.sv_description);
                 $('#service-price').val(parseInt(sv.sv_price));
                 $('#type-pet').val(sv.sv_pet);
                 $('#category-service').val(sv.cs_id);
@@ -96,7 +96,6 @@ $(document).ready(function () {
 
     $("#reset").click(function () {
         loadData();
-        clearImage();
     })
 
     $("#form-edit-service").submit(function (e) {
@@ -105,12 +104,12 @@ $(document).ready(function () {
         svDescription = $("#service-description").val().trim();
         categoryService = $("#category-service").val().trim();
         typPet = $("#type-pet").val().trim();
-        servicePrice = $("#service-price").val() != '' && $("#service-price").val() > 0 ? parseInt($("#service-price").val()) : 0;
+        servicePrice = $("#service-price").val().trim() != '' && $("#service-price").val() >= 0 ? parseInt($("#service-price").val()) : parseInt(0);
         svStatus = $("#service-status").val().trim();
         svImg = $("#service-img")[0].files[0];
         //svImg = $("#service-img")[0].files[0];
         // console.log(sessionStorage.getItem('token')); return false;
-        if (svId == '' || svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '' || servicePrice == '') {
+        if (svId == '' || svName == '' || svDescription == '' || categoryService == '' || typPet == '' || svStatus == '') {
             $('#msg-service').html("CLI: Thông tin không được bỏ trống.");
             $('#msg-service').show()
             window.setTimeout(function () {

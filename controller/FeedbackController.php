@@ -34,8 +34,18 @@ class FeedbackController extends BaseController
                 $offset = 0;
                 $feedbackModel = $this->get_model('feedback');
                 if (isset($_GET['number']) && $_GET['number'] != '' && $_GET['number'] > 0) {
-                    $key .= " where fb_rating = " . $_GET['number'];
+                    $key .= " fb_rating = " . $_GET['number'];
                 }
+                if (!isset($_SESSION['login']) || (isset($_SESSION['login']) && $_SESSION['login'] != Enum::ADMIN)) {
+                    if ($key != '') {
+                        $key .= ' and ';
+                    }
+                    $key .= " fb_status = 1 ";
+                }
+                if ($key != '') {
+                    $key = ' where ' . $key;
+                }
+                $data = $key;
                 $count = $feedbackModel->count_data($key);
                 if ($count > 0) {
                     $key .= " order by fb_time DESC ";

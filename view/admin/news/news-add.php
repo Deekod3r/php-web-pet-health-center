@@ -5,7 +5,7 @@
 
 <body>
     <?php include "view/admin/layout/header.php" ?>
-    <div class="container-fluid main-admin">
+    <div class="container-fluid main-admin mb-3">
         <form class="" id="form-add-news" method="post" enctype="multipart/form-data">
             <h3 class="mb-3 text-primary">Thêm tin tức</h3>
             <div class="row g-3">

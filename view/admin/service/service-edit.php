@@ -75,7 +75,7 @@
             <div class="row mr-1 ml-1">
                 <button class="col-5 btn btn-primary" type="submit" id="submit">Lưu</button>
                 <p class="col-lg-2"></p>
-                <button class="col-5 btn btn-primary" type="button" id="reset">Làm mới</button>
+                <button class="col-5 btn btn-primary" type="reset" id="reset">Làm mới</button>
             </div>
             <div class="alert alert-danger mt-3 mr-1 ml-1" role="alert" style="display: none" id="msg-service"></div>
         </form>

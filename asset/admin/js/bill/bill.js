@@ -167,7 +167,7 @@ function loadDatabill(data){
         billData += "<th scope='row'>" + element.bill_id + "</th>";
         billData += "<td>" + element.bill_date_release + "</td>";
         billData += "<td>" + element.ad_username + "</td>";
-        billData += "<td>" + element.ctm_id + " - " + element.ctm_name + "</td>";
+        billData += "<td>" + element.ctm_phone + " - " + element.ctm_name + "</td>";
         billData += "<td>" + discountCode + "</td>";
         billData += "<td>" + new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.sub_total) + "</td>";
         billData += "<td>" + new Intl.NumberFormat("vi-VN", {style: "currency",currency: "VND",}).format(element.value_reduced) + "</td>";
@@ -194,22 +194,22 @@ $(document).ready(function(){
     $("#form-add-bill").submit(function (e) {
         ctmPhoneAdd = $("#ctm-phone-add").val().trim();
         if (ctmPhoneAdd == "" ) {
-            $("#msg-bill").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-bill").addClass(" alert-danger");
-            $("#msg-bill").show();
+            $("#msg-bill-add").html("CLI: Thông tin không được bỏ trống.");
+            $("#msg-bill-add").addClass(" alert-danger");
+            $("#msg-bill-add").show();
             window.setTimeout(function () {
-                $("#msg-bill").hide();
-                $("#msg-bill").removeClass(" alert-danger");
+                $("#msg-bill-add").hide();
+                $("#msg-bill-add").removeClass(" alert-danger");
             }, 3000);
             return false;
         } 
         if (!regNumber.test(ctmPhoneAdd)) {
-            $("#msg-bill").html("CLI: Số điện thoại không hợp lệ.");
-            $("#msg-bill").addClass(" alert-danger");
-            $("#msg-bill").show();
+            $("#msg-bill-add").html("CLI: Số điện thoại không hợp lệ.");
+            $("#msg-bill-add").addClass(" alert-danger");
+            $("#msg-bill-add").show();
             window.setTimeout(function () {
-                $("#msg-bill").hide();
-                $("#msg-bill").removeClass(" alert-danger");
+                $("#msg-bill-add").hide();
+                $("#msg-bill-add").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
@@ -224,22 +224,22 @@ $(document).ready(function(){
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-bill").html("CLI: Thêm hoá đơn thành công.");
-                    $("#msg-bill").addClass(" alert-success");
-                    $("#msg-bill").show();
+                    $("#msg-bill-add").html("CLI: Thêm hoá đơn thành công.");
+                    $("#msg-bill-add").addClass(" alert-success");
+                    $("#msg-bill-add").show();
                     $("#form-add-bill")[0].reset();
                     window.setTimeout(function () {
-                        $("#msg-bill").hide();
-                        $("#msg-bill").removeClass(" alert-success");
+                        $("#msg-bill-add").hide();
+                        $("#msg-bill-add").removeClass(" alert-success");
                     }, 3000);
                     loadDataPage(1);
                 } else {
-                    $("#msg-bill").html(response.message);
-                    $("#msg-bill").addClass(" alert-danger");
-                    $("#msg-bill").show();
+                    $("#msg-bill-add").html(response.message);
+                    $("#msg-bill-add").addClass(" alert-danger");
+                    $("#msg-bill-add").show();
                     window.setTimeout(function () {
-                        $("#msg-bill").hide();
-                        $("#msg-bill").removeClass(" alert-danger");
+                        $("#msg-bill-add").hide();
+                        $("#msg-bill-add").removeClass(" alert-danger");
                     }, 3000);
                 }
             },

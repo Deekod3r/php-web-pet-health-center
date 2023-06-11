@@ -209,9 +209,9 @@ class ServiceController extends BaseController
                                     $img = $_FILES["svImg"];
                                     if ($this->save_img(ServiceController::PATH_IMG_SERVICE, $img)) {
                                         $dataService = [
-                                            'name' => $_POST['svName'],
+                                            'name' => htmlspecialchars($_POST['svName']),
                                             'price' => $_POST['svPrice'],
-                                            'description' => $_POST['svDescription'],
+                                            'description' => htmlspecialchars($_POST['svDescription']),
                                             'pet' => $_POST['typePet'],
                                             'img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
                                             'cs' => $_POST['categoryService'],
@@ -284,9 +284,9 @@ class ServiceController extends BaseController
                                             $img = $_FILES["svImg"];
                                             if ($this->save_img(ServiceController::PATH_IMG_SERVICE, $img)) {
                                                 $dataService = [
-                                                    'sv_name' => $_POST['svName'],
+                                                    'sv_name' => htmlspecialchars($_POST['svName']),
                                                     'sv_price' => $_POST['svPrice'],
-                                                    'sv_description' => $_POST['svDescription'],
+                                                    'sv_description' => htmlspecialchars($_POST['svDescription']),
                                                     'sv_pet' => $_POST['typePet'],
                                                     'sv_img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
                                                     'cs_id' => $_POST['categoryService'],

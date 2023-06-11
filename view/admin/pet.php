@@ -70,7 +70,7 @@
                             <h3 class="ml-3 mt-2 mb-0">Thêm thú cưng</h3>
                         </div>
                         <div class="modal-body row">
-                            <div class="alert col-12 " role="alert" style="display: none" id="msg-pet"></div>
+                            <div class="alert col-12 " role="alert" style="display: none" id="msg-pet-add"></div>
                             <div class="mb-3 col-4">
                                 <label for="" class="form-label" style="font-weight:bold; margin-bottom:0;color:black">Tên thú</label>
                                 <input type="text" class="form-control" id="pet-name-add">

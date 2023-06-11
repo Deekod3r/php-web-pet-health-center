@@ -329,31 +329,31 @@ class CustomerController extends BaseController
                         $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
                     } else {
                         if (isset($_POST['ctmName']) && $_POST['ctmName'] != '' && isset($_POST['ctmAddress']) && $_POST['ctmAddress'] != '' && isset($_POST['ctmPhone']) && $_POST['ctmPhone'] != '' && isset($_POST['ctmGender']) && $_POST['ctmGender'] != '') {
-                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
                                 if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_SALE) {
-                                    //$img = $_FILES["svImg"];
-                                    //if ($this->save_img(customerController::PATH_IMG_customer,$img)) {
-                                    $dataCustomer = [
-                                        'name' => $_POST['ctmName'],
-                                        'address' => $_POST['ctmAddress'],
-                                        'phone' => $_POST['ctmPhone'],
-                                        'password' => '',
-                                        'gender' => $_POST['ctmGender'],
-                                        'active' => 0
-                                    ];
                                     $customerModel = $this->get_model('customer');
-                                    if ($customerModel->save_data($dataCustomer)) {
-                                        $responseCode = ResponseCode::SUCCESS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thành công");
+                                    $cus = $customerModel->get_data("where ctm_phone = '" . $_POST['ctmPhone'] ."'");
+                                    if ($cus == null) {
+                                        $dataCustomer = [
+                                            'name' => $_POST['ctmName'],
+                                            'address' => $_POST['ctmAddress'],
+                                            'phone' => $_POST['ctmPhone'],
+                                            'password' => '',
+                                            'gender' => $_POST['ctmGender'],
+                                            'active' => 0
+                                        ];
+                                        if ($customerModel->save_data($dataCustomer)) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thất bại");
+                                        }
                                     } else {
-                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "khách hàng", "thất bại");
+                                        $responseCode = ResponseCode::OBJECT_EXISTS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_EXISTS_MESSAGE, 'Thông tin người dùng');
                                     }
-                                    //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh khách hàng","thất bại");
-                                    //}
                                 } else {
                                     $responseCode = ResponseCode::ACCESS_DENIED;
                                     $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;

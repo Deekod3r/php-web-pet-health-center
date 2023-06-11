@@ -236,22 +236,22 @@ $(document).ready(function(){
         petGenderAdd = $("#gender-pet-add").val().trim();
         petNoteAdd = $("#pet-note-add").val().trim();
         if (petNameAdd == "" || ctmPhoneAdd == "" || petSpeciesAdd == "" || petTypeAdd == "" || petGenderAdd == "" ) {
-            $("#msg-pet").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-pet").addClass(" alert-danger");
-            $("#msg-pet").show();
+            $("#msg-pet-add").html("CLI: Thông tin không được bỏ trống.");
+            $("#msg-pet-add").addClass(" alert-danger");
+            $("#msg-pet-add").show();
             window.setTimeout(function () {
-                $("#msg-pet").hide();
-                $("#msg-pet").removeClass(" alert-danger");
+                $("#msg-pet-add").hide();
+                $("#msg-pet-add").removeClass(" alert-danger");
             }, 3000);
             return false;
         } 
         if (!regNumber.test(ctmPhoneAdd)) {
-            $("#msg-pet").html("CLI: Số điện thoại không hợp lệ.");
-            $("#msg-pet").addClass(" alert-danger");
-            $("#msg-pet").show();
+            $("#msg-pet-add").html("CLI: Số điện thoại không hợp lệ.");
+            $("#msg-pet-add").addClass(" alert-danger");
+            $("#msg-pet-add").show();
             window.setTimeout(function () {
-                $("#msg-pet").hide();
-                $("#msg-pet").removeClass(" alert-danger");
+                $("#msg-pet-add").hide();
+                $("#msg-pet-add").removeClass(" alert-danger");
             }, 3000);
             return false;
         }
@@ -271,22 +271,22 @@ $(document).ready(function(){
             success: function (response) {
                 //console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    $("#msg-pet").html("CLI: Thêm thú cưng thành công.");
-                    $("#msg-pet").addClass(" alert-success");
-                    $("#msg-pet").show();
+                    $("#msg-pet-add").html("CLI: Thêm thú cưng thành công.");
+                    $("#msg-pet-add").addClass(" alert-success");
+                    $("#msg-pet-add").show();
                     $("#form-add-pet")[0].reset();
                     window.setTimeout(function () {
-                        $("#msg-pet").hide();
-                        $("#msg-pet").removeClass(" alert-success");
+                        $("#msg-pet-add").hide();
+                        $("#msg-pet-add").removeClass(" alert-success");
                     }, 3000);
                     loadDataPage(1);
                 } else {
-                    $("#msg-pet").html(response.message);
-                    $("#msg-pet").addClass(" alert-danger");
-                    $("#msg-pet").show();
+                    $("#msg-pet-add").html(response.message);
+                    $("#msg-pet-add").addClass(" alert-danger");
+                    $("#msg-pet-add").show();
                     window.setTimeout(function () {
-                        $("#msg-pet").hide();
-                        $("#msg-pet").removeClass(" alert-danger");
+                        $("#msg-pet-add").hide();
+                        $("#msg-pet-add").removeClass(" alert-danger");
                     }, 3000);
                 }
             },
@@ -319,10 +319,10 @@ $(document).ready(function(){
         petSpeciesEdit = $("#pet-species-edit").val().trim();
         petTypeEdit = $("#type-pet-edit").val().trim();
         petGenderEdit = $("#gender-pet-edit").val().trim();
-        petNoteEdit = $("#pet-note-edit").val().trim();
+        petNoteEdit = $("#pet-note-edit").val().trim() != "" ? $("#pet-note-edit").val().trim() : '';
         if (petNameEdit == "" || petSpeciesEdit == "" || petTypeEdit == "" || petGenderEdit == "" || petIdEdit == "") {
             $("#msg-pet-edit").html("CLI: Thông tin không được bỏ trống.");
-            $("#msg-pet-edit").EditClass(" alert-danger");
+            $("#msg-pet-edit").addClass(" alert-danger");
             $("#msg-pet-edit").show();
             window.setTimeout(function () {
                 $("#msg-pet-edit").hide();

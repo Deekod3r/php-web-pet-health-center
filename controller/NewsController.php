@@ -240,13 +240,13 @@ class NewsController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_NEWS) {
                                     $img = $_FILES["newsImg"];
                                     if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
                                         $dataNews = [
-                                            'title' => $_POST['newsTitle'],
-                                            'content' => $_POST['newsContent'],
-                                            'description' => $_POST['newsDescription'],
+                                            'title' => htmlspecialchars($_POST['newsTitle']),
+                                            'content' => htmlspecialchars($_POST['newsContent']),
+                                            'description' => htmlspecialchars($_POST['newsDescription']),
                                             'img' => newsController::PATH_IMG_NEWS . $img['name'],
                                             'cn' => $_POST['categoryNews'],
                                             'status' => $_POST['newsStatus'],
@@ -310,16 +310,16 @@ class NewsController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
+                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_NEWS) {
                                     $newsModel = $this->get_model('news');
                                     if (isset($_FILES["newsImg"]) && $_FILES["newsImg"]["name"] != '') {
                                         $img = $_FILES["newsImg"];
                                         if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
                                             $dataNews = [
                                                 'news_img' => newsController::PATH_IMG_NEWS . $img['name'],
-                                                'news_title' => $_POST['newsTitle'],
-                                                'news_content' => $_POST['newsContent'],
-                                                'news_description' => $_POST['newsDescription'],
+                                                'news_title' => htmlspecialchars($_POST['newsTitle']),
+                                                'news_content' => htmlspecialchars($_POST['newsContent']),
+                                                'news_description' => htmlspecialchars($_POST['newsDescription']),
                                                 'cn_id' => $_POST['categoryNews'],
                                                 'news_active' => $_POST['newsStatus'],
                                                 'ad_id' => $id
