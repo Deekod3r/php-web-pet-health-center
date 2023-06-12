@@ -168,7 +168,7 @@ class NewsController extends BaseController
         $data[] = $_POST;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -228,7 +228,7 @@ class NewsController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -299,7 +299,7 @@ class NewsController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
