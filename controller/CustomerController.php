@@ -229,19 +229,19 @@ class CustomerController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['ctmName']) and $_GET['ctmName'] != '') {
-                    $key .= "ctm_name like '%" . $_GET['ctmName'] . "%'";
+                    $key .= "ctm_name like '%" . htmlspecialchars($_GET['ctmName']) . "%'";
                 }
                 if (isset($_GET['ctmPhone']) and $_GET['ctmPhone'] != '') {
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= "ctm_phone like '%" . $_GET['ctmPhone'] . "%'";
+                    $key .= "ctm_phone like '%" . htmlspecialchars($_GET['ctmPhone']) . "%'";
                 }
                 if (isset($_GET['ctmAddress']) and $_GET['ctmAddress'] != '') {
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= "ctm_address like '%" . $_GET['ctmAddress'] . "%'";
+                    $key .= "ctm_address like '%" . htmlspecialchars($_GET['ctmAddress']) . "%'";
                 }
                 if (isset($_GET['ctmId']) and $_GET['ctmId'] != '') {
                     if ($key != '') {

@@ -44,7 +44,7 @@
                     <label for="" class="form-label mr-2">Trạng thái</label>
                     <select name="newsStatus" id="news-status" class="custom-select" style="width:250px;">
                         <option value="">Chọn</option>
-                        <option value="1">Hiển thị</option>
+                        <option value="1">Công khai</option>
                         <option value="0">Ẩn</option>
                     </select>
                 </div>

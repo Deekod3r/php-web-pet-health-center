@@ -5,11 +5,11 @@
 
 <body>
     <?php include "view/admin/layout/header.php" ?>
-    <div class="container-fluid main-admin">
+    <div class="container-fluid main-admin mb-5">
         <form class="" id="form-edit-news" method="post" enctype="multipart/form-data">
             <h3 class="mb-3 text-primary">Sửa tin tức</h3>
             <div class="row g-3">
-                <input type="hidden" id="news-id">
+                <input type="text" id="news-id">
                 <div class="col-6">
                     <label for="" class="form-label mb-0">Tiêu đề</label>
                     <div class="input-group">
@@ -45,7 +45,7 @@
                     <label for="" class="form-label mr-2">Trạng thái</label>
                     <select name="newsStatus" id="news-status" class="custom-select" style="width:250px;">
                         <option value="">Chọn</option>
-                        <option value="1">Hiển thị</option>
+                        <option value="1">Công khai</option>
                         <option value="0">Ẩn</option>
                     </select>
                 </div>

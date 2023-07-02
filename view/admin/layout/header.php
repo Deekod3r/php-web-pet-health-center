@@ -22,7 +22,7 @@
                     <a href="?controller=appointment&action=appointment_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Lịch hẹn") echo "active"; ?>">Lịch hẹn</a>
                     <a href="?controller=bill&action=bill_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Hoá đơn") echo "active"; ?>">Hoá đơn</a>
                     <a href="?controller=customer&action=customer_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Khách hàng") echo "active"; ?>">Khách hàng</a>
-                    <a href="?controller=pet&action=pet_page_ad" class="nav-item nav-top nav-link <?php if ($title == "PET") echo "active"; ?>">PET</a>
+                    <a href="?controller=pet&action=pet_page_ad" class="nav-item nav-top nav-link <?php if ($title == "PET") echo "active"; ?>">Thú cưng</a>
                     <?php endif; ?>
                     <?php if((isset($_SESSION["ad".Enum::ROLE_NEWS]) && $_SESSION["ad".Enum::ROLE_NEWS]) || (isset($_SESSION["ad".Enum::ROLE_MANAGER]) && $_SESSION["ad".Enum::ROLE_MANAGER])):?>
                     <a href="?controller=news&action=news_page_ad" class="nav-item nav-top nav-link <?php if ($title == "Tin tức") echo "active"; ?>">Tin tức</a>

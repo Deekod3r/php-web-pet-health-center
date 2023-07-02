@@ -172,7 +172,7 @@ class BillController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['billId']) and $_GET['billId'] != '') {
-                    $key .= " bill_id = " . $_GET['billId'];
+                    $key .= " bill_id = " . (int)$_GET['billId'];
                 }
                 if (isset($_GET['ctmPhone']) and $_GET['ctmPhone'] != '') {
                     if ($key != '') $key = $key . " and ";

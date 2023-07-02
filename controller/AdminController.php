@@ -36,7 +36,7 @@ class AdminController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['adminUsername']) and $_GET['adminUsername'] != '') {
-                    $key .= "ad_username like '%" . $_GET['adminUsername'] . "%'";
+                    $key .= "ad_username like '%" . htmlspecialchars($_GET['adminUsername']) . "%'";
                 }
                 if (isset($_GET['adminRole']) and $_GET['adminRole'] != '') {
                     if ($key != '') {

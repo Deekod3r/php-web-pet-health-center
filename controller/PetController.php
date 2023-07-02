@@ -102,13 +102,13 @@ class PetController extends BaseController
                 $limit = 0;
                 $offset = 0;
                 if (isset($_GET['petName']) and $_GET['petName'] != '') {
-                    $key .= "pet_name like '%" . $_GET['petName'] . "%'";
+                    $key .= "pet_name like '%" . htmlspecialchars($_GET['petName']) . "%'";
                 }
                 if (isset($_GET['ctmPhone']) and $_GET['ctmPhone'] != '') {
                     if ($key != '') {
                         $key .= ' and ';
                     }
-                    $key .= "ctm_phone like '%" . $_GET['ctmPhone'] . "%'";
+                    $key .= "ctm_phone like '%" . htmlspecialchars($_GET['ctmPhone']) . "%'";
                 }
                 if (isset($_GET['petType']) and $_GET['petType'] != '') {
                     if ($key != '') {

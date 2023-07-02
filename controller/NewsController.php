@@ -296,7 +296,7 @@ class NewsController extends BaseController
     {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
-        $data[] = null;
+        $data[] = $_POST;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_NEWS))) {
@@ -336,9 +336,9 @@ class NewsController extends BaseController
                                         }
                                     } else {
                                         $dataNews = [
-                                            'news_title' => $_POST['newsTitle'],
-                                            'news_content' => $_POST['newsContent'],
-                                            'news_description' => $_POST['newsDescription'],
+                                            'news_title' => htmlspecialchars($_POST['newsTitle']),
+                                            'news_content' => htmlspecialchars($_POST['newsContent']),
+                                            'news_description' => htmlspecialchars($_POST['newsDescription']),
                                             'cn_id' => $_POST['categoryNews'],
                                             'news_active' => $_POST['newsStatus'],
                                             'ad_id' => $id

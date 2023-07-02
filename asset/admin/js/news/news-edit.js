@@ -127,10 +127,9 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if (response.responseCode == responseCode.success) {
-                    alert("ok");
-                    // sessionStorage.setItem('addNews', true);
-                    // sessionStorage.setItem('msgNews', "Thêm tin tức thành công");
-                    // window.location.href = "?controller=news&action=news_page_ad";
+                    sessionStorage.setItem('addNews', true);
+                    sessionStorage.setItem('msgNews', "Sửa tin tức thành công");
+                    window.location.href = "?controller=news&action=news_page_ad";
                 } else {
                     $('#msg-news').html(response.message);
                     $('#msg-news').show()
