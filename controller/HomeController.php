@@ -64,13 +64,13 @@ class HomeController extends BaseController
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $requestLogin = $_POST;
                 //var_dump($requestLogin);
-                if ($requestLogin['lgUsername'] != '' && $requestLogin['lgPassword'] != '') {
+                if (trim($requestLogin['lgUsername']) != '' && $requestLogin['lgPassword'] != '') {
                     $adminModel = $this->get_model('admin');
-                    $admin = $adminModel->get_by_username(htmlspecialchars($requestLogin['lgUsername']),Enum::ADMIN_STATUS_ACTIVE);
+                    $admin = $adminModel->get_by_username(htmlspecialchars(trim($requestLogin['lgUsername'])),Enum::ADMIN_STATUS_ACTIVE);
                     // , htmlspecialchars($requestLogin['lgPassword'])
                     if ($admin == null) {
                         $customerModel = $this->get_model('customer');
-                        $customer = $customerModel->get_by_phone(htmlspecialchars($requestLogin['lgUsername']),1);
+                        $customer = $customerModel->get_by_phone(htmlspecialchars(trim($requestLogin['lgUsername'])),1);
                         // , htmlspecialchars($requestLogin['lgPassword'])
                         if ($customer == null) {
                             $responseCode = ResponseCode::DATA_DOES_NOT_MATCH;

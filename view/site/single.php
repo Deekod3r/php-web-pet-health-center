@@ -25,7 +25,7 @@
 
             <div class="col-lg-4 mt-5 mt-lg-0">
                 <div class="mb-5">
-                    <form action="">
+                    <form action="" onsubmit="return false">
                         <div class="input-group">
                             <input type="text" class="form-control form-control-lg" placeholder="Tìm kiếm">
                             <div class="input-group-append">

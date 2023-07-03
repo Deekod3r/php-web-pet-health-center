@@ -18,13 +18,13 @@
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Ngày</p>
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmDate" id="apm-date" placeholder="" data-target="#date" data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmDate" id="apm-date" placeholder="MM/dd/yyyy" data-target="#date" data-toggle="datetimepicker" onkeypress="return false"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <p style="margin-bottom:0; color:black; margin-top:0; font-size:18px; font-weight:bold">Giờ</p>
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmTime" id="apm-time" placeholder="" data-target="#time" data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control border-0 p-4 datetimepicker-input" name="apmTime" id="apm-time" placeholder="" data-target="#time" data-toggle="datetimepicker" onkeypress="return false"/>
                                     </div>
                                 </div>
                                 <div class="form-group">

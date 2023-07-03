@@ -152,8 +152,8 @@ $(document).ready(function () {
     });
 
     $("#form-search-news").submit(function (e) {
-        newsKey = $("#news-key").val()
-        categoryNews = $("#category-news").val()
+        newsKey = $("#news-key").val().trim();
+        categoryNews = $("#category-news").val().trim();
         loadDataPage(1);
         // $.ajax({
         //     type: "GET",
