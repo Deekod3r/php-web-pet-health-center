@@ -9,7 +9,7 @@
         <form class="" id="form-edit-news" method="post" enctype="multipart/form-data">
             <h3 class="mb-3 text-primary">Sửa tin tức</h3>
             <div class="row g-3">
-                <input type="text" id="news-id">
+                <input type="hidden" id="news-id">
                 <div class="col-6">
                     <label for="" class="form-label mb-0">Tiêu đề</label>
                     <div class="input-group">
