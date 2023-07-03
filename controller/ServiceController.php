@@ -271,36 +271,15 @@ class ServiceController extends BaseController
                                 $serviceModel = $this->get_model('service');
                                 $service = $serviceModel->get_by_id($_POST['svId']);
                                 if ($service != null) {
-                                    if ($serviceModel->get_date(" where sv_name = '" . $_POST['svName'] . "'") == null) {
-                                        if (isset($_FILES["svImg"]) && $_FILES["svImg"]["name"] != '') {
-                                            $img = $_FILES["svImg"];
-                                            if ($this->save_img(ServiceController::PATH_IMG_SERVICE, $img)) {
-                                                $dataService = [
-                                                    'sv_name' => htmlspecialchars($_POST['svName']),
-                                                    'sv_price' => $_POST['svPrice'],
-                                                    'sv_description' => htmlspecialchars($_POST['svDescription']),
-                                                    'sv_pet' => $_POST['typePet'],
-                                                    'sv_img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
-                                                    'cs_id' => $_POST['categoryService'],
-                                                    'sv_status' => $_POST['svStatus']
-                                                ];
-                                                if ($serviceModel->update_data($dataService, $_POST['svId'])) {
-                                                    $responseCode = ResponseCode::SUCCESS;
-                                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thành công");
-                                                } else {
-                                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thất bại");
-                                                }
-                                            } else {
-                                                $data = $img['name'];
-                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thất bại");
-                                            }
-                                        } else {
+                                    if (isset($_FILES["svImg"]) && $_FILES["svImg"]["name"] != '') {
+                                        $img = $_FILES["svImg"];
+                                        if ($this->save_img(ServiceController::PATH_IMG_SERVICE, $img)) {
                                             $dataService = [
-                                                'sv_name' => $_POST['svName'],
+                                                'sv_name' => htmlspecialchars($_POST['svName']),
                                                 'sv_price' => $_POST['svPrice'],
-                                                'sv_description' => $_POST['svDescription'],
+                                                'sv_description' => htmlspecialchars($_POST['svDescription']),
                                                 'sv_pet' => $_POST['typePet'],
-                                                //'img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
+                                                'sv_img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
                                                 'cs_id' => $_POST['categoryService'],
                                                 'sv_status' => $_POST['svStatus']
                                             ];
@@ -310,10 +289,26 @@ class ServiceController extends BaseController
                                             } else {
                                                 $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thất bại");
                                             }
+                                        } else {
+                                            $data = $img['name'];
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thất bại");
                                         }
                                     } else {
-                                        $responseCode = ResponseCode::OBJECT_EXISTS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_EXISTS_MESSAGE, "Dịch vụ");
+                                        $dataService = [
+                                            'sv_name' => $_POST['svName'],
+                                            'sv_price' => $_POST['svPrice'],
+                                            'sv_description' => $_POST['svDescription'],
+                                            'sv_pet' => $_POST['typePet'],
+                                            //'img' => ServiceController::PATH_IMG_SERVICE . $img['name'],
+                                            'cs_id' => $_POST['categoryService'],
+                                            'sv_status' => $_POST['svStatus']
+                                        ];
+                                        if ($serviceModel->update_data($dataService, $_POST['svId'])) {
+                                            $responseCode = ResponseCode::SUCCESS;
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thành công");
+                                        } else {
+                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "dịch vụ", "thất bại");
+                                        }
                                     }
                                 } else {
                                     $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;

@@ -176,7 +176,7 @@ class BillController extends BaseController
                 }
                 if (isset($_GET['ctmPhone']) and $_GET['ctmPhone'] != '') {
                     if ($key != '') $key = $key . " and ";
-                    $key .= " ctm_phone = '" . $_GET['ctmPhone'] . "'";
+                    $key .= " ctm_phone = '" . htmlspecialchars($_GET['ctmPhone']) . "'";
                 }
                 if (isset($_GET['billYear']) and $_GET['billYear'] != '') {
                     if ($key != '') $key = $key . " and ";
