@@ -244,7 +244,7 @@ class FeedbackController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER)) || $this->check_admin_role(Enum::ROLE_NEWS)) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -252,29 +252,18 @@ class FeedbackController extends BaseController
                         $message = "SERV: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " token:" . $token;
                     } else {
                         if (isset($_POST['feedbackIdEdit']) && $_POST['feedbackIdEdit'] != '' && isset($_POST['feedbackStatusEdit']) && $_POST['feedbackStatusEdit'] != '') {
-                            //&& isset($_FILES["svImg"]) && !$_FILES["svImg"]["name"] != ''
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    //$img = $_FILES["svImg"];
-                                    //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
-                                    $datafeedback = [
-                                        'fb_status' => $_POST['feedbackStatusEdit']
-                                    ];
-                                    $feedbackModel = $this->get_model('feedback');
-                                    if ($feedbackModel->update_data($datafeedback, $_POST['feedbackIdEdit'])) {
-                                        $responseCode = ResponseCode::SUCCESS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thành công");
-                                    } else {
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thất bại");
-                                    }
-                                    //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh mã giảm giá","thất bại");
-                                    //}
+                                $datafeedback = [
+                                    'fb_status' => $_POST['feedbackStatusEdit']
+                                ];
+                                $feedbackModel = $this->get_model('feedback');
+                                if ($feedbackModel->update_data($datafeedback, $_POST['feedbackIdEdit'])) {
+                                    $responseCode = ResponseCode::SUCCESS;
+                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thành công");
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "giảm giá", "thất bại");
                                 }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
@@ -300,7 +289,8 @@ class FeedbackController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function new_feedback() {
+    public function new_feedback()
+    {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
