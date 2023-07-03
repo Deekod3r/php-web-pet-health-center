@@ -1,7 +1,6 @@
 <?php
 class BaseModel
 {
-
     protected $table;
     protected $view;
     protected $insert;

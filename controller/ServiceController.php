@@ -242,7 +242,7 @@ class ServiceController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::ACCESS_DENIED;
-                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
@@ -340,7 +340,7 @@ class ServiceController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::ACCESS_DENIED;
-                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
@@ -403,7 +403,7 @@ class ServiceController extends BaseController
                     }
                 } else {
                     $responseCode = ResponseCode::ACCESS_DENIED;
-                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE . " 1" . $this->check_admin_role(Enum::ROLE_MANAGER) . " 2" . $this->check_admin() . " 3" . $this->check_login();
+                    $message = "SERV2: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;

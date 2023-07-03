@@ -1,5 +1,5 @@
-# create database web_shop_pet;
-# use web_shop_pet;
+create database web_shop_pet;
+use web_shop_pet;
 
 create table admin
 (

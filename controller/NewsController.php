@@ -38,7 +38,7 @@ class NewsController extends BaseController
             );
         } else $this->render_error('400');
     }
-    
+
     public function news_page_ad()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -105,26 +105,26 @@ class NewsController extends BaseController
                         }
                     }
                     $news = $newsModel->get_data($key);
-                    if ($news !== null) { 
+                    if ($news !== null) {
                         $responseCode = ResponseCode::SUCCESS;
-                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                        $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "tin tức", "thành công.");
                         $data = [
                             'news' => $news,
                             'count' => $count
                         ];
                     } else {
                         $responseCode = ResponseCode::DATA_EMPTY;
-                        $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                        $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "tin tức");
                     }
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
-                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "tin tức");
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
                 $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
-            } 
-        }  catch (Exception $e) {
+            }
+        } catch (Exception $e) {
             $responseCode = ResponseCode::UNKNOWN_ERROR;
             $message = "SERV: " . $e->getMessage();
         }
@@ -142,19 +142,19 @@ class NewsController extends BaseController
                 $news = $newsModel->get_by_id($_GET['idNews']);
                 if ($news != null) {
                     $responseCode = ResponseCode::SUCCESS;
-                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE,"tin tức","thành công.");
+                    $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "tin tức", "thành công.");
                     $data = [
-                        'news' => $news                    
+                        'news' => $news
                     ];
                 } else {
                     $responseCode = ResponseCode::DATA_EMPTY;
-                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE,"tin tức");
+                    $message = "SERV: " . sprintf(ResponseMessage::DATA_EMPTY_MESSAGE, "tin tức");
                 }
             } else {
                 $responseCode = ResponseCode::REQUEST_INVALID;
                 $message = "SERV: " . sprintf(ResponseMessage::REQUEST_INVALID_MESSAGE);
-            } 
-        }  catch (Exception $e) {
+            }
+        } catch (Exception $e) {
             $responseCode = ResponseCode::UNKNOWN_ERROR;
             $message = "SERV: " . $e->getMessage();
         }
@@ -179,23 +179,18 @@ class NewsController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    $newsModel = $this->get_model('news');
-                                    $news = $newsModel->get_by_id($_POST['idNews']);
-                                    if ($news != null) {
-                                        if ($newsModel->delete_data($_POST['idNews'])) {
-                                            $responseCode = ResponseCode::SUCCESS;
-                                            $message = "SERV: " . sprintf(ResponseMessage::DELETE_MESSAGE, "tin tức", "thành công");
-                                        } else {
-                                            $message = "SERV: " . sprintf(ResponseMessage::DELETE_MESSAGE, "tin tức", "thất bại");
-                                        }
+                                $newsModel = $this->get_model('news');
+                                $news = $newsModel->get_by_id($_POST['idNews']);
+                                if ($news != null) {
+                                    if ($newsModel->delete_data($_POST['idNews'])) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::DELETE_MESSAGE, "tin tức", "thành công");
                                     } else {
-                                        $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
-                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE,"Tin tức");
+                                        $message = "SERV: " . sprintf(ResponseMessage::DELETE_MESSAGE, "tin tức", "thất bại");
                                     }
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                    $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Tin tức");
                                 }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
@@ -240,33 +235,28 @@ class NewsController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_NEWS) {
-                                    $img = $_FILES["newsImg"];
-                                    if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
-                                        $dataNews = [
-                                            'title' => htmlspecialchars($_POST['newsTitle']),
-                                            'content' => htmlspecialchars($_POST['newsContent']),
-                                            'description' => htmlspecialchars($_POST['newsDescription']),
-                                            'img' => newsController::PATH_IMG_NEWS . $img['name'],
-                                            'cn' => $_POST['categoryNews'],
-                                            'status' => $_POST['newsStatus'],
-                                            'ad' => $id
-                                        ];
-                                        $newsModel = $this->get_model('news');
-                                        // $data = $newsModel->save_data($dataNews);
-                                        if ($newsModel->save_data($dataNews)) {
-                                            $responseCode = ResponseCode::SUCCESS;
-                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thành công");
-                                        } else {
-                                            $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thất bại2");
-                                        }
+                                $img = $_FILES["newsImg"];
+                                if ($this->save_img(NewsController::PATH_IMG_NEWS, $img)) {
+                                    $dataNews = [
+                                        'title' => htmlspecialchars($_POST['newsTitle']),
+                                        'content' => htmlspecialchars($_POST['newsContent']),
+                                        'description' => htmlspecialchars($_POST['newsDescription']),
+                                        'img' => newsController::PATH_IMG_NEWS . $img['name'],
+                                        'cn' => $_POST['categoryNews'],
+                                        'status' => $_POST['newsStatus'],
+                                        'ad' => $id
+                                    ];
+                                    $newsModel = $this->get_model('news');
+                                    // $data = $newsModel->save_data($dataNews);
+                                    if ($newsModel->save_data($dataNews)) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thành công");
                                     } else {
-                                        $data = $img['name'];
-                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"tin tức","thất bại1");
+                                        $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thất bại2");
                                     }
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $data = $img['name'];
+                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "tin tức", "thất bại1");
                                 }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
@@ -310,32 +300,12 @@ class NewsController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_NEWS) {
-                                    $newsModel = $this->get_model('news');
-                                    if (isset($_FILES["newsImg"]) && $_FILES["newsImg"]["name"] != '') {
-                                        $img = $_FILES["newsImg"];
-                                        if ($this->save_img(NewsController::PATH_IMG_NEWS,$img)) {
-                                            $dataNews = [
-                                                'news_img' => newsController::PATH_IMG_NEWS . $img['name'],
-                                                'news_title' => htmlspecialchars($_POST['newsTitle']),
-                                                'news_content' => htmlspecialchars($_POST['newsContent']),
-                                                'news_description' => htmlspecialchars($_POST['newsDescription']),
-                                                'cn_id' => $_POST['categoryNews'],
-                                                'news_active' => $_POST['newsStatus'],
-                                                'ad_id' => $id
-                                            ];
-                                            if ($newsModel->update_data($dataNews,$_POST['newsId'])) {
-                                                $responseCode = ResponseCode::SUCCESS;
-                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thành công");
-                                            } else {
-                                                $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
-                                            }
-                                        } else {
-                                            $data = $img['name'];
-                                            $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE,"tin tức","thất bại");
-                                        }
-                                    } else {
+                                $newsModel = $this->get_model('news');
+                                if (isset($_FILES["newsImg"]) && $_FILES["newsImg"]["name"] != '') {
+                                    $img = $_FILES["newsImg"];
+                                    if ($this->save_img(NewsController::PATH_IMG_NEWS, $img)) {
                                         $dataNews = [
+                                            'news_img' => newsController::PATH_IMG_NEWS . $img['name'],
                                             'news_title' => htmlspecialchars($_POST['newsTitle']),
                                             'news_content' => htmlspecialchars($_POST['newsContent']),
                                             'news_description' => htmlspecialchars($_POST['newsDescription']),
@@ -343,16 +313,31 @@ class NewsController extends BaseController
                                             'news_active' => $_POST['newsStatus'],
                                             'ad_id' => $id
                                         ];
-                                        if ($newsModel->update_data($dataNews,$_POST['newsId'])) {
+                                        if ($newsModel->update_data($dataNews, $_POST['newsId'])) {
                                             $responseCode = ResponseCode::SUCCESS;
                                             $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thành công");
                                         } else {
                                             $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
                                         }
-                                    }  
+                                    } else {
+                                        $data = $img['name'];
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
+                                    }
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $dataNews = [
+                                        'news_title' => htmlspecialchars($_POST['newsTitle']),
+                                        'news_content' => htmlspecialchars($_POST['newsContent']),
+                                        'news_description' => htmlspecialchars($_POST['newsDescription']),
+                                        'cn_id' => $_POST['categoryNews'],
+                                        'news_active' => $_POST['newsStatus'],
+                                        'ad_id' => $id
+                                    ];
+                                    if ($newsModel->update_data($dataNews, $_POST['newsId'])) {
+                                        $responseCode = ResponseCode::SUCCESS;
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thành công");
+                                    } else {
+                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "tin tức", "thất bại");
+                                    }
                                 }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;

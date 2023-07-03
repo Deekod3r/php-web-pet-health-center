@@ -86,7 +86,7 @@
                             <div class="col-lg-4 mb-3">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Loại</p>
                                 <select name="typePetAdd" id="type-pet-add" class="custom-select" style="width:250px;">
-                                    <option value="">Tất cả</option>
+                                    <option value="">Chọn</option>
                                     <option value="0">Mèo</option>
                                     <option value="1">Chó</option>
                                 </select>
@@ -94,7 +94,7 @@
                             <div class="col-lg-6">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Giới tính</p>
                                 <select name="genderPetAdd" id="gender-pet-add" class="custom-select" style="width:250px;">
-                                    <option value="">Tất cả</option>
+                                    <option value="">Chọn</option>
                                     <option value="0">Cái</option>
                                     <option value="1">Đực</option>
                                 </select>
@@ -136,7 +136,7 @@
                             <div class="col-lg-4 mb-3">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Loại</p>
                                 <select name="typePetEdit" id="type-pet-edit" class="custom-select" style="width:250px;">
-                                    <option value="">Tất cả</option>
+                                    <option value="">Chọn</option>
                                     <option value="0">Mèo</option>
                                     <option value="1">Chó</option>
                                 </select>
@@ -144,7 +144,7 @@
                             <div class="col-lg-6">
                                 <p style="font-weight:bold; margin-bottom:0;color:black">Giới tính</p>
                                 <select name="genderPetEdit" id="gender-pet-edit" class="custom-select" style="width:250px;">
-                                    <option value="">Tất cả</option>
+                                    <option value="">Chọn</option>
                                     <option value="0">Cái</option>
                                     <option value="1">Đực</option>
                                 </select>

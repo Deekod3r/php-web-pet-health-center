@@ -379,7 +379,7 @@ class AppointmentController extends BaseController
         $data[] = null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -391,26 +391,21 @@ class AppointmentController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    //$img = $_FILES["svImg"];
-                                    //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
-                                    $dataappointment = [
-                                        'apm_status' => $_POST['appointmentStatusEdit']
-                                    ];
-                                    $appointmentModel = $this->get_model('appointment');
-                                    if ($appointmentModel->update_data($dataappointment, $_POST['appointmentIdEdit'])) {
-                                        $responseCode = ResponseCode::SUCCESS;
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thành công");
-                                    } else {
-                                        $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thất bại");
-                                    }
-                                    //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
-                                    //}
+                                //$img = $_FILES["svImg"];
+                                //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
+                                $dataappointment = [
+                                    'apm_status' => $_POST['appointmentStatusEdit']
+                                ];
+                                $appointmentModel = $this->get_model('appointment');
+                                if ($appointmentModel->update_data($dataappointment, $_POST['appointmentIdEdit'])) {
+                                    $responseCode = ResponseCode::SUCCESS;
+                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thành công");
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "lịch hẹn", "thất bại");
                                 }
+                                //} else {
+                                //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
+                                //}
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                 $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
@@ -442,7 +437,7 @@ class AppointmentController extends BaseController
         $data[] =  null;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -453,49 +448,44 @@ class AppointmentController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    $customerModel = $this->get_model('customer');
-                                    $appointmentModel = $this->get_model('appointment');
-                                    $customer = $customerModel->get_data("where ctm_phone = '" . $_POST['ctmPhone'] . "'");
-                                    if ($customer != null) {
-                                        $customer = $customer[0];
-                                        $countCurrentApm = $appointmentModel->get_by_customer($customer['ctm_id'], " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")") != null ? count($appointmentModel->get_by_customer($customer['ctm_id'], " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")")) : 0;
-                                        if ($countCurrentApm <= 2) {
-                                            //$data = $_POST;
-                                            $time = $_POST['apmTime']. ":00";
-                                            $date = date("Y/m/d", strtotime($_POST['apmDate']));
-                                            $dt = new DateTime("now", new DateTimeZone('Asia/Saigon'));
-                                            $dateTimeToday = $dt->setTimestamp(time())->format('Y/m/d H:i:s');
-                                            $dateTimeBooking = $date . " " . $time;
-                                            if (strtotime($dateTimeBooking) - 7000 >= strtotime($dateTimeToday)) {
-                                                $dataBooking = [
-                                                    'ctmId' => $customer['ctm_id'],
-                                                    'date' => $date,
-                                                    'time' => $time,
-                                                    'categoryService' => $_POST['categoryService'],
-                                                    'note' => $_POST['apmNote'],
-                                                ];
-                                                if ($appointmentModel->save_data($dataBooking)) {
-                                                    $responseCode = ResponseCode::SUCCESS;
-                                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thành công");
-                                                } else {
-                                                    $responseCode = ResponseCode::FAIL;
-                                                    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thất bại");
-                                                }
+                                $customerModel = $this->get_model('customer');
+                                $appointmentModel = $this->get_model('appointment');
+                                $customer = $customerModel->get_data("where ctm_phone = '" . $_POST['ctmPhone'] . "'");
+                                if ($customer != null) {
+                                    $customer = $customer[0];
+                                    $countCurrentApm = $appointmentModel->get_by_customer($customer['ctm_id'], " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")") != null ? count($appointmentModel->get_by_customer($customer['ctm_id'], " and apm_status in (" . Enum::STATUS_APPOINTMENT_CONFIRMED_YES . "," . Enum::STATUS_APPOINTMENT_CONFIRMED_NO . ")")) : 0;
+                                    if ($countCurrentApm <= 2) {
+                                        //$data = $_POST;
+                                        $time = $_POST['apmTime'] . ":00";
+                                        $date = date("Y/m/d", strtotime($_POST['apmDate']));
+                                        $dt = new DateTime("now", new DateTimeZone('Asia/Saigon'));
+                                        $dateTimeToday = $dt->setTimestamp(time())->format('Y/m/d H:i:s');
+                                        $dateTimeBooking = $date . " " . $time;
+                                        if (strtotime($dateTimeBooking) - 7000 >= strtotime($dateTimeToday)) {
+                                            $dataBooking = [
+                                                'ctmId' => $customer['ctm_id'],
+                                                'date' => $date,
+                                                'time' => $time,
+                                                'categoryService' => $_POST['categoryService'],
+                                                'note' => $_POST['apmNote'],
+                                            ];
+                                            if ($appointmentModel->save_data($dataBooking)) {
+                                                $responseCode = ResponseCode::SUCCESS;
+                                                $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thành công");
                                             } else {
-                                                $responseCode = ResponseCode::INPUT_INVALID_TYPE;
-                                                $message = "SERV: " . "Lịch hẹn cần đặt tối thiểu trước 2 tiếng.";
+                                                $responseCode = ResponseCode::FAIL;
+                                                $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE, "lịch hẹn", "thất bại");
                                             }
                                         } else {
-                                            $message = "SERV: " . "Khách hàng đang có quá nhiều lịch hẹn, vui lòng đặt lịch sau.";
+                                            $responseCode = ResponseCode::INPUT_INVALID_TYPE;
+                                            $message = "SERV: " . "Lịch hẹn cần đặt tối thiểu trước 2 tiếng.";
                                         }
                                     } else {
-                                        $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
-                                        $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'khách hàng');
+                                        $message = "SERV: " . "Khách hàng đang có quá nhiều lịch hẹn, vui lòng đặt lịch sau.";
                                     }
                                 } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
+                                    $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
+                                    $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'khách hàng');
                                 }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
@@ -521,7 +511,8 @@ class AppointmentController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function data_statistic_appointment() {
+    public function data_statistic_appointment()
+    {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
@@ -554,7 +545,8 @@ class AppointmentController extends BaseController
         $this->response($responseCode, $message, $data);
     }
 
-    public function new_appointment() {
+    public function new_appointment()
+    {
         $responseCode = ResponseCode::FAIL;
         $message = "SERV: " . sprintf(ResponseMessage::UNKNOWN_ERROR_MESSAGE, "");
         $data[] = null;
@@ -563,7 +555,7 @@ class AppointmentController extends BaseController
                 $appointmentModel = $this->get_model('appointment');
                 $count = $appointmentModel->count_data("");
                 if ($count > 0) {
-                    $newAppointment = $appointmentModel->native_query("select count(apm_id) as count from appointment where apm_status = ". Enum::STATUS_APPOINTMENT_CONFIRMED_NO);
+                    $newAppointment = $appointmentModel->native_query("select count(apm_id) as count from appointment where apm_status = " . Enum::STATUS_APPOINTMENT_CONFIRMED_NO);
                     $responseCode = ResponseCode::SUCCESS;
                     $message = "SERV: " . sprintf(ResponseMessage::SELECT_MESSAGE, "lịch hẹn", "thành công.");
                     $data = [

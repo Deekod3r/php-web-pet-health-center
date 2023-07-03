@@ -256,7 +256,6 @@ class PetController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER || $admin['ad_role'] == Enum::ROLE_SALE) {
                                     $customerModel = $this->get_model('customer');
                                     $customer = $customerModel->get_data("where ctm_phone = '" . $_POST['ctmPhone'] . "'");
                                     if ($customer != null) {
@@ -279,10 +278,6 @@ class PetController extends BaseController
                                         $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                         $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, "Khách hàng");
                                     }
-                                } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
-                                }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                 $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
@@ -314,7 +309,7 @@ class PetController extends BaseController
         $data[] = $_POST;
         try {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($this->check_admin() && $this->check_admin_role(Enum::ROLE_MANAGER)) {
+                if ($this->check_admin() && ($this->check_admin_role(Enum::ROLE_MANAGER) || $this->check_admin_role(Enum::ROLE_SALE))) {
                     $token = isset($_POST['token']) && $_POST['token'] != null ? $_POST['token'] : '';
                     $dataToken = $this->verify_and_decode_token($token);
                     if (!$dataToken) {
@@ -326,9 +321,6 @@ class PetController extends BaseController
                             $id = json_decode($dataToken)->{'id'};
                             $admin = $this->get_model('admin')->get_by_id($id);
                             if ($admin != null) {
-                                if ($admin['ad_role'] == Enum::ROLE_MANAGER) {
-                                    //$img = $_FILES["svImg"];
-                                    //if ($this->save_img(ServiceController::PATH_IMG_SERVICE,$img)) {
                                     $dataPet = [
                                         'pet_name' => $_POST['petName'],
                                         'pet_type' => $_POST['petType'],
@@ -343,13 +335,6 @@ class PetController extends BaseController
                                     } else {
                                         $message = "SERV: " . sprintf(ResponseMessage::UPDATE_MESSAGE, "thú cưng", "thất bại");
                                     }
-                                    //} else {
-                                    //    $message = "SERV: " . sprintf(ResponseMessage::INSERT_MESSAGE,"ảnh dịch vụ","thất bại");
-                                    //}
-                                } else {
-                                    $responseCode = ResponseCode::ACCESS_DENIED;
-                                    $message = "SERV1: " . ResponseMessage::ACCESS_DENIED_MESSAGE;
-                                }
                             } else {
                                 $responseCode = ResponseCode::OBJECT_DOES_NOT_EXIST;
                                 $message = "SERV: " . sprintf(ResponseMessage::OBJECT_DOES_NOT_EXIST_MESSAGE, 'admin');
