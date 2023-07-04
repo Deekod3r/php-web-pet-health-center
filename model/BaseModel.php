@@ -15,8 +15,9 @@ class BaseModel
         $username = "root";
         $password = "123456";
         $database = "web_shop_pet";
+        $port = 3306;
         try {
-            $conn = new mysqli($hostname, $username, $password, $database);
+            $conn = new mysqli($hostname, $username, $password, $database,$port);
             if ($conn->connect_error) {
                 throw new mysqli_sql_exception("Connection error: " . $conn->connect_error);
             } else {

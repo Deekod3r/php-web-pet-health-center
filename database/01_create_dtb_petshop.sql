@@ -165,13 +165,12 @@ create table feedback
     fb_content text not null, -- nội dung
     fb_rating tinyint(1) not null, -- đánh giá range(1-5)
     fb_time datetime not null default now(), -- thời gian đánh giá -- linh hoạt
+    fb_status boolean default true not null,
     is_delete boolean default false not null, -- default
     ctm_id int, -- mã khách hàng
     constraint fk_feedback_ctm foreign key (ctm_id) references customer(ctm_id),
     constraint check_feedback_rating check(fb_rating >= 0 and fb_rating <=5)
 );
-
-alter table feedback add column fb_status boolean default true not null;
 
 create table shop_info
 (
@@ -183,7 +182,10 @@ create table shop_info
     shop_description text, -- mô tả
     shop_facebook varchar(255) not null, -- địa chỉ facebook
     is_delete boolean not null default false
-)
+);
+
+SET SQL_SAFE_UPDATES = 0;
+
 
 
 

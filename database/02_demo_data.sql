@@ -25,8 +25,8 @@ insert into customer (ctm_id, ctm_name, ctm_phone, ctm_email, ctm_address, ctm_p
                    (12,'Hoàng Quốc Việt','0987126859','vitvang2000@gmail.com','Nguyễn Hiền, Hai Bà Trưng, Hà Nội','viet.2000',1, true, false);
 
 -- select * from customer;
-update admin set ad_password = 'c4ca4238a0b923820dcc509a6f75849b' where 1=1;
-update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_active = 1;
+update admin set ad_password = 'c4ca4238a0b923820dcc509a6f75849b' where ad_id is not null;
+update customer set ctm_password = 'c4ca4238a0b923820dcc509a6f75849b' where ctm_active = 1 and ctm_id not null;
 
 -- discount
 insert into discount (dc_id, dc_code, dc_description, dc_condition, dc_value, dc_value_percent, dc_start_time, dc_end_time, dc_quantity, dc_active, is_delete)
@@ -245,13 +245,12 @@ insert into detail_bill (detail_id, bill_id, sv_id, quantity, sv_price, is_delet
                    (12,11,6,1,10000000,default);
 -- select * from detail_bill;
 -- feedback
-insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id)
-            values (default,'Nhân viên nhiệt tình, thân thiện. Dịch vụ rất tốt.',5,'2023/04/06 12:00:00',default,2),
-                   (default,'Cắt tỉa lông đẹp lắm.',4,'2023/04/08 20:00:00',default,4),
-                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3),
-                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5),
-                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5);
-update feedback set fb_status = 1 where 1=1;
+insert into feedback (fb_id, fb_content, fb_rating, fb_time, is_delete, ctm_id, fb_status)
+            values (default,'Nhân viên nhiệt tình, thân thiện. Dịch vụ rất tốt.',5,'2023/04/06 12:00:00',default,2,1),
+                   (default,'Cắt tỉa lông đẹp lắm.',4,'2023/04/08 20:00:00',default,4,1),
+                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 16:30:19',default,3,1),
+                   (default,'Dịch vụ tốt, sức khoẻ bé nhà mình tốt lắm.',5,'2023/04/10 20:00:00',default,5,1),
+                   (default,'Lần thứ 2 sử dụng dịch vụ, mình thấy cả 2 lần đều rất tốt. Cảm ơn CarePet nhiềuuuu',5,'2023/04/20 20:00:00',default,5,1);
 -- select * from feedback;
 -- select * from customer where ctm_can_feedback = 1
 -- shop_info
@@ -260,5 +259,4 @@ insert into shop_info (shop_name, shop_address, shop_phone, shop_description, sh
                    'https://www.facebook.com/carepet.nhom2','carepet@huce.com');
 -- select * from shop_info;
 
-# update shop_info set shop_description = 'Hệ thống chăm sóc thú cưng số 1 HUCE, đem đến cho bạn sự yên tâm, tin tưởng, mang niềm vui tới cho thú cưng của bạn. Hệ thống chuyên cung cấp các dịch vụ thẩm mỹ, sức khoẻ, y tế, tinh thần cho thú cưng (chó, mèo). Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng sẽ là điểm đến lý tưởng và tuyệt vời dành cho vật nuôi.' where 1=1
 
